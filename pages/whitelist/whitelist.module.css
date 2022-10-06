@@ -1,0 +1,131 @@
+
+
+.ffContainer {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 0;
+  position: relative;
+  justify-content: center;
+}
+
+.notConnectedContent {
+  width: calc(100%) !important;
+  background: transparent !important;
+  text-align: center;
+  height: calc(100vh);
+  box-shadow: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  flex-direction: column;
+  border-radius: 0 !important;
+}
+
+.contentFloat {
+  position: relative;
+  z-index: 9;
+}
+
+.contentFloatText {
+  font-family: 'PPNeueMachina', serif !important;
+  font-weight: 700 !important;
+  font-size: 72px !important;
+  color: #ffffff !important;
+}
+
+.mainDescBg {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 460px;
+  width: 100%;
+  min-height: 120px;
+  margin-top: 20px;
+  padding: 30px;
+  background: rgba(227, 238, 244, 0.8);
+  border: 1px solid #CFE5F2;
+  backdrop-filter: blur(5px);
+}
+
+.mainDescBg::after,
+.mainDescBg::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.mainDescBg::before {
+  top: 0;
+  left: 0;
+  border-width: 16px 16px 0 0;
+  border-color: #ffffff transparent transparent transparent;
+}
+
+.mainDescBg::after {
+  bottom: 0;
+  right: 0;
+  border-width: 0 0 16px 16px;
+  border-color: transparent transparent #ffffff transparent;
+}
+
+.mainDescNC {
+  text-align: center !important;
+  font-size: 18px !important;
+  font-weight: 400 !important;
+  line-height: 140% !important;
+  color: #0A2C40 !important;
+}
+
+.mainDescBg--dark {
+  background: rgba(21, 23, 24, 0.8);
+  border-color: #304E61;
+}
+
+.mainDescBg--dark::before {
+  border-color: #304E61 transparent transparent transparent;
+}
+
+.mainDescBg--dark::after {
+  border-color: transparent transparent #304E61 transparent;
+}
+
+.mainDescNC--dark {
+  color: #ffffff !important;
+}
+
+.buttonConnect {
+  position: relative;
+  margin-top: 40px !important;
+  padding: 0 !important;
+  border: none !important;
+  background-color: transparent !important;
+  cursor: pointer;
+}
+
+.buttonEnterLabel {
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  line-height: 120% !important;
+  color: #8F5AE8 !important;
+  white-space: pre-line;
+}
+
+@media (max-width: 530px) {
+  .contentFloatText {
+    font-size: 58px !important;
+  }
+
+  .mainDescNC {
+    font-size: 16px !important;
+  }
+
+  .mainDescBg {
+    padding: 20px 16px;
+  }
+}

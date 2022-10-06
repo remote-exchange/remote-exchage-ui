@@ -1,0 +1,137 @@
+.notConnectedContent {
+  display: flex;
+  flex-direction: column;
+
+  width: calc(100%) !important;
+  height: calc(100vh);
+
+  border-radius: 0 !important;
+
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.contentFloat {
+  position: relative;
+  z-index: 9;
+}
+
+.contentFloatText {
+  margin-bottom: 40px !important;
+
+  font-family: 'Poppins', serif !important;
+  font-size: 96px !important;
+  font-weight: 500 !important;
+  line-height: 144px !important;
+
+  color: #ffffff !important;
+}
+
+.title {
+  max-width: 500px;
+
+  margin-bottom: 40px;
+
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+
+  color: #fff;
+}
+
+.buttonConnect {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 377px;
+  height: 96px;
+
+  border-radius: 12px;
+
+  background: #D3F85A;
+
+  margin-top: 40px !important;
+  padding: 0 !important;
+
+  border: none !important;
+  background-color: #D3F85A !important;
+
+  cursor: pointer;
+}
+
+.buttonEnterLabel {
+  font-family: 'Poppins';
+  font-size: 32px !important;
+  font-weight: 700 !important;
+  line-height: 48px !important;
+
+  color: #171D2D !important;
+
+  white-space: pre-line;
+}
+
+/* deprecated */
+
+.mainDescBg {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 460px;
+  width: 100%;
+  min-height: 120px;
+  margin-top: 20px;
+  padding: 30px;
+  background: rgba(227, 238, 244, 0.8);
+  border: 1px solid #CFE5F2;
+  backdrop-filter: blur(5px);
+}
+
+.mainDescBg::after,
+.mainDescBg::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.mainDescBg::before {
+  top: 0;
+  left: 0;
+  border-width: 16px 16px 0 0;
+  border-color: #ffffff transparent transparent transparent;
+}
+
+.mainDescBg::after {
+  bottom: 0;
+  right: 0;
+  border-width: 0 0 16px 16px;
+  border-color: transparent transparent #ffffff transparent;
+}
+
+.mainDescNC {
+  text-align: center !important;
+  font-size: 18px !important;
+  font-weight: 400 !important;
+  line-height: 140% !important;
+  color: #0A2C40 !important;
+}
+
+@media (max-width: 530px) {
+  .contentFloatText {
+    font-size: 58px !important;
+  }
+
+  .mainDescNC {
+    font-size: 16px !important;
+  }
+
+  .mainDescBg {
+    padding: 20px 16px;
+  }
+}

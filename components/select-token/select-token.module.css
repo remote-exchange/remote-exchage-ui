@@ -1,0 +1,151 @@
+.listPaper {
+  margin-top: 8px;
+  border: 1px solid #D3F85A;
+  border-radius: 12px !important;
+  background: #060B17 !important;
+}
+
+.noNFT {
+  display: flex;
+  flex-direction: column;
+  width: 347px;
+  padding: 16px 25px;
+  margin-top: 0;
+}
+
+.noNFTtext {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #E4E9F4;
+  margin-bottom: 25px;
+}
+.noNFTlinks {
+  display: flex;
+  gap: 12px;
+}
+.noNFTlinkButton {
+  background: rgba(119, 155, 244, 0.15);
+  border: 1px solid #779BF4;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  color: #779BF4;
+  cursor: pointer;
+}
+
+.tokenSelect {
+  display: flex;
+  align-items: center;
+  height: 72px;
+  width: 100%;
+  background: #171D2D;
+  border: 1px solid transparent;
+  border-radius: 12px !important;
+}
+
+.tokenSelect:hover, .tokenSelectOpen {
+  border: 1px solid #D3F85A;
+}
+
+@media (max-width: 767px) {
+  .tokenSelect {
+    height: 48px;
+  }
+}
+
+.placeholder {
+  padding: 10px;
+  padding-right: 30px;
+  font-weight: 400;
+  font-size: 16px;
+  color: #D3F85A;
+}
+
+@media (max-width: 767px) {
+  .placeholder {
+    padding: 0;
+    font-size: 14px;
+  }
+}
+
+.tokenSelect > svg,
+.tokenSelect--dark > svg {
+  color: #5F7285 !important;
+}
+
+@media (max-width: 767px) {
+  .tokenSelect > svg {
+    font-size: 15px;
+  }
+}
+
+.tokenSelect > fieldset,
+.tokenSelect--dark > fieldset {
+  display: none !important;
+}
+
+.tokenSelectInput {
+  padding: 20px 34px 20px 20px !important;
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+@media (max-width: 767px) {
+  .tokenSelectInput {
+    padding: 16px !important;
+  }
+}
+
+.menuOption {
+  /*padding-left: 30px;*/
+}
+
+.menuOptionSec {
+  margin-left: 15px;
+  margin-right: 10px;
+}
+
+.list,
+.list--dark {
+  padding: 0 !important;
+  background: #DBE6EC !important;
+}
+
+.list--dark {
+  background: #151718 !important;
+}
+
+.list > li,
+.list--dark > li {
+  padding: 0 !important;
+}
+
+.list > li > .menuOption,
+.list--dark > li > .menuOption {
+  width: 100%;
+  padding: 20px !important;
+  border: 1px solid #0B5E8E !important;
+}
+
+.list > li:not(:last-of-type) > .menuOption,
+.list--dark > li:not(:last-of-type) > .menuOption {
+  border-bottom: none !important;
+}
+
+.list > li > .menuOption > .menuOptionSec,
+.list--dark > li > .menuOption > .menuOptionSec {
+  margin-right: 0 !important;
+}
+
+@media (max-width: 530px) {
+  .tokenSelect {
+    width: 100% !important;
+    margin-left: 0;
+  }
+}

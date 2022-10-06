@@ -1,0 +1,21 @@
+.tableBodyWrapper {
+  padding: 25px 24px;
+  background-color: #171D2D;
+}
+
+.tableBodyWrapper--light {
+  color: #325569;
+}
+
+.tableBodyWrapper--dark {
+  color: #C6CDD2;
+}
+
+.tableBodyLoader {}
+
+.tableBodyMessage {
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+}

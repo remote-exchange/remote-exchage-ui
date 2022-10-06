@@ -1,0 +1,17 @@
+.container {
+  max-width: 1400px;
+  width: calc(100% - 180px);
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 20px !important;
+  margin-bottom: 24px !important;
+}
+
+.bribesContainer {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 24px;
+}

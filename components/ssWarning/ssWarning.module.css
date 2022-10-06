@@ -1,0 +1,349 @@
+.dialogContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: auto;
+  min-height: auto;
+  margin: 0 25px;
+  padding: 50px 0;
+}
+
+.dialogWrapper {
+  z-index: 10030 !important;
+  position: fixed !important;
+}
+
+@media (max-width: 991px) {
+  .dialogContainer {
+    padding: 60px 0;
+  }
+}
+
+@media (max-width: 450px) {
+  .dialogContainer {
+    margin: 0 15px;
+  }
+}
+
+.paperBody {
+  background: rgba(0, 0, 0, .1) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.warningContainer {
+  position: relative;
+  width: 1052px;
+  padding: 42px;
+  border-radius: 12px;
+  background: #1F2B49;
+}
+
+@media (max-width: 991px) {
+  .warningContainer {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 650px) {
+  .warningContainer {
+    padding: 20px;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 42px;
+}
+
+@media (max-width: 991px) {
+  .header {
+    margin-bottom: 30px !important;
+  }
+}
+
+.warningIcon {
+  width: 22px;
+  height: 22px;
+}
+
+@media (max-width: 991px) {
+  .warningIcon {
+    width: 18px;
+  }
+}
+
+@media (max-width: 650px) {
+  .warningIcon {
+    width: 16px;
+  }
+}
+
+@media (max-width: 450px) {
+  .warningIcon {
+    width: 14px;
+  }
+}
+
+.title1 {
+  margin-left: 20px !important;
+  font-size: 20px !important;
+  font-weight: 500 !important;
+  line-height: 28px !important;
+  color: #8191B9 !important;
+}
+
+@media (max-width: 991px) {
+  .title1 {
+    margin-left: 15px !important;
+    font-size: 20px !important;
+  }
+}
+
+@media (max-width: 450px) {
+  .title1 {
+    font-size: 16px !important;
+    margin-left: 10px !important;
+  }
+}
+
+.title2 {
+  margin-top: 0px !important;
+  margin-bottom: 32px !important;
+
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500 !important;
+  font-size: 60px !important;
+  line-height: 72px !important;
+  color: #FFF !important;
+}
+
+@media (max-width: 991px) {
+  .title2 {
+    margin-bottom: 15px !important;
+    font-size: 40px !important;
+    line-height: 50px !important;
+  }
+}
+
+@media (max-width: 650px) {
+  .title2 {
+    margin-bottom: 15px !important;
+    font-size: 24px !important;
+    line-height: 30px !important;
+  }
+}
+
+@media (max-width: 450px) {
+  .title2 {
+    font-size: 20px !important;
+  }
+}
+
+.paragraph {
+  margin-bottom: 40px !important;
+
+  font-family: 'Poppins' !important;
+  font-weight: 400 !important;
+  font-size: 16px !important;
+  line-height: 24px !important;
+  text-align: left !important;
+
+  color: #B4BED9 !important;
+}
+
+@media (max-width: 991px) {
+  .paragraph {
+    margin-bottom: 30px !important;
+  }
+}
+
+@media (max-width: 450px) {
+  .paragraph {
+    font-size: 14px !important;
+  }
+}
+
+.paragraph p {
+  margin-top: 0 !important;
+  margin-bottom: 12px !important;
+}
+
+p.paragraph1 {
+  margin-top: 0 !important;
+  margin-bottom: 24px !important;
+
+  font-family: 'Poppins' !important;
+  font-weight: 400 !important;
+  font-size: 16px !important;
+  line-height: 24px !important;
+  text-align: left !important;
+
+  color: #FFF !important;
+}
+
+p.paragraph1 ~ p {
+  font-size: 14px;
+  line-height: 16px;
+}
+
+
+.buttonsContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 767px) {
+  .buttonsContainer {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 991px) {
+  .buttonsContainer {
+    justify-content: flex-start;
+  }
+}
+
+.primaryButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: calc(30% - 16px);
+  height: 72px;
+
+  margin-right: 32px;
+
+  border: 1px solid #779BF4;
+  border-radius: 12px;
+
+  background: rgba(119, 155, 244, 0.15);
+
+  cursor: pointer;
+}
+
+@media (max-width: 991px) {
+  .primaryButton {
+    width: 250px;
+    height: 60px;
+    margin-bottom: 20px;
+  }
+}
+
+/* @media (max-width: 650px) {
+  .primaryButton {
+    margin-bottom: 15px;
+  }
+} */
+
+.secondaryButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: calc(70% - 16px);
+  height: 72px;
+
+  border-radius: 12px;
+  background: #D3F85A;
+
+  cursor: pointer;
+}
+
+@media (max-width: 991px) {
+  .secondaryButton {
+    width: 100%;
+    max-width: 500px;
+    height: 60px;
+    margin-bottom: 20px;
+  }
+}
+
+.buttonTextPrimary {
+  margin-right: 18px !important;
+
+  font-size: 18px !important;
+  line-height: 24px !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+
+  color: #779BF4 !important;
+}
+
+@media (max-width: 991px) {
+  .buttonTextPrimary {
+    font-size: 16px !important;
+  }
+}
+
+.buttonTextSecondary {
+  padding: 0 10px;
+  font-size: 18px !important;
+  line-height: 24px !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+
+  color: #060B17 !important;
+}
+
+@media (max-width: 991px) {
+  .buttonTextSecondary {
+    font-size: 16px !important;
+  }
+}
+
+/* @media (max-width: 720px) {
+  .dialogContainer {
+    min-width: auto;
+    min-height: auto;
+    padding: 50px 0;
+  }
+
+  .warningContainer {
+    width: 90%;
+    padding: 10px 20px 20px;
+  }
+
+  .warningIcon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .title1,
+  .title2 {
+    font-size: 18px !important;
+  }
+
+  .paragraph {
+    font-size: 12px !important;
+  }
+
+  .paragraph1 {
+    font-size: 14px !important;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  .primaryButton {
+    border-right: 1px solid #8F5AE8;
+  }
+
+  .primaryButton--dark {
+    border-right: 1px solid #7F828B;
+  }
+
+  .secondaryButton {
+    border-right: 1px solid #5688A5;
+  }
+
+  .secondaryButton--dark {
+    border-right: 1px solid #7C838A;
+  }
+} */

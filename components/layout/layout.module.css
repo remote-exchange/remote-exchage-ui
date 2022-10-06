@@ -1,0 +1,88 @@
+.container {
+  max-width: 100vw;
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  /* background-image: url('/images/solid_background.png'); */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.content {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #2B3446;
+  background-image: url('/images/background/background.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+.content--light *::-webkit-scrollbar-thumb {
+  background: #586586;
+  border-radius: 8px;
+  border: 1px solid #171D2D;
+}
+
+.content--light * {
+  scrollbar-color: #586586 #171D2D;
+}
+
+.content--dark *::-webkit-scrollbar-thumb {
+  background: #586586;
+  border-radius: 8px;
+  border: 1px solid #171D2D;
+}
+
+.content--dark * {
+  scrollbar-color: #586586 #171D2D;
+}
+
+.content--light {
+  /* background: var(--background-light) url("/images/background/background-light.jpg") no-repeat top left; */
+  /* background-size: cover; */
+}
+
+.content--dark {
+  /* background: var(--background-dark) url("/images/background/background-dark.jpg") no-repeat top left; */
+  /* background-size: cover; */
+}
+
+/* .homePage--light {
+  background: #DBE6EC;
+}
+
+.homePage--dark {
+  background: #151718;
+} */
+
+.main {
+  position: relative;
+  padding: 30px 20px 30px;
+}
+
+.containerInner {
+  /*max-width: 1440px;*/
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 1024px) {
+  .main {
+    padding: 60px 47px;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .main {
+    padding: 48px 20px;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .main {
+    padding: 48px 12px;
+  }
+}

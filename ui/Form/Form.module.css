@@ -1,0 +1,130 @@
+.form {
+  position: relative;
+  /* width: 463px; */
+  width: 782px;
+  max-width: 100%;
+  height: auto;
+  /* margin-left: 1px; */
+  /* background: var(--background-dark); */
+  /* padding: 13px 30px; */
+  /* border: 1px solid var(--border-dark); */
+  /* border-top: none; */
+  /* border-bottom: none; */
+  z-index: 2;
+}
+
+.top,
+.top--dark,
+.top--light,
+.bottom,
+.bottom--dark,
+.bottom--light {
+  position: relative;
+}
+
+.top {
+  /* top: 0; */
+  /* left: 0.5px; */
+  /* width: 463px; */
+  /* width: 782px; */
+  /* height: 17px; */
+  /* background: var(--border-light); */
+  /* clip-path: polygon(4% 0, 100% 0%, 100% 100%, 0 100%); */
+}
+
+.top--inside {
+  margin-top: 1px;
+  margin-left: 0;
+  width: 462px;
+  height: 17px;
+  background: var(--background-light);
+  clip-path: polygon(4% 0, 100% 0%, 100% 100%, 0 100%);
+}
+
+.top--dark {
+  background: var(--border-dark);
+}
+
+.top--inside--dark {
+  background: var(--background-dark);
+}
+
+.bottom {
+  top: 0;
+  left: 0.5px;
+  /* width: 463px; */
+  height: 93px;
+  background: var(--border-light);
+  clip-path: polygon(0 0, 100% 0, 96% 17%, 44% 17%, 27% 100%, 0 100%)
+}
+
+.bottom--inside {
+  margin-top: -1px;
+  margin-left: 1px;
+  width: 461.5px;
+  height: 93px;
+  background: var(--background-light);
+  clip-path: polygon(0 0, 100% 0, 96% 17%, 43.8% 17%, 26.8% 100%, 0 100%)
+}
+
+.bottom--dark {
+  background: var(--border-dark);
+}
+
+.bottom--inside--dark {
+  background: var(--background-dark);
+}
+
+.form--dark {
+  /* background: var(--background-dark); */
+  /* border-color: var(--border-dark); */
+}
+
+.form--light {
+  /* background: var(--background-light); */
+  /* border-color: var(--border-light); */
+}
+
+/* @media (max-width: 470px) {
+  .form,
+  .top,
+  .bottom {
+    width: 320px;
+  }
+
+  .top {
+    clip-path: polygon(5% 0, 100% 0%, 100% 100%, 0 100%);
+  }
+
+  .top--inside {
+    width: 318.5px;
+    clip-path: polygon(5% 0, 100% 0%, 100% 100%, 0 100%);
+  }
+
+  .bottom {
+    height: 58px;
+    background: var(--background-light);
+    border: 1px solid var(--border-light);
+    border-top: none;
+    display: none;
+  }
+
+  .bottom--dark {
+    height: 58px;
+    background: var(--background-dark);
+    border-color: var(--border-dark);
+    border-top: none;
+  }
+
+  .form {
+    padding: 2px 20px 20px;
+  }
+
+  .form--dark {
+    border-bottom: 1px solid var(--border-dark);
+  }
+
+  .form--light {
+    border-bottom: 1px solid var(--border-light);
+  }
+} */
