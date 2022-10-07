@@ -13,10 +13,10 @@
 
 @media (min-width: 1501px) {
   .navigationContainerSmart {
-    width: calc(50vw + 300px);
+    width: calc(50vw + 176px);
     position: absolute;
-    margin-left: calc(50vw - 408px);
-    top: 22px;
+    margin-left: calc(50vw - 280px);
+    top: 14px;
     left: 0;
   }
 }
@@ -301,7 +301,7 @@ a.linkz {
 .smallVersion {
   font-size: 10px !important;
   letter-spacing: 1px;
-  padding-top: 0px;
+  padding-top: 0;
 }
 
 .navigationOptionContainer {
@@ -329,11 +329,10 @@ a.linkz {
 
 .subtitleText {
   margin: 0 !important;
-
   font-style: normal !important;
-  font-weight: 500 !important;
+  font-weight: 700 !important;
   font-size: 20px !important;
-  line-height: 140% !important;
+  line-height: 20px !important;
   letter-spacing: 0 !important;
 }
 
@@ -544,7 +543,7 @@ a.linkz {
   line-height: 40px;
 
   background: none !important;
-  color: #E4E9F4 !important;
+  color: #131313 !important;
 }
 
 @media (max-width: 1500px) {
@@ -556,12 +555,9 @@ a.linkz {
 }
 
 .nav-button:hover {
-  /* background: #B9DFF5 !important;
-  color: #0B5E8E !important;
-  border: 1px solid var(--main-secondary-light) !important;
-  z-index: 9; */
 
-  color: #D3F85A !important;
+  text-decoration: underline !important;
+  color: #7DB857 !important;
 }
 
 .nav-button:active {
@@ -612,7 +608,7 @@ a.linkz {
 
 .nav-button--active {
   /* position: relative; */
-  color: #D3F85A !important;
+  color: #7DB857 !important;
 }
 
 .nav-button--active::after {

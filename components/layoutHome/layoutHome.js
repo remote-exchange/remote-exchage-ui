@@ -14,38 +14,7 @@ export default function Layout({
         <link rel="icon" href="/favicon.png" />
         <link
           rel="preload"
-          href="/fonts/Inter/Inter-Regular.ttf"
-          as="font"
-          crossOrigin=""
-        />
-        <link
-          rel="preload"
-          href="/fonts/Inter/Inter-Bold.ttf"
-          as="font"
-          crossOrigin=""
-        />
-
-        <link
-          rel="preload"
-          href="/fonts/MonumentExt/MonumentExtended-Regular.otf"
-          as="font"
-          crossOrigin=""
-        />
-        <link
-          rel="preload"
-          href="/fonts/MonumentExt/MonumentExtended-Bold.otf"
-          as="font"
-          crossOrigin=""
-        />
-        <link
-          rel="preload"
-          href="/fonts/PPNeueMachina/PPNeueMachina.ttf"
-          as="font"
-          crossOrigin=""
-        />
-        <link
-          rel="preload"
-          href="/fonts/RobotoMono/RobotoMono-Regular.ttf"
+          href="/fonts/PT-Root-UI/PT-Root-UI_Regular.ttf"
           as="font"
           crossOrigin=""
         />

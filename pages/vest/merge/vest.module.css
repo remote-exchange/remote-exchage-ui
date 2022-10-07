@@ -11,7 +11,6 @@
   margin-top: 0;
   margin-bottom: 30px;
 
-  font-family: "Poppins";
   font-weight: 500;
   font-size: 60px;
   line-height: 72px;
@@ -45,7 +44,6 @@
   margin: 0;
 
   font-size: 20px;
-  font-family: 'Poppins';
   font-weight: 500;
   line-height: 28px;
     
@@ -214,7 +212,6 @@
 
   margin-bottom: 8px;
 
-  font-family: 'Poppins';
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
@@ -237,7 +234,6 @@
 }
 
 .tokenSelectLabel {
-  font-family: 'Poppins';
   font-size: 24px;
   font-weight: 500;
   line-height: 32px;
@@ -282,7 +278,6 @@
   margin-bottom: 4px;
 
   font-size: 24px;
-  font-family: 'Poppins';
   font-weight: 500;
 
   line-height: 32px;
@@ -302,7 +297,6 @@
   align-items: center;
 
   font-size: 16px;
-  font-family: 'Poppins';
   font-weight: 500;
   line-height: 24px;
 
@@ -546,7 +540,6 @@
   margin-bottom: 4px;
 
   font-size: 24px;
-  font-family: 'Poppins';
   font-weight: 500;
 
   line-height: 32px;
@@ -566,7 +559,6 @@
   align-items: center;
 
   font-size: 16px;
-  font-family: 'Poppins';
   font-weight: 500;
   line-height: 24px;
 

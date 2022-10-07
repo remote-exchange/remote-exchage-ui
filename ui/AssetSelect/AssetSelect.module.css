@@ -604,7 +604,6 @@ p.labelSelectSecondary {
     margin-bottom: 12px;
     padding: 0 16px;
 
-    font-family: 'Poppins';
     font-weight: 600;
     font-size: 14px !important;
     line-height: 16px !important;
@@ -648,7 +647,6 @@ p.labelSelectSecondary {
 .tokenPopover_button {
   margin-bottom: 12px;
 
-  font-family: 'Poppins';
   font-size: 14px;
   font-weight: 600;
   line-height: 16px;

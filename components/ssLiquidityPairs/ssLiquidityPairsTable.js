@@ -194,8 +194,6 @@ const headCells = [
             tooltip: {
               style: {
                 padding: 24,
-
-                fontFamily: 'Poppins',
                 fontSize: 16,
                 fontWeight: 400,
                 lineHeight: '24px',
@@ -885,7 +883,6 @@ const useStyles = makeStyles({
     color: '#E4E9F4',
   },
   filterListTitle: {
-    fontFamily: 'Poppins',
     fontWeight: 500,
     fontSize: 48,
     lineHeight: '52px',
@@ -2637,8 +2634,6 @@ export default function EnhancedTable({pairs, isLoading}) {
                                   tooltip: {
                                     style: {
                                       padding: 24,
-
-                                      fontFamily: 'Poppins',
                                       fontSize: 16,
                                       fontWeight: 400,
                                       lineHeight: '24px',

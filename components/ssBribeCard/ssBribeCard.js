@@ -24,8 +24,7 @@ const theme = createTheme({
       fontSize: 16,
     },
     fontFamily: [
-      '"Poppins"',
-      'Inter',
+      '"PT Root UI"',
       'Arial',
       '-apple-system',
       'BlinkMacSystemFont',

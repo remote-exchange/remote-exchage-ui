@@ -1286,8 +1286,6 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
                     tooltip: {
                       style: {
                         padding: '12px 24px',
-
-                        fontFamily: 'Poppins',
                         fontSize: 16,
                         fontWeight: 400,
                         lineHeight: '24px',
@@ -1337,8 +1335,6 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
                     tooltip: {
                       style: {
                         padding: '12px 24px',
-
-                        fontFamily: 'Poppins',
                         fontSize: 16,
                         fontWeight: 400,
                         lineHeight: '24px',

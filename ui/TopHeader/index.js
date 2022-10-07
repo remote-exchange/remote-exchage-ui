@@ -7,7 +7,6 @@ const TopHeader = ({children}) => {
   const {appTheme} = useAppThemeContext();
   const className = [
     classes["top-header"],
-    classes[`top-header--${appTheme}`],
   ].join(" ");
 
   return (

@@ -201,7 +201,6 @@ input[type=number].massiveInputAmount {
 
 p.inputBalanceText,
 p.inputTitleText {
-  font-family: 'Poppins';
   font-style: normal;
   font-weight: 500;
   font-size: 14px;

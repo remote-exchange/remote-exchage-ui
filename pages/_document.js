@@ -9,12 +9,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <link rel="stylesheet" href="/fonts/Inter/Inter.css"/>
-          <link rel="stylesheet" href="/fonts/MonumentExt/Monument.css"/>
-          <link rel="stylesheet" href="/fonts/Druk/Druk.css"/>
-          <link rel="stylesheet" href="/fonts/PPNeueMachina/PPNeueMachina.css"/>
-          <link rel="stylesheet" href="/fonts/RobotoMono/RobotoMono.css"/>
-          <link rel="stylesheet" href="/fonts/Poppins/Poppins.css"/>
+          <link rel="stylesheet" href="/fonts/PT-Root-UI/PT-Root-UI.css"/>
         </Head>
         <body
           style={{

@@ -18,17 +18,8 @@ const coreTheme = {
       fontSize: 16,
     },
     fontFamily: [
-      "'Poppins'",
-      "Inter",
+      "'PT Root UI'",
       "Arial",
-      "-apple-system",
-      "BlinkMacSystemFont",
-      '"Segoe UI"',
-      '"Helvetica Neue"',
-      "sans-serif",
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"'
     ].join(","),
     h1: {
       // Portfolio balance numbers
@@ -51,18 +42,6 @@ const coreTheme = {
       }
     },
     h3: {
-      // yearn title text YEARN
-      fontFamily: [
-        "'Roboto Mono'",
-        "Druk Wide Bold",
-        "Inter",
-        "Arial",
-        "-apple-system",
-        "BlinkMacSystemFont",
-        '"Segoe UI"',
-        '"Helvetica Neue"',
-        "sans-serif"
-      ],
       fontSize: "1.5rem",
       fontWeight: 700,
       lineHeight: 1.167,
@@ -121,7 +100,7 @@ const coreTheme = {
       }
     },
     body: {
-      fontFamily: "Poppins",
+      fontFamily: "PT Root UI",
     }
   },
   palette: {
@@ -237,7 +216,7 @@ const coreTheme = {
       }
     },
     Mui: {
-      fontFamily: "Poppins",
+      fontFamily: "PT Root UI",
       '&$disabled': {
         '&:before': {
           borderBottom: 'none'

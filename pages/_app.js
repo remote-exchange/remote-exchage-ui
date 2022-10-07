@@ -84,7 +84,7 @@ export default function MyApp({ Component, pageProps }) {
   const theme = createTheme({
     typography: {
       allVariants: {
-        fontFamily: '"Poppins", serif',
+        fontFamily: "'PT Root UI'",
       },
     },
   });

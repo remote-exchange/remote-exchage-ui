@@ -309,7 +309,7 @@ const useStyles = makeStyles((theme) => ({
     minHeight: 72,
     padding: '12px 24px',
     paddingRight: 100,
-    fontFamily: 'Roboto Mono',
+    fontFamily: 'PT Root UI',
     fontSize: 16,
     fontWeight: 400,
     lineHeight: '24px',
@@ -585,7 +585,6 @@ const useStyles = makeStyles((theme) => ({
 
     background: '#171D2D',
 
-    fontFamily: 'Poppins',
     fontWeight: 400,
     fontSize: 16,
     lineHeight: '100%',
