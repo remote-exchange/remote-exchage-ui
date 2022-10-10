@@ -194,7 +194,7 @@ export default function MySnackbar(props) {
             className={[classes.transactionInfo, classes[`transactionInfo--${type}`], classes[`transactionInfo--${appTheme}`]].join(' ')}
             style={{
               display: 'flex',
-              padding: 26,
+              // padding: 26,
             }}>
             <div
               style={{

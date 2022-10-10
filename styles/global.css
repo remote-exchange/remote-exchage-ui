@@ -28,18 +28,13 @@ button {
 
 .web3modal-modal-card {
   display: flex !important;
-  /* flex-direction: column !important; */
+  flex-direction: column !important;
   flex-wrap: wrap;
-  justify-content: space-between;
-
-  max-width: 1052px !important;
-  width: 1052px !important;
-
-  padding: 152px 40px 40px !important;
-
-  border-radius: 12px !important;
-
-  background: #1F2B49 !important;
+  width: 400px !important;
+  height: 372px !important;
+  padding: 92px 40px 20px 40px !important;
+  background: #EAE8E1 !important;
+  border-radius: 20px !important;
 }
 
 @media (max-width: 991px) {
@@ -61,21 +56,27 @@ button {
 }
 
 .web3modal-modal-card::before {
-  content: 'Select your wallet provider';
-
+  content: 'Connect Wallet';
   position: absolute;
-
   top: 0;
   left: 0;
-
-  padding: 40px;
-
-  font-weight: 500;
-  font-size: 60px;
-  line-height: 72px;
+  padding: 20px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
   text-align: left;
+  color: #131313;
+}
 
-  color: #FFFFFF;
+.web3modal-modal-card::after {
+  content: "";
+  background-color: black;
+  border-radius: 20px;
+  position: absolute;
+  top: 72px;
+  left: 20px;
+  width: 360px;
+  height: 280px;
 }
 
 @media (max-width: 991px) {
@@ -102,10 +103,12 @@ button {
 }
 
 .web3modal-provider-wrapper {
-  width: calc(50% - 14px) !important;
-  margin-bottom: 28px !important;
+  width: 320px !important;
+  height: 72px !important;
+  margin-bottom: 12px !important;
   padding: 0 !important;
   border: none !important;
+  z-index: 1;
 }
 
 @media (max-width: 991px) {
@@ -121,24 +124,19 @@ button {
 }
 
 .web3modal-provider-wrapper:last-child {
-  width: 100% !important;
   margin-bottom: 0 !important;
 }
 
 .web3modal-provider-container {
   display: flex !important;
-  justify-content: center !important;
+  justify-content: flex-end !important;
   flex-direction: row-reverse!important;
   align-items: center !important;
-
   height: 120px;
-
   padding: 10px 20px !important;
-
-  border: 1px solid #779BF4 !important;
+  border: 1px solid rgba(104, 114, 122, 0.4) !important;
   border-radius: 12px !important;
-
-  background: rgba(119, 155, 244, 0.15) !important;
+  background: transparent !important;
 }
 
 .web3modal-provider-container:hover {
@@ -146,7 +144,7 @@ button {
 }
 
 .web3modal-provider-name {
-  color: #779BF4 !important;
+  color: #EAE8E1 !important;
 }
 
 .web3modal-provider-description {
@@ -157,8 +155,9 @@ button {
   width: auto !important;
   order: 0 !important;
   margin-top: 0 !important;
-  font-size: 32px !important;
-  font-weight: 500 !important;
+  font-weight: 700 !important;
+  font-size: 24px !important;
+  line-height: 32px !important;
 }
 
 .web3modal-provider-icon {

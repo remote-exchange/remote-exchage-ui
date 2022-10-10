@@ -6,8 +6,12 @@ import * as queries from './graph-queries'
 
 let isTestnet = process.env.NEXT_PUBLIC_CHAINID == 80001
 
+export const NETWORK_NAME = "Avalanche"
+export const DAPP_NAME = "Newfork"
+export const DAPP_DOMAIN = "newfork.exchange"
+
 // URLS
-let scan = 'https://bscscan.com/'
+let scan = 'https://subnets.avax.network/'
 let cont = contracts
 
 if (isTestnet) {

@@ -1,11 +1,9 @@
 import { Dialog, Typography } from "@mui/material";
 import classes from "./ssWrongNetwork.module.css";
-import { useAppThemeContext } from "../../ui/AppThemeProvider";
+import {NETWORK_NAME, ETHERSCAN_URL} from "../../stores/constants"
 
 export const WrongNetwork = (props) => {
   const { visible, onClose, onSwitch } = props;
-
-  const { appTheme } = useAppThemeContext();
 
   return (
     <Dialog
@@ -28,37 +26,30 @@ export const WrongNetwork = (props) => {
             className={classes.header}
             style={{ display: "flex", alignItems: "center" }}
           >
-            <img
-              src="/images/icon-warning.svg"
-              className={classes.warningIcon}
-            />
-
-            <Typography className={classes.title1}>WRONG NETWORK</Typography>
+            <Typography className={classes.title1}>Wrong Network</Typography>
           </div>
 
-          <Typography className={classes.title2}>
-            The chain you are connected to is not supported!
-          </Typography>
+          <div className={classes.inner}>
+            <Typography className={classes.title2}>
+              The chain you are connected is not supported!
+            </Typography>
 
-          <Typography className={classes.paragraph}>
-            Please check that your wallet is connected to BSC Network, only
-            after you can proceed. If you do not have a BSC Network in your
-            wallet, you can add it through the footer link.
-          </Typography>
+            <Typography className={classes.paragraph}>
+              Please check that your wallet is connected to {NETWORK_NAME} Network, only after you can proceed. If you do not have a {NETWORK_NAME} Network in your wallet, you can add it through the footer link on the {ETHERSCAN_URL}.
+            </Typography>
 
-          <div className={classes.buttonsContainer}>
-            <a className={classes.primaryButton} href="https://chainlist.org/chain/56" target="_blank" rel="noreferrer">
-              <Typography className={classes.buttonTextPrimary}>
-                ADD BSC MAINNET
-              </Typography>
-              <img src="/images/ui/explorer.svg" width="20px" />
-            </a>
+            <div className={classes.buttonsContainer}>
+              <div className={classes.secondaryButton} onClick={onSwitch}>
+                <Typography className={classes.buttonTextSecondary}>
+                  Swith to {NETWORK_NAME} Mainnet
+                </Typography>
+              </div>
 
-            <div className={classes.secondaryButton} onClick={onSwitch}>
-              {/* <div className={classes.secondaryButton} onClick={action2 ? action2 : navigateToMedium}> */}
-              <Typography className={classes.buttonTextSecondary}>
-                SWITCH TO BSC MAINNET
-              </Typography>
+              <a className={classes.primaryButton} href={ETHERSCAN_URL} target="_blank" rel="noreferrer">
+                <Typography className={classes.buttonTextPrimary}>
+                  Redirect to {ETHERSCAN_URL}
+                </Typography>
+              </a>
             </div>
           </div>
         </div>

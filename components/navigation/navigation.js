@@ -42,6 +42,10 @@ function Navigation(props) {
   };
 
   const closeWarning = () => {
+    setWarningOpen(false);
+  };
+
+  const acceptWarning = () => {
     window.localStorage.setItem("fixed.forex-warning-accepted", "accepted");
     setWarningOpen(false);
   };
@@ -169,7 +173,7 @@ function Navigation(props) {
           {props.children}
         </div>
 
-      {warningOpen && <SSWarning close={closeWarning} />}
+      {warningOpen && <SSWarning close={acceptWarning} closePopup={closeWarning} />}
       {isShowWarningWeb3Provider && (
           <SSWarning
               close={onDownloadClicked}
@@ -181,6 +185,7 @@ function Navigation(props) {
               btnLabel2={"What is Metamask?"}
               action2={onRedirectToMetamaskGuide}
               title={' '}
+              closePopup={closeWarning}
           />
       )}
 
