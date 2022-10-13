@@ -13,20 +13,21 @@ input[type=number].massiveInputAmount {
   display: flex;
   flex-direction: column;
   width: 100%;
+  background: #EAE8E1;
+  box-shadow: 8px 8px 0 #6575B1;
+  border-radius: 20px;
+  padding: 20px;
 }
 
 .swapInputsHeader {
   display: flex;
   justify-content: space-between;
-
-  margin-bottom: 32px;
-
-  font-size: 60px !important;
-  font-weight: 500 !important;
-  line-height: 1em !important;
-  letter-spacing: 0.04em !important;
-
-  color: #E4E9F4;
+  margin-bottom: 20px;
+  font-size: 40px !important;
+  font-weight: 700 !important;
+  line-height: 48px !important;
+  text-shadow: 2px 2px 0 #6575B1;
+  color: #000000;
 }
 
 @media (max-width: 600px) {
@@ -53,6 +54,11 @@ input[type=number].massiveInputAmount {
 .inputColumn {
   position: relative;
 
+  background: #131313;
+  border: 1px solid rgba(104, 114, 122, 0.4);
+  border-radius: 16px;
+  padding: 20px;
+
   flex-shrink: 0;
   width: calc(50% - 9px);
 }
@@ -65,11 +71,11 @@ input[type=number].massiveInputAmount {
 }
 
 .inputColumn:last-child {
-  width: calc(61% - 8px);
+  width: calc(50% - 8px);
 }
 
 .inputColumn:first-child {
-  width: calc(39% - 8px);
+  width: calc(49% - 8px);
 }
 
 @media (max-width: 580px) {
@@ -95,9 +101,9 @@ input[type=number].massiveInputAmount {
 
 .max {
   font-size: 14px;
-  font-weight: 500;
-  line-height: 120%;
-  color: #779BF4;
+  font-weight: 700;
+  line-height: 20px;
+  color: #B1F1E3;
   cursor: pointer;
 }
 
@@ -132,7 +138,7 @@ input[type=number].massiveInputAmount {
 
   border-radius: 12px;
 
-  background: #171D2D;
+  /*background: #171D2D;*/
 
   font-size: 24px;
   line-height: 32px;
@@ -183,8 +189,9 @@ input[type=number].massiveInputAmount {
 .inputTitleText span {
   margin-left: auto;
   font-size: 14px;
-  font-weight: 400;
-  color: #5E6E96;
+  font-weight: 500;
+  line-height: 20px;
+  color: #9A9FAF;
 }
 
 @media (max-width: 580px) {
@@ -204,9 +211,8 @@ p.inputTitleText {
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
-  line-height: 16px;
-
-  color: #8191B9;
+  line-height: 20px;
+  color: #9A9FAF;
 }
 
 @media (max-width: 580px) {
@@ -334,13 +340,13 @@ p.inputTitleText {
 
 .textField {
   position: relative;
-  width: 782px;
-  max-width: 100%;
-  padding: 24px;
+  width: 100%;
+  /*max-width: 100%;*/
+  /*padding: 24px;*/
 
-  border-radius: 12px;
+  /*border-radius: 12px;*/
 
-  background: #060B17;
+  /*background: #060B17;*/
 }
 
 @media (max-width: 860px) {
@@ -352,12 +358,12 @@ p.inputTitleText {
 .largeInput {
   padding: 0 !important;
   font-weight: 400 !important;
-  font-size: 30px !important;
-  line-height: 100% !important;
+  font-size: 48px !important;
+  line-height: 52px !important;
   border: none !important;
   outline: none !important;
-  color: #E4E9F4 !important;
-  -webkit-text-fill-color: #E4E9F4 !important;
+  color: #F6F7F9 !important;
+  -webkit-text-fill-color: #F6F7F9 !important;
 }
 
 @media (max-width: 860px) {
@@ -385,15 +391,15 @@ p.inputTitleText {
 
 .swapIconContainer {
   width: 72px;
-  height: 72px;
+  /*height: 72px;*/
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   margin: 0 auto;
-  margin-top: -20px;
-  margin-bottom: -20px;
+  margin-top: 24px;
+  margin-bottom: 24px;
 
   cursor: pointer;
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
@@ -623,15 +629,13 @@ p.inputTitleText {
   display: flex;
   justify-content: center;
   align-items: center;
-
+  border-radius: 16px;
   width: 100%;
-  height: 96px;
-
+  height: 63px;
+  color: #FFFFFF !important;
   font-size: 32px !important;
   font-weight: 600 !important;
-  text-transform: uppercase;
-
-  border-radius: 12px;
+  /*text-transform: uppercase;*/
 }
 
 @media (max-width: 630px) {
@@ -643,20 +647,21 @@ p.inputTitleText {
 }
 
 .actionButtonText {
-  background: #D3F85A;
-  color: #060B17 !important;
+  background: #7DB857;
+  /*color: #060B17 !important;*/
 }
 
 .actionButtonTextError {
-  background-color: #E93131;
-  color: #060B17 !important;
+  background: #9B0E0E;
+  /*color: #060B17 !important;*/
 }
 
 .actionButtonTextErrorWarning {}
 
 .actionButtonText--disabled {
-  background: #586586;
-  color: #1F2B49 !important;
+  background: #68727A;
+
+  /*color: #1F2B49 !important;*/
 }
 
 .route {
@@ -969,32 +974,26 @@ p.inputTitleText {
 }
 
 .quoteLoader,
-.warningContainer,
-.priceImpactWrapper {
+.warningContainer {
   position: relative;
-
   display: flex;
   align-items: center;
   justify-content: flex-start;
-
   width: 100%;
-
-  /* margin-top: 20px; */
-  padding: 20px !important;
-
-  /* border: 1px solid #15B525; */
-  border: 1px solid #1F2B49;
+  padding: 16px 20px !important;
+  background: rgba(104, 114, 122, 0.12);
+  border: 1px solid #68727A;
   border-radius: 12px;
-
+  font-weight: 500 !important;
   font-size: 14px !important;
-  font-weight: 400 !important;
-  line-height: 120% !important;
+  line-height: 20px !important;
   text-align: left !important;
-
-  background-color: #171D2D;
-  color: #E4E9F4 !important;
+  color: #68727A !important;
 }
 
+.priceImpactWrapper {
+
+}
 @media (max-width: 630px) {
   .quoteLoader,
   .warningContainer {
@@ -1043,13 +1042,9 @@ p.inputTitleText {
 
 .priceImpactTitle {
   display: block;
-
-  margin-bottom: 4px;
-
   font-size: 16px;
   font-weight: 500;
-
-  color: #E4E9F4;
+  line-height: 20px;
 }
 
 @media (max-width: 630px) {
@@ -1060,11 +1055,11 @@ p.inputTitleText {
 
 .priceImpactValue {
   display: block;
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 28px;
-  text-align: left;
-  color: #1F2B49;
+  /*text-align: left;*/
+  /*color: #1F2B49;*/
 }
 
 .priceImpactValueError {
@@ -1097,6 +1092,8 @@ p.inputTitleText {
 
 .warningContainerError {
   border: 1px solid #E25656;
+  background: rgba(155, 14, 14, 0.12);
+  color: #9B0E0E !important;
 }
 
 .warningContainerWarning {
@@ -1122,12 +1119,34 @@ p.inputTitleText {
 }
 
 .controlsBtn {
-  flex-grow: 1;
+  /*flex-grow: 1;*/
+  position: relative;
 }
 
 .controlsInfo {
-  width: 164px;
-  margin-right: 16px;
+  width: 257px;
+  height: 64px;
+  margin-left: 20px;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  border-radius: 12px;
+}
+
+.controlsInfoGood {
+  background: rgba(69, 155, 14, 0.12);
+  border: 1px solid #459B0E;
+  color: #459B0E;
+}
+
+.controlsInfoBad {
+  background: rgba(155, 14, 14, 0.12);
+  border: 1px solid #9B0E0E;
+  color: #9B0E0E;
 }
 
 @media (max-width: 630px) {
@@ -1137,147 +1156,59 @@ p.inputTitleText {
   }
 }
 
-/* @media (max-width: 470px) {
-  .inputBalanceSlippageText::after {
-    font-size: 18px !important;
-    font-weight: 400 !important;
-    line-height: 121% !important;
-  }
+.settings {
+  cursor: pointer;
+}
 
-  .loader {
-    bottom: -70px;
-    left: 105px;
-  }
+.inputsBlock {
+  background: #131313;
+  border-radius: 20px;
+  padding: 20px;
+}
 
-  .textField {
-    width: 100%;
-  }
+.buttonPrefix {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  left: -12px;
+  top: 21px;
+  background: #EAE8E1;
+  border-radius: 100px;
+  z-index: 1;
+}
 
-  .textField--From-dark {
-    width: 280px;
-    height: 114px;
-    background-image: url("/images/ui/swap-coin-top-360--dark.svg");
-  }
+.buttonPostfix {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  right: -12px;
+  top: 21px;
+  background: #EAE8E1;
+  border-radius: 100px;
+}
 
-  .textField--To-dark {
-    width: 280px;
-    height: 114px;
-    background-image: url("/images/ui/swap-coin-bottom-360--dark.svg");
-  }
+.routeBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 52px;
+  align-self: center;
+  margin-left: auto;
+  color: #131313;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 16px;
+}
 
-  .textField--From-light {
-    width: 280px;
-    height: 114px;
-    background-image: url("/images/ui/swap-coin-top-360--light.svg");
-  }
+.swapAssetsPriceText {
+  color: #F6F7F9;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+}
 
-  .textField--To-light {
-    width: 280px;
-    height: 114px;
-    background-image: url("/images/ui/swap-coin-bottom-360--light.svg");
-  }
-
-  .inputBalanceText,
-  .inputTitleText {
-    font-size: 12px !important;
-  }
-
-  .swapIconContainer {
-    background-repeat: no-repeat;
-    margin-left: 210px;
-    margin-top: -37px;
-    margin-bottom: 15px;
-  }
-
-  .textField--To-light,
-  .textField--To-dark {
-    margin-top: -50px;
-  }
-
-  .swapInputs {
-    align-items: center;
-  }
-
-  .inputBalanceText {
-    left: 100px;
-  }
-
-  .inputBalanceTextContainer {
-    position: absolute;
-    left: 94px;
-    top: 10px;
-    width: 172px;
-  }
-
-  .largeInput {
-    font-size: 18px !important;
-  }
-
-  .massiveInputAmount {
-    top: 51px;
-    left: 100px;
-  }
-
-  .smallerText {
-    font-size: 12px !important;
-    top: 79px;
-    left: 100px;
-  }
-
-  .warningWarning,
-  .depositInfoHeading,
-  .priceInfo > .text {
-    font-size: 12px !important;
-  }
-
-  .priceInfos {
-    background-image: none !important;
-    border: 1px solid #86B9D6;
-  }
-
-  .priceInfos--dark {
-    border: 1px solid #5F7285;
-  }
-
-  .priceInfo {
-    padding: 10px;
-  }
-
-  .priceInfo:not(:last-child) {
-    border-right: 1px solid #86B9D6;
-  }
-
-  .priceInfos--dark .priceInfo:not(:last-of-type) {
-    border-right: 1px solid #5F7285;
-  }
-
-  .routeLinesLeft,
-  .routeLinesRight {
-    width: 35%;
-  }
-
-  .routeArrow {
-    font-weight: 500;
-    font-size: 12px;
-  }
-
-  .slippage {
-    width: 280px;
-    position: static;
-    display: flex;
-    align-items: center;
-    margin-top: 20px;
-  }
-
-  .slippageLabel {
-    margin-bottom: 0;
-    margin-right: 20px;
-  }
-
-  .btnSwap {
-    left: 50%;
-    bottom: -76px;
-    transform: translateX(-50%);
-    margin-left: 0 !important;
-  }
-} */
+.swapAssetsRow {
+  display: flex;
+  align-items: center;
+}

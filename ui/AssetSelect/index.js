@@ -480,6 +480,12 @@ const AssetSelect = (
                   handleOpenPopover={handleOpenPopover}
                 />
               }
+
+              <div className={classes.selectExpander}>
+                  <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M7.29289 8.79289L1.38995 2.88995C0.507999 2.008 1.13263 0.5 2.3799 0.5L13.6201 0.500001C14.8674 0.500001 15.492 2.008 14.6101 2.88995L8.70711 8.79289C8.31658 9.18342 7.68342 9.18342 7.29289 8.79289Z" fill="#9A9FAF"/>
+                  </svg>
+              </div>
           </div>
         </div>
       </div>

@@ -19,7 +19,11 @@ export const TokenOptions = (props) => {
           handleOpenPopover(e);
         }}
       >
-        <div />
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10.5" y="10.5" width="3" height="3" rx="1.5" fill="#353A42"/>
+              <rect x="4.5" y="10.5" width="3" height="3" rx="1.5" fill="#353A42"/>
+              <rect x="16.5" y="10.5" width="3" height="3" rx="1.5" fill="#353A42"/>
+          </svg>
       </div>
       <Popover
         open={visible}

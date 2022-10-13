@@ -1,15 +1,8 @@
 .form {
   position: relative;
-  /* width: 463px; */
-  width: 782px;
+  width: 932px;
   max-width: 100%;
   height: auto;
-  /* margin-left: 1px; */
-  /* background: var(--background-dark); */
-  /* padding: 13px 30px; */
-  /* border: 1px solid var(--border-dark); */
-  /* border-top: none; */
-  /* border-bottom: none; */
   z-index: 2;
 }
 

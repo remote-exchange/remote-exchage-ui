@@ -54,6 +54,9 @@ function Setup() {
   const [hintAnchor, setHintAnchor] = React.useState(null);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  const [settingsOpened, setSettingsOpened] = useState(false);
+  const [routingOpened, setRoutingOpened] = useState(false);
+
   const { appTheme } = useAppThemeContext();
 
   const router = useRouter()
@@ -606,93 +609,23 @@ function Setup() {
   const renderSwapInformation = () => {
     if (!quoteError && !quoteLoading && quote) {
       return (
-          <div className={classes.controlsInfo}>
-            <div className={classes.depositInfoContainer}>
-              {quote && (
-                  <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        width: "100%",
-                      }}
-                  >
-                    { (
-                        <div
-                          className={[
-                            classes.priceImpactWrapper,
-                            classes[`warningContainer--${appTheme}`],
-                            BigNumber(quote.priceImpact).gt(5)
-                              ? classes.priceImpactWrapperError
-                              : classes.priceImpactWrapperWarning,
-                          ].join(" ")}
-                        >
-                          <Typography
-                            className={[
-                              classes.priceImpactRow,
-                              BigNumber(quote.priceImpact).gt(5)
-                                ? classes.warningError
-                                : classes.warningWarning,
-                              classes[`warningText--${appTheme}`],
-                            ].join(" ")}
-                            align="center"
-                          >
-                            <span className={classes.priceImpactTitle}>
-                              Price impact
-                            </span>{" "}
-                            <span
-                              className={[classes.priceImpactValue,
-                                BigNumber(quote.priceImpact).gt(5) || BigNumber(quote.priceImpact).lt(0)
-                                  ? classes.priceImpactValueError
-                                  : classes.priceImpactValueWarning,
-                                ].join(" ")}>
+          <div className={[classes.controlsInfo, BigNumber(quote.priceImpact).gt(5) || BigNumber(quote.priceImpact).lt(0)
+              ? classes.controlsInfoBad
+              : classes.controlsInfoGood,].join(" ")}>
+               <span className={classes.priceImpactTitle}>
+                   Price impact
+               </span>
+              <span
+                  className={[classes.priceImpactValue,
+
+                  ].join(" ")}>
                         {quote.priceImpact > 0 ? formatCurrency(quote.priceImpact) : "Unknown"}%
                       </span>
-                          </Typography>
-                        </div>
-                    )}
-                  </div>
-              )}
-            </div>
           </div>
       );
     }
 
-    return (
-        <div className={classes.controlsInfo}>
-          <div className={classes.depositInfoContainer}>
-            <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  width: "100%",
-                }}
-            >
-              <div
-                  className={[
-                    classes.warningContainer,
-                    classes[`warningContainer--${appTheme}`],
-                  ].join(" ")}
-              >
-                <Typography
-                    className={[
-                      classes.priceImpactRow,
-                      classes[`warningText--${appTheme}`],
-                    ].join(" ")}
-                    align="center"
-                >
-                  <span className={classes.priceImpactTitle}>
-                    Price impact
-                  </span>{" "}
-                  <span className={[classes.priceImpactValue,
-                  ].join(" ")}>
-                    0.00%
-                  </span>
-                </Typography>
-              </div>
-            </div>
-          </div>
-        </div>
-    );
+    return null
   };
 
   const renderBalanceIsBellowError = () => {
@@ -707,12 +640,11 @@ function Setup() {
               ].join(" ")}
           >
             <img src="/images/ui/info-circle-red.svg" width="24px" style={{ marginRight: 8 }} />
-
             <Typography
                 className={classes.warningError}
                 align="center"
             >
-              Insufficient funds {fromAssetValue?.symbol}
+                Your {fromAssetValue?.symbol} balance is too low.
             </Typography>
           </div>
       )
@@ -968,7 +900,7 @@ function Setup() {
             <div className={classes.inputColumn}>
               <div className={classes.massiveInputTitle}>
                 <Typography className={classes.inputTitleText} noWrap>
-                  {type === "From" ? "From" : "To"}
+                  {type === "From" ? "From :" : "To :"}
 
                   <span>{priceCompareText}</span>
                 </Typography>
@@ -993,11 +925,6 @@ function Setup() {
                       "g-flex--align-center",
                     ].join(" ")}
                 >
-                  <img
-                      src="/images/ui/icon-wallet.svg"
-                      className={classes.walletIcon}
-                  />
-
                   <Typography
                       className={[classes.inputBalanceText, "g-flex__item"].join(
                           " "
@@ -1006,6 +933,7 @@ function Setup() {
                       onClick={() => setBalance100()}
                   >
                   <span>
+                      Balance:
                     {assetValue && assetValue.balance
                         ? " " + formatCurrency(assetValue.balance)
                         : ""}
@@ -1014,7 +942,7 @@ function Setup() {
 
                   {assetValue?.balance &&
                   Number(assetValue?.balance) > 0 &&
-                  type === "From" && (
+                      (type === "From") && (
                       <div
                           className={classes.max}
                           onClick={() => setBalance100()}
@@ -1081,210 +1009,135 @@ function Setup() {
       <div className={classes.swapInputs}>
         <div className={classes.swapInputsHeader}>
           <Typography className={classes.swapInputsHeader}>Swap</Typography>
+            <div className={classes.settings}>
+                <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.99997 0.484375C9.34253 0.484375 8.77058 0.905954 7.62667 1.74911L5.90576 3.01757C5.72555 3.1504 5.63545 3.21681 5.53871 3.27266C5.44198 3.32851 5.33941 3.37334 5.13427 3.46299L3.1753 4.31911C1.87315 4.88819 1.22208 5.17272 0.893356 5.74208C0.564637 6.31144 0.643758 7.01756 0.802 8.42979L1.04006 10.5544C1.06499 10.7768 1.07745 10.8881 1.07745 10.9998C1.07745 11.1115 1.06499 11.2227 1.04006 11.4452L0.802 13.5698C0.643758 14.982 0.564637 15.6881 0.893357 16.2575C1.22208 16.8269 1.87315 17.1114 3.1753 17.6805L5.13427 18.5366C5.33941 18.6262 5.44198 18.6711 5.53871 18.7269C5.63545 18.7828 5.72555 18.8492 5.90576 18.982L7.62667 20.2505C8.77058 21.0936 9.34253 21.5152 9.99997 21.5152C10.6574 21.5152 11.2294 21.0936 12.3733 20.2505L12.3733 20.2505L14.0942 18.982C14.2744 18.8492 14.3645 18.7828 14.4612 18.7269C14.558 18.6711 14.6605 18.6262 14.8657 18.5366L16.8246 17.6805C18.1268 17.1114 18.7779 16.8269 19.1066 16.2575C19.4353 15.6881 19.3562 14.982 19.1979 13.5698L18.9599 11.4452L18.9599 11.4452C18.935 11.2227 18.9225 11.1115 18.9225 10.9998C18.9225 10.8881 18.9349 10.7769 18.9599 10.5544L18.9599 10.5544L19.1979 8.42979C19.3562 7.01756 19.4353 6.31144 19.1066 5.74208C18.7779 5.17272 18.1268 4.88819 16.8246 4.31911L14.8657 3.46299L14.8657 3.46298C14.6605 3.37334 14.558 3.32851 14.4612 3.27266C14.3645 3.21681 14.2744 3.1504 14.0942 3.01757L12.3733 1.74911C11.2294 0.905954 10.6574 0.484375 9.99997 0.484375ZM9.99997 14.9998C12.2091 14.9998 14 13.2089 14 10.9998C14 8.79065 12.2091 6.99979 9.99997 6.99979C7.79083 6.99979 5.99997 8.79065 5.99997 10.9998C5.99997 13.2089 7.79083 14.9998 9.99997 14.9998Z" fill="#131313"/>
+                </svg>
+            </div>
 
-          {renderSmallInput(
+            {/*{renderSmallInput(
               "slippage",
               slippage,
               slippageError,
               onSlippageChanged
-          )}
+          )}*/}
         </div>
 
-        {renderMassiveInput(
-            "From",
-            fromAmountValue,
-            fromAmountError,
-            fromAmountChanged,
-            fromAssetValue,
-            fromAssetError,
-            fromAssetOptions,
-            onAssetSelect,
-            quote &&
-            `1 ${fromAssetValue?.symbol} =
+          <div className={classes.inputsBlock}>
+              {renderMassiveInput(
+                  "From",
+                  fromAmountValue,
+                  fromAmountError,
+                  fromAmountChanged,
+                  fromAssetValue,
+                  fromAssetError,
+                  fromAssetOptions,
+                  onAssetSelect,
+                  quote &&
+                  `1 ${fromAssetValue?.symbol} =
         ${!hidequote ? formatCurrency(
-                BigNumber(quote.output.finalValue)
-                    .div(quote.inputs.fromAmount)
-                    .toFixed(18)
-            ) : 1}
+                      BigNumber(quote.output.finalValue)
+                          .div(quote.inputs.fromAmount)
+                          .toFixed(18)
+                  ) : 1}
         ${toAssetValue?.symbol}`
-        )}
-
-        {fromAssetError && (
-            <div
-                style={{ marginTop: 20 }}
-                className={[
-                  classes.warningContainer,
-                  classes[`warningContainer--${appTheme}`],
-                  classes.warningContainerError,
-                ].join(" ")}
-            >
-              <div
-                  className={[
-                    classes.warningDivider,
-                    classes.warningDividerError,
-                  ].join(" ")}
-              ></div>
-              <Typography
-                  className={[
-                    classes.warningError,
-                    classes[`warningText--${appTheme}`],
-                  ].join(" ")}
-                  align="center"
-              >
-                {fromAssetError}
-              </Typography>
-            </div>
-        )}
-
-        <div className={classes.swapIconContainerOuter}>
-          <div className={classes.inputRow}>
-            <div className={classes.inputColumn}>
-              <div
-                  className={[
-                    classes.swapIconContainer,
-                    classes[`swapIconContainer--${appTheme}`],
-                  ].join(" ")}
-                  onMouseOver={swapIconHover}
-                  onMouseOut={swapIconDefault}
-                  onMouseDown={swapIconClick}
-                  onMouseUp={swapIconDefault}
-                  onTouchStart={swapIconClick}
-                  onTouchEnd={swapIconDefault}
-                  onClick={swapAssets}
-              >
-                <img src="/images/ui/arrow-down.png" />
-                {/* {windowWidth > 470 && (
-                <svg
-                  width="80"
-                  height="80"
-                  viewBox="0 0 80 80"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle
-                    cx="40"
-                    cy="40"
-                    r="39.5"
-                    fill={appTheme === "dark" ? "#151718" : "#DBE6EC"}
-                    stroke={appTheme === "dark" ? "#5F7285" : "#86B9D6"}
-                  />
-
-                  <rect
-                    y="30"
-                    width="4"
-                    height="20"
-                    fill={appTheme === "dark" ? "#151718" : "#DBE6EC"}
-                  />
-
-                  <rect
-                    x="76"
-                    y="30"
-                    width="4"
-                    height="20"
-                    fill={appTheme === "dark" ? "#151718" : "#DBE6EC"}
-                  />
-
-                  <circle
-                    cx="40"
-                    cy="40"
-                    r="29.5"
-                    fill={
-                      swapIconBgColor || (appTheme === "dark" ? "#24292D" : "#B9DFF5")
-                    }
-                    stroke={
-                      swapIconBorderColor ||
-                      (appTheme === "dark" ? "#5F7285" : "#86B9D6")
-                    }
-                  />
-
-                  <path
-                    d="M41.0002 44.172L46.3642 38.808L47.7782 40.222L40.0002 48L32.2222 40.222L33.6362 38.808L39.0002 44.172V32H41.0002V44.172Z"
-                    fill={
-                      swapIconArrowColor ||
-                      (appTheme === "dark" ? "#4CADE6" : "#0B5E8E")
-                    }
-                  />
-                </svg>
               )}
 
-              {windowWidth <= 470 && (
-                <svg
-                  width="50"
-                  height="50"
-                  viewBox="0 0 50 50"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle
-                    cx="25"
-                    cy="25"
-                    r="24.5"
-                    fill={appTheme === "dark" ? "#151718" : "#DBE6EC"}
-                    stroke={appTheme === "dark" ? "#5F7285" : "#86B9D6"}
-                  />
+              {fromAssetError && (
+                  <div
+                      style={{ marginTop: 20 }}
+                      className={[
+                          classes.warningContainer,
+                          classes[`warningContainer--${appTheme}`],
+                          classes.warningContainerError,
+                      ].join(" ")}
+                  >
+                      <div
+                          className={[
+                              classes.warningDivider,
+                              classes.warningDividerError,
+                          ].join(" ")}
+                      ></div>
+                      <Typography
+                          className={[
+                              classes.warningError,
+                              classes[`warningText--${appTheme}`],
+                          ].join(" ")}
+                          align="center"
+                      >
+                          {fromAssetError}
+                      </Typography>
+                  </div>
+              )}
 
-                  <rect
-                    y="20"
-                    width="3"
-                    height="10"
-                    fill={appTheme === "dark" ? "#151718" : "#DBE6EC"}
-                  />
-
-                  <rect
-                    x="48"
-                    y="20"
-                    width="2"
-                    height="10"
-                    fill={appTheme === "dark" ? "#151718" : "#DBE6EC"}
-                  />
-
-                  <circle
-                    cx="25"
-                    cy="25"
-                    r="18.5"
-                    fill={
-                      swapIconBgColor || (appTheme === "dark" ? "#24292D" : "#B9DFF5")
-                    }
-                    stroke={
-                      swapIconBorderColor ||
-                      (appTheme === "dark" ? "#5F7285" : "#86B9D6")
-                    }
-                  />
-
-                  <path
-                    d="M25.8336 28.4773L30.3036 24.0073L31.4819 25.1857L25.0002 31.6673L18.5186 25.1857L19.6969 24.0073L24.1669 28.4773V18.334H25.8336V28.4773Z"
-                    fill={
-                      swapIconArrowColor ||
-                      (appTheme === "dark" ? "#ffffff" : "#ffffff")
-                    }
-                  />
-                </svg>
-              )} */}
+              <div className={classes.swapIconContainerOuter}>
+                  <div className={classes.inputRow}>
+                      <div className={classes.swapAssetsRow}>
+                          <div
+                              className={[
+                                  classes.swapIconContainer,
+                                  classes[`swapIconContainer--${appTheme}`],
+                              ].join(" ")}
+                              onMouseOver={swapIconHover}
+                              onMouseOut={swapIconDefault}
+                              onMouseDown={swapIconClick}
+                              onMouseUp={swapIconDefault}
+                              onTouchStart={swapIconClick}
+                              onTouchEnd={swapIconDefault}
+                              onClick={swapAssets}
+                          >
+                              <svg width="48" height="32" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M30 18.6667L30.5303 18.1363L31.0607 18.6667L30.5303 19.197L30 18.6667ZM20 18.6667L20 17.9167L20 18.6667ZM17.9167 17.3333C17.9167 16.9191 18.2525 16.5833 18.6667 16.5833C19.0809 16.5833 19.4167 16.9191 19.4167 17.3333L17.9167 17.3333ZM27.8637 15.4697L30.5303 18.1363L29.4697 19.197L26.803 16.5303L27.8637 15.4697ZM30.5303 19.197L27.8637 21.8637L26.803 20.803L29.4697 18.1363L30.5303 19.197ZM30 19.4167L20 19.4167L20 17.9167L30 17.9167L30 19.4167ZM20 19.4167C18.8494 19.4167 17.9167 18.4839 17.9167 17.3333L19.4167 17.3333C19.4167 17.6555 19.6778 17.9167 20 17.9167L20 19.4167Z" fill="#B1F1E3"/>
+                                  <path d="M19.333 13.3332L18.8027 12.8028L18.2723 13.3332L18.8027 13.8635L19.333 13.3332ZM29.2497 14.6665C29.2497 15.0807 29.5855 15.4165 29.9997 15.4165C30.4139 15.4165 30.7497 15.0807 30.7497 14.6665H29.2497ZM21.4693 10.1362L18.8027 12.8028L19.8633 13.8635L22.53 11.1968L21.4693 10.1362ZM18.8027 13.8635L21.4693 16.5302L22.53 15.4695L19.8633 12.8028L18.8027 13.8635ZM19.333 14.0832H28.6663V12.5832H19.333V14.0832ZM28.6663 14.0832C28.9885 14.0832 29.2497 14.3443 29.2497 14.6665H30.7497C30.7497 13.5159 29.8169 12.5832 28.6663 12.5832V14.0832Z" fill="#B1F1E3"/>
+                                  <rect x="0.5" y="0.5" width="47" height="31" rx="15.5" stroke="#9A9FAF"/>
+                              </svg>
+                          </div>
+                          <div className={classes.swapAssetsPriceText}>
+                              {!hidequote && quote && `${formatCurrency(
+                                  BigNumber(quote.inputs.fromAmount)
+                                      .div(quote.output.finalValue)
+                                      .toFixed(18))} ${fromAssetValue?.symbol} per 1 ${toAssetValue?.symbol}`}
+                          </div>
+                      </div>
+                  </div>
               </div>
-            </div>
-          </div>
-        </div>
 
-        {renderMassiveInput(
-            "To",
-            toAmountValue,
-            toAmountError,
-            toAmountChanged,
-            toAssetValue,
-            toAssetError,
-            toAssetOptions,
-            onAssetSelect,
-            quote &&
-            `1 ${toAssetValue?.symbol} = 
+              {renderMassiveInput(
+                  "To",
+                  toAmountValue,
+                  toAmountError,
+                  toAmountChanged,
+                  toAssetValue,
+                  toAssetError,
+                  toAssetOptions,
+                  onAssetSelect,
+                  quote &&
+                  `1 ${toAssetValue?.symbol} = 
         ${!hidequote ? formatCurrency(
-                BigNumber(quote.inputs.fromAmount)
-                    .div(quote.output.finalValue)
-                    .toFixed(18)
-            ) : 1}
+                      BigNumber(quote.inputs.fromAmount)
+                          .div(quote.output.finalValue)
+                          .toFixed(18)
+                  ) : 1}
         ${fromAssetValue?.symbol}`
-        )}
-
+              )}
+          </div>
         <div style={{ marginBottom: 20}} />
+
+
+          {(!fromAmountValue || Number(fromAmountValue) <= 0) &&
+              <div
+                  style={{ marginBottom: 20 }}
+                  className={[
+                      classes.warningContainer,
+                      // classes.warningContainerError,
+                  ].join(" ")}
+              >
+                  <svg style={{marginRight: 15}} width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M18 9C18 13.9706 13.9706 18 9 18C4.02944 18 0 13.9706 0 9C0 4.02944 4.02944 0 9 0C13.9706 0 18 4.02944 18 9ZM10 5C10 5.55228 9.55229 6 9 6C8.44771 6 8 5.55228 8 5C8 4.44772 8.44771 4 9 4C9.55229 4 10 4.44772 10 5ZM9.75 14V8H8.25V14H9.75Z" fill="#68727A"/>
+                  </svg>
+                  Select coins/tokens you want to swap and enter amounts.
+              </div>
+          }
 
         {toAssetError && (
             <div
@@ -1351,19 +1204,32 @@ function Setup() {
               >
                 <img src="/images/ui/info-circle-red.svg" width="24px" />
               </div>
-              {/* <div
-            className={[
-              classes.quoteLoaderDivider,
-              classes.quoteLoaderDividerError,
-            ].join(" ")}
-          ></div> */}
               <Typography className={classes.quoteError}>{quoteError}</Typography>
             </div>
         )}
 
         {renderBalanceIsBellowError()}
 
-        {quoteLoading && (
+          {quote && BigNumber(quote.priceImpact).gt(5) && fromAmountValue <= Number(fromAssetValue.balance) &&
+              <div
+                  style={{ marginBottom: 20 }}
+                  className={[
+                      classes.warningContainer,
+                      classes[`warningContainer--${appTheme}`],
+                      classes.warningContainerError
+                  ].join(" ")}
+              >
+                  <img src="/images/ui/info-circle-red.svg" width="24px" style={{ marginRight: 8 }} />
+                  <Typography
+                      className={classes.warningError}
+                      align="center"
+                  >
+                      Price impact is too high! ARE YOU SURE?!
+                  </Typography>
+              </div>
+          }
+
+        {quoteLoading&&false && (
             <div
                 className={[classes.quoteLoader, classes.quoteLoaderLoading].join(
                     " "
@@ -1373,12 +1239,10 @@ function Setup() {
             </div>
         )}
 
-        {!hidequote ? renderRoute() : ''}
-
         <div className={classes.controls}>
-            {!hidequote ? renderSwapInformation() : null}
 
           <div className={classes.controlsBtn}>
+              <div className={classes.buttonPrefix}></div>
             <BtnSwap
                 onClick={(fromAssetValue?.symbol == CONTRACTS.FTM_SYMBOL && toAssetValue?.symbol == CONTRACTS.WFTM_SYMBOL)
                     ? onWrap
@@ -1388,7 +1252,7 @@ function Setup() {
                 className={classes.btnSwap}
                 labelClassName={[
                   !fromAmountValue ||
-                  fromAmountValue > Number(fromAssetValue.balance) ||
+                  fromAmountValue > Number(fromAssetValue?.balance) ||
                   Number(fromAmountValue) <= 0
                       ? classes["actionButtonText--disabled"]
                       : classes.actionButtonText,
@@ -1406,9 +1270,9 @@ function Setup() {
                 loading={loading}
                 label={
                     loading && fromAssetValue?.symbol == CONTRACTS.FTM_SYMBOL && toAssetValue?.symbol == CONTRACTS.WFTM_SYMBOL
-                        ? "Wrapping"
+                        ? "Wrap" //"Wrapping"
                         : loading && fromAssetValue?.symbol == CONTRACTS.WFTM_SYMBOL && toAssetValue?.symbol == CONTRACTS.FTM_SYMBOL
-                            ? "Unwrapping"
+                            ? "Unwrap" // "Unwrapping"
                             : loading &&
                             !(
                                 (fromAssetValue?.symbol == CONTRACTS.FTM_SYMBOL ||
@@ -1416,17 +1280,29 @@ function Setup() {
                                 (toAssetValue?.symbol == CONTRACTS.WFTM_SYMBOL ||
                                     toAssetValue?.symbol == CONTRACTS.FTM_SYMBOL)
                             )
-                                ? "Swapping"
-                                : !fromAmountValue || Number(fromAmountValue) <= 0
-                                    ? "Enter Amount"
-                                    : (fromAssetValue?.symbol == CONTRACTS.FTM_SYMBOL && toAssetValue?.symbol == CONTRACTS.WFTM_SYMBOL)
-                                        ? "Wrap"
-                                        : (fromAssetValue?.symbol == CONTRACTS.WFTM_SYMBOL && toAssetValue?.symbol == CONTRACTS.FTM_SYMBOL)
-                                            ? "Unwrap"
-                                            : quote && BigNumber(quote.priceImpact).gt(5) ? "SWAP | ARE YOU SURE?" : "SWAP"
+                                ? "Swap" // "Swapping"
+                                : (fromAssetValue?.symbol == CONTRACTS.FTM_SYMBOL && toAssetValue?.symbol == CONTRACTS.WFTM_SYMBOL)
+                                    ? "Wrap"
+                                    : (fromAssetValue?.symbol == CONTRACTS.WFTM_SYMBOL && toAssetValue?.symbol == CONTRACTS.FTM_SYMBOL)
+                                        ? "Unwrap"
+                                        : "Swap"
                 }
             ></BtnSwap>
+              <div className={classes.buttonPostfix}></div>
           </div>
+            {!hidequote ? renderSwapInformation() : null}
+
+            {!hidequote && !quoteError && !quoteLoading && quote &&
+                <div className={classes.routeBlock}>
+                    <div>Route</div>
+                    <div>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M2.97924 10.2709C4.36454 8.19808 7.26851 5 12 5C16.7314 5 19.6354 8.19808 21.0207 10.2709C21.4855 10.9665 21.718 11.3143 21.6968 11.9569C21.6757 12.5995 21.4088 12.9469 20.8752 13.6417C19.2861 15.7107 16.1129 19 12 19C7.88699 19 4.71384 15.7107 3.12471 13.6417C2.59106 12.9469 2.32424 12.5995 2.30308 11.9569C2.28193 11.3143 2.51436 10.9665 2.97924 10.2709ZM11.9999 16C14.2091 16 15.9999 14.2091 15.9999 12C15.9999 9.79086 14.2091 8 11.9999 8C9.79081 8 7.99995 9.79086 7.99995 12C7.99995 14.2091 9.79081 16 11.9999 16Z" fill="#7DB857"/>
+                        </svg>
+                    </div>
+                </div>
+            }
+            {/*{!hidequote ? renderRoute() : ''}*/}
         </div>
       </div>
   );
