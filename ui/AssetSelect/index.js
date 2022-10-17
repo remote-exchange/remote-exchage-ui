@@ -183,7 +183,7 @@ const AssetSelect = (
                 className={[classes.assetOptionIcon, classes[`assetOptionIcon--${appTheme}`]].join(' ')}
                 alt=""
                 src={asset ? `${asset.logoURI}` : ''}
-                height="50px"
+                height="48px"
                 onError={(e) => {
                   e.target.onerror = null;
                   e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
@@ -258,7 +258,7 @@ const AssetSelect = (
                 style={{
                   color: appTheme === "dark" ? '#7C838A' : '#5688A5',
                 }}>
-                {typeIcon === 'single' ? 'Balance' : ''}
+                {/*{typeIcon === 'single' ? 'Balance' : ''}*/}
               </div>
             }
           </div>
@@ -275,7 +275,7 @@ const AssetSelect = (
             autoFocus
             variant="outlined"
             fullWidth
-            placeholder="Search by name or paste address"
+            placeholder="Type or paste the address"
             value={search}
             onChange={onSearchChanged}
             InputProps={{
@@ -284,10 +284,10 @@ const AssetSelect = (
                 inputAdornedStart: [classes.searchInputText, classes[`searchInputText--${appTheme}`]].join(' '),
               },
               endAdornment: <InputAdornment position="end">
-                <Search style={{
-                  color: '#779BF4',
-                  // color: appTheme === "dark" ? '#4CADE6' : '#0B5E8E',
-                }}/>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M18 11C18 14.866 14.866 18 11 18C7.13401 18 4 14.866 4 11C4 7.13401 7.13401 4 11 4C14.866 4 18 7.13401 18 11Z" fill="#9A9FAF"/>
+                      <path d="M20 20L18 18" stroke="#9A9FAF" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
               </InputAdornment>,
             }}
           />
@@ -305,12 +305,6 @@ const AssetSelect = (
             }
           </div>
         }
-
-        <div className={classes.manageLocalContainer}>
-          <Button onClick={toggleLocal}>
-            Back to token list
-          </Button>
-        </div>
       </>
     );
   };
@@ -324,7 +318,7 @@ const AssetSelect = (
           <TextField
             variant="outlined"
             fullWidth
-            placeholder="Search by name or paste address"
+            placeholder="Type or paste the address"
             value={search}
             onChange={onSearchChanged}
             InputProps={{
@@ -333,10 +327,10 @@ const AssetSelect = (
                 inputAdornedStart: [classes.searchInputText, classes[`searchInputText--${appTheme}`]].join(' '),
               },
               endAdornment: <InputAdornment position="end">
-                <Search style={{
-                  color: '#779BF4',
-                  // color: appTheme === "dark" ? '#4CADE6' : '#0B5E8E',
-                }}/>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M18 11C18 14.866 14.866 18 11 18C7.13401 18 4 14.866 4 11C4 7.13401 7.13401 4 11 4C14.866 4 18 7.13401 18 11Z" fill="#9A9FAF"/>
+                      <path d="M20 20L18 18" stroke="#9A9FAF" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
               </InputAdornment>,
             }}
           />
@@ -346,7 +340,7 @@ const AssetSelect = (
           className={[classes.dialogOptions, 'g-flex-column__item', 'g-flex-column'].join(' ')}
           style={{
             position: 'relative',
-            marginBottom: !isManageLocal ? 34 : 45,
+            // marginBottom: !isManageLocal ? 34 : 45,
           }}>
           {/* <Borders/> */}
 
@@ -366,16 +360,6 @@ const AssetSelect = (
             </div>
           }
         </div>
-
-        {isManageLocal &&
-          <div className={classes.manageLocalContainer}>
-            <Button
-              className={[classes.manageLocalBtn, classes[`manageLocalBtn--${appTheme}`]].join(' ')}
-              onClick={toggleLocal}>
-              Manage local assets
-            </Button>
-          </div>
-        }
       </>
     );
   };
@@ -536,39 +520,25 @@ const AssetSelect = (
                 display: 'flex',
                 alignItems: 'center',
                 color: "#E4E9F4",
-                // color: appTheme === "dark" ? '#ffffff' : '#0A2C40',
               }}>
-                {/* {isManageLocal && manageLocal && <ArrowBackIosNew onClick={toggleLocal} style={{
-                  marginRight: 10,
-                  width: 18,
-                  height: 18,
-                  cursor: 'pointer',
-                }}/>} */}
-                {isManageLocal && manageLocal ? 'Select a Token' : title}
+                  <div className={classes.tabs}>
+                      <div onClick={() => {
+                          setManageLocal(false);
+                      }} className={[classes.tab, !manageLocal ? classes.activeTab : ''].join(' ')}>Token List</div>
+                      <div onClick={() => {
+                          setManageLocal(true);
+                      }} className={[classes.tab, manageLocal ? classes.activeTab : ''].join(' ')}>Local Assets</div>
+                  </div>
               </div>
 
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  width: 20,
-                  height: 20,
-                  backgroundColor: '#8191B9',
-                  borderRadius: 5,
-                }}
-              >
-                <Close
-                  style={{
-                    cursor: 'pointer',
-                    // color: appTheme === "dark" ? '#ffffff' : '#0A2C40',
-                    color: '#1e2c48',
-                    fontSize: 12,
-                  }}
-                  onClick={onClose}
-                />
-              </div>
-
+                <div
+                    className={classes.close}
+                    onClick={onClose}
+                >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM12 13.4142L8.70711 16.7071L7.29289 15.2929L10.5858 12L7.29289 8.70711L8.70711 7.29289L12 10.5858L15.2929 7.29289L16.7071 8.70711L13.4142 12L16.7071 15.2929L15.2929 16.7071L12 13.4142Z" fill="#131313"/>
+                    </svg>
+                </div>
             </div>
           </DialogTitle>
 

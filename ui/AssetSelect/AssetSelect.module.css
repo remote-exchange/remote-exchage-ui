@@ -1,6 +1,6 @@
 .paper {
-  border-radius: 12px !important;
-  background: #1F2B49 !important;
+  background: #EAE8E1 !important;
+  border-radius: 20px !important;
 }
 
 .paperScrollPaper {
@@ -104,10 +104,10 @@
 }
 
 .displayDualIconContainerSmall {
-  width: 56px;
-  height: 56px;
+  width: 48px;
+  height: 48px;
   position: relative;
-  margin-right: 12px;
+  margin-right: 14px;
 }
 
 @media (max-width: 600px) {
@@ -212,13 +212,16 @@ p.labelSelectSecondary {
   justify-content: space-between;
   align-items: center;
 
-  min-height: 92px !important;
+  min-height: 76px !important;
 
   padding: 16px !important;
-  margin-bottom: 4px !important;
+  margin-bottom: 8px !important;
   margin-right: 8px !important;
   border-radius: 12px !important;
-  background: #171D2D !important;
+
+  background: #131313 !important;
+  border: 1px solid rgba(104, 114, 122, 0.4) !important;
+
 
   transition: all ease 300ms;
 }
@@ -231,8 +234,8 @@ p.labelSelectSecondary {
 }
 
 .assetOptionIcon {
-  width: 56px;
-  height: 56px;
+  width: 48px;
+  height: 48px;
   border-radius: 100px;
 }
 
@@ -244,10 +247,10 @@ p.labelSelectSecondary {
 }
 
 .assetSymbolName {
-  font-weight: 500 !important;
-  font-size: 24px !important;
-  line-height: 130% !important;
-  color: #E4E9F4 !important;
+  font-weight: 700 !important;
+  font-size: 20px !important;
+  line-height: 28px !important;
+  color: #F6F7F9 !important;
 }
 
 @media (max-width: 600px) {
@@ -266,12 +269,12 @@ p.labelSelectSecondary {
 
   font-size: 16px !important;
   font-weight: 500 !important;
-  line-height: 150% !important;
+  line-height: 24px !important;
   text-overflow: ellipsis !important;
 
   overflow: hidden !important;
 
-  color: #8191B9 !important;
+  color: #9A9FAF !important;
 }
 
 @media (max-width: 600px) {
@@ -289,9 +292,9 @@ p.labelSelectSecondary {
 
 .assetSelectBalanceText {
   font-weight: 500 !important;
-  font-size: 24px !important;
-  line-height: 130% !important;
-  color: #E4E9F4 !important;
+  font-size: 16px !important;
+  line-height: 24px !important;
+  color: #F6F7F9 !important;
 }
 
 @media (max-width: 600px) {
@@ -316,7 +319,7 @@ p.labelSelectSecondary {
 }
 
 .assetSelectBalance {
-  margin-top: 4px;
+  /*margin-top: 4px;*/
 }
 
 .searchInline {
@@ -326,11 +329,11 @@ p.labelSelectSecondary {
 }
 
 .searchInput {
-  height: 72px;
-  padding-right: 26px !important;
-  background: #171D2D !important;
-  border: 1px solid #779BF4 !important;
+  height: 48px;
+  padding-right: 12px !important;
+  /*background: #171D2D !important;*/
   border-radius: 12px !important;
+  border: 1px solid #9A9FAF !important;
 }
 
 @media (max-width: 600px) {
@@ -340,8 +343,13 @@ p.labelSelectSecondary {
 }
 
 .searchInput input {
-  padding-left: 24px !important;
-  color: #8191B9 !important;
+  padding-left: 12px !important;
+  color: white !important;
+  /*color: #9A9FAF !important;*/
+}
+
+.searchInput input::placeholder {
+  /*color: white !important;*/
 }
 
 @media (max-width: 600px) {
@@ -352,18 +360,18 @@ p.labelSelectSecondary {
 }
 
 .searchInput:hover {
-  background: #B9DFF5 !important;
-  border: 1px solid #86B9D6 !important;
+  /*background: #B9DFF5 !important;*/
+  /*border: 1px solid #86B9D6 !important;*/
 }
 
 .searchInput:active {
-  background: #B9DFF5 !important;
-  border: 1px solid #0B5E8E !important;
+  /*background: #B9DFF5 !important;*/
+  /*border: 1px solid #0B5E8E !important;*/
 }
 
 .searchInput:focus {
-  background: #B9DFF5 !important;
-  border: 1px solid #FFFFFF !important;
+  /*background: #B9DFF5 !important;*/
+  /*border: 1px solid #FFFFFF !important;*/
 }
 
 
@@ -458,7 +466,10 @@ p.labelSelectSecondary {
 }
 
 .dialogContent {
-  padding: 20px 30px 30px !important;
+  padding: 20px 20px 20px !important;
+  margin: 20px 30px 30px !important;
+  background: #131313 !important;
+  border-radius: 20px !important;
 }
 
 @media (max-width: 600px) {
@@ -627,4 +638,40 @@ p.labelSelectSecondary {
 
 .selectExpander {
   margin-left: auto;
+}
+
+.tabs {
+  display: flex;
+  border: 1px solid #131313;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  padding: 2px;
+}
+
+.tab {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #353A42;
+  background: transparent;
+  border-radius: 10px;
+  width: 158px;
+  height: 44px;
+}
+
+.activeTab {
+  color: #F6F7F9;
+  background: #131313;
+}
+
+.close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
 }

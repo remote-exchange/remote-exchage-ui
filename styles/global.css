@@ -168,19 +168,19 @@ button {
 }
 
 ::-webkit-scrollbar {
-  width:8px;
-  height: 8px;
-  border-radius: 8px;
+  width:16px;
+  height: 16px;
+  border: 1px solid rgba(104, 114, 122, 0.4);
+  border-radius: 100px;
 }
 ::-webkit-scrollbar-track {
-  background-color: #171D2D;
-  border-radius: 8px;
+  background-color: transparent;
+  border-radius: 100px;
 }
 ::-webkit-scrollbar-thumb {
   box-shadow: none;
-  background: #586586;
+  background: #353A42;
   border-radius: 8px;
-  border: 1px solid #171D2D;
 }
 div, table, textarea, input {
   scrollbar-width: thin;
