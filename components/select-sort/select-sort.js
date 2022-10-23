@@ -15,26 +15,19 @@ const SortSelect = (props) => {
 
   return (
     <ClickAwayListener onClickAway={() => setOpen(false)}>
-      <div
-        className={[classes.sortSelect, open ? classes.sortSelectOpened : ''].join(' ')}>
-        <div>
+      <div className={[classes.sortSelect, open ? classes.sortSelectOpened : ''].join(' ')}>
+        <div className={classes.selectedOption} onClick={changeState}>
           <div
-            className={[classes.selectedOption, classes[`selectedOption--${appTheme}`], 'g-flex', 'g-flex--align-center', 'g-flex--space-between'].join(' ')}
-            onClick={changeState}>
-            <div className={['g-flex', 'g-flex--align-center', 'g-flex__item'].join(' ')}
-                 title={options.find(it => it.id === value).label}
-            >
-              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="0.5" y="0.5" width="47" height="47" rx="11.5" fill={open ? "#779BF4" : 'transparent'}/>
-                <path d="M15.23 13H23.36C24.04 13 24.59 13.56 24.59 14.25V15.62C24.59 16.12 24.28 16.74 23.97 17.05L21.33 19.43C20.96 19.74 20.72 20.36 20.72 20.86V23.54C20.72 23.91 20.47 24.41 20.17 24.6L19.3 25.17C18.5 25.67 17.39 25.11 17.39 24.11V20.8C17.39 20.36 17.14 19.8 16.9 19.49L14.56 16.99C14.25 16.68 14 16.12 14 15.75V14.31C14 13.56 14.55 13 15.23 13Z"
-                      fill={open ? "#E4E9F4" : "#779BF4"}/>
-                <path d="M29 14H26.6C26.32 14 26.1 14.22 26.1 14.5C26.1 14.98 26.1 15.62 26.1 15.62C26.1 16.61 25.57 17.58 25.05 18.11L22.33 20.54C22.3 20.61 22.25 20.71 22.22 20.79V23.54C22.22 24.45 21.68 25.44 20.94 25.89L20.12 26.42C19.66 26.71 19.15 26.85 18.64 26.85C18.18 26.85 17.72 26.73 17.3 26.5C16.7825 26.2134 16.3918 25.781 16.1531 25.2735C16.0311 25.0143 16 24.7245 16 24.438V22.21C16 22.08 15.95 21.95 15.85 21.86L14.85 20.86C14.54 20.54 14 20.76 14 21.21V29C14 31.76 16.24 34 19 34H29C31.76 34 34 31.76 34 29V19C34 16.24 31.76 14 29 14ZM30 29.75H23C22.59 29.75 22.25 29.41 22.25 29C22.25 28.59 22.59 28.25 23 28.25H30C30.41 28.25 30.75 28.59 30.75 29C30.75 29.41 30.41 29.75 30 29.75ZM30 25.75H25C24.59 25.75 24.25 25.41 24.25 25C24.25 24.59 24.59 24.25 25 24.25H30C30.41 24.25 30.75 24.59 30.75 25C30.75 25.41 30.41 25.75 30 25.75Z"
-                      fill={open ? "#E4E9F4" : "#779BF4"}/>
-                <rect x="0.5" y="0.5" width="47" height="47" rx="11.5" stroke="#779BF4"/>
-              </svg>
-
-            </div>
-
+            className={['g-flex', 'g-flex--align-center', 'g-flex__item'].join(' ')}
+            title={options.find(it => it.id === value).label}
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.26872 7.999L8.40008 6.86788L5.7656 4.23436C5.45288 3.92188 4.946 3.92188 4.63424 4.23436L2 6.86788L3.13136 7.99996L4.4 6.73108V19H6.00008V6.73108L7.26872 7.999Z" fill="#131313"/>
+              <path d="M21.2001 4H10V5.60008H21.2001V4Z" fill="#131313"/>
+              <path d="M18.8001 8.4502H10V10.0503H18.8001V8.4502Z" fill="#131313"/>
+              <path d="M16.4001 12.9004H10V14.5005H16.4001V12.9004Z" fill="#131313"/>
+              <path d="M14.0001 17.3506H10V18.9504H14.0001V17.3506Z" fill="#131313"/>
+            </svg>
           </div>
         </div>
 
@@ -45,54 +38,45 @@ const SortSelect = (props) => {
                 Sort
               </div>
 
-              <span
-                  style={{
-                    width: 20,
-                    height: 20,
-                    cursor: 'pointer',
-                    backgroundColor: '#586586',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    borderRadius: 4,
-                    marginTop: 22,
-                    marginRight: 22,
-                  }}
-                  onClick={changeState}
-              >
-              <Close
-                  style={{
-                    fontSize: 14,
-                  }}
-              />
-            </span>
+              <span className={classes.optsHeadClose} onClick={changeState}>
+                <Close style={{ fontSize: 14, color: "#ff", fill: "#fff" }} />
+              </span>
             </div>
 
-            {options?.map((option) => {
-              return (
-                <div
-                  key={option.id}
-                  className={[classes.menuOption, classes[`menuOption--${appTheme}`], 'g-flex-column'].join(' ')}
-                  onClick={() => {
-                    setOpen(false);
-                    handleChange({target: {value: option.id}});
-                  }}>
+            <div className={classes.optsBody}>
+              {options?.map((option) => {
+                return (
                   <div
-                    style={{
-                      padding: '16px 0',
-                      fontWeight: 400,
-                      fontSize: 16,
-                      lineHeight: '24px',
-                      color: '#E4E9F4',
-                      height: '100%',
-                      alignItems: 'center',
-                      display: 'flex',
+                    key={option.id}
+                    className={classes.menuOption}
+                    onClick={() => {
+                      setOpen(false);
+                      handleChange({target: {value: option.id}});
                     }}>
-                    {option.label}
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        fontFamily: 'PT Root UI',
+                        fontWeight: 500,
+                        fontSize: 14,
+                        lineHeight: '20px',
+                        color: '#F6F7F9'
+                      }}
+                    >
+                      {option.label ? (
+                        option.label
+                      ) : (
+                        <>
+                          <span style={{ marginRight: 8 }}>{option.labelPart1}</span>
+                          <span style={{ color: '#9A9FAF' }}>{option.labelPart2}</span>
+                        </>
+                      )}
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         }
       </div>

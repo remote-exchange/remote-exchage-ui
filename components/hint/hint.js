@@ -5,7 +5,7 @@ import classes from './hint.module.css';
 
 function Hint(props) {
   const {appTheme} = useAppThemeContext();
-  const {hintText, open, anchor, handleClick, handleClose, vertical = -90, fill = '#171D2D40'} = props;
+  const {hintText, open, anchor, handleClick, handleClose, vertical = -90, fill = '#171D2D40', iconComponent} = props;
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   window.addEventListener('resize', () => {
@@ -20,8 +20,12 @@ function Hint(props) {
       }}
       className={['g-flex', 'g-flex--align-center', 'g-flex--justify-center'].join(' ')}
       onMouseOut={handleClose}
-      onMouseOver={handleClick}>
-      <svg
+      onMouseOver={handleClick}
+    >
+      {iconComponent ? iconComponent : <img src="/images/ui/info-circle-gray.svg" width="18px" />}
+      
+      {/* <img src="/images/ui/info-circle-gray.svg" width="12px" /> */}
+      {/* <svg
         width="20"
         height="20"
         viewBox="0 0 20 20"
@@ -32,7 +36,7 @@ function Hint(props) {
           // fill={anchor ? (appTheme === 'dark' ? '#4CADE6' : '#0B5E8E') : (appTheme === 'dark' ? '#5F7285' : '#86B9D6')}
           fill={fill}
         />
-      </svg>
+      </svg> */}
       <Popover
         classes={{
           paper: [classes.popoverPaper, appTheme === "dark" ? classes['popoverPaper--dark'] : classes['popoverPaper--light']].join(' '),
@@ -71,11 +75,10 @@ function Hint(props) {
 
           <div
             style={{
-              fontWeight: 400,
-              fontSize: 16,
-              lineHeight: '150%',
-              color: '#E4E9F4',
-              // color: appTheme === "dark" ? '#C6CDD2' : '#325569',
+              fontWeight: 500,
+              fontSize: 14,
+              lineHeight: '142%',
+              color: '#131313',
             }}>
             {hintText}
           </div>

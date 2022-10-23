@@ -133,11 +133,11 @@ export default function ssWhitelist() {
   const renderToken = () => {
     return (
       <>
-        {windowWidth > 820 &&
+        {windowWidth > 900 &&
           <div className={classes.results}>
             <div className={[classes.tokenHeader, 'g-flex', 'g-flex--align-center'].join(' ')}>
               <div className={[classes.tokenHeaderLabel, classes.tokenCellName, 'g-flex__item'].join(' ')}>
-                Asset to Whitelist
+                Asset
               </div>
 
               <div className={[classes.tokenHeaderLabel, classes.cellStatus].join(' ')}>
@@ -145,10 +145,10 @@ export default function ssWhitelist() {
               </div>
 
               <div className={[classes.tokenHeaderLabel, classes.cellFee, 'g-flex', 'g-flex--align-center', 'g-flex--justify-end'].join(' ')}>
-                <div style={{ marginRight: 9 }}>Listing Fee</div>
+                <div style={{ marginRight: 9 }}>Listing fee</div>
 
                 <Hint
-                  hintText={'You must have the indicated amount of veCONE to whitelist an asset.'}
+                  hintText={'Listing fee either needs to be locked in your veREMOTE NFT or be paid and burnt on listing.'}
                   open={openFeeHint}
                   anchor={feeHintAnchor}
                   handleClick={handleClickFeePopover}
@@ -159,102 +159,110 @@ export default function ssWhitelist() {
               </div>
 
               <div className={[classes.tokenHeaderLabel, classes.cellAction].join(' ')}>
-                Action
+                Actions
               </div>
             </div>
 
-            <div className={[classes.tokenBody, 'g-flex', 'g-flex--align-center'].join(' ')}>
-              <div className={[classes.tokenBodyCell, classes.tokenCellName, 'g-flex', 'g-flex--align-center', 'g-flex__item'].join(' ')}>
-                <img
-                  src={token.logoURI || ''}
-                  alt=""
-                  className={classes.tokenLogo}
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
-                  }}/>
+            <div className={classes.tokenBody}>
+              <div className={[classes.tokenBodyRow, 'g-flex', 'g-flex--align-center'].join(' ')}>
+                <div className={[classes.tokenBodyCell, classes.tokenCellName, 'g-flex', 'g-flex--align-center', 'g-flex__item'].join(' ')}>
+                  <img
+                    src={token.logoURI || ''}
+                    alt=""
+                    className={classes.tokenLogo}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
+                    }}/>
 
-                <div>
-                  <Typography className={classes.tokenName}>
-                    {token.name}
-                  </Typography>
-
-                  <Tooltip title="View in explorer">
-                    <Typography
-                      className={classes.tokenAddress}
-                      onClick={() => {
-                        onAddressClick(token.address);
-                      }}
-                    >
-                      {formatAddress(token.address)}
+                  <div>
+                    <Typography className={classes.tokenName}>
+                      {token.name}
                     </Typography>
-                  </Tooltip>
+
+                    <Tooltip title="View in explorer">
+                      <Typography
+                        className={classes.tokenAddress}
+                        onClick={() => {
+                          onAddressClick(token.address);
+                        }}
+                      >
+                        {formatAddress(token.address)}
+                      </Typography>
+                    </Tooltip>
+                  </div>
                 </div>
-              </div>
 
-              <div className={[classes.tokenBodyCell, classes.cellStatus, 'g-flex', 'g-flex--align-center', 'g-flex--justify-end'].join(' ')}>
-                {token.isWhitelisted &&
-                  <Typography className={classes.isWhitelist}>
-                    Already Whitelisted
-                  </Typography>
-                }
+                <div className={[classes.tokenBodyCell, classes.cellStatus, 'g-flex', 'g-flex--align-center', 'g-flex--justify-center'].join(' ')}>
+                  {token.isWhitelisted &&
+                    <Typography className={classes.isWhitelist}>
+                      Already Whitelisted
+                    </Typography>
+                  }
 
-                {!token.isWhitelisted &&
-                  <Typography className={classes.notWhitelist}>
-                    Not Whitelisted
-                  </Typography>
-                }
-              </div>
-
-              <div className={[classes.tokenBodyCell, classes.cellFee, 'g-flex', 'g-flex--align-center', 'g-flex--justify-end'].join(' ')}>
-                <div className={classes.cellFeeContent}>
-                  <Typography className={classes.listingFee}>
-                    {formatCurrency(token.listingFee)}
-                  </Typography>
-
-                  <Typography className={classes.listingFeeSymbol}>
-                    {formatSymbol(veToken?.symbol)}
-                  </Typography>
+                  {!token.isWhitelisted &&
+                    <Typography className={classes.notWhitelist}>
+                      Not Whitelisted
+                    </Typography>
+                  }
                 </div>
-              </div>
 
-              <div className={[classes.tokenBodyCell, classes.cellAction, 'g-flex', 'g-flex--align-center', 'g-flex--justify-end'].join(' ')}>
-                {!token.isWhitelisted && nft && BigNumber(nft.lockValue).gt(token.listingFee) &&
-                  <div
-                    onClick={onWhitelist}
-                    className={[classes.buttonOverride, 'g-flex', 'g-flex--align-center', 'g-flex--justify-center'].join(' ')}>
-                    <Typography
-                      className={classes.actionButtonText}>
-                      {whitelistLoading ? `Whitelisting` : `Whitelist`}
+                <div className={[classes.tokenBodyCell, classes.cellFee, 'g-flex', 'g-flex--align-center', 'g-flex--justify-center'].join(' ')}>
+                  <div className={classes.cellFeeContent}>
+                    <Typography className={classes.listingFee}>
+                      {formatCurrency(token.listingFee)}
+                    </Typography>
+
+                    <Typography className={classes.listingFeeSymbol}>
+                      {formatSymbol(veToken?.symbol)}
                     </Typography>
                   </div>
-                }
+                </div>
 
-                {(!nft || (!token.isWhitelisted && nft && BigNumber(nft.lockValue).lt(token.listingFee)) || (token.isWhitelisted && nft && BigNumber(nft.lockValue).gt(token.listingFee))) &&
-                  <>
-                    {!token.isWhitelisted &&
-                      <Hint
-                        hintText={'Cannot proceed with whitelisting due to insufficient veCONE.'}
-                        open={openActionHint}
-                        anchor={actionHintAnchor}
-                        handleClick={handleClickActionPopover}
-                        handleClose={handleCloseActionPopover}
-                        fill="#586586"
-                      >
-                      </Hint>
-                    }
-
-                    <div color="primary" className={classes.buttonOverrideDisabled}>
-                      {token.isWhitelisted ? 'Nothing to do' : 'Vest value < Fee'}
+                <div className={[classes.tokenBodyCell, classes.cellAction, 'g-flex', 'g-flex--align-center', 'g-flex--justify-end'].join(' ')}>
+                  {!token.isWhitelisted && nft && BigNumber(nft.lockValue).gt(token.listingFee) &&
+                    <div
+                      onClick={onWhitelist}
+                      className={[classes.buttonOverride, 'g-flex', 'g-flex--align-center', 'g-flex--justify-center'].join(' ')}>
+                      <Typography
+                        className={classes.actionButtonText}>
+                        {whitelistLoading ? `Whitelisting` : `Whitelist`}
+                      </Typography>
                     </div>
-                  </>
-                }
+                  }
+
+                  {(!nft || (!token.isWhitelisted && nft && BigNumber(nft.lockValue).lt(token.listingFee)) || (token.isWhitelisted && nft && BigNumber(nft.lockValue).gt(token.listingFee))) &&
+                    <>
+                      {!token.isWhitelisted &&
+                        <Hint
+                          hintText={'Cannot proceed with whitelisting due to insufficient veCONE.'}
+                          open={openActionHint}
+                          anchor={actionHintAnchor}
+                          handleClick={handleClickActionPopover}
+                          handleClose={handleCloseActionPopover}
+                          fill="#586586"
+                        >
+                        </Hint>
+                      }
+
+                      <div color="primary" className={classes.buttonOverrideDisabled}>
+                        {token.isWhitelisted ? 'Nothing to do' : 'Vest Value < Fee'}
+                      </div>
+                    </>
+                  }
+                </div>
+              </div>
+
+              {/* TODO */}
+              <div className={classes.notification}>
+                <img src="/images/ui/info-circle-gray.svg" width="18px" style={{ marginRight: 15 }} />
+                <span>You cannot proceed with the whitelisting as there is not enough funds locked in the chosen veREMOTE.</span>
               </div>
             </div>
           </div>
         }
 
-        {windowWidth <= 820 &&
+        {windowWidth <= 900 &&
           <div className={classes.adaptiveContainer}>
             <div className={classes.adaptiveHeader}>
               <div className={['g-flex', 'g-flex--align-center'].join(' ')}>
@@ -286,93 +294,94 @@ export default function ssWhitelist() {
               </div>
             </div>
 
-            <div className={classes.adaptiveTable}>
-              <div className={classes.adaptive}>
-                <div className={classes.adaptiveActionLabel}>
-                  Whitelist <br />Status
-                </div>
-
-                <div className={classes.adaptiveActionItem}>
-                  {token.isWhitelisted &&
-                    <Typography className={classes.isWhitelist}>
-                      Already Whitelisted
-                    </Typography>
-                  }
-
-                  {!token.isWhitelisted &&
-                    <Typography className={classes.notWhitelist}>
-                      Not Whitelisted
-                    </Typography>
-                  }
-                </div>
-              </div>
-
-              <div className={classes.adaptive}>
-                <div className={classes.adaptiveActionLabel}>
-                  <div style={{ marginRight: 9 }}>
-                    Listing Fee
+            <div className={classes.adaptiveWrapper}>
+              <div className={classes.adaptiveTable}>
+                <div className={classes.adaptive}>
+                  <div className={classes.adaptiveActionLabel}>
+                    Whitelist status
                   </div>
 
-                  <Hint
-                    hintText={'You must have the indicated amount of veCONE to whitelist an asset.'}
-                    open={openFeeHint}
-                    anchor={feeHintAnchor}
-                    handleClick={handleClickFeePopover}
-                    handleClose={handleCloseFeePopover}
-                    fill="#586586"
-                  >
-                  </Hint>
-                </div>
+                  <div className={classes.adaptiveActionItem}>
+                    {token.isWhitelisted &&
+                      <Typography className={classes.isWhitelist}>
+                        Already Whitelisted
+                      </Typography>
+                    }
 
-                <div className={classes.adaptiveActionItem}>
-                  <div className={classes.cellFeeContent}>
-                    <Typography className={classes.listingFee}>
-                      {formatCurrency(token.listingFee)}
-                    </Typography>
-
-                    <Typography className={classes.listingFeeSymbol}>
-                      {formatSymbol(veToken?.symbol)}
-                    </Typography>
+                    {!token.isWhitelisted &&
+                      <Typography className={classes.notWhitelist}>
+                        Not Whitelisted
+                      </Typography>
+                    }
                   </div>
                 </div>
-              </div>
 
-              <div className={classes.adaptive}>
-                <div className={classes.adaptiveActionLabel}>
-                  Action
-                </div>
+                <div className={classes.adaptive}>
+                  <div className={classes.adaptiveActionLabel}>
+                    <div style={{ marginRight: 10 }}>
+                      Listing Fee
+                    </div>
 
-                <div className={classes.adaptiveActionItem}>
-                  {!token.isWhitelisted && nft && BigNumber(nft.lockValue).gt(token.listingFee) &&
-                    <div
-                      onClick={onWhitelist}
-                      className={[classes.buttonOverride, 'g-flex', 'g-flex--align-center', 'g-flex--justify-center'].join(' ')}>
-                      <Typography className={classes.actionButtonText}>
-                        {whitelistLoading ? `Whitelisting` : `Whitelist`}
+                    <Hint
+                      hintText={'Listing fee either needs to be locked in your veREMOTE NFT or be paid and burnt on listing.'}
+                      open={openFeeHint}
+                      anchor={feeHintAnchor}
+                      handleClick={handleClickFeePopover}
+                      handleClose={handleCloseFeePopover}
+                      fill="#586586"
+                      iconComponent={<img src="/images/ui/info-circle-gray.svg" width="12px" />}
+                    >
+                    </Hint>
+                  </div>
+
+                  <div className={classes.adaptiveActionItem}>
+                    <div className={classes.cellFeeContent}>
+                      <Typography className={classes.listingFee}>
+                        {formatCurrency(token.listingFee)}
+                      </Typography>
+
+                      <Typography className={classes.listingFeeSymbol}>
+                        {formatSymbol(veToken?.symbol)}
                       </Typography>
                     </div>
-                  }
-
-                  {(!nft || (!token.isWhitelisted && nft && BigNumber(nft.lockValue).lt(token.listingFee)) || (token.isWhitelisted && nft && BigNumber(nft.lockValue).gt(token.listingFee))) &&
-                    <>
-                      {!token.isWhitelisted &&
-                        <Hint
-                          hintText={'Cannot proceed with whitelisting due to insufficient veCONE.'}
-                          open={openActionHint}
-                          anchor={actionHintAnchor}
-                          handleClick={handleClickActionPopover}
-                          handleClose={handleCloseActionPopover}
-                          fill="#586586"
-                        >
-                        </Hint>
-                      }
-
-                      <div color="primary" className={classes.buttonOverrideDisabled}>
-                        {token.isWhitelisted ? 'Nothing to do' : 'Vest value < Fee'}
-                      </div>
-                    </>
-                  }
+                  </div>
                 </div>
+              </div>
+
+              {!token.isWhitelisted && nft && BigNumber(nft.lockValue).gt(token.listingFee) &&
+                <div
+                  onClick={onWhitelist}
+                  className={[classes.buttonOverride, 'g-flex', 'g-flex--align-center', 'g-flex--justify-center'].join(' ')}>
+                  <Typography className={classes.actionButtonText}>
+                    {whitelistLoading ? `Whitelisting` : `Whitelist`}
+                  </Typography>
+                </div>
+              }
+
+              {(!nft || (!token.isWhitelisted && nft && BigNumber(nft.lockValue).lt(token.listingFee)) || (token.isWhitelisted && nft && BigNumber(nft.lockValue).gt(token.listingFee))) &&
+                <>
+                  {!token.isWhitelisted &&
+                    <Hint
+                      hintText={'Cannot proceed with whitelisting due to insufficient veCONE.'}
+                      open={openActionHint}
+                      anchor={actionHintAnchor}
+                      handleClick={handleClickActionPopover}
+                      handleClose={handleCloseActionPopover}
+                      fill="#586586"
+                    >
+                    </Hint>
+                  }
+
+                  <div color="primary" className={classes.buttonOverrideDisabled}>
+                    {token.isWhitelisted ? 'Nothing to do' : 'Vest value < Fee'}
+                  </div>
+                </>
+              }
+
+              {/* TODO */}
+              <div className={classes.notification}>
+                <img src="/images/ui/info-circle-gray.svg" width="15px" style={{ marginRight: 10 }} />
+                <span>You cannot proceed with the whitelisting as there is not enough funds locked in the chosen veREMOTE.</span>
               </div>
             </div>
           </div>
@@ -383,49 +392,56 @@ export default function ssWhitelist() {
 
   return (
     <>
-      <div className={[classes.controls, 'g-flex', 'g-flex--align-center', 'g-flex--space-between'].join(' ')}>
-        <div className={classes.select}>
-          {TokenSelect({
-            value: nft,
-            options: nfts,
-            symbol: veToken?.symbol,
-            handleChange,
-            placeholder: 'Click to select veCONE',
-          })}
-        </div>
-
+      <div className={classes.wrapper}>
         <div className={classes.title}>Whitelist</div>
 
-        <div className={classes.field}>
-          <TextField
-            autoFocus
-            fullWidth
-            placeholder={windowWidth > 540 ? "Type or paste the address" : 'Token to whitelist: 0x'}
-            value={search}
-            onChange={onSearchChanged}
-            autoComplete={'off'}
-            InputProps={{
-              classes: {
-                root: classes.searchInput,
-                input: classes.searchInputInput,
-              },
-              endAdornment: <InputAdornment position="end">
-                <div className={classes.searchInputIcon}>
-                  <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10.5 20C15.7467 20 20 15.7467 20 10.5C20 5.25329 15.7467 1 10.5 1C5.25329 1 1 5.25329 1 10.5C1 15.7467 5.25329 20 10.5 20Z" stroke="#779BF4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                  <div style={{position: 'relative'}}>
-                    <svg style={{position: 'absolute', top: 8, right: 0,}} width="4" height="4" viewBox="0 0 4 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M3 3L1 1" stroke="#779BF4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <div className={[classes.controls, 'g-flex', 'g-flex--align-center', 'g-flex--space-between'].join(' ')}>
+          <div className={classes.field}>
+            <TextField
+              autoFocus
+              fullWidth
+              placeholder={windowWidth > 540 ? "Type or paste the address" : 'Token to whitelist: 0x'}
+              value={search}
+              onChange={onSearchChanged}
+              autoComplete={'off'}
+              InputProps={{
+                classes: {
+                  root: classes.searchInput,
+                  input: classes.searchInputInput,
+                },
+                endAdornment: <InputAdornment position="end">
+                  <div className={classes.searchInputIcon}>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M18 11C18 14.866 14.866 18 11 18C7.13401 18 4 14.866 4 11C4 7.13401 7.13401 4 11 4C14.866 4 18 7.13401 18 11Z" fill="#9A9FAF"/>
+                      <path d="M20 20L18 18" stroke="#9A9FAF" stroke-width="2" stroke-linecap="round"/>
                     </svg>
+
+                    {/* <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M10.5 20C15.7467 20 20 15.7467 20 10.5C20 5.25329 15.7467 1 10.5 1C5.25329 1 1 5.25329 1 10.5C1 15.7467 5.25329 20 10.5 20Z" stroke="#779BF4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                    <div style={{position: 'relative'}}>
+                      <svg style={{position: 'absolute', top: 8, right: 0,}} width="4" height="4" viewBox="0 0 4 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 3L1 1" stroke="#779BF4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </div> */}
                   </div>
-                </div>
-              </InputAdornment>,
-            }}
-            inputProps={{
-              className: classes.searchInputText,
-            }}
-          />
+                </InputAdornment>,
+              }}
+              inputProps={{
+                className: classes.searchInputText,
+              }}
+            />
+          </div>
+
+          <div className={classes.select}>
+            {TokenSelect({
+              value: nft,
+              options: nfts,
+              symbol: veToken?.symbol,
+              handleChange,
+              placeholder: 'Select veREMOTE',
+            })}
+          </div>
         </div>
       </div>
 

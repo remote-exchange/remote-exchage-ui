@@ -1,17 +1,208 @@
+.toolbarContainer {
+  margin-bottom: 40px;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 8px 8px 0px #6575b1;
+  background: #eae8e1;
+}
+
+@media (max-width: 991px) {
+  .toolbarContainer {
+    margin-bottom: 24px;
+    padding: 12px;
+    box-shadow: 4px 4px 0px #6575B1;
+    border-radius: 16px;
+  }
+}
+
+.toolbarContainerRow {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 991px) {
+  .toolbarContainerRow {
+    margin-bottom: 12px;
+  }
+}
+
 .pageTitle {
-  /* white */
-  color: #E4E9F4;
+  font-family: "PT Root UI";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 48px;
+  text-transform: uppercase;
+
+  color: #000000;
+
+  text-shadow: 2px 2px 0px #6575b1;
+}
+
+@media (max-width: 991px) {
+  .pageTitle {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32px;
+  }
+}
+
+.addButton,
+.addButtonMobile {
+  /* margin: 24px 0;
+  width: 100%;
+  height: 72px;
+  cursor: pointer;
+  position: relative; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 192px;
+  height: 64px;
+  padding: 0 32px;
+  
+  border-radius: 12px;
+
+  background: #7DB857;
+}
+
+@media (max-width: 991px) {
+  .addButton {
+    display: none;
+  }
+}
+
+.addButtonMobile {
+  width: 100%;
+  height: 48px;
+  margin-top: 12px;
+  padding: 16px 32px;
+  display: none;
+}
+
+.addButtonMobile .actionButtonText {
+  font-size: 16px !important;
+  line-height: 16px !important;
+}
+
+@media (max-width: 991px) {
+  .addButtonMobile {
+    display: block;
+  }
+}
+
+.addButtonIcon {}
+
+.actionButtonText {
+  width: 100%;
+  height: 100%;
+
+  font-family: 'PT Root UI';
+  font-weight: 700 !important;
+  font-size: 24px !important;
+  line-height: 32px !important;
+
+  color: #FFFFFF;
+  transition: all ease 300ms;
+}
+
+.controls {
+  align-items: flex-start;
+
+  padding: 20px 20px;
+
+  border-radius: 20px;
+
+  background: #131313;
+}
+
+@media (max-width: 991px) {
+  .controls {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px;
+    border-radius: 16px;
+  }
+}
+
+
+.disclaimerContainer {
+  position: relative;
+  width: 100%;
+  margin-right: 12px;
+}
+
+@media (max-width: 991px) {
+  .disclaimerContainer {
+    margin-right: 0;
+    margin-bottom: 8px;
+  }
+}
+
+.disclaimerContainer::after {
+  content: '';
+
+  position: absolute;
+
+  top: 50%;
+  left: 100%;
+
+  width: 12px;
+  height: 1px;
+
+  background: #B1F1E3;
+}
+
+@media (max-width: 991px) {
+  .disclaimerContainer::after {
+    top: 100%;
+    left: 50%;
+    width: 1px;
+    height: 8px;
+  }
+}
+
+.disclaimer {
+  align-items: center;
+  display: flex;
+
+  height: 48px;
+
+  padding: 0 12px;
+
+  font-family: 'PT Root UI';
+  font-style: normal;
   font-weight: 500;
-  font-size: 60px;
-  line-height: 72px;
+  font-size: 16px;
+  line-height: 24px;
+
+  border: 1px solid #B1F1E3;
+  border-radius: 12px;
+
+  background: #131313;
+  color: #EAE8E1;
+}
+
+@media (max-width: 991px) {
+  .disclaimer {
+    height: auto;
+    padding: 8px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+.nftSelect {
+  max-width: 288px;
   width: 100%;
 }
 
-.disclaimerContainerWrapper {
-  justify-content: right;
-  top: 0;
-  position: absolute;
-  right: 0;
+@media (max-width: 991px) {
+  .nftSelect {
+    max-width: 100%;
+  }
 }
 
 .tableWrapper {
@@ -23,11 +214,6 @@
 .tableWrapper > div {
   width: 100%;
   overflow: hidden;
-}
-
-.nftSelect {
-  margin-top: 20px;
-  width: 100%;
 }
 
 .container {
@@ -59,11 +245,6 @@
 
 .assetTableRow {
   cursor: pointer !important;
-}
-
-.toolbarContainer {
-  flex-direction: column;
-  position: relative;
 }
 
 .searchContainer {
@@ -142,100 +323,59 @@
   font-size: 12px !important;
 }
 
-.disclaimer {
-  align-items: center;
-  display: flex;
-  gap: 20px;
-  padding: 12px 24px !important;;
-  font-weight: 400 !important;
-  font-size: 16px !important;
-  line-height: 24px !important;
-  letter-spacing: 0.1em !important;
-  color: #E4E9F4 !important;
-  background: rgba(119, 155, 244, 0.15) !important;
-  border: 1px solid #779BF4 !important;
-  border-radius: 12px !important;
-}
-
-.addButton {
-  margin: 24px 0;
-  width: 100%;
-  height: 72px;
-  cursor: pointer;
-  position: relative;
-}
-
-.addButtonIcon {
-  width: 50px;
-  height: 100%;
-  background: #8F5AE8;
-}
-
-.actionButtonText {
-  width: 100%;
-  height: 100%;
-  font-weight: 600 !important;
-  font-size: 32px !important;
-  line-height: 48px;
-  background: #D3F85A;
-  border-radius: 12px;
-  color: #060B17;
-  transition: all ease 300ms;
-}
-
 @media (min-width: 806px) {
-  .tableWrapper {
+  /* .tableWrapper {
     flex-direction: row;
-  }
-  .tableWrapper > div {
+  } */
+  /* .tableWrapper > div {
     background: #060B17;
     border: 1px solid #D3F85A;
     border-radius: 12px;
-  }
-  .toolbarContainer {
+  } */
+  /* .toolbarContainer {
     height: 100px;
     flex-direction: row;
     margin-bottom: 82px;
-  }
-  .nftSelect {
+  } */
+  /* .nftSelect {
     margin-top: 0;
     position: absolute;
     top: 90px;
     left: 0;
     width: 300px;
-  }
-  .addButton {
+  } */
+  /* .addButton {
     margin: 0;
     width: 300px;
     height: 72px;
     position: absolute;
     top: 90px;
     left: 322px;
-  }
+  } */
 }
 
 @media (min-width: 1920px) {
-  .tableWrapper {
+  /* .tableWrapper {
     padding-left: 400px;
-  }
-  .pageTitle {
+  } */
+  /* .pageTitle {
     padding-left: 400px;
-  }
-  .toolbarContainer {
+  } */
+  /* .toolbarContainer {
     margin-bottom: 0;
-  }
-  .nftSelect {
+  } */
+  /* .nftSelect {
     top: 0;
     left: 0;
     width: 377px;
-  }
-  .addButton {
+  } */
+  /* .addButton {
     width: 377px;
     height: 96px;
     position: absolute;
     top: 100px;
     left: 0;
-  }
+  } */
 }
 
 .divider {
@@ -250,91 +390,91 @@
 }
 
 @media screen and (max-width: 1005px) {
-  .disclaimerContainer {
+  /* .disclaimerContainer {
     position: absolute !important;
     top: 40px;
     left: 90px;
     width: calc(100% - 180px);
-  }
+  } */
 }
 
 @media (max-width:660px) {
-  .disclaimerContainer {
+  /* .disclaimerContainer {
     left: 20px;
     top: 20px;
     width: calc(100% - 40px);
-  }
+  } */
 }
 
 @media (max-width: 530px) {
-  .container,
+  /* .container,
   .container3,
   .reAddPadding3 {
     width: 100%;
-  }
+  } */
 
-  .top {
+  /* .top {
     width: calc(100% + 2px);
-  }
+  } */
 
-  .textField {
+  /* .textField {
     width: 100%;
-  }
+  } */
 
-  .disclaimer {
+  /* .disclaimer {
     padding: 10px !important;
     font-size: 12px !important;
-  }
+  } */
 
-  .textField--amount0-dark,
+  /* .textField--amount0-dark,
   .textField--withdraw-dark {
     width: 280px;
     height: 114px;
     background-image: url("/images/ui/swap-coin-top-360--dark.svg");
-  }
+  } */
 
-  .textField--amount1-dark {
+  /* .textField--amount1-dark {
     margin-top: -30px;
     width: 280px;
     height: 114px;
     background-image: url("/images/ui/swap-coin-bottom-360--dark.svg");
-  }
+  } */
 
-  .textField--To-dark {
+  /* .textField--To-dark {
     margin-top: -50px;
-  }
+  } */
 
-  .swapIconContainer--dark {
+  /* .swapIconContainer--dark {
     background-image: url("/images/ui/swap-coin-btn-360--dark.svg");
-  }
+  } */
 
-  .inputBalanceText,
+  /* .inputBalanceText,
   .inputTitleText {
     font-size: 12px !important;
-  }
+  } */
 
-  .swapIconContainer,
+  /* .swapIconContainer,
   .swapIconContainerWithdraw {
     position: static;
     background-repeat: no-repeat;
     margin-left: 220px;
     margin-top: -22px;
-  }
+  } */
 
-  .swapIconContainerWithdraw {
+  /* .swapIconContainerWithdraw {
     margin-left: 0;
-  }
+  } */
 
-  .mediumInputContainer {
+  /* .mediumInputContainer {
     width: 135px;
     height: 61px;
-  }
+  } */
 
-  .mediumdisplayDualIconContainer {
+  /* .mediumdisplayDualIconContainer {
     margin-left: 10px;
-  }
+  } */
 
-  .mediumInputContainer {
+  /* .mediumInputContainer {
     background-image: url("/images/ui/liquidity-swap-token-360--light.svg");
   }
 
@@ -352,9 +492,9 @@
 
   .inputBalanceText {
     left: 90px;
-  }
+  } */
 
-  .displayDualIconContainer {
+  /* .displayDualIconContainer {
     width: 60px;
     height: 60px;
   }
@@ -576,5 +716,5 @@
 
   .actionButtonText {
     padding: 8px 15px;
-  }
+  } */
 }

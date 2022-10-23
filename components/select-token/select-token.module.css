@@ -1,3 +1,14 @@
+.selectWrapper {
+  padding: 0 !important;
+}
+
+.selectArrowIcon {
+  display: flex;
+  width: 10px;
+  height: 10px;
+  background: red;
+}
+
 .listPaper {
   margin-top: 8px;
   border: 1px solid #D3F85A;
@@ -42,46 +53,58 @@
 .tokenSelect {
   display: flex;
   align-items: center;
-  height: 72px;
+
+  height: 48px;
   width: 100%;
-  background: #171D2D;
-  border: 1px solid transparent;
+
+  border: 1px solid #B1F1E3;
   border-radius: 12px !important;
+
+  background: rgba(177, 241, 227, 0.12);
 }
 
-.tokenSelect:hover, .tokenSelectOpen {
-  border: 1px solid #D3F85A;
-}
-
-@media (max-width: 767px) {
+@media (max-width: 991px) {
   .tokenSelect {
-    height: 48px;
+    height: 36px;
+    border-radius: 8px !important;
   }
 }
 
+/* .tokenSelect:hover, .tokenSelectOpen {
+  border: 1px solid #D3F85A;
+} */
+
 .placeholder {
-  padding: 10px;
+  padding: 0 12px;
   padding-right: 30px;
-  font-weight: 400;
+
+  font-family: 'PT Root UI';
+  font-style: normal;
+  font-weight: 500;
   font-size: 16px;
-  color: #D3F85A;
+  line-height: 24px;
+
+  color: #EAE8E1;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 991px) {
   .placeholder {
-    padding: 0;
+    padding: 0 8px;
     font-size: 14px;
+    line-height: 20px;
   }
 }
 
 .tokenSelect > svg,
 .tokenSelect--dark > svg {
-  color: #5F7285 !important;
+  color: #B1F1E3 !important;
 }
 
-@media (max-width: 767px) {
-  .tokenSelect > svg {
-    font-size: 15px;
+@media (max-width: 991px) {
+  .tokenSelect > svg,
+  .tokenSelect--dark > svg {
+    right: 10px !important;
+    transform: scale(0.8);
   }
 }
 

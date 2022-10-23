@@ -119,7 +119,7 @@ const headCells = [
     numeric: true,
     disablePadding: false,
     label: 'Vest Expires',
-    isHideInDetails: true,
+    isHideInDetails: false,
   },
   {
     id: '',
@@ -178,80 +178,53 @@ function EnhancedTableHead(props) {
   const {appTheme} = useAppThemeContext();
 
   return (
-      <TableHead>
-        <TableRow
-            style={{
-              // border: '1px solid #9BC9E4',
-              // borderColor: appTheme === 'dark' ? '#5F7285' : '#9BC9E4',
-              whiteSpace: 'nowrap',
-            }}>
-          {headCells.map((headCell) => (
-              <>
-                {
-                  headCell.isSticky
-                      ? <StickyTableCell
-                          appTheme={appTheme}
-                          key={headCell.id}
-                          align={headCell.numeric ? 'right' : 'left'}
-                          padding={'normal'}
-                          sortDirection={orderBy === headCell.id ? order : false}
-                          style={{
-                            padding: '15px 24px 16px',
-                            background: '#060B17',
-                            borderBottom: `1px solid #d3f85a`,
-                            zIndex: 10,
-                          }}>
-                        <TableSortLabel
-                            active={orderBy === headCell.id}
-                            direction={orderBy === headCell.id ? order : 'asc'}
-                            onClick={createSortHandler(headCell.id)}
-                            IconComponent={() => orderBy === headCell.id ? sortIcon(order) : null}>
-                          <Typography className={classes.headerText}>
-                            {headCell.label}
-                          </Typography>
-                          {/*{orderBy === headCell.id
-                        ? <span className={classes.visuallyHidden}>
-                            {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                          </span>
-                        : null
-                      }*/}
-                        </TableSortLabel>
-                      </StickyTableCell>
-                      : <StyledTableCell
-                          style={{
-                            padding: '15px 24px 16px',
-                            background: '#060B17',
-                            borderBottom: `1px solid #d3f85a`,
-                            color: '#8191B9',
-                          }}
-                          key={headCell.id}
-                          align={headCell.numeric ? 'right' : 'left'}
-                          padding={'normal'}
-                          sortDirection={orderBy === headCell.id ? order : false}>
-                        <TableSortLabel
-                            active={orderBy === headCell.id}
-                            direction={orderBy === headCell.id ? order : 'asc'}
-                            IconComponent={() => orderBy === headCell.id ? sortIcon(order) : null}
-                            style={{
-                              color: appTheme === 'dark' ? '#C6CDD2' : '#325569',
-                            }}
-                            onClick={createSortHandler(headCell.id)}>
-                          <Typography className={classes.headerText}>
-                            {headCell.label}
-                          </Typography>
-                          {/*{orderBy === headCell.id
-                        ? <span className={classes.visuallyHidden}>
-                    {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                  </span>
-                        : null
-                      }*/}
-                        </TableSortLabel>
-                      </StyledTableCell>
-                }
-              </>
-          ))}
-        </TableRow>
-      </TableHead>
+    <TableHead>
+      <TableRow style={{ whiteSpace: 'nowrap' }}>
+        {headCells.map((headCell) => (
+          <>
+            {headCell.isSticky ? (
+              <StickyTableCell
+                appTheme={appTheme}
+                key={headCell.id}
+                align={headCell.numeric ? 'right' : 'left'}
+                padding={'normal'}
+                sortDirection={orderBy === headCell.id ? order : false}
+                className={css.headCell}
+                style={{ zIndex: 10 }}
+              >
+                <TableSortLabel
+                  active={orderBy === headCell.id}
+                  direction={orderBy === headCell.id ? order : 'asc'}
+                  onClick={createSortHandler(headCell.id)}
+                  IconComponent={() => orderBy === headCell.id ? sortIcon(order) : null}
+                >
+                  <div className={css.headerText}>
+                    {headCell.label}
+                  </div>
+                </TableSortLabel>
+              </StickyTableCell>
+            ) : (
+              <StyledTableCell
+                className={css.headCell}
+                key={headCell.id}
+                align={headCell.numeric ? 'right' : 'left'}
+                padding={'normal'}
+                sortDirection={orderBy === headCell.id ? order : false}
+              >
+                <TableSortLabel
+                  active={orderBy === headCell.id}
+                  direction={orderBy === headCell.id ? order : 'asc'}
+                  IconComponent={() => orderBy === headCell.id ? sortIcon(order) : null}
+                  onClick={createSortHandler(headCell.id)}
+                >
+                  <div className={css.headerText}>{headCell.label}</div>
+                </TableSortLabel>
+              </StyledTableCell>
+            )}
+          </>
+        ))}
+      </TableRow>
+    </TableHead>
   );
 }
 
@@ -265,104 +238,6 @@ EnhancedTableHead.propTypes = {
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-  },
-  toolbarFirst: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-end',
-    width: '100%',
-    position: 'relative',
-    ["@media (max-width: 1450px)"]: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'flex-start',
-    },
-  },
-  toolbarTitle: {
-    fontSize: '60px',
-    lineHeight: '120%',
-    fontWeight: 500,
-    color: '#E4E9F4',
-    letterSpacing: '0.04em !important',
-    ["@media (max-width: 1450px)"]: {
-      marginBottom: 12,
-    },
-    ["@media (max-width: 575px)"]: {
-      fontSize: 40,
-      letterSpacing: '0 !important',
-    }
-  },
-  toolbarTitleRow: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    ["@media (max-width: 1450px)"]: {
-      width: '100%',
-    },
-  },
-  toolbarInfo: {
-    position: 'relative',
-    display: 'flex',
-    alignItems: 'center',
-    maxWidth: 918,
-    minHeight: 72,
-    padding: '12px 24px',
-    paddingRight: 100,
-    fontFamily: 'PT Root UI',
-    fontSize: 16,
-    fontWeight: 400,
-    lineHeight: '24px',
-    letterSpacing: '0',
-    border: '1px solid #779BF4',
-    borderRadius: '12px',
-    background: 'rgba(119, 155, 244, 0.15)',
-    color: '#E4E9F4',
-    ["@media (max-width: 1450px)"]: {
-      maxWidth: '100%',
-      width: '100%',
-    },
-    ["@media (max-width: 575px)"]: {
-      padding: 12,
-      paddingBottom: 40,
-      fontSize: 14,
-      lineHeight: '20px',
-    },
-  },
-  toolbarInfoLink: {
-    position: 'absolute',
-    top: 25,
-    right: 25,
-    ["@media (max-width: 1550px)"]: {
-      top: 14,
-    },
-    ["@media (max-width: 575px)"]: {
-      top: 'auto',
-      right: 'auto',
-      bottom: 6,
-      left: 12,
-    }
-  },
-  sidebar: {
-    position: 'absolute',
-    left: -400,
-    paddingTop: 210,
-
-    display: 'flex',
-    flexDirection: 'column',
-    width: '370px',
-
-    ["@media (max-width: 1450px)"]: {
-      paddingTop: 285,
-    },
-    ["@media (max-width: 1199px)"]: {
-      position: 'static',
-      width: '100%',
-      paddingTop: 0,
-      // width: '370px',
-      // left: -400,
-      // paddingTop: 330,
-    },
   },
   assetTableRow: {
     '&:hover': {
@@ -478,16 +353,10 @@ const useStyles = makeStyles((theme) => ({
     color: 'green',
   },
   img1Logo: {
-    // position: 'absolute',
-    // left: '0px',
-    // top: '0px',
     borderRadius: '30px',
   },
   img2Logo: {
-    // position: 'absolute',
-    // left: '28px',
     zIndex: '1',
-    // top: '0px',
   },
   overrideTableHead: {
     borderBottom: '1px solid rgba(104,108,122,0.2) !important',
@@ -496,8 +365,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     position: 'relative',
     marginRight: 12,
-    // width: '80px',
-    // height: '35px',
   },
   buttonOverride: {
     color: 'rgb(6, 211, 215)',
@@ -508,163 +375,22 @@ const useStyles = makeStyles((theme) => ({
       background: 'rgb(19, 44, 60)',
     },
   },
-  toolbar: {
-    marginBottom: 30,
-    padding: 0,
-    minHeight: 'auto',
-    ["@media (max-width: 1199px)"]: {
-      display: 'flex',
-      flexDirection: 'column',
-    },
-    // ["@media (max-width: 660px)"]: {
-    // paddingBottom: 70,
-    // },
-  },
-  tableContainer: {
-    // border: 'none',
-    border: '1px solid #D3F85A',
-    borderRadius: 12,
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-end',
-    background: 'transparent',
-    overflow: 'hidden',
-  },
   table: {
     tableLayout: 'auto',
-  },
-  addButton: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-
-    width: '100%',
-    height: 96,
-
-    marginTop: 16,
-
-    fontWeight: 600,
-    fontSize: 32,
-    textTransform: 'uppercase',
-    textAlign: 'center',
-    lineHeight: '150%',
-    letterSpacing: '0 !important',
-
-    borderRadius: 12,
-
-    background: '#D3F85A',
-    color: '#060B17',
-
-    cursor: 'pointer',
-
-    transition: 'all ease 300ms',
-
-    ["@media (max-width: 1199px)"]: {
-      height: 68,
-      marginTop: 12,
-      fontSize: 20,
-    },
-    '&:hover > p': {
-      background: '#c4ff00',
-    },
-  },
-  aprButton: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 24,
-
-    width: '100%',
-    height: 72,
-
-    marginBottom: 12,
-
-    border: '1px solid #1F2B49',
-    borderRadius: 12,
-
-    background: '#171D2D',
-
-    fontWeight: 400,
-    fontSize: 16,
-    lineHeight: '100%',
-
-    color: '#E4E9F4',
-
-    // ["@media (max-width: 1550px)"]: {
-    //   marginBottom: 0,
-    // },
-
-    ["@media (max-width: 1550px)"]: {
-      marginTop: 12,
-    },
-
-    '& > span': {
-      color: '#D3F85A',
-    }
-  },
-  mergeButton: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-
-    width: '100%',
-    height: 72,
-
-    marginTop: 16,
-
-    fontWeight: 600,
-    fontSize: 18,
-    textTransform: 'uppercase',
-    textAlign: 'center',
-    lineHeight: '133%',
-    letterSpacing: '0 !important',
-
-    borderRadius: 12,
-    border: '1px solid #779BF4',
-
-    background: 'rgba(119, 155, 244, 0.15)',
-    color: '#779BF4',
-
-    cursor: 'pointer',
-
-    transition: 'all ease 300ms',
-
-    ["@media (max-width: 1199px)"]: {
-      height: 48,
-      marginTop: 12,
-      fontSize: 14,
-    },
-
-    '&:hover > p': {
-      background: '#c4ff00',
-    },
   },
   accordionSummaryContent: {
     margin: 0,
     padding: 0,
   },
-  sortSelect: {
-    // position: 'absolute',
-    // top: 0,
-    // right: 0,
-  },
+  sortSelect: {},
   cellPaddings: {
     padding: '11px 20px',
-    // ["@media (max-width:530px)"]: {
-    // eslint-disable-line no-useless-computed-key
-    // padding: 10,
-    // },
   },
   cellHeadSmallPaddings: {
     padding: '8px 16px',
   },
   cellHeadPaddings: {
-    padding: '16px',
-    // ["@media (max-width:530px)"]: {
-    // eslint-disable-line no-useless-computed-key
-    // padding: '5px 10px',
-    // },
+    padding: '12px',
   },
 }));
 
@@ -677,12 +403,12 @@ const EnhancedTableToolbar = (props) => {
   const [sortDirection, setSortDirection] = useState('asc');
 
   const options = [
-    {id: 'Locked Amount--desc', label: 'Vest Amount: high to low'},
-    {id: 'Locked Amount--asc', label: 'Vest Amount: low to high'},
-    {id: 'Lock Value--desc', label: 'Vest Value: high to low'},
-    {id: 'Lock Value--asc', label: 'Vest Value: low to high'},
-    {id: 'Lock Expires--desc', label: 'Vest Expires: high to low'},
-    {id: 'Lock Expires--asc', label: 'Vest Expires: low to high'},
+    {id: 'Locked Amount--desc', labelPart1: 'Vest Amount', labelPart2: 'high to low'},
+    {id: 'Locked Amount--asc', labelPart1: 'Vest Amount', labelPart2: 'low to high'},
+    {id: 'Lock Value--desc', labelPart1: 'Vest Value', labelPart2: 'high to low'},
+    {id: 'Lock Value--asc', labelPart1: 'Vest Value', labelPart2: 'low to high'},
+    {id: 'Lock Expires--desc', labelPart1: 'Vest Expires', labelPart2: 'high to low'},
+    {id: 'Lock Expires--asc', labelPart1: 'Vest Expires', labelPart2: 'low to high'},
   ];
 
   const [sortValueId, setSortValueId] = useState('Locked Amount--desc');
@@ -716,44 +442,54 @@ const EnhancedTableToolbar = (props) => {
   window.addEventListener('resize', handleResize);
 
   return (
-      <Toolbar className={classes.toolbar} style={{ marginBottom: 30 }}>
-        <div className={classes.toolbarFirst}>
-          <div className={classes.toolbarTitleRow}>
-            <Typography className={classes.toolbarTitle}>
-              Vest
-            </Typography>
+    <div>
+      <div className={css.toolbarContainer}>
+        <div className={css.toolbarContainerRow}>
+          <div className={css.pageTitle}>Vest</div>
+          {windowWidth <= 660 && (
+            <div className={css.sortSelect}>
+              {SortSelect({value: sortValueId, options, handleChange: handleChangeSort, sortDirection})}
+            </div>
+          )}
 
-            {windowWidth <= 660 && (
-                <div className={[classes.sortSelect, css.sortSelect].join(' ')}>
-                  {SortSelect({value: sortValueId, options, handleChange: handleChangeSort, sortDirection})}
-                </div>
-            )}
+          <div className={css.mergeButton} onClick={onMerge}>
+            MERGE MY LOCKED NFTs
           </div>
 
-
-          <div className={classes.toolbarInfo}>
-            Lock CONE to earn voting power, rewards and boost your LP rewards.
-            <span className={classes.toolbarInfoLink}>
-            <img src="/images/ui/explorer.svg" />
-          </span>
+          <div className={css.addButton} onClick={onCreate}>
+            <div className={css.actionButtonText}>Create Lock</div>
           </div>
         </div>
 
-        <div className={classes.sidebar}>
-
-          <div className={classes.aprButton}>
-            veCONE Rewards APR: <span>{parseInt(props.veToken?.veDistApr)}%</span>
+        <div className={[css.controls, 'g-flex', 'g-flex--align-baseline'].join(' ')}>
+          <div className={css.toolbarInfoContainer}>
+            <div className={css.toolbarInfo}>
+              Lock CONE to earn voting power, rewards and boost your LP rewards.
+            </div>
           </div>
 
-          <div className={classes.addButton} onClick={onCreate}>
-            Create Lock
+          <div className={css.aprButton}>
+            <span>{parseInt(props.veToken?.veDistApr)}%</span>
+            <span>veCONE Rewards APR:</span>
           </div>
 
-          <div className={classes.mergeButton} onClick={onMerge}>
+          <div
+            className={[css.addButtonMobile, 'g-flex', 'g-flex--align-center', 'g-flex--justify-center'].join(' ')}
+            onClick={onCreate}
+          >
+            <Typography
+              className={[css.actionButtonText, 'g-flex', 'g-flex--align-center', 'g-flex--justify-center'].join(' ')}
+            >
+              Create Lock
+            </Typography>
+          </div>
+
+          <div className={css.mergeButtonMobile} onClick={onMerge}>
             MERGE MY LOCKED NFTs
           </div>
         </div>
-      </Toolbar>
+      </div>
+    </div>
   );
 };
 
@@ -818,267 +554,324 @@ export default function EnhancedTable({vestNFTs, govToken, veToken}) {
     You have not created any Lock yet
   </div>
 
-  return (
-      <div
-          className={['g-flex-column__item', 'g-flex-column'].join(' ')}
-          style={{
-            overflowY: 'initial'/*windowWidth <= 400 ? 'auto' : 'hidden'*/,
-            paddingLeft: windowWidth > 1200 ? 400 : 0,
-          }}
-      >
-        <EnhancedTableToolbar
-            handleRequestSort={handleRequestSort}
-            setSortDirection={setSortDirection}
-            veToken={veToken}
-        />
 
-        {windowWidth > 660 &&
-        <Paper elevation={0} className={classes.tableContainer}>
-          <TableContainer
-              className={'g-flex-column__item'}
-              style={{
-                overflow: 'auto',
-                maxHeight: isEmptyTable ? 'auto' : tableHeight,
-                height: 'auto',
-                background: appTheme === 'dark' ? '#24292D' : '#dbe6ec',
-              }}>
-            <Table
+  const emptyMessageMobile = <div className={css.tableEmptyMessageMobile}>
+    You have not created any Lock yet
+  </div>
+
+  return (
+    <div>
+      <EnhancedTableToolbar
+        handleRequestSort={handleRequestSort}
+        setSortDirection={setSortDirection}
+        veToken={veToken}
+      />
+
+      {windowWidth > 660 &&
+        <div>
+          <div className={css.tableWrapper}>
+            <TableContainer
+              className={['g-flex-column__item', css.tableContainer].join(" ")}
+              // style={{ maxHeight: isEmptyTable ? 'auto' : tableHeight }}
+            >
+              <Table
                 stickyHeader
                 className={classes.table}
                 aria-labelledby="tableTitle"
                 size={'medium'}
-                aria-label="enhanced table">
-              <EnhancedTableHead
+                aria-label="enhanced table"
+              >
+                <EnhancedTableHead
                   classes={classes}
                   order={order}
                   orderBy={orderBy}
-                  onRequestSort={handleRequestSort}/>
-              {isEmptyTable ? null : (
+                  onRequestSort={handleRequestSort}
+                />
+
+                {isEmptyTable ? null : (
                   <TableBody>
                     {stableSort(vestNFTs, getComparator(order, orderBy))
-                        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                        .map((row, index) => {
-                          if (!row) {
-                            return null;
-                          }
-                          const labelId = `enhanced-table-checkbox-${index}`;
+                      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                      .map((row, index) => {
+                        if (!row) {
+                          return null;
+                        }
+                        const labelId = `enhanced-table-checkbox-${index}`;
 
-                          return (
-                              <TableRow
-                                  key={labelId}
-                                  className={classes.assetTableRow}
-                              >
-                                <StickyTableCell
-                                    style={{
-                                      padding: '15px 24px 16px',
-                                      background: '#171D2D',
-                                      borderBottom: `1px solid ${appTheme === 'dark' ? '#2D3741' : '#CFE5F2'}`,
+                        return (
+                          <TableRow
+                            key={labelId}
+                            className={css.row}
+                          >
+                            <StickyTableCell className={css.cell}>
+                              <div className={classes.inline}>
+                                <div className={classes.doubleImages}>
+                                  <img
+                                    className={classes.img1Logo}
+                                    src={govToken?.logoURI}
+                                    width="36"
+                                    height="36"
+                                    alt=""
+                                    onError={(e) => {
+                                      e.target.onerror = null;
+                                      e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
                                     }}
-                                    className={classes.cell}>
-                                  <div className={classes.inline}>
-                                    <div className={classes.doubleImages}>
-                                      <img
-                                          className={classes.img1Logo}
-                                          src={govToken?.logoURI}
-                                          width="37"
-                                          height="37"
-                                          alt=""
-                                          onError={(e) => {
-                                            e.target.onerror = null;
-                                            e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
-                                          }}
-                                      />
-                                    </div>
-                                    <div>
-                                      <Typography
-                                          className={classes.textSpaced}
-                                          style={{
-                                            marginBottom: 8,
-                                            fontWeight: 500,
-                                            fontSize: 14,
-                                            lineHeight: '120%',
-                                            color: appTheme === 'dark' ? '#ffffff' : '#0A2C40',
-                                          }}>
-                                        {row.id}
-                                      </Typography>
-                                      <Typography
-                                          className={classes.textSpaced}
-                                          style={{
-                                            fontWeight: 400,
-                                            fontSize: 14,
-                                            lineHeight: '120%',
-                                            color: '#8191B9',
-                                          }}>
-                                        NFT ID
-                                      </Typography>
-                                    </div>
+                                  />
+                                </div>
+                                <div>
+                                  <div className={css.vaultSourceTitle}>
+                                    {row.id}
                                   </div>
-                                </StickyTableCell>
+                                  <div className={css.vaultSourceSubtitle}>
+                                    NFT ID
+                                  </div>
+                                </div>
+                              </div>
+                            </StickyTableCell>
 
-                                <TableCell
-                                    className={classes.cell}
-                                    align="right"
-                                    style={{
-                                      padding: '15px 24px 16px',
-                                      background: '#171D2D',
-                                      borderBottom: `1px solid ${appTheme === 'dark' ? '#2D3741' : '#CFE5F2'}`,
-                                      overflow: 'hidden',
-                                    }}>
-                                  <Typography
-                                      className={classes.textSpaced}
-                                      style={{
-                                        marginBottom: 8,
-                                        fontWeight: 500,
-                                        fontSize: 14,
-                                        lineHeight: '120%',
-                                        color: appTheme === 'dark' ? '#ffffff' : '#0A2C40',
-                                      }}>
-                                    {formatCurrency(row.lockAmount)}
-                                  </Typography>
+                            <TableCell className={css.cell}>
+                              <div className={css.itemTitle}>
+                                {formatCurrency(row.lockAmount)}
+                              </div>
 
-                                  <Typography
-                                      className={classes.textSpaced}
-                                      style={{
-                                        fontWeight: 400,
-                                        fontSize: 14,
-                                        lineHeight: '120%',
-                                        color: '#8191B9',
-                                      }}>
-                                    {govToken?.symbol}
-                                  </Typography>
-                                </TableCell>
+                              <div className={css.itemText}>
+                                {govToken?.symbol}
+                              </div>
+                            </TableCell>
 
-                                <TableCell
-                                    className={classes.cell}
-                                    align="right"
-                                    style={{
-                                      padding: '15px 24px 16px',
-                                      background: '#171D2D',
-                                      borderBottom: `1px solid ${appTheme === 'dark' ? '#2D3741' : '#CFE5F2'}`,
-                                      overflow: 'hidden',
-                                    }}>
-                                  <Typography
-                                      className={classes.textSpaced}
-                                      style={{
-                                        marginBottom: 8,
-                                        fontWeight: 500,
-                                        fontSize: 14,
-                                        lineHeight: '120%',
-                                        color: appTheme === 'dark' ? '#ffffff' : '#0A2C40',
-                                      }}>
-                                    {formatCurrency(row.lockValue)}
-                                  </Typography>
+                            <TableCell className={css.cell}>
+                              <div className={css.itemTitle}>
+                                {formatCurrency(row.lockValue)}
+                              </div>
 
-                                  <Typography
-                                      className={classes.textSpaced}
-                                      style={{
-                                        fontWeight: 400,
-                                        fontSize: 14,
-                                        lineHeight: '120%',
-                                        color: '#8191B9',
-                                      }}>
-                                    {veToken?.symbol}
-                                  </Typography>
-                                </TableCell>
+                              <div className={css.itemText}>
+                              {veToken?.symbol}
+                            </div>
+                            </TableCell>
 
-                                <TableCell
-                                    className={classes.cell}
-                                    align="right"
-                                    style={{
-                                      padding: '15px 24px 16px',
-                                      background: '#171D2D',
-                                      borderBottom: `1px solid ${appTheme === 'dark' ? '#2D3741' : '#CFE5F2'}`,
-                                      overflow: 'hidden',
-                                    }}>
-                                  <Typography
-                                      className={classes.textSpaced}
-                                      style={{
-                                        marginBottom: 8,
-                                        fontWeight: 500,
-                                        fontSize: 14,
-                                        lineHeight: '120%',
-                                        color: appTheme === 'dark' ? '#ffffff' : '#0A2C40',
-                                      }}>
-                                    {moment.unix(row.lockEnds).format('YYYY-MM-DD')}
-                                  </Typography>
+                            <TableCell className={css.cell}>
+                              <div className={css.itemTitle}>
+                                {moment.unix(row.lockEnds).format('YYYY-MM-DD')}
+                              </div>
 
-                                  <Typography
-                                      className={classes.textSpaced}
-                                      style={{
-                                        fontWeight: 400,
-                                        fontSize: 14,
-                                        lineHeight: '120%',
-                                        color: '#8191B9',
-                                      }}>
-                                        {(BigNumber(row.lockEnds).lt(moment().unix()) &&
-                                          BigNumber(row.lockEnds).gt(0))
-                                            ? `Expired ${moment.unix(row.lockEnds).fromNow()}`
-                                            : `Expires ${moment.unix(row.lockEnds).fromNow()}`
-                                        }
-                                    {/* Expires in {moment.unix(row.lockEnds).fromNow()} */}
-                                    {/* Expired {moment.unix(row.lockEnds).fromNow()} ago */}
-                                  </Typography>
-                                </TableCell>
+                              <div className={css.itemText}>
+                                {(BigNumber(row.lockEnds).lt(moment().unix()) &&
+                                  BigNumber(row.lockEnds).gt(0))
+                                    ? `Expired ${moment.unix(row.lockEnds).fromNow()}`
+                                    : `Expires ${moment.unix(row.lockEnds).fromNow()}`
+                                }
+                              </div>
+                            </TableCell>
 
-
-
-
-
-
-
-                                <TableCell
-                                    className={classes.cell}
-                                    align="right"
-                                    style={{
-                                      padding: '15px 24px 16px',
-                                      background: '#171D2D',
-                                      borderBottom: `1px solid ${appTheme === 'dark' ? '#2D3741' : '#CFE5F2'}`,
-                                      overflow: 'hidden',
-                                    }}>
-                                  <Button
-                                      variant="outlined"
-                                      color="primary"
-                                      style={{
-                                        padding: '7px 14px',
-                                        border: `1px solid #D3F85A`,
-                                        borderRadius: 12,
-                                        fontWeight: 600,
-                                        fontSize: 14,
-                                        lineHeight: '120%',
-                                        color: '#D3F85A',
-                                      }}
-                                      onClick={() => {
-                                        onView(row);
-                                      }}
-                                  >
-                                    {(BigNumber(row.lockEnds).lt(moment().unix()) &&
-                                      BigNumber(row.lockEnds).gt(0))
-                                        ? 'WITHDRAW'
-                                        : 'EDIT'
-                                    }
-                                    {/* Manage */}
-                                  </Button>
-                                </TableCell>
-                              </TableRow>
-                          );
-                        })}
+                            <TableCell className={css.cell}>
+                              <Button
+                                variant="outlined"
+                                color="primary"
+                                className={css.action}
+                                onClick={() => {
+                                  onView(row);
+                                }}
+                              >
+                                {(BigNumber(row.lockEnds).lt(moment().unix()) &&
+                                  BigNumber(row.lockEnds).gt(0))
+                                    ? 'WITHDRAW'
+                                    : 'EDIT'
+                                }
+                                {/* Manage */}
+                              </Button>
+                            </TableCell>
+                          </TableRow>
+                        );
+                      })}
                   </TableBody>
-              )}
-            </Table>
-            {isEmptyTable && emptyMessage}
-          </TableContainer>
+                )}
+              </Table>
+              {isEmptyTable && emptyMessage}
+            </TableContainer>
+          </div>
 
-          <TablePagination
+          <TablePagination className={"g-flex-column__item-fixed"}
+            style={{
+              width: "100%",
+              padding: "0 20px",
+              borderRadius: 20,
+              background: '#131313',
+              color: '#8191B9',
+            }}
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={vestNFTs.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            labelRowsPerPage={window.innerWidth < 550 ? null : 'Rows per page:'}
+            rowsPerPageOptions={window.innerWidth < 435 ? [] : [5, 10, 25]}
+            ActionsComponent={TablePaginationActions}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+            classes={{
+              root: css.paginationRoot,
+              toolbar: css.paginationToolbar,
+              spacer: css.paginationSpacer,
+              selectLabel: css.selectLabel,
+              selectRoot: css.selectRoot,
+              select: css.select,
+              selectIcon: css.selectIcon,
+              input: css.input,
+              menuItem: css.menuItem,
+              displayedRows: css.displayedRows,
+              actions: css.actions,
+            }}
+          />
+        </div>
+      }
+
+      {windowWidth <= 660 && (
+        <>
+          {isEmptyTable && emptyMessageMobile}
+
+          <div style={{ overflow: 'auto' }}>
+            {stableSort(vestNFTs, getComparator(order, orderBy))
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row, index) => {
+                if (!row) {
+                  return null;
+                }
+                const labelId = `accordion-${index}`;
+
+                return (
+                  <div
+                    key={labelId}
+                    style={{
+                      margin: 0,
+                      marginBottom: 12,
+                      paddingBottom: 12,
+                      background: '#131313',
+                      borderRadius: 16,
+                    }}
+                  >
+                    <div>
+                      <div>
+                        <div
+                          className={[classes.cellHeadPaddings, 'g-flex', 'g-flex--align-center'].join(' ')}
+                          style={{ justifyContent: 'space-between' }}
+                        >
+                          <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <div className={classes.doubleImages}>
+                              <img
+                                  className={classes.img1Logo}
+                                  src={govToken?.logoURI}
+                                  width="36"
+                                  height="36"
+                                  alt=""
+                                  onError={(e) => {
+                                    e.target.onerror = null;
+                                    e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
+                                  }}
+                              />
+                            </div>
+
+                            <div>
+                              <div className={css.vaultSourceTitle}>{row.id}</div>
+                              <div className={css.vaultSourceSubtitle}>NFT ID</div>
+                            </div>
+                          </div>
+
+                          <Button
+                            variant="outlined"
+                            color="primary"
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              width: 69,
+                              height: 36,
+                              padding: "8px 16px",
+                              fontSize: 14,
+                              lineHeight: 20,
+                              fontWeight: 500,
+                              borderRadius: 8,
+                              border: "1px solid #7DB857",
+                              background: "rgba(125, 184, 87, 0.12)",
+                              color: "#7DB857",
+                            }}
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              event.preventDefault();
+
+                              onView(row);
+                            }}
+                          >
+                            Edit
+                          </Button>
+                        </div>
+
+                        <div className={css.mobileItem}>
+                          <div className={css.mobileItemTable}>
+                            {headCells.map((headCell) => (
+                              !headCell.isHideInDetails && (
+                                <div className={css.mobileItemRow}>
+                                  <div className={css.mobileItemCell}>
+                                    {headCell.label}
+                                  </div>
+
+                                  <div className={css.mobileItemCell}>
+                                    <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
+                                      <div className={css.itemTitle} style={{ marginBottom: 4 }}>
+                                        {headCell.id === 'Locked Amount' && formatCurrency(row.lockAmount)}
+                                        {headCell.id === 'Lock Value' && formatCurrency(row.lockValue)}
+                                      </div>
+                                      <div className={css.itemTitle} style={{ marginBottom: 4 }}>
+                                      </div>
+                                    </div>
+
+                                    {headCell.id === 'Lock Expires' ? (
+                                      <div className={[classes.cellHeadPaddings, 'g-flex'].join(' ')}>
+                                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+                                          <div className={css.itemTitle} style={{ marginBottom: 4 }}>
+                                            {moment.unix(row.lockEnds).format('YYYY-MM-DD')}
+                                          </div>
+              
+                                          <div className={css.itemTitle}>
+                                            {`Expires ${moment.unix(row.lockEnds).fromNow()}`}
+                                          </div>
+                                        </div>
+
+                                        <div style={{ paddingLeft: 8, display: 'flelx', flexDirection: 'column', alignItems: 'flex-end' }}>
+                                          <div className={css.itemText} style={{ marginBottom: 4 }}>current</div>
+                                          <div className={css.itemText}>next</div>
+                                        </div>
+                                      </div>
+                                    ) : (
+                                      <div style={{ paddingLeft: 8, display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
+                                        <div className={css.itemText} style={{ marginBottom: 4 }}>
+                                          {headCell.id === 'Locked Amount' && govToken?.symbol}
+                                          {headCell.id === 'Lock Value' && veToken?.symbol}
+                                        </div>
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                              )
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })
+            }
+          </div>
+
+          {!isEmptyTable && (
+            <TablePagination
               className={['g-flex-column__item-fixed', css.pagination].join(" ")}
               style={{
-                width: '100%',
-                // marginTop: 20,
-                padding: '0 30px',
-                background: '#060B17',
-                borderTop: '1px solid #d3f85a',
+                width: "100%",
+                padding: "0 20px",
+                borderRadius: 20,
+                background: '#131313',
                 color: '#8191B9',
               }}
-              rowsPerPageOptions={[5, 10, 25]}
               component="div"
               count={vestNFTs.length}
               rowsPerPage={rowsPerPage}
@@ -1101,366 +894,10 @@ export default function EnhancedTable({vestNFTs, govToken, veToken}) {
                 displayedRows: css.displayedRows,
                 actions: css.actions,
               }}
-          />
-        </Paper>
-        }
-
-        {windowWidth <= 660 && (
-            <>
-              {isEmptyTable && emptyMessage}
-              <div style={{overflow: 'auto'}}>
-                {stableSort(vestNFTs, getComparator(order, orderBy))
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row, index) => {
-                      if (!row) {
-                        return null;
-                      }
-                      const labelId = `accordion-${index}`;
-
-                      return (
-                          <Accordion
-                              key={labelId}
-                              style={{
-                                margin: 0,
-                                marginBottom: 16,
-                                borderRadius: 12,
-                                background: '#161d2c',
-                                overflow: 'hidden',
-                              }}
-                              disableGutters={true}
-                              expanded={expanded === labelId}
-                              onChange={handleChangeAccordion(labelId)}>
-                            <AccordionSummary
-                                style={{
-                                  padding: 0,
-                                }}
-                                classes={{
-                                  content: classes.accordionSummaryContent,
-                                }}
-                                expandIcon={null}
-                                aria-controls="panel1a-content">
-                              <div className={['g-flex-column', 'g-flex-column__item'].join(' ')}>
-                                <div className={['g-flex'].join(' ')}>
-                                  <div
-                                      className={[classes.cellHeadPaddings, 'g-flex', 'g-flex--align-center'].join(' ')}
-                                      style={{ width: '50%', backgroundColor: '#171D2D', borderRight: '1px solid #060B17' }}
-                                  >
-                                    <div className={classes.doubleImages}>
-                                      <img
-                                          className={classes.img1Logo}
-                                          src={govToken?.logoURI}
-                                          width="37"
-                                          height="37"
-                                          alt=""
-                                          onError={(e) => {
-                                            e.target.onerror = null;
-                                            e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
-                                          }}
-                                      />
-                                    </div>
-                                    <div>
-                                      <Typography
-                                          className={classes.textSpaced}
-                                          style={{
-                                            marginBottom: 4,
-                                            fontWeight: 500,
-                                            fontSize: 16,
-                                            lineHeight: '20px',
-                                            color: '#E4E9F4',
-                                          }}>
-                                        {row.id}
-                                      </Typography>
-
-                                      <Typography
-                                          className={classes.textSpaced}
-                                          style={{
-                                            fontWeight: 400,
-                                            fontSize: 14,
-                                            lineHeight: '16px',
-                                            color: '#8191B9',
-                                          }}>
-                                        NFT ID
-                                      </Typography>
-                                    </div>
-                                  </div>
-
-                                  <div
-                                      className={[classes.cellHeadPaddings, 'g-flex', 'g-flex-column', 'g-flex--align-end'].join(' ')}
-                                      style={{ width: '50%', backgroundColor: '#171D2D' }}
-                                  >
-                                    <Typography
-                                        className={classes.textSpaced}
-                                        style={{
-                                          marginBottom: 8,
-                                          fontWeight: 400,
-                                          fontSize: 14,
-                                          lineHeight: '16px',
-                                          color: '#E4E9F4',
-                                          whiteSpace: 'nowrap',
-                                        }}>
-                                      {formatCurrency(row.lockAmount)}
-                                    </Typography>
-
-                                    <Typography
-                                        className={`${classes.textSpaced} ${classes.symbol}`}
-                                        style={{
-                                          fontWeight: 400,
-                                          fontSize: 14,
-                                          lineHeight: '16px',
-                                          color: '#8191B9',
-                                        }}>
-                                      {govToken?.symbol}
-                                    </Typography>
-                                  </div>
-                                </div>
-
-                                <div className={['g-flex', 'g-flex--align-center'].join(' ')}>
-                                  <div style={{ width: '50%' }}>
-                                    <Typography
-                                        className={classes.cellHeadSmallPaddings}
-                                        style={{
-                                          fontSize: 14,
-                                          fontWeight: 500,
-                                          lineHeight: '16px',
-                                          backgroundColor: '#060B17',
-                                          color: '#8191B9',
-                                        }}
-                                        noWrap
-                                    >
-                                      Action
-                                    </Typography>
-                                  </div>
-
-                                  <div style={{ width: '50%' }}>
-                                    <Typography
-                                        className={classes.cellHeadSmallPaddings}
-                                        style={{
-                                          fontSize: 14,
-                                          fontWeight: 500,
-                                          lineHeight: '16px',
-                                          textAlign: 'right',
-                                          backgroundColor: '#060B17',
-                                          color: '#8191B9',
-                                        }}
-                                        noWrap
-                                    >
-                                      Vest Expires
-                                    </Typography>
-                                  </div>
-                                </div>
-
-                                <div className={['g-flex', 'g-flex--align-center'].join(' ')}>
-                                  <div className={classes.cellHeadPaddings} style={{ width: '50%', borderRight: '1px solid #060B17' }}>
-                                    <Button
-                                        variant="outlined"
-                                        color="primary"
-                                        style={{
-                                          padding: '11px 16px',
-                                          border: '1px solid #D3F85A',
-                                          borderRadius: 12,
-                                          fontWeight: 600,
-                                          fontSize: 14,
-                                          lineHeight: '16px',
-                                          letterSpacing: '0em !important',
-                                          color: '#D3F85A',
-                                        }}
-                                        onClick={(event) => {
-                                          event.stopPropagation();
-                                          event.preventDefault();
-
-                                          onView(row);
-                                        }}>
-                                      EDIT
-                                    </Button>
-                                  </div>
-                                  <div
-                                      className={[classes.cellHeadPaddings, 'g-flex', 'g-flex-column', 'g-flex--align-end'].join(' ')}
-                                      style={{ width: '50%' }}
-                                  >
-                                    <Typography
-                                        className={classes.textSpaced}
-                                        style={{
-                                          marginBottom: 8,
-                                          fontWeight: 400,
-                                          fontSize: 14,
-                                          lineHeight: '16px',
-                                          color: '#E4E9F4',
-                                          whiteSpace: 'nowrap',
-                                        }}>
-                                      {moment.unix(row.lockEnds).format('YYYY-MM-DD')}
-                                    </Typography>
-
-                                    <Typography
-                                        className={`${classes.textSpaced} ${classes.symbol}`}
-                                        style={{
-                                          fontWeight: 400,
-                                          fontSize: 14,
-                                          lineHeight: '16px',
-                                          color: '#8191B9',
-                                        }}>
-                                      {`Expires ${moment.unix(row.lockEnds).fromNow()}`}
-                                    </Typography>
-                                  </div>
-                                </div>
-
-                                <div
-                                    style={{ padding: '10px 16px', background: '#060B17' }}
-                                    className={['g-flex', 'g-flex--align-center', 'g-flex--space-between'].join(' ')}
-                                >
-                                  <Typography
-                                      style={{
-                                        fontWeight: 500,
-                                        fontSize: 14,
-                                        lineHeight: '16px',
-                                        color: '#779BF4',
-                                      }}
-                                      noWrap
-                                  >
-                                    {expanded !== labelId ? 'Show' : 'Hide'} Details
-                                  </Typography>
-
-                                  {expanded !== labelId &&
-                                  <div
-                                      style={{
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        width: 25,
-                                        height: 25,
-                                        borderRadius: '50%',
-                                        backgroundColor: '#779BF4'
-                                      }}
-                                  >
-                                    <ExpandMore style={{ color: '#060B17' }} />
-                                  </div>
-                                  }
-
-                                  {expanded === labelId &&
-                                    <div
-                                      style={{
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        width: 25,
-                                        height: 25,
-                                        borderRadius: '50%',
-                                        backgroundColor: '#779BF4'
-                                      }}
-                                  >
-                                    <ExpandLess style={{ color: '#060B17' }} />
-                                  </div>
-                                  }
-                                </div>
-                              </div>
-                            </AccordionSummary>
-
-                            <AccordionDetails style={{ padding: 0 }}>
-                              {headCells.map((headCell) => (
-                                  <>
-                                    {!headCell.isHideInDetails &&
-                                    <div
-                                        style={{ height: 72, borderTop: '1px solid #060B17' }}
-                                        className={['g-flex', 'g-flex--align-center'].join(' ')}
-                                    >
-                                      <Typography
-                                          className={classes.cellHeadPaddings}
-                                          style={{
-                                            width: '50%',
-                                            height: '100%',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            fontWeight: 500,
-                                            fontSize: 14,
-                                            lineHeight: '16px',
-                                            borderRight: `1px solid #060B17`,
-                                            color: '#8191B9',
-                                          }}
-                                          noWrap>
-                                        {headCell.label}
-                                      </Typography>
-
-                                      <div
-                                          className={classes.cellPaddings}
-                                          style={{
-                                            width: '50%',
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            alignItems: 'flex-end',
-                                          }}>
-                                        <Typography
-                                            className={classes.textSpaced}
-                                            style={{
-                                              marginBottom: 8,
-                                              fontWeight: 400,
-                                              fontSize: 14,
-                                              lineHeight: '16px',
-                                              color: '#E4E9F4',
-                                              whiteSpace: 'nowrap',
-                                            }}>
-                                          {headCell.id === 'Locked Amount' && formatCurrency(row.lockAmount)}
-                                          {headCell.id === 'Lock Value' && formatCurrency(row.lockValue)}
-                                        </Typography>
-
-                                        <Typography
-                                            className={`${classes.textSpaced} ${classes.symbol}`}
-                                            style={{
-                                              fontWeight: 400,
-                                              fontSize: 14,
-                                              lineHeight: '16px',
-                                              color: '#8191B9',
-                                            }}>
-                                          {headCell.id === 'Locked Amount' && govToken?.symbol}
-                                          {headCell.id === 'Lock Value' && veToken?.symbol}
-                                        </Typography>
-                                      </div>
-                                    </div>
-                                    }
-                                  </>
-                              ))}
-                            </AccordionDetails>
-                          </Accordion>
-                      );
-                    })
-                }
-              </div>
-              {!isEmptyTable && (
-                  <TablePagination
-                      className={['g-flex-column__item-fixed', css.pagination].join(" ")}
-                      style={{
-                        width: '100%',
-                        padding: '0 30px',
-                        background: '#060B17',
-                        borderTop: '1px solid #d3f85a',
-                        // borderColor: appTheme === 'dark' ? '#5F7285' : '#86B9D6',
-                        // borderRadius: 100,
-                        color: '#8191B9',
-                      }}
-                      component="div"
-                      count={vestNFTs.length}
-                      rowsPerPage={rowsPerPage}
-                      page={page}
-                      labelRowsPerPage={window.innerWidth < 550 ? null : 'Rows per page:'}
-                      rowsPerPageOptions={window.innerWidth < 435 ? [] : [5, 10, 25]}
-                      ActionsComponent={TablePaginationActions}
-                      onPageChange={handleChangePage}
-                      onRowsPerPageChange={handleChangeRowsPerPage}
-                      classes={{
-                        root: css.paginationRoot,
-                        toolbar: css.paginationToolbar,
-                        spacer: css.paginationSpacer,
-                        selectLabel: css.selectLabel,
-                        selectRoot: css.selectRoot,
-                        select: css.select,
-                        selectIcon: css.selectIcon,
-                        input: css.input,
-                        menuItem: css.menuItem,
-                        displayedRows: css.displayedRows,
-                        actions: css.actions,
-                      }}
-                  />
-              )}
-            </>
-        )}
-      </div>
+            />
+          )}
+        </>
+      )}
+    </div>
   );
 }
