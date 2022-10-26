@@ -55,7 +55,7 @@ async function usdPlusApr(pair, aprResponse) {
     // setTimeout(async () => {
     try {
 
-      if (aprResponse?.data) {
+      if (aprResponse?.data && pair.gauge) {
         pair.gauge.additionalApr1 = BigNumber(aprResponse.data).times(100)
           .times(reserve1ETH).div(reserve0ETH.plus(reserve1ETH)).toString();
       }

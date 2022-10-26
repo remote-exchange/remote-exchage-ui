@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from 'next/router'
 import {
-  TextField,
-  Typography,
-  CircularProgress,
-  InputBase,
+    TextField,
+    Typography,
+    CircularProgress,
+    InputBase, DialogTitle, DialogContent, Dialog, Slide, Tooltip,
 } from "@mui/material";
 import { withTheme } from "@mui/styles";
 import {
@@ -22,8 +22,11 @@ import {
 import BigNumber from "bignumber.js";
 import { useAppThemeContext } from "../../ui/AppThemeProvider";
 import BtnSwap from "../../ui/BtnSwap";
-import Hint from "../hint/hint";
 import AssetSelect from "../../ui/AssetSelect";
+
+const Transition = React.forwardRef((props, ref) => (
+    <Slide direction="up" {...props} ref={ref} />
+));
 
 function Setup() {
   const [, updateState] = React.useState();
@@ -45,7 +48,7 @@ function Setup() {
   const [toAssetError, setToAssetError] = useState(false);
   const [toAssetOptions, setToAssetOptions] = useState([]);
 
-  const [slippage, setSlippage] = useState("2");
+  const [slippage, setSlippage] = useState(localStorage && localStorage.getItem('slippage') ? localStorage && localStorage.getItem('slippage') : "2");
   const [slippageError, setSlippageError] = useState(false);
 
   const [quoteError, setQuoteError] = useState(null);
@@ -339,10 +342,10 @@ function Setup() {
 
   const toAmountChanged = (event) => {};
 
-  const onSlippageChanged = (event) => {
-    if (event.target.value == "" || !isNaN(event.target.value)) {
-      setSlippage(event.target.value);
-    }
+  const onSlippageChanged = (slippageAmount) => {
+      // console.log('setSlippage')
+      localStorage.setItem('slippage', slippageAmount)
+      setSlippage(slippageAmount);
   };
 
   const calculateReceiveAmount = (amount, from, to) => {
@@ -810,71 +813,183 @@ function Setup() {
     return null;
   }
 
-  const renderSmallInput = (type, amountValue, amountError, amountChanged) => {
-    return (
-        <div className={classes.slippage}>
-          <div
-              className={[
-                "g-flex",
-                "g-flex--align-center",
-                classes.slippageLabel,
-              ].join(" ")}
-          >
-            <Typography
-                className={[
-                  classes.inputBalanceSlippage,
-                  classes[`inputBalanceSlippage--${appTheme}`],
-                ].join(" ")}
-                noWrap
-            >
-              Slippage
-            </Typography>
+  const renderSettings = (open, amountValue, amountError, slippageAmountChanged, handleClose) => {
+      const isSuggestedSlippage = parseFloat(amountValue) === 0.5 || parseFloat(amountValue) === 1.0 || parseFloat(amountValue) === 2.0 || parseFloat(amountValue) === 3.0
+      const [selectedAmount, setSelectedAmount] = useState(isSuggestedSlippage ? amountValue : '')
+      const [typedAmount, setTypedAmount] = useState(isSuggestedSlippage ? '' : amountValue)
+      const selectAmount = (amount) => {
+          setSelectedAmount(amount)
+          setTypedAmount('')
+      }
+      const onTypedChanged = (event) => {
+          if (event.target.value == "" || !isNaN(event.target.value)) {
+              setTypedAmount(event.target.value);
+              setSelectedAmount('')
+          }
+      };
 
-            <div className={classes.inputBalanceSlippageHelp}>
-              <Hint
-                  hintText={
-                    "Slippage is the price difference between the submission of a transaction and the confirmation of the transaction on the blockchain."
-                  }
-                  open={openHint}
-                  anchor={hintAnchor}
-                  handleClick={handleClickPopover}
-                  handleClose={handleClosePopover}
-                  vertical={46}
-              />
+      const onApply = () => {
+          const newSlippage = selectedAmount ? selectedAmount : typedAmount
+          slippageAmountChanged(newSlippage)
+          handleClose()
+      }
+
+      return (
+        <Dialog
+            className={classes.dialogScale}
+            classes={{
+                root: classes.rootPaper,
+                scrollPaper: classes.topScrollPaper,
+                paper: classes.paperBody,
+            }}
+            open={open}
+            onClose={handleClose}
+            onClick={(e) => {
+                if (e.target.classList.contains('MuiDialog-container')) {
+                    handleClose()
+                }
+            }}
+            fullWidth={true}
+            maxWidth={"sm"}
+            TransitionComponent={Transition}
+            fullScreen={false}
+        >
+            <div className={classes.tvAntenna}>
+                <svg width="56" height="28" viewBox="0 0 56 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clipPath="url(#clip0_116_22640)">
+                        <path fillRule="evenodd" clipRule="evenodd" d="M53.7324 1.53632C51.8193 0.431753 49.3729 1.08725 48.2683 3.00042C47.4709 4.38158 47.5908 6.04061 48.4389 7.27208L33.2833 22.4277C31.9114 21.3226 30.1671 20.6611 28.2683 20.6611C26.2328 20.6611 24.3748 21.4213 22.9629 22.6733L7.56181 7.27224C8.40988 6.04078 8.52973 4.38181 7.73235 3.00071C6.62778 1.08754 4.18142 0.432036 2.26825 1.53661C0.355075 2.64117 -0.300425 5.08754 0.804144 7.00071C1.86628 8.84038 4.16909 9.51716 6.04549 8.58435L21.6406 24.1794C20.7743 25.4579 20.2683 27.0004 20.2683 28.6611H36.2683C36.2683 26.8626 35.6748 25.2026 34.6729 23.8665L49.9553 8.58413C51.8317 9.51684 54.1344 8.84005 55.1965 7.00042C56.3011 5.08725 55.6456 2.64089 53.7324 1.53632Z" fill="#EAE8E1"/>
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_116_22640">
+                            <rect width="56" height="28" fill="white"/>
+                        </clipPath>
+                    </defs>
+                </svg>
             </div>
-          </div>
+            <div className={classes.realDialog}>
+                <DialogTitle
+                    className={classes.dialogTitle}
+                    style={{
+                        padding: 20,
+                        fontWeight: 700,
+                        fontSize: 24,
+                        lineHeight: '32px',
+                        color: '#131313',
+                    }}>
+                    <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                    }}>
+                        <div>
+                            Transaction Settings
+                        </div>
 
-          <TextField
-              placeholder="0.00"
-              error={amountError}
-              value={amountValue}
-              onChange={amountChanged}
-              disabled={loading}
-              autoComplete="off"
-              InputProps={{
-                classes: {
-                  root: [
-                    classes.inputBalanceSlippageText,
-                    classes[`inputBalanceSlippageText--${appTheme}`],
-                  ].join(" "),
-                  inputAdornedStart: [
-                    classes.inputBalanceSlippageText,
-                    classes[`inputBalanceSlippageText--${appTheme}`],
-                  ].join(" "),
-                },
-              }}
-              inputProps={{
-                size: amountValue?.length || 4,
-                style: {
-                  padding: 0,
-                  borderRadius: 0,
-                  border: "none",
-                  color: "#E4E9F4",
-                  paddingRight: amountValue?.length >= 8 ? 10 : 0,
-                },
-              }}
-          />
-        </div>
+                        <div
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                width: 20,
+                                height: 20,
+                                cursor: 'pointer',
+                            }}
+                            onClick={handleClose}
+                        >
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fillRule="evenodd" clipRule="evenodd" d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM12 13.4142L8.70711 16.7071L7.29289 15.2929L10.5858 12L7.29289 8.70711L8.70711 7.29289L12 10.5858L15.2929 7.29289L16.7071 8.70711L13.4142 12L16.7071 15.2929L15.2929 16.7071L12 13.4142Z" fill="#131313"/>
+                            </svg>
+                        </div>
+                    </div>
+                </DialogTitle>
+
+                <DialogContent
+                    className={classes.dialogContent}
+                    style={{ padding: '4px 20px 20px' }}>
+                    <div className={classes.inner}>
+                        <div className={classes.slippage}>
+                            <div
+                                className={[
+                                    "g-flex",
+                                    "g-flex--align-center",
+                                    classes.slippageLabel,
+                                ].join(" ")}
+                            >
+                                <Typography
+                                    className={[
+                                        classes.inputBalanceSlippage,
+                                        classes[`inputBalanceSlippage--${appTheme}`],
+                                    ].join(" ")}
+                                    noWrap
+                                >
+                                    Slippage
+                                </Typography>
+
+                                <div className={classes.inputBalanceSlippageHelp}>
+                                    <Tooltip
+                                        title="Slippage is the price difference between the submission of a transaction and the confirmation of the transaction on the blockchain."
+                                        componentsProps={{
+                                            tooltip: {
+                                                style: {
+                                                    padding: '12px 24px',
+                                                    fontFamily: 'PT Root UI',
+                                                    fontSize: 16,
+                                                    fontWeight: 400,
+                                                    lineHeight: '24px',
+                                                    border: '1px solid #779BF4',
+                                                    borderRadius: 12,
+                                                    background: '#1F2B49',
+                                                    color: '#E4E9F4',
+                                                }
+                                            },
+                                        }}
+                                    >
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fillRule="evenodd" clipRule="evenodd" d="M14 8C14 11.3137 11.3137 14 8 14C4.68629 14 2 11.3137 2 8C2 4.68629 4.68629 2 8 2C11.3137 2 14 4.68629 14 8ZM8.66667 5.33333C8.66667 5.70152 8.36819 6 8 6C7.63181 6 7.33333 5.70152 7.33333 5.33333C7.33333 4.96514 7.63181 4.66667 8 4.66667C8.36819 4.66667 8.66667 4.96514 8.66667 5.33333ZM8.75 11.3333V7.33333H7.25V11.3333H8.75Z" fill="#9A9FAF"/>
+                                        </svg>
+                                    </Tooltip>
+                                </div>
+                            </div>
+
+                            <div className={classes.slippageInputs}>
+                                <div onClick={() => {selectAmount(0.5)}} className={parseFloat(selectedAmount) === 0.5 ? classes.slippageValueButtonActive : classes.slippageValueButton}>0.5%</div>
+                                <div onClick={() => {selectAmount(1)}} className={parseFloat(selectedAmount) === 1 ? classes.slippageValueButtonActive : classes.slippageValueButton}>1%</div>
+                                <div onClick={() => {selectAmount(2)}} className={parseFloat(selectedAmount) === 2 ? classes.slippageValueButtonActive : classes.slippageValueButton}>2%</div>
+                                <div onClick={() => {selectAmount(3)}} className={parseFloat(selectedAmount) === 3 ? classes.slippageValueButtonActive : classes.slippageValueButton}>3%</div>
+
+                                <TextField
+                                    placeholder="custom"
+                                    error={amountError}
+                                    value={typedAmount}
+                                    onChange={onTypedChanged}
+                                    disabled={loading}
+                                    autoComplete="off"
+                                    fullWidth
+                                    InputProps={{
+                                        classes: {
+                                            root: [
+                                                classes.inputBalanceSlippageText,
+                                                classes[`inputBalanceSlippageText--${appTheme}`],
+                                            ].join(" "),
+                                        },
+                                    }}
+                                    inputProps={{
+                                        // size: typedAmount?.length || 4,
+                                        style: {
+                                            padding: 0,
+                                            borderRadius: 0,
+                                            border: "none",
+                                            color: "#E4E9F4",
+                                        },
+                                    }}
+                                />
+                            </div>
+                        </div>
+                        <div onClick={onApply} className={classes.settingsSaveButton}>Apply Settings</div>
+                    </div>
+                </DialogContent>
+            </div>
+        </Dialog>
     );
   };
 
@@ -1009,18 +1124,18 @@ function Setup() {
       <div className={classes.swapInputs}>
         <div className={classes.swapInputsHeader}>
           <Typography className={classes.swapInputsHeader}>Swap</Typography>
-            <div className={classes.settings}>
+            <div className={classes.settings} onClick={() => { setSettingsOpened(!settingsOpened) }}>
                 <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.99997 0.484375C9.34253 0.484375 8.77058 0.905954 7.62667 1.74911L5.90576 3.01757C5.72555 3.1504 5.63545 3.21681 5.53871 3.27266C5.44198 3.32851 5.33941 3.37334 5.13427 3.46299L3.1753 4.31911C1.87315 4.88819 1.22208 5.17272 0.893356 5.74208C0.564637 6.31144 0.643758 7.01756 0.802 8.42979L1.04006 10.5544C1.06499 10.7768 1.07745 10.8881 1.07745 10.9998C1.07745 11.1115 1.06499 11.2227 1.04006 11.4452L0.802 13.5698C0.643758 14.982 0.564637 15.6881 0.893357 16.2575C1.22208 16.8269 1.87315 17.1114 3.1753 17.6805L5.13427 18.5366C5.33941 18.6262 5.44198 18.6711 5.53871 18.7269C5.63545 18.7828 5.72555 18.8492 5.90576 18.982L7.62667 20.2505C8.77058 21.0936 9.34253 21.5152 9.99997 21.5152C10.6574 21.5152 11.2294 21.0936 12.3733 20.2505L12.3733 20.2505L14.0942 18.982C14.2744 18.8492 14.3645 18.7828 14.4612 18.7269C14.558 18.6711 14.6605 18.6262 14.8657 18.5366L16.8246 17.6805C18.1268 17.1114 18.7779 16.8269 19.1066 16.2575C19.4353 15.6881 19.3562 14.982 19.1979 13.5698L18.9599 11.4452L18.9599 11.4452C18.935 11.2227 18.9225 11.1115 18.9225 10.9998C18.9225 10.8881 18.9349 10.7769 18.9599 10.5544L18.9599 10.5544L19.1979 8.42979C19.3562 7.01756 19.4353 6.31144 19.1066 5.74208C18.7779 5.17272 18.1268 4.88819 16.8246 4.31911L14.8657 3.46299L14.8657 3.46298C14.6605 3.37334 14.558 3.32851 14.4612 3.27266C14.3645 3.21681 14.2744 3.1504 14.0942 3.01757L12.3733 1.74911C11.2294 0.905954 10.6574 0.484375 9.99997 0.484375ZM9.99997 14.9998C12.2091 14.9998 14 13.2089 14 10.9998C14 8.79065 12.2091 6.99979 9.99997 6.99979C7.79083 6.99979 5.99997 8.79065 5.99997 10.9998C5.99997 13.2089 7.79083 14.9998 9.99997 14.9998Z" fill="#131313"/>
+                    <path fillRule="evenodd" clipRule="evenodd" d="M9.99997 0.484375C9.34253 0.484375 8.77058 0.905954 7.62667 1.74911L5.90576 3.01757C5.72555 3.1504 5.63545 3.21681 5.53871 3.27266C5.44198 3.32851 5.33941 3.37334 5.13427 3.46299L3.1753 4.31911C1.87315 4.88819 1.22208 5.17272 0.893356 5.74208C0.564637 6.31144 0.643758 7.01756 0.802 8.42979L1.04006 10.5544C1.06499 10.7768 1.07745 10.8881 1.07745 10.9998C1.07745 11.1115 1.06499 11.2227 1.04006 11.4452L0.802 13.5698C0.643758 14.982 0.564637 15.6881 0.893357 16.2575C1.22208 16.8269 1.87315 17.1114 3.1753 17.6805L5.13427 18.5366C5.33941 18.6262 5.44198 18.6711 5.53871 18.7269C5.63545 18.7828 5.72555 18.8492 5.90576 18.982L7.62667 20.2505C8.77058 21.0936 9.34253 21.5152 9.99997 21.5152C10.6574 21.5152 11.2294 21.0936 12.3733 20.2505L12.3733 20.2505L14.0942 18.982C14.2744 18.8492 14.3645 18.7828 14.4612 18.7269C14.558 18.6711 14.6605 18.6262 14.8657 18.5366L16.8246 17.6805C18.1268 17.1114 18.7779 16.8269 19.1066 16.2575C19.4353 15.6881 19.3562 14.982 19.1979 13.5698L18.9599 11.4452L18.9599 11.4452C18.935 11.2227 18.9225 11.1115 18.9225 10.9998C18.9225 10.8881 18.9349 10.7769 18.9599 10.5544L18.9599 10.5544L19.1979 8.42979C19.3562 7.01756 19.4353 6.31144 19.1066 5.74208C18.7779 5.17272 18.1268 4.88819 16.8246 4.31911L14.8657 3.46299L14.8657 3.46298C14.6605 3.37334 14.558 3.32851 14.4612 3.27266C14.3645 3.21681 14.2744 3.1504 14.0942 3.01757L12.3733 1.74911C11.2294 0.905954 10.6574 0.484375 9.99997 0.484375ZM9.99997 14.9998C12.2091 14.9998 14 13.2089 14 10.9998C14 8.79065 12.2091 6.99979 9.99997 6.99979C7.79083 6.99979 5.99997 8.79065 5.99997 10.9998C5.99997 13.2089 7.79083 14.9998 9.99997 14.9998Z" fill="#131313"/>
                 </svg>
             </div>
-
-            {/*{renderSmallInput(
-              "slippage",
-              slippage,
-              slippageError,
-              onSlippageChanged
-          )}*/}
+            {renderSettings(
+                settingsOpened,
+                slippage,
+                slippageError,
+                onSlippageChanged,
+                () => { setSettingsOpened(false) }
+            )}
         </div>
 
           <div className={classes.inputsBlock}>
@@ -1133,7 +1248,7 @@ function Setup() {
                   ].join(" ")}
               >
                   <svg style={{marginRight: 15}} width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path fill-rule="evenodd" clip-rule="evenodd" d="M18 9C18 13.9706 13.9706 18 9 18C4.02944 18 0 13.9706 0 9C0 4.02944 4.02944 0 9 0C13.9706 0 18 4.02944 18 9ZM10 5C10 5.55228 9.55229 6 9 6C8.44771 6 8 5.55228 8 5C8 4.44772 8.44771 4 9 4C9.55229 4 10 4.44772 10 5ZM9.75 14V8H8.25V14H9.75Z" fill="#68727A"/>
+                      <path fillRule="evenodd" clipRule="evenodd" d="M18 9C18 13.9706 13.9706 18 9 18C4.02944 18 0 13.9706 0 9C0 4.02944 4.02944 0 9 0C13.9706 0 18 4.02944 18 9ZM10 5C10 5.55228 9.55229 6 9 6C8.44771 6 8 5.55228 8 5C8 4.44772 8.44771 4 9 4C9.55229 4 10 4.44772 10 5ZM9.75 14V8H8.25V14H9.75Z" fill="#68727A"/>
                   </svg>
                   Select coins/tokens you want to swap and enter amounts.
               </div>
@@ -1297,7 +1412,7 @@ function Setup() {
                     <div>Route</div>
                     <div>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M2.97924 10.2709C4.36454 8.19808 7.26851 5 12 5C16.7314 5 19.6354 8.19808 21.0207 10.2709C21.4855 10.9665 21.718 11.3143 21.6968 11.9569C21.6757 12.5995 21.4088 12.9469 20.8752 13.6417C19.2861 15.7107 16.1129 19 12 19C7.88699 19 4.71384 15.7107 3.12471 13.6417C2.59106 12.9469 2.32424 12.5995 2.30308 11.9569C2.28193 11.3143 2.51436 10.9665 2.97924 10.2709ZM11.9999 16C14.2091 16 15.9999 14.2091 15.9999 12C15.9999 9.79086 14.2091 8 11.9999 8C9.79081 8 7.99995 9.79086 7.99995 12C7.99995 14.2091 9.79081 16 11.9999 16Z" fill="#7DB857"/>
+                            <path fillRule="evenodd" clipRule="evenodd" d="M2.97924 10.2709C4.36454 8.19808 7.26851 5 12 5C16.7314 5 19.6354 8.19808 21.0207 10.2709C21.4855 10.9665 21.718 11.3143 21.6968 11.9569C21.6757 12.5995 21.4088 12.9469 20.8752 13.6417C19.2861 15.7107 16.1129 19 12 19C7.88699 19 4.71384 15.7107 3.12471 13.6417C2.59106 12.9469 2.32424 12.5995 2.30308 11.9569C2.28193 11.3143 2.51436 10.9665 2.97924 10.2709ZM11.9999 16C14.2091 16 15.9999 14.2091 15.9999 12C15.9999 9.79086 14.2091 8 11.9999 8C9.79081 8 7.99995 9.79086 7.99995 12C7.99995 14.2091 9.79081 16 11.9999 16Z" fill="#7DB857"/>
                         </svg>
                     </div>
                 </div>

@@ -24,7 +24,7 @@ class SnackbarController extends Component {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     emitter.on(ACTIONS.ERROR, this.showError);
     // emitter.on(ACTIONS.TX_SUBMITTED, this.showHash);
   }

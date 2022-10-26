@@ -223,12 +223,10 @@ p.inputTitleText {
 }
 
 .inputBalanceSlippage {
-  margin: 0 16px !important;
-  margin-right: 2px !important;
-
   font-size: 16px !important;
-  font-weight: 500 !important;
-  color: #060B17 !important;
+  line-height: 16px !important;
+  font-weight: 700 !important;
+  color: #F6F7F9 !important;
 }
 
 @media (max-width: 500px) {
@@ -240,41 +238,90 @@ p.inputTitleText {
 }
 
 .inputBalanceSlippageHelp {
-  margin-right: 14px;
+  display: flex;
+  margin-left: 4px;
+  /*margin-right: 14px;*/
 }
 
 @media (max-width: 500px) {
   .inputBalanceSlippageHelp {
-    margin-right: 9px;
+    /*margin-right: 9px;*/
   }
+}
+
+.slippageLabel {
+  margin-bottom: 16px;
 }
 
 .inputBalanceSlippageText {
   position: relative;
-
-  width: 110px;
-  height: 100% !important;
-
-  padding: 16px !important;
+  width: 100%;
+  height: 48px !important;
+  padding: 12px !important;
   padding-right: 32px !important;
-
   font-size: 16px !important;
-  font-weight: 400 !important;
-  line-height: 150% !important;
-
+  font-weight: 500 !important;
+  line-height: 24px !important;
   border-radius: 12px !important;
-
-  background: #171D2D;
-  color: #8191B9;
+  /*background: #171D2D;*/
+  color: #9A9FAF;
   box-shadow: none;
+  border: 1px solid #9A9FAF;
 }
 
 .inputBalanceSlippageText input::placeholder {
-  color: #8191B9 !important;
+  color: #9A9FAF !important;
 }
 
 .inputBalanceSlippageText:hover {
-  background-color: #1F2B49;
+  /*background-color: #1F2B49;*/
+}
+
+.slippageInputs {
+  display: flex;
+
+}
+
+.slippageValueButton {
+  cursor: pointer;
+  margin-right: 8px;
+  padding: 11px 12px;
+  height: 48px;
+  background: rgba(234, 232, 225, 0.12);
+  border: 1px solid #EAE8E1;
+  border-radius: 8px;
+  color: #EAE8E1;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.slippageValueButtonActive {
+  cursor: pointer;
+  margin-right: 8px;
+  padding: 12px;
+  height: 48px;
+  background: #B1F1E3;
+  border-radius: 8px;
+  color: #131313;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.settingsSaveButton {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 64px;
+  background: #7DB857;
+  border-radius: 12px;
+  flex: 1;
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
 }
 
 @media (max-width: 500px) {
@@ -284,7 +331,7 @@ p.inputTitleText {
   }
 }
 
-.inputBalanceSlippageText::after {
+/*.inputBalanceSlippageText::after {
   position: absolute;
 
   content: '%';
@@ -292,12 +339,12 @@ p.inputTitleText {
   right: 16px;
 
   color: #8191B9;
-}
+}*/
 
 @media (max-width: 500px) {
-  .inputBalanceSlippageText::after {
+  /*.inputBalanceSlippageText::after {
     right: 12px;
-  }
+  }*/
 }
 
 .inputBalanceSlippageText > fieldset {
@@ -305,19 +352,21 @@ p.inputTitleText {
 }
 
 .slippage {
-  display: inline-flex;
-  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  /*justify-content: space-between;*/
 
-  margin-left: auto;
+  /*margin-left: auto;*/
 
-  width: 237px;
-  height: 56px;
-  margin-top: 10px;
+  /*width: 237px;*/
+  /*height: 56px;*/
+  /*margin-top: 10px;*/
 
-  border-radius: 12px;
+  /*border-radius: 12px;*/
 
-  background: #779BF4;
-  border: 1px solid #779BF4;
+  /*background: #779BF4;*/
+  /*border: 1px solid #779BF4;*/
 }
 
 @media (max-width: 600px) {
@@ -1211,4 +1260,45 @@ p.inputTitleText {
 .swapAssetsRow {
   display: flex;
   align-items: center;
+}
+
+.dialogScale {
+  max-width: 640px;
+  margin: auto;
+  text-align: center;
+}
+
+.rootPaper {
+  max-width: none !important;
+}
+
+.topScrollPaper {
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+}
+
+.paperBody {
+  width: 520px !important;
+  height: auto;
+  max-height: none !important;
+  margin: auto !important;
+  background: transparent !important;
+}
+
+.tvAntenna {
+  height: 28px;
+}
+
+.realDialog {
+  box-shadow: none;
+  background: #EAE8E1 !important;
+  border-radius: 20px !important;
+}
+
+.inner {
+  background: #131313;
+  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
 }
