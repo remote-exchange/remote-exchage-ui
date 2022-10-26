@@ -224,6 +224,5 @@ export default function ThreePointSlider({
       disabled={disabled}
       value={sliderValue ? sliderValue : pointCurrent}
       used={pointUsed}
-      appTheme
   />
 }
