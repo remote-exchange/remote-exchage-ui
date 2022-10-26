@@ -904,7 +904,7 @@ function Setup() {
                 </DialogTitle>
 
                 <DialogContent
-                    className={classes.dialogContent}
+                    // className={classes.dialogContent}
                     style={{ padding: '4px 20px 20px' }}>
                     <div className={classes.inner}>
                         <div className={classes.slippage}>

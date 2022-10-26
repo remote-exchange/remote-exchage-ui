@@ -12,8 +12,7 @@ export const CopyAddress = (props) => {
 
   return (
     <div className={classes.tokenPopover_button} onClick={copyAddress}>
-      <img src="/images/ui/copy.svg" width="16" />
-      <span>copy address</span>
+      Copy token address
     </div>
   );
 };

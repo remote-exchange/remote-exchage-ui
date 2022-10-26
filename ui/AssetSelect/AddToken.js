@@ -29,9 +29,8 @@ export const AddToken = (props) => {
   };
 
   return (
-    <div className={classes.tokenPopover_button} onClick={handleClick}>
-      <img src="/connectors/icn-metamask.svg" width="16" />
-      <span>add to the wallet</span>
+    <div className={classes.tokenPopover_button_secondary} onClick={handleClick}>
+      <span>Add to the wallet</span>
     </div>
   );
 };
