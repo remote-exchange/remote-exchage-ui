@@ -183,7 +183,7 @@ class Store {
       setTimeout(async () => await this.configure(), 1000);
       return;
     }
-    console.log('configure ', this.id)
+    // console.log('configure ', this.id)
     try {
       this.configurationLoading = true;
 
