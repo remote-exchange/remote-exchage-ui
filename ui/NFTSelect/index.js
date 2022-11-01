@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import classes from "./NFTSelect.module.css";
 import { Dialog, DialogContent, DialogTitle, TextField, InputAdornment } from "@mui/material";
 import { Close, Search } from "@mui/icons-material";
+import { useRouter } from "next/router";
 
 export const NFTSelect = ({ text }) => {
   const [open, setOpen] = useState(false);

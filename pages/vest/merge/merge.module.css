@@ -1,0 +1,239 @@
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 767px) {
+  .row {
+    flex-direction: column;
+  }
+}
+
+.column {
+  position: relative;
+  width: calc(50% - 6px);
+}
+
+@media (max-width: 767px) {
+  .column {
+    width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .column:first-child {
+    margin-bottom: 8px;
+  }
+}
+
+.column:first-child::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: 12px;
+  height: 1px;
+  background-color: rgba(104, 114, 122, 0.4);
+}
+
+@media (max-width: 767px) {
+  .column:first-child::after {
+    top: 100%;
+    left: 50%;
+    width: 1px;
+    height: 8px;
+  }
+}
+
+.selectWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  padding: 20px;
+  height: 152px;
+
+  border: 1px solid rgba(104, 114, 122, 0.4);
+  border-radius: 16px;
+
+  background: #131313;
+}
+
+@media (max-width: 767px) {
+  .selectWrapper {
+    height: 76px;
+    padding: 8px;
+    border-radius: 12px;
+  }
+}
+
+.selectHeader {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.selectTitle {
+  font-family: "PT Root UI";
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #f6f7f9;
+}
+
+@media (max-width: 767px) {
+  .selectTitle {
+    font-size: 12px;
+    line-height: 16px;
+  }
+}
+
+.tokenSelectInfoAmount {
+  font-family: "PT Root UI";
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #f6f7f9;
+}
+
+@media (max-width: 767px) {
+  .tokenSelectInfoAmount {
+    font-size: 12px;
+    line-height: 16px;
+  }
+}
+
+.tokenSelect {
+  width: 100%;
+}
+
+.tokenSelectLabel {
+  font-family: "PT Root UI";
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 52px;
+
+  color: #68727a;
+}
+
+@media (max-width: 767px) {
+  .tokenSelectLabel {
+    font-size: 28px;
+    line-height: 32px;
+  }
+}
+
+/* token select choosen */
+
+.tokenSelectInfo {
+  position: relative;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+
+  cursor: pointer;
+}
+
+.tokenSelectInfoCol {
+  width: 50%;
+}
+
+.tokenSelectInfoCol:last-child {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.tokenSelectInfoTitle {
+  display: flex;
+  align-items: center;
+
+  font-family: "PT Root UI";
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 52px;
+
+  color: #f6f7f9;
+}
+
+@media (max-width: 767px) {
+  .tokenSelectInfoTitle {
+    font-size: 28px;
+    line-height: 32px;
+  }
+}
+
+.tokenSelectInfoTextTitle {
+  margin-bottom: 4px;
+
+  font-family: "PT Root UI";
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #f6f7f9;
+}
+
+@media (max-width: 767px) {
+  .tokenSelectInfoTextTitle {
+    font-size: 12px;
+    line-height: 12px;
+  }
+}
+
+.tokenSelectInfoValue {
+  font-family: "PT Root UI";
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #9a9faf;
+}
+
+@media (max-width: 767px) {
+  .tokenSelectInfoValue {
+    font-size: 12px;
+    line-height: 12px;
+  }
+}
+
+.result {
+  margin-top: 20px;
+}
+
+@media (max-width: 767px) {
+  .result {
+    margin-top: 12px;
+  }
+
+  .result .selectWrapper {
+    border: 1px solid #EAE8E1;
+  }
+}
+
+/* @media (max-width: 600px) {
+  .tokenSelectInfo {
+    min-height: 64px;
+    padding: 12px;
+  }
+}
+
+@media (max-width: 991px) {
+  .tokenSelectInfoTitle {
+    font-size: 16px;
+    line-height: 125%;
+  }
+}
+
+@media (max-width: 991px) {
+  .tokenSelectInfoValue {
+    font-size: 14px;
+    line-height: 115%;
+  }
+} */

@@ -29,6 +29,27 @@ import { formatSymbol } from "../../utils";
 import css from './ssRewardsTable.module.css';
 import {descendingComparator, getComparator, stableSort, headCells} from "./reward-ui-utils";
 
+const sortIcon = (sortDirection) => {
+  const {appTheme} = useAppThemeContext();
+
+  return (
+      <>
+        <svg
+          style={{
+            marginRight: 10,
+            transform: sortDirection === 'desc' ? 'rotate(0deg)' : 'rotate(180deg)',
+          }}
+          width="11"
+          height="13"
+          viewBox="0 0 11 13"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M5.5 1.66663L4.79289 0.959519L5.5 0.252412L6.20711 0.959519L5.5 1.66663ZM6.5 11.6666C6.5 12.2189 6.05229 12.6666 5.5 12.6666C4.94772 12.6666 4.5 12.2189 4.5 11.6666L6.5 11.6666ZM0.792893 4.95952L4.79289 0.959519L6.20711 2.37373L2.20711 6.37373L0.792893 4.95952ZM6.20711 0.959519L10.2071 4.95952L8.79289 6.37373L4.79289 2.37373L6.20711 0.959519ZM6.5 1.66663L6.5 11.6666L4.5 11.6666L4.5 1.66663L6.5 1.66663Z" fill="#353A42"/>
+        </svg>
+      </>
+  );
+};
 
 const StickyTableCell = styled(TableCell)(({ theme, appTheme }) => ({
   color: appTheme === "dark" ? "#C6CDD2 !important" : "#325569 !important",
@@ -55,15 +76,10 @@ function EnhancedTableHead(props) {
 
   const { appTheme } = useAppThemeContext();
 
+  // TODO SORT ICON
   return (
     <TableHead>
-      <TableRow
-        style={{
-          border: "1px solid #9BC9E4",
-          borderColor: appTheme === "dark" ? "#5F7285" : "#9BC9E4",
-          whiteSpace: "nowrap",
-        }}
-      >
+      <TableRow style={{ whiteSpace: "nowrap" }}>
         {headCells.map((headCell) => (
           <>
             {headCell.isSticky ? (
@@ -73,43 +89,20 @@ function EnhancedTableHead(props) {
                 align={headCell.numeric ? "right" : "left"}
                 padding={"normal"}
                 sortDirection={orderBy === headCell.id ? order : false}
-                style={{
-                  background: '#060B17',
-                  borderBottom: "1px solid #D3F85A",
-                  // zIndex: 10,
-                }}
+                className={css.headCell}
               >
                 <TableSortLabel
                   active={orderBy === headCell.id}
                   direction={orderBy === headCell.id ? order : "asc"}
                   onClick={createSortHandler(headCell.id)}
+                  IconComponent={() => orderBy === headCell.id ? sortIcon(order) : null}
                 >
-                  <Typography
-                    className={classes.headerText}
-                    style={{
-                      fontWeight: 500,
-                      fontSize: 14,
-                      lineHeight: "115%",
-                      color: '#8191B9'
-                    }}
-                  >
-                    {headCell.label}
-                  </Typography>
-                  {/*{orderBy === headCell.id
-                        ? <span className={classes.visuallyHidden}>
-                            {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                          </span>
-                        : null
-                      }*/}
+                  <div className={css.headerText}>{headCell.label}</div>
                 </TableSortLabel>
               </StickyTableCell>
             ) : (
               <StyledTableCell
-                style={{
-                  background: '#060B17',
-                  borderBottom: "1px solid #D3F85A",
-                  color: '#8191B9',
-                }}
+                className={css.headCell}
                 key={headCell.id}
                 align={headCell.numeric ? "right" : "left"}
                 padding={"normal"}
@@ -118,29 +111,10 @@ function EnhancedTableHead(props) {
                 <TableSortLabel
                   active={orderBy === headCell.id}
                   direction={orderBy === headCell.id ? order : "asc"}
-                  IconComponent={ArrowDropDown}
-                  style={{
-                    color: '#8191B9',
-                  }}
                   onClick={createSortHandler(headCell.id)}
+                  IconComponent={() => orderBy === headCell.id ? sortIcon(order) : null}
                 >
-                  <Typography
-                    className={classes.headerText}
-                    style={{
-                      fontWeight: 500,
-                      fontSize: 14,
-                      lineHeight: "115%",
-                      width: headCell.width || "auto",
-                    }}
-                  >
-                    {headCell.label}
-                  </Typography>
-                  {/*{orderBy === headCell.id
-                        ? <span className={classes.visuallyHidden}>
-                    {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                  </span>
-                        : null
-                      }*/}
+                  <div className={css.headerText}>{headCell.label}</div>
                 </TableSortLabel>
               </StyledTableCell>
             )}
@@ -165,11 +139,11 @@ const useStyles = makeStyles((theme) => {
     root: {
       width: "100%",
     },
-    assetTableRow: {
-      "&:hover": {
-        background: "rgba(104,108,122,0.05)",
-      },
-    },
+    // assetTableRow: {
+    //   "&:hover": {
+    //     background: "rgba(104,108,122,0.05)",
+    //   },
+    // },
     paper: {
       width: "100%",
       marginBottom: theme.spacing(2),
@@ -196,12 +170,6 @@ const useStyles = makeStyles((theme) => {
     },
     icon: {
       marginRight: "12px",
-    },
-    textSpaced: {
-      lineHeight: "1.5",
-      fontWeight: "200",
-      fontSize: "12px",
-
     },
     textSpacedPadded: {
       paddingLeft: "10px",
@@ -294,8 +262,6 @@ const useStyles = makeStyles((theme) => {
       position: "absolute",
       left: "0px",
       top: "0px",
-      // outline: "2px solid #DBE6EC",
-      // background: "#13B5EC",
       borderRadius: "30px",
     },
     img2Logo: {
@@ -303,8 +269,6 @@ const useStyles = makeStyles((theme) => {
       left: "28px",
       zIndex: "1",
       top: "0px",
-      // outline: "2px solid #DBE6EC",
-      // background: "#13B5EC",
       borderRadius: "30px",
     },
     overrideTableHead: {
@@ -313,8 +277,8 @@ const useStyles = makeStyles((theme) => {
     doubleImages: {
       display: "flex",
       position: "relative",
-      width: "80px",
-      height: "35px",
+      width: "74px",
+      height: "40px",
     },
     searchContainer: {
       flex: 1,
@@ -386,13 +350,6 @@ const useStyles = makeStyles((theme) => {
     table: {
       tableLayout: "auto",
     },
-    tableBody: {
-      background: appTheme === "dark" ? "#151718" : "#DBE6EC",
-    },
-    accordionSummaryContent: {
-      margin: 0,
-      padding: 0,
-    },
     sortSelect: {
       position: "absolute",
       top: 60,
@@ -405,11 +362,7 @@ const useStyles = makeStyles((theme) => {
       },
     },
     cellHeadPaddings: {
-      padding: "20px 20px",
-      ["@media (max-width:530px)"]: {
-        // eslint-disable-line no-useless-computed-key
-        // padding: "5px 10px",
-      },
+      padding: "12px 12px",
     },
   };
 });
@@ -521,87 +474,26 @@ export default function EnhancedTable({ rewards, vestNFTs, tokenID }) {
     imgSource2
   ) {
     return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-        }}
-      >
-        <div
-          className={classes.inlineEnd}
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-end",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <Typography
-              className={classes.textSpaced}
-              style={{
-                fontWeight: 400,
-                marginBottom: 8,
-                fontSize: 14,
-                lineHeight: "115%",
-                color: '#E4E9F4',
-              }}
-            >
-              {data1}
-            </Typography>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
+          <div className={css.itemTitle} style={{ marginBottom: 2 }}>
+            {data1}
           </div>
 
-          <Typography
-            className={classes.textSpaced}
-            style={{
-              fontWeight: 400,
-              fontSize: 14,
-              lineHeight: "115%",
-              color: '#E4E9F4',
-            }}
-          >
+          <div className={css.itemTitle}>
             {data2}
-          </Typography>
+          </div>
         </div>
 
         {(symbol1 || symbol2) && (
-          <div
-            className={classes.inlineEnd}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-end",
-              paddingLeft: 10,
-            }}
-          >
-            <Typography
-              className={`${classes.textSpaced} ${classes.symbol}`}
-              style={{
-                marginBottom: 8,
-                fontWeight: 400,
-                fontSize: 14,
-                lineHeight: "115%",
-                color: '#8191B9',
-              }}
-            >
+          <div style={{ paddingLeft: 8, display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+            <div className={`${css.itemText} ${classes.symbol}`} style={{ marginBottom: 2 }}>
               {symbol1}
-            </Typography>
+            </div>
 
-            <Typography
-              className={`${classes.textSpaced} ${classes.symbol}`}
-              style={{
-                fontWeight: 400,
-                fontSize: 14,
-                lineHeight: "115%",
-                color: '#8191B9',
-              }}
-            >
+            <div className={`${css.itemText} ${classes.symbol}`}>
               {symbol2}
-            </Typography>
+            </div>
           </div>
         )}
       </div>
@@ -621,380 +513,293 @@ export default function EnhancedTable({ rewards, vestNFTs, tokenID }) {
     <>
       {windowWidth >= 806 && (
         <div>
-          <TableContainer
-            className={"g-flex-column__item-fixed"}
-            style={{
-              overflow: "auto",
-              height: "auto",
-              background: appTheme === "dark" ? "#24292D" : "#dbe6ec",
-            }}
-          >
-            <Table
-              stickyHeader
-              className={classes.table}
-              aria-labelledby="tableTitle"
-              size={"medium"}
-              aria-label="enhanced table"
-            >
-              <EnhancedTableHead
-                classes={classes}
-                order={order}
-                orderBy={orderBy}
-                onRequestSort={handleRequestSort}
-              />
+          <div className={css.wrapper}>
+            <TableContainer className={["g-flex-column__item-fixed", css.tableContainer].join(" ")}>
+              <Table
+                stickyHeader
+                className={classes.table}
+                aria-labelledby="tableTitle"
+                size={"medium"}
+                aria-label="enhanced table"
+              >
+                <EnhancedTableHead
+                  classes={classes}
+                  order={order}
+                  orderBy={orderBy}
+                  onRequestSort={handleRequestSort}
+                />
 
-              <TableBody classes={{ root: classes.tableBody }}>
-                {Array.from(rewards).length > 0
-                  ? stableSort(rewards, getComparator(order, orderBy))
-                      .slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
-                      )
-                      .map((row, index) => {
-                        if (!row) {
-                          return null;
-                        }
-                        return (
-                          <TableRow
-                            key={"ssRewardsTable" + index}
-                            className={classes.assetTableRow}
-                          >
-                            <StickyTableCell
-                              style={{
-                                background: '#171D2D',
-                                borderBottom: '1px dashed #323B54',
-                              }}
-                              className={classes.cell}
+                <TableBody>
+                  {Array.from(rewards).length > 0
+                    ? stableSort(rewards, getComparator(order, orderBy))
+                        .slice(
+                          page * rowsPerPage,
+                          page * rowsPerPage + rowsPerPage
+                        )
+                        .map((row, index) => {
+                          if (!row) {
+                            return null;
+                          }
+                          return (
+                            <TableRow
+                              key={"ssRewardsTable" + index}
+                              className={css.row}
                             >
-                              {["Bribe", "Fees", "Reward"].includes(
-                                row.rewardType
-                              ) && (
-                                <div className={classes.inline}>
-                                  <div className={classes.doubleImages}>
-                                    <img
-                                      className={classes.img1Logo}
-                                      src={
-                                        row && row.token0 && row.token0.logoURI
-                                          ? row.token0.logoURI
-                                          : ``
-                                      }
-                                      width="36"
-                                      height="36"
-                                      alt=""
-                                      onError={(e) => {
-                                        e.target.onerror = null;
-                                        e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
-                                      }}
-                                    />
-                                    <img
-                                      className={classes.img2Logo}
-                                      src={
-                                        row && row.token1 && row.token1.logoURI
-                                          ? row.token1.logoURI
-                                          : ``
-                                      }
-                                      width="36"
-                                      height="36"
-                                      alt=""
-                                      onError={(e) => {
-                                        e.target.onerror = null;
-                                        e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
-                                      }}
-                                    />
+                              <StickyTableCell className={css.cell}>
+                                {["Bribe", "Fees", "Reward"].includes(
+                                  row.rewardType
+                                ) && (
+                                  <div className={classes.inline}>
+                                    <div className={classes.doubleImages}>
+                                      <img
+                                        className={classes.img1Logo}
+                                        src={
+                                          row && row.token0 && row.token0.logoURI
+                                            ? row.token0.logoURI
+                                            : ``
+                                        }
+                                        width="36"
+                                        height="36"
+                                        alt=""
+                                        onError={(e) => {
+                                          e.target.onerror = null;
+                                          e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
+                                        }}
+                                      />
+                                      <img
+                                        className={classes.img2Logo}
+                                        src={
+                                          row && row.token1 && row.token1.logoURI
+                                            ? row.token1.logoURI
+                                            : ``
+                                        }
+                                        width="36"
+                                        height="36"
+                                        alt=""
+                                        onError={(e) => {
+                                          e.target.onerror = null;
+                                          e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
+                                        }}
+                                      />
+                                    </div>
+
+                                    <div>
+                                      <div className={css.vaultSourceTitle}>
+                                        {formatSymbol(row?.symbol)}
+                                      </div>
+                                      <div className={css.vaultSourceSubtitle}>
+                                        {row?.rewardType}
+                                      </div>
+                                    </div>
                                   </div>
+                                )}
+                                {["Distribution"].includes(row.rewardType) && (
+                                  <div className={classes.inline}>
+                                    <div className={classes.doubleImages}>
+                                      <img
+                                        className={classes.img1Logo}
+                                        src={
+                                          row &&
+                                          row.lockToken &&
+                                          row.lockToken.logoURI
+                                            ? row.lockToken.logoURI
+                                            : ``
+                                        }
+                                        width="40"
+                                        height="40"
+                                        alt=""
+                                        onError={(e) => {
+                                          e.target.onerror = null;
+                                          e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
+                                        }}
+                                      />
+                                    </div>
 
-                                  <div>
-                                    <Typography
-                                      className={classes.textSpaced}
-                                      style={{
-                                        marginBottom: 4,
-                                        fontWeight: 500,
-                                        fontSize: 16,
-                                        lineHeight: "125%",
-                                        color: '#E4E9F4',
-                                      }}
-                                      noWrap
-                                    >
-                                      {formatSymbol(row?.symbol)}
-                                    </Typography>
-                                    <Typography
-                                      className={classes.textSpaced}
-                                      style={{
-                                        fontWeight: 400,
-                                        fontSize: 14,
-                                        lineHeight: "115%",
-                                        color: '#8191B9',
-                                      }}
-                                      noWrap
-                                    >
-                                      {row?.rewardType}
-                                    </Typography>
+                                    <div>
+                                      <div className={css.vaultSourceTitle}>
+                                        {formatSymbol(row?.lockToken?.symbol)}
+                                      </div>
+                                      <div className={css.vaultSourceSubtitle}>
+                                        {row?.rewardType}
+                                      </div>
+                                    </div>
                                   </div>
-                                </div>
-                              )}
-                              {["Distribution"].includes(row.rewardType) && (
-                                <div className={classes.inline}>
-                                  <div className={classes.doubleImages}>
-                                    <img
-                                      className={classes.img1Logo}
-                                      src={
-                                        row &&
-                                        row.lockToken &&
-                                        row.lockToken.logoURI
-                                          ? row.lockToken.logoURI
-                                          : ``
-                                      }
-                                      width="36"
-                                      height="36"
-                                      alt=""
-                                      onError={(e) => {
-                                        e.target.onerror = null;
-                                        e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
-                                      }}
-                                    />
-                                  </div>
-
-                                  <div>
-                                    <Typography
-                                      className={classes.textSpaced}
-                                      style={{
-                                        marginBottom: 4,
-                                        fontWeight: 500,
-                                        fontSize: 16,
-                                        lineHeight: "125%",
-                                        color: '#E4E9F4',
-                                      }}
-                                      noWrap
-                                    >
-                                      {formatSymbol(row?.lockToken?.symbol)}
-                                    </Typography>
-                                    <Typography
-                                      className={classes.textSpaced}
-                                      style={{
-                                        fontWeight: 400,
-                                        fontSize: 14,
-                                        lineHeight: "115%",
-                                        color: '#8191B9',
-                                      }}
-                                      noWrap
-                                    >
-                                      {row?.rewardType}
-                                    </Typography>
-                                  </div>
-                                </div>
-                              )}
-                            </StickyTableCell>
-
-                            <TableCell
-                              className={classes.cell}
-                              align="right"
-                              style={{
-                                background: '#171D2D',
-                                borderBottom: '1px solid #323B54',
-                                overflow: "hidden",
-                              }}
-                            >
-                              {row &&
-                                row.rewardType === "Bribe" &&
-                                row.gauge &&
-                                row.gauge.balance &&
-                                row.gauge.totalSupply &&
-                                tableCellContent(
-                                  formatCurrency(
-                                    BigNumber(row.gauge.balance)
-                                      .div(row.gauge.totalSupply)
-                                      .times(row.gauge.reserve0)
-                                  ),
-                                  formatCurrency(
-                                    BigNumber(row.gauge.balance)
-                                      .div(row.gauge.totalSupply)
-                                      .times(row.gauge.reserve1)
-                                  ),
-                                  row.token0.symbol,
-                                  row.token1.symbol
                                 )}
+                              </StickyTableCell>
 
-                              {row &&
-                                row.rewardType === "Fees" &&
-                                row.balance &&
-                                row.totalSupply &&
-                                tableCellContent(
-                                  formatCurrency(
-                                    BigNumber(row.balance)
-                                      .div(row.totalSupply)
-                                      .times(row.reserve0)
-                                  ),
-                                  formatCurrency(
-                                    BigNumber(row.balance)
-                                      .div(row.totalSupply)
-                                      .times(row.reserve1)
-                                  ),
-                                  row.token0.symbol,
-                                  row.token1.symbol
-                                )}
+                              <TableCell className={css.cell} align="right">
+                                {row &&
+                                  row.rewardType === "Bribe" &&
+                                  row.gauge &&
+                                  row.gauge.balance &&
+                                  row.gauge.totalSupply &&
+                                  tableCellContent(
+                                    formatCurrency(
+                                      BigNumber(row.gauge.balance)
+                                        .div(row.gauge.totalSupply)
+                                        .times(row.gauge.reserve0)
+                                    ),
+                                    formatCurrency(
+                                      BigNumber(row.gauge.balance)
+                                        .div(row.gauge.totalSupply)
+                                        .times(row.gauge.reserve1)
+                                    ),
+                                    row.token0.symbol,
+                                    row.token1.symbol
+                                  )}
 
-                              {row &&
-                                row.rewardType === "Reward" &&
-                                row.gauge &&
-                                row.gauge.balance &&
-                                row.gauge.totalSupply &&
-                                tableCellContent(
-                                  formatCurrency(
-                                    BigNumber(row.gauge.balance)
-                                      .div(row.gauge.totalSupply)
-                                      .times(row.gauge.reserve0)
-                                  ),
-                                  formatCurrency(
-                                    BigNumber(row.gauge.balance)
-                                      .div(row.gauge.totalSupply)
-                                      .times(row.gauge.reserve1)
-                                  ),
-                                  row.token0.symbol,
-                                  row.token1.symbol
-                                )}
+                                {row &&
+                                  row.rewardType === "Fees" &&
+                                  row.balance &&
+                                  row.totalSupply &&
+                                  tableCellContent(
+                                    formatCurrency(
+                                      BigNumber(row.balance)
+                                        .div(row.totalSupply)
+                                        .times(row.reserve0)
+                                    ),
+                                    formatCurrency(
+                                      BigNumber(row.balance)
+                                        .div(row.totalSupply)
+                                        .times(row.reserve1)
+                                    ),
+                                    row.token0.symbol,
+                                    row.token1.symbol
+                                  )}
 
-                              {row &&
-                                row.rewardType === "Distribution" &&
-                                tableCellContent(
-                                  formatCurrency(row.token?.lockValue),
-                                  null,
-                                  row.lockToken.symbol,
-                                  null
-                                )}
-                            </TableCell>
+                                {row &&
+                                  row.rewardType === "Reward" &&
+                                  row.gauge &&
+                                  row.gauge.balance &&
+                                  row.gauge.totalSupply &&
+                                  tableCellContent(
+                                    formatCurrency(
+                                      BigNumber(row.gauge.balance)
+                                        .div(row.gauge.totalSupply)
+                                        .times(row.gauge.reserve0)
+                                    ),
+                                    formatCurrency(
+                                      BigNumber(row.gauge.balance)
+                                        .div(row.gauge.totalSupply)
+                                        .times(row.gauge.reserve1)
+                                    ),
+                                    row.token0.symbol,
+                                    row.token1.symbol
+                                  )}
 
-                            <TableCell
-                              className={classes.cell}
-                              align="right"
-                              style={{
-                                background: '#171D2D',
-                                borderBottom: '1px solid #323B54',
-                                overflow: "hidden",
-                              }}
-                            >
-                              {row &&
-                                row.rewardType === "Bribe" &&
-                                row.gauge &&
-                                row.gauge.bribesEarned &&
-                                row.gauge.bribesEarned.map((bribe) => {
-                                  return tableCellContent(
-                                    parseFloat(bribe.earned).toFixed(4),
+                                {row &&
+                                  row.rewardType === "Distribution" &&
+                                  tableCellContent(
+                                    formatCurrency(row.token?.lockValue),
                                     null,
-                                    bribe.token?.symbol,
-                                    null,
-                                    bribe && bribe.token && bribe.token.logoURI
-                                      ? bribe.token.logoURI
+                                    row.lockToken.symbol,
+                                    null
+                                  )}
+                              </TableCell>
+
+                              <TableCell className={css.cell} align="right">
+                                {row &&
+                                  row.rewardType === "Bribe" &&
+                                  row.gauge &&
+                                  row.gauge.bribesEarned &&
+                                  row.gauge.bribesEarned.map((bribe) => {
+                                    return tableCellContent(
+                                      parseFloat(bribe.earned).toFixed(4),
+                                      null,
+                                      bribe.token?.symbol,
+                                      null,
+                                      bribe && bribe.token && bribe.token.logoURI
+                                        ? bribe.token.logoURI
+                                        : `/tokens/unknown-logo--${appTheme}.svg`
+                                    );
+                                  })}
+
+                                {row &&
+                                  row.rewardType === "Fees" &&
+                                  tableCellContent(
+                                    parseFloat(row.claimable0).toFixed(4),
+                                    parseFloat(row.claimable1).toFixed(4),
+                                    row.token0?.symbol,
+                                    row.token1?.symbol,
+                                    row.token0 && row.token0.logoURI
+                                      ? row.token0.logoURI
+                                      : `/tokens/unknown-logo--${appTheme}.svg`,
+                                    row.token1 && row.token1.logoURI
+                                      ? row.token1.logoURI
                                       : `/tokens/unknown-logo--${appTheme}.svg`
-                                  );
-                                })}
+                                  )}
 
-                              {row &&
-                                row.rewardType === "Fees" &&
-                                tableCellContent(
-                                  parseFloat(row.claimable0).toFixed(4),
-                                  parseFloat(row.claimable1).toFixed(4),
-                                  row.token0?.symbol,
-                                  row.token1?.symbol,
-                                  row.token0 && row.token0.logoURI
-                                    ? row.token0.logoURI
-                                    : `/tokens/unknown-logo--${appTheme}.svg`,
-                                  row.token1 && row.token1.logoURI
-                                    ? row.token1.logoURI
-                                    : `/tokens/unknown-logo--${appTheme}.svg`
-                                )}
+                                {row &&
+                                  row.rewardType === "Reward" &&
+                                  row.gauge &&
+                                  row.gauge.rewardTokens &&
+                                  row.gauge.rewardTokens.map((rt) => {
+                                    return tableCellContent(
+                                      parseFloat(rt.rewardsEarned).toFixed(4),
+                                      null,
+                                      rt.token?.symbol,
+                                      null,
+                                      rt && rt.token && rt.token.logoURI
+                                        ? rt.token.logoURI
+                                        : `/tokens/unknown-logo--${appTheme}.svg`
+                                    );
+                                  })}
 
-                              {row &&
-                                row.rewardType === "Reward" &&
-                                row.gauge &&
-                                row.gauge.rewardTokens &&
-                                row.gauge.rewardTokens.map((rt) => {
-                                  return tableCellContent(
-                                    parseFloat(rt.rewardsEarned).toFixed(4),
+                                {row &&
+                                  row.rewardType === "Distribution" &&
+                                  tableCellContent(
+                                    parseFloat(row.earned).toFixed(4),
                                     null,
-                                    rt.token?.symbol,
-                                    null,
-                                    rt && rt.token && rt.token.logoURI
-                                      ? rt.token.logoURI
-                                      : `/tokens/unknown-logo--${appTheme}.svg`
-                                  );
-                                })}
+                                    row.rewardToken.symbol,
+                                    null
+                                  )}
+                              </TableCell>
 
-                              {row &&
-                                row.rewardType === "Distribution" &&
-                                tableCellContent(
-                                  parseFloat(row.earned).toFixed(4),
-                                  null,
-                                  row.rewardToken.symbol,
-                                  null
-                                )}
-                            </TableCell>
-
-                            <TableCell
-                              className={classes.cell}
-                              align="right"
+                              <TableCell className={css.cell} align="right">
+                                <Button
+                                  variant="outlined"
+                                  color="primary"
+                                  className={css.action}
+                                  onClick={() => {
+                                    onClaim(row);
+                                  }}
+                                >
+                                  Claim
+                                </Button>
+                              </TableCell>
+                            </TableRow>
+                          );
+                        })
+                    : (
+                        <TableRow>
+                          <td style={{ padding: "30px 12px 16px" }} colSpan={4}>
+                            <span
                               style={{
-                                background: '#171D2D',
-                                borderBottom: '1px solid #323B54',
-                                overflow: "hidden",
+                                fontFamily: 'PT Root UI',
+                                fontWeight: 700,
+                                fontSize: 16,
+                                lineHeight: "16px",
+                                color: '#9a9faf',
                               }}
                             >
-                              <Button
-                                variant="outlined"
-                                color="primary"
-                                style={{
-                                  padding: '7px 14px',
-                                  border: `1px solid rgb(211, 248, 90)`,
-                                  borderRadius: 12,
-                                  fontWeight: 600,
-                                  fontSize: 14,
-                                  lineHeight: "120%",
-                                  color: 'rgb(211, 248, 90)',
-                                  textTransform: 'uppercase',
-                                }}
-                                onClick={() => {
-                                  onClaim(row);
-                                }}
-                              >
-                                CLAIM
-                              </Button>
-                            </TableCell>
-                          </TableRow>
-                        );
-                      })
-                  : (
-                      <TableRow>
-                        <td style={{
-                          color: '#E4E9F4',
-                          fontSize: 20,
-                          fontWeight: 500,
-                          padding: 24,
-                          background: '#171D2D',
-                        }} colSpan={4}>You don't have any Rewards yet</td>
-                      </TableRow>
-                    )}
-              </TableBody>
-            </Table>
-          </TableContainer>
+                              You don't have any Rewards yet
+                            </span>
+                          </td>
+                        </TableRow>
+                      )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </div>
 
           <TablePagination
             className={"g-flex-column__item-fixed"}
             style={{
               width: "100%",
-              // marginTop: 20,
-              padding: "0 30px",
-              // borderTop: '1px solid #D3F85A',
-              borderTop: '1px solid #d3f85a',
-              background: '#060B17',
-              // height: 70,
-              // alignItems: 'center',
-              // display: 'flex',
-              // justifyContent: 'flex-end',
+              padding: "0 20px",
+              borderRadius: 20,
+              background: '#131313',
               color: '#8191B9',
-              // background: appTheme === "dark" ? "#24292D" : "#dbe6ec",
-              // border: "1px solid #86B9D6",
-              // borderColor: appTheme === "dark" ? "#5F7285" : "#86B9D6",
-              // borderRadius: 100,
-              // color: appTheme === "dark" ? "#7C838A" : "#5688A5",
             }}
             ActionsComponent={TablePaginationActions}
             rowsPerPageOptions={[5, 10, 25]}
@@ -1028,274 +833,187 @@ export default function EnhancedTable({ rewards, vestNFTs, tokenID }) {
           <div style={{ overflow: "auto" }}>
             {Array.from(rewards).length > 0
               ? stableSort(rewards, getComparator(order, orderBy))
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row, index) => {
-                    if (!row) {
-                      return null;
-                    }
-                    const labelId = `accordion-${index}`;
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row, index) => {
+                  if (!row) {
+                    return null;
+                  }
+                  const labelId = `accordion-${index}`;
 
-                    return (
-                      <Accordion
-                        key={labelId}
-                        style={{
-                          margin: 0,
-                          marginBottom: 20,
-                          background: '#171D2D',
-                          borderRadius: 12,
-                        }}
-                        disableGutters={true}
-                        expanded={expanded === labelId}
-                        onChange={handleChangeAccordion(labelId)}
-                      >
-                        <AccordionSummary
-                          style={{
-                            padding: 0,
-                          }}
-                          classes={{
-                            content: classes.accordionSummaryContent,
-                          }}
-                          expandIcon={null}
-                          aria-controls="panel1a-content"
+                  return (
+                    <div
+                      key={labelId}
+                      style={{
+                        margin: 0,
+                        marginBottom: 12,
+                        paddingBottom: 12,
+                        background: '#131313',
+                        borderRadius: 16,
+                      }}
+                    >
+                      <div className={["g-flex-column", "g-flex-column__item"].join(" ")}>
+                        <div
+                          style={{ justifyContent: 'space-between' }}
+                          className={[
+                            classes.cellHeadPaddings,
+                            "g-flex",
+                            "g-flex--align-center",
+                          ].join(" ")}
                         >
-                          <div
-                            className={[
-                              "g-flex-column",
-                              "g-flex-column__item",
-                            ].join(" ")}
-                          >
-                            <div
-                              className={[
-                                classes.cellHeadPaddings,
-                                "g-flex",
-                                "g-flex--align-center",
-                              ].join(" ")}
-                            >
-                              {["Bribe", "Fees", "Reward"].includes(
-                                row.rewardType
-                              ) && (
-                                <div className={classes.inline}>
-                                  <div className={classes.doubleImages}>
-                                    <img
-                                      className={classes.img1Logo}
-                                      src={
-                                        row && row.token0 && row.token0.logoURI
-                                          ? row.token0.logoURI
-                                          : ``
-                                      }
-                                      width="36"
-                                      height="36"
-                                      alt=""
-                                      onError={(e) => {
-                                        e.target.onerror = null;
-                                        e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
-                                      }}
-                                    />
-                                    <img
-                                      className={classes.img2Logo}
-                                      src={
-                                        row && row.token1 && row.token1.logoURI
-                                          ? row.token1.logoURI
-                                          : ``
-                                      }
-                                      width="36"
-                                      height="36"
-                                      alt=""
-                                      onError={(e) => {
-                                        e.target.onerror = null;
-                                        e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
-                                      }}
-                                    />
-                                  </div>
-
-                                  <div>
-                                    <Typography
-                                      className={classes.textSpaced}
-                                      style={{
-                                        fontWeight: 500,
-                                        fontSize: 14,
-                                        lineHeight: "120%",
-                                        color:
-                                          appTheme === "dark"
-                                            ? "#ffffff"
-                                            : "#0A2C40",
-                                      }}
-                                      noWrap
-                                    >
-                                      {formatSymbol(row?.symbol)}
-                                    </Typography>
-                                    <Typography
-                                      className={classes.textSpaced}
-                                      style={{
-                                        fontWeight: 400,
-                                        fontSize: 14,
-                                        lineHeight: "120%",
-                                        color:
-                                          appTheme === "dark"
-                                            ? "#7C838A"
-                                            : "#5688A5",
-                                      }}
-                                      noWrap
-                                    >
-                                      {row?.rewardType}
-                                    </Typography>
-                                  </div>
-                                </div>
-                              )}
-                              {["Distribution"].includes(row.rewardType) && (
-                                <div className={classes.inline}>
-                                  <div className={classes.doubleImages}>
-                                    <img
-                                      className={classes.img1Logo}
-                                      src={
-                                        row &&
-                                        row.lockToken &&
-                                        row.lockToken.logoURI
-                                          ? row.lockToken.logoURI
-                                          : ``
-                                      }
-                                      width="36"
-                                      height="36"
-                                      alt=""
-                                      onError={(e) => {
-                                        e.target.onerror = null;
-                                        e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
-                                      }}
-                                    />
-                                  </div>
-
-                                  <div>
-                                    <Typography
-                                      className={classes.textSpaced}
-                                      style={{
-                                        marginBottom: 4,
-                                        fontWeight: 500,
-                                        fontSize: 14,
-                                        lineHeight: "120%",
-                                        color: '#E4E9F4',
-                                      }}
-                                      noWrap
-                                    >
-                                      {formatSymbol(row?.lockToken?.symbol)}
-                                    </Typography>
-                                    <Typography
-                                      className={classes.textSpaced}
-                                      style={{
-                                        fontWeight: 400,
-                                        fontSize: 14,
-                                        lineHeight: "120%",
-                                        color: '#8191B9',
-                                      }}
-                                      noWrap
-                                    >
-                                      {row?.rewardType}
-                                    </Typography>
-                                  </div>
-                                </div>
-                              )}
-                            </div>
-
-                            <div
-                              style={{
-                                borderTop: `1px solid #060B17`,
-                                borderBottom: `1px solid #060B17`,
-                              }}
-                              className={["g-flex"].join(" ")}
-                            >
-                              <div
-                                style={{
-                                  width: "50%",
-                                  borderRight: `1px solid #060B17`,
-                                }}
-                              >
-                                <Typography
-                                  className={classes.cellHeadPaddings}
-                                  style={{
-                                    background: '#060B17',
-                                    fontWeight: 500,
-                                    fontSize: 14,
-                                    lineHeight: "120%",
-                                    /*borderBottom: `1px solid ${
-                                      appTheme === "dark"
-                                        ? "#2D3741"
-                                        : "#9BC9E4"
-                                    }`,*/
-                                    color: '#8191B9',
+                          {["Bribe", "Fees", "Reward"].includes(
+                            row.rewardType
+                          ) && (
+                            <div className={classes.inline}>
+                              <div className={classes.doubleImages}>
+                                <img
+                                  className={classes.img1Logo}
+                                  src={
+                                    row && row.token0 && row.token0.logoURI
+                                      ? row.token0.logoURI
+                                      : ``
+                                  }
+                                  width="36"
+                                  height="36"
+                                  alt=""
+                                  onError={(e) => {
+                                    e.target.onerror = null;
+                                    e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
                                   }}
-                                  noWrap
-                                >
-                                  Action
-                                </Typography>
-
-                                <div
-                                  className={classes.cellPaddings}
-                                  style={{
-                                    height: 72,
-                                    display: 'flex',
-                                    alignItems: 'center',
+                                />
+                                <img
+                                  className={classes.img2Logo}
+                                  src={
+                                    row && row.token1 && row.token1.logoURI
+                                      ? row.token1.logoURI
+                                      : ``
+                                  }
+                                  width="36"
+                                  height="36"
+                                  alt=""
+                                  onError={(e) => {
+                                    e.target.onerror = null;
+                                    e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
                                   }}
-                                >
-                                  <Button
-                                    variant="outlined"
-                                    color="primary"
-                                    style={{
-                                      padding: "7px 14px",
-                                      border: "1px solid #D3F85A",
-                                      borderColor: '#D3F85A',
-                                      borderRadius: 100,
-                                      fontWeight: 600,
-                                      fontSize: 14,
-                                      lineHeight: "120%",
-                                      color: '#D3F85A',
-                                      textTransform: 'uppercase',
-                                    }}
-                                    onClick={(event) => {
-                                      event.stopPropagation();
-                                      event.preventDefault();
-
-                                      onClaim(row);
-                                    }}
-                                  >
-                                    CLAIM
-                                  </Button>
-                                </div>
+                                />
                               </div>
 
-                              <div
-                                style={{
-                                  width: "50%",
-                                }}
-                              >
-                                <Typography
-                                  className={classes.cellHeadPaddings}
-                                  style={{
-                                    background: '#060B17',
-                                    fontWeight: 500,
-                                    fontSize: 14,
-                                    lineHeight: "120%",
-                                    /*borderBottom: `1px solid ${
-                                      appTheme === "dark"
-                                        ? "#2D3741"
-                                        : "#9BC9E4"
-                                    }`,*/
-                                    color: '#8191B9',
-                                    textAlign: "right",
+                              <div>
+                                <div className={css.vaultSourceTitle}>
+                                  {formatSymbol(row?.symbol)}
+                                </div>
+                                <div className={css.vaultSourceSubtitle}>
+                                  {row?.rewardType}
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                          {["Distribution"].includes(row.rewardType) && (
+                            <div className={classes.inline}>
+                              <div className={classes.doubleImages}>
+                                <img
+                                  className={classes.img1Logo}
+                                  src={
+                                    row &&
+                                    row.lockToken &&
+                                    row.lockToken.logoURI
+                                      ? row.lockToken.logoURI
+                                      : ``
+                                  }
+                                  width="36"
+                                  height="36"
+                                  alt=""
+                                  onError={(e) => {
+                                    e.target.onerror = null;
+                                    e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
                                   }}
-                                  noWrap
-                                >
-                                  You Earned
-                                </Typography>
+                                />
+                              </div>
 
-                                <div
-                                  className={classes.cellPaddings}
-                                  style={{
-                                    display: "flex",
-                                    justifyContent: "flex-end",
-                                    alignItems: "center",
-                                    height: 85,
-                                    marginTop: 10,
-                                  }}
-                                >
+                              <div>
+                                <div className={css.vaultSourceTitle}>
+                                  {formatSymbol(row?.lockToken?.symbol)}
+                                </div>
+                                <div className={css.vaultSourceSubtitle}>
+                                  {row?.rewardType}
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                          <Button
+                            variant="outlined"
+                            color="primary"
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              width: 69,
+                              height: 36,
+                              padding: "8px 16px",
+                              fontSize: 14,
+                              lineHeight: 20,
+                              fontWeight: 500,
+                              borderRadius: 8,
+                              border: "1px solid #7DB857",
+                              background: "rgba(125, 184, 87, 0.12)",
+                              color: "#7DB857",
+                            }}
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              event.preventDefault();
+
+                              onClaim(row);
+                            }}
+                          >
+                            Claim
+                          </Button>
+                        </div>
+
+                        <div className={css.mobileItem}>
+                          <div className={css.mobileItemTable}>
+                            {headCells.map((headCell) => headCell.id !== 'earned' && (
+                              <div className={css.mobileItemRow}>
+                                <div className={css.mobileItemCell}>
+                                  {headCell.label}
+                                </div>
+
+                                <div className={css.mobileItemCell}>
+                                  <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
+                                    <div className={css.itemTitle} style={{ marginBottom: 4 }}>
+                                      {headCell.id === "balance" && row?.gauge &&
+                                        formatCurrency(
+                                          BigNumber(row?.gauge?.balance)
+                                            .div(row?.gauge?.totalSupply)
+                                            .times(row?.gauge?.reserve0)
+                                        )}
+                                    </div>
+
+                                    <div className={css.itemTitle}>
+                                      {headCell.id === "balance" && row?.gauge &&
+                                        formatCurrency(
+                                          BigNumber(row.gauge.balance)
+                                            .div(row.gauge.totalSupply)
+                                            .times(row.gauge.reserve1)
+                                        )}
+                                    </div>
+                                  </div>
+
+                                  <div style={{ paddingLeft: 8, display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+                                    <div className={css.itemText} style={{ marginBottom: 4 }}>
+                                      {formatSymbol(row?.token0?.symbol)}
+                                    </div>
+
+                                    <div className={css.itemText}>
+                                      {formatSymbol(row?.token1?.symbol)}
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                            <div className={css.mobileItemRow}>
+                              <div className={css.mobileItemCell}>
+                                You Earned
+                              </div>
+                              <div className={css.mobileItemCell}>
+                                <div>
                                   <div>
                                   {row &&
                                     row.rewardType === "Bribe" &&
@@ -1361,188 +1079,21 @@ export default function EnhancedTable({ rewards, vestNFTs, tokenID }) {
                                 </div>
                               </div>
                             </div>
-
-                            <div
-                              style={{
-                                padding: "10px 20px",
-                                background: '#060B17',
-                              }}
-                              className={[
-                                "g-flex",
-                                "g-flex--align-center",
-                                "g-flex--space-between",
-                              ].join(" ")}
-                            >
-                              <Typography
-                                style={{
-                                  fontWeight: 500,
-                                  fontSize: 14,
-                                  lineHeight: "120%",
-                                  color: '#8191B9',
-                                }}
-                                noWrap
-                              >
-                                {expanded !== labelId ? "Show" : "Hide"} details
-                              </Typography>
-
-                              {expanded !== labelId && (
-                                  <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M25.5 13C25.5 6.1125 19.8875 0.5 13 0.499999C6.1125 0.499999 0.5 6.1125 0.499999 13C0.499999 19.8875 6.1125 25.5 13 25.5C19.8875 25.5 25.5 19.8875 25.5 13ZM12.3375 16.4875L7.925 12.075C7.7375 11.8875 7.65 11.65 7.65 11.4125C7.65 11.175 7.7375 10.9375 7.925 10.75C8.2875 10.3875 8.8875 10.3875 9.25 10.75L13 14.5L16.75 10.75C17.1125 10.3875 17.7125 10.3875 18.075 10.75C18.4375 11.1125 18.4375 11.7125 18.075 12.075L13.6625 16.4875C13.3 16.8625 12.7 16.8625 12.3375 16.4875Z" fill="#779BF4"/>
-                                  </svg>
-                              )}
-
-                              {expanded === labelId && (
-                                  <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M25.5 13C25.5 19.8875 19.8875 25.5 13 25.5C6.1125 25.5 0.5 19.8875 0.499999 13C0.499999 6.1125 6.1125 0.500001 13 0.500001C19.8875 0.5 25.5 6.1125 25.5 13ZM12.3375 9.5125L7.925 13.925C7.7375 14.1125 7.65 14.35 7.65 14.5875C7.65 14.825 7.7375 15.0625 7.925 15.25C8.2875 15.6125 8.8875 15.6125 9.25 15.25L13 11.5L16.75 15.25C17.1125 15.6125 17.7125 15.6125 18.075 15.25C18.4375 14.8875 18.4375 14.2875 18.075 13.925L13.6625 9.5125C13.3 9.1375 12.7 9.1375 12.3375 9.5125Z" fill="#779BF4"/>
-                                  </svg>
-                              )}
-                            </div>
                           </div>
-                        </AccordionSummary>
-
-                        <AccordionDetails
-                          style={{
-                            padding: 0,
-                          }}
-                        >
-                          {headCells.map((headCell) => (
-                            <>
-                              {!headCell.isHideInDetails && (
-                                <div
-                                  style={{
-                                    height: 72,
-                                    borderTop: `1px solid #060B17`,
-                                  }}
-                                  className={[
-                                    "g-flex",
-                                    "g-flex--align-center",
-                                  ].join(" ")}
-                                >
-                                  <Typography
-                                    className={classes.cellHeadPaddings}
-                                    style={{
-                                      width: "50%",
-                                      height: "100%",
-                                      display: "flex",
-                                      alignItems: "center",
-                                      fontWeight: 500,
-                                      fontSize: 14,
-                                      lineHeight: "120%",
-                                      color: '#8191B9',
-                                      borderRight: `1px solid #060B17`,
-                                    }}
-                                    noWrap
-                                  >
-                                    {headCell.label}
-                                  </Typography>
-
-                                  <div
-                                    className={classes.cellPaddings}
-                                    style={{
-                                      width: "50%",
-                                      display: "flex",
-                                      justifyContent: "flex-end",
-                                    }}
-                                  >
-                                    <div
-                                      className={classes.inlineEnd}
-                                      style={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        alignItems: "flex-end",
-                                      }}
-                                    >
-                                      <Typography
-                                        className={classes.textSpaced}
-                                        style={{
-                                          marginBottom: 8,
-                                          fontWeight: 500,
-                                          fontSize: 14,
-                                          lineHeight: "120%",
-                                          color: '#E4E9F4',
-                                          whiteSpace: "nowrap",
-                                        }}
-                                      >
-                                        {headCell.id === "balance" && row?.gauge &&
-                                          formatCurrency(
-                                            BigNumber(row?.gauge?.balance)
-                                              .div(row?.gauge?.totalSupply)
-                                              .times(row?.gauge?.reserve0)
-                                          )}
-                                      </Typography>
-
-                                      <Typography
-                                        className={classes.textSpaced}
-                                        style={{
-                                          fontWeight: 500,
-                                          fontSize: 14,
-                                          lineHeight: "120%",
-                                          color: '#E4E9F4',
-                                          whiteSpace: "nowrap",
-                                        }}
-                                      >
-                                        {headCell.id === "balance" && row?.gauge &&
-                                          formatCurrency(
-                                            BigNumber(row.gauge.balance)
-                                              .div(row.gauge.totalSupply)
-                                              .times(row.gauge.reserve1)
-                                          )}
-                                      </Typography>
-                                    </div>
-
-                                    <div
-                                      className={classes.inlineEnd}
-                                      style={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        alignItems: "flex-end",
-                                        paddingLeft: 10,
-                                      }}
-                                    >
-                                      <Typography
-                                        className={`${classes.textSpaced} ${classes.symbol}`}
-                                        style={{
-                                          marginBottom: 8,
-                                          fontWeight: 400,
-                                          fontSize: 14,
-                                          lineHeight: "120%",
-                                          color: '#8191B9',
-                                        }}
-                                      >
-                                        {formatSymbol(row?.token0?.symbol)}
-                                      </Typography>
-
-                                      <Typography
-                                        className={`${classes.textSpaced} ${classes.symbol}`}
-                                        style={{
-                                          fontWeight: 400,
-                                          fontSize: 14,
-                                          lineHeight: "120%",
-                                          color: '#8191B9',
-                                        }}
-                                      >
-                                        {formatSymbol(row?.token1?.symbol)}
-                                      </Typography>
-                                    </div>
-                                  </div>
-                                </div>
-                              )}
-                            </>
-                          ))}
-                        </AccordionDetails>
-                      </Accordion>
-                    );
-                  })
-              : null}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })
+            : null}
           </div>
           <TablePagination
             className={"g-flex-column__item-fixed"}
             style={{
-              width: '100%',
-              padding: '0 30px',
-              background: '#060B17',
-              borderTop: '1px solid #d3f85a',
-              // borderRadius: 100,
+              width: "100%",
+              padding: "0 20px",
+              borderRadius: 20,
+              background: '#131313',
               color: '#8191B9',
             }}
             ActionsComponent={TablePaginationActions}

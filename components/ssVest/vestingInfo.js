@@ -1,5 +1,5 @@
 import { Paper, Typography } from "@mui/material";
-import classes from "./ssVest.module.css";
+import classes from "./vestingInfo.module.css";
 import moment from "moment";
 import { formatCurrency } from "../../utils";
 import BigNumber from "bignumber.js";
@@ -17,80 +17,76 @@ export default function VestingInfo({
 
   return (
     <div className={classes.vestInfoContainer}>
+      {currentNFT && (
+        <div className={classes.vestInfo}>
+          <div className={[classes.vestInfoTextWrap, (currentNFT && futureNFT) ? classes.vestInfoWithTag : ""].join(" ")}>
+            <div>Voting Power</div>
+
+            <div>
+              >{formatCurrency(currentNFT?.lockValue)}{" "}
+              <span>{veToken?.symbol}</span>
+            </div>
+
+            {currentNFT && futureNFT && (
+              <div className={classes.vestInfoTag}>before</div>
+            )}
+          </div>
+
+          <div className={[classes.vestInfoTextWrap, (currentNFT && futureNFT) ? classes.vestInfoWithTag : ""].join(" ")}>
+            <div>Vest Expires</div>
+            <div>
+              {moment.unix(currentNFT?.lockEnds).fromNow()} until{" "}
+              {moment.unix(currentNFT?.lockEnds).format("YYYY/MM/DD")}
+            </div>
+
+            {currentNFT && futureNFT && (
+              <div className={classes.vestInfoTag}>before</div>
+            )}
+          </div>
+        </div>
+      )}
+      {futureNFT && (
+        <div className={classes.vestInfo}>
+          <div className={[classes.vestInfoTextWrap, (currentNFT && futureNFT) ? classes.vestInfoWithTag : ""].join(" ")}>
+            <div>Voting Power</div>
+
+            <div>
+              {formatCurrency(futureNFT?.lockValue)}{" "}
+              <span>{veToken?.symbol}</span>
+            </div>
+
+            {currentNFT && futureNFT && (
+              <div className={[classes.vestInfoTag, classes.vestInfoTagFuture].join(" ")}>after</div>
+            )}
+          </div>
+
+          <div className={[classes.vestInfoTextWrap, (currentNFT && futureNFT) ? classes.vestInfoWithTag : ""].join(" ")}>
+            <div>Vest Expires</div>
+            <div>
+              {moment.unix(futureNFT?.lockEnds).fromNow()} until{" "}
+              {moment.unix(futureNFT?.lockEnds).format("YYYY/MM/DD")}
+            </div>
+
+            {currentNFT && futureNFT && (
+              <div className={[classes.vestInfoTag, classes.vestInfoTagFuture].join(" ")}>after</div>
+            )}
+          </div>
+        </div>
+      )}
+
       {showVestingStructure && (
         <div className={classes.seccondSection}>
-          {/*
-          <Typography className={[classes.info, classes[`info--${appTheme}`]].join(' ')} color="textSecondary">
-            1 {govToken?.symbol} locked for 4 years = 1.00 {veToken?.symbol}
-          </Typography>
-          <Typography className={[classes.info, classes[`info--${appTheme}`]].join(' ')} color="textSecondary">
-            1 {govToken?.symbol} locked for 3 years = 0.75 {veToken?.symbol}</Typography>
-          <Typography className={[classes.info, classes[`info--${appTheme}`]].join(' ')} color="textSecondary">
-            1 {govToken?.symbol} locked for 2 years = 0.50 {veToken?.symbol}</Typography>
-          */}
           <Typography
             className={[classes.info, classes[`info--${appTheme}`]].join(" ")}
             color="textSecondary"
           >
             <img src="/images/ui/info-circle-blue.svg" />
-            <span>1 {govToken?.symbol} locked for 1 year = 0.25 {veToken?.symbol}, 1 {govToken?.symbol} locked for 4 years = 1 {veToken?.symbol}</span>
+            <span>
+              1 {govToken?.symbol} locked for 1 year = 0.25 {veToken?.symbol}, 1{" "}
+              {govToken?.symbol} locked for 4 years = 1 {veToken?.symbol}
+            </span>
           </Typography>
         </div>
-      )}
-
-      {currentNFT && (
-        <>
-          <div className={classes.vestInfo}>
-            <div className={classes.vestInfoTextWrap}>
-              <div className={classes.vestInfoText}>
-                <Typography>Voting Power</Typography>
-
-                <Typography className={classes.amount}>
-                  >{formatCurrency(currentNFT?.lockValue)}{" "}
-                  <span>{veToken?.symbol}</span>
-                </Typography>
-              </div>
-
-              {currentNFT && futureNFT && <div className={classes.vestInfoTag}>now</div>}
-            </div>
-
-            <div className={classes.vestInfoTextWrap}>
-              <div className={classes.vestInfoText}>
-                <Typography>
-                  {/* {formatCurrency(currentNFT.lockAmount)} {govToken?.symbol} locked */}
-                  expires {moment.unix(currentNFT?.lockEnds).fromNow()} until {moment.unix(currentNFT?.lockEnds).format("YYYY/MM/DD")}
-                </Typography>
-              </div>
-            </div>
-          </div>
-        </>
-      )}
-      {futureNFT && (
-        <>
-          <div className={classes.vestInfo}>
-            <div className={classes.vestInfoTextWrap}>
-              <div className={classes.vestInfoText}>
-                <Typography>Voting Power</Typography>
-
-                <Typography className={classes.amount}>
-                  {formatCurrency(futureNFT?.lockValue)}{" "}
-                  <span >{veToken?.symbol}</span>
-                </Typography>
-              </div>
-
-              {currentNFT && futureNFT && <div className={classes.vestInfoTag}>will be</div>}
-            </div>
-
-            <div className={classes.vestInfoTextWrap}>
-              <div className={classes.vestInfoText}>
-                <Typography>
-                  {/* {formatCurrency(futureNFT.lockAmount)} {govToken?.symbol} locked */}
-                  expires {moment.unix(futureNFT?.lockEnds).fromNow()} until {moment.unix(futureNFT?.lockEnds).format("YYYY/MM/DD")}
-                </Typography>
-              </div>
-            </div>
-          </div>
-        </>
       )}
     </div>
   );
