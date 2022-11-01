@@ -604,32 +604,38 @@ p.labelSelectSecondary {
 }
 
 .tokenPopover_button {
-  margin-bottom: 12px;
-
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 16px;
-
+  margin-top: 20px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
   display: flex;
+  justify-content: center;
   align-items: center;
   flex-wrap: nowrap;
-  text-transform: uppercase;
   white-space: nowrap;
-
-  height: 40px;
-  padding: 0 16px;
-
-  border: 1px solid #779BF4;
+  height: 64px;
   border-radius: 12px;
-
-  background: rgba(119, 155, 244, 0.15);
-  color: #779BF4;
-
+  background: #7DB857;
+  color: #FFFFFF;
   cursor: pointer;
 }
 
-.tokenPopover_button img {
-  margin-right: 8px;
+.tokenPopover_button_secondary {
+  margin-top: 20px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  height: 64px;
+  background: rgba(177, 241, 227, 0.12);
+  border: 2px solid #B1F1E3;
+  border-radius: 12px;
+  color: #B1F1E3;
+  cursor: pointer;
 }
 
 .tokenPopover_button:last-child {
@@ -674,4 +680,62 @@ p.labelSelectSecondary {
   width: 24px;
   height: 24px;
   cursor: pointer;
+}
+
+.popoverBody {
+  display: flex;
+  flex-direction: column;
+}
+
+.tvAntenna {
+  height: 28px;
+}
+
+.realDialog {
+  box-shadow: none;
+  background: #EAE8E1 !important;
+  border-radius: 20px !important;
+}
+
+.dialogInner {
+  background: #131313;
+  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+}
+
+.rootPaper {
+  max-width: none !important;
+}
+
+.topScrollPaper {
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+}
+
+.paperBody {
+  width: 520px !important;
+  height: auto;
+  max-height: none !important;
+  margin: auto !important;
+  background: transparent !important;
+}
+
+.dialogScale {
+  max-width: 640px;
+  margin: auto;
+  text-align: center;
+}
+
+.dialogTokenRow {
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 52px;
+  color: #F6F7F9;
+}
+.dialogTokenRow img {
+  margin-right: 12px;
 }

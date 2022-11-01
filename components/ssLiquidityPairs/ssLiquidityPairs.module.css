@@ -21,19 +21,30 @@
 }
 
 .paginationSpacer {
+  flex: none !important;
 }
 
 .selectLabel {
-  font-size: 14px !important;
+  font-size: 16px !important;
   font-weight: 500 !important;
-  line-height: 14px !important;
+  line-height: 24px !important;
 
-  color: #8191b9 !important;
+  color: #9A9FAF !important;
 }
 
 .selectLabel + div {
   margin-right: 16px !important;
+  /*flex: 1;*/
+
 }
+/*.selectLabel + div > div {
+  justify-content: flex-start;
+  display: flex;
+}
+
+.selectLabel + div > input {
+  width: 100px;
+}*/
 
 .select {
   display: flex;
@@ -50,7 +61,7 @@
 }
 
 .selectIcon {
-  color: #779bf4 !important;
+  color: #B1F1E3 !important;
 }
 
 .input {
@@ -60,17 +71,25 @@
 }
 
 .displayedRows {
-  font-size: 14px !important;
-  font-weight: 400 !important;
-  line-height: 16px !important;
+  flex: 1;
+  justify-content: flex-end;
+  display: flex;
 
-  color: #8191b9 !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  line-height: 24px !important;
+
+  color: #9A9FAF !important;
 }
 
 .displayedRows + div button {
   border: none !important;
-  background-color: #1f2b49 !important;
-  color: #060b17 !important;
+  /*background-color: #1f2b49 !important;*/
+  color: #9A9FAF !important;
+}
+
+.displayedRows + div button[disabled] {
+  color: #353A42 !important;
 }
 
 .actions {
@@ -174,4 +193,60 @@
   position: absolute;
   right: 28px;
   top: 28px;
+}
+
+.dialogScale {
+  max-width: 640px;
+  margin: auto;
+  text-align: center;
+}
+
+.rootPaper {
+  max-width: none !important;
+}
+
+.topScrollPaper {
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+}
+
+.tvAntenna {
+  height: 28px;
+}
+
+.paperBody {
+  width: 520px !important;
+  height: auto;
+  max-height: none !important;
+  margin: auto !important;
+  background: transparent !important;
+}
+
+.realDialog {
+  box-shadow: none;
+  background: #EAE8E1 !important;
+  border-radius: 20px !important;
+}
+
+.dialogInner {
+  background: #131313;
+  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+}
+
+.apply {
+  background: #7DB857;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-top: 12px;
 }
