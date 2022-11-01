@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import {Button, CircularProgress, IconButton, InputBase, Paper, Tooltip, Typography,} from "@mui/material";
 import classes from "./ssVest.module.css";
+import classesLock from "./lock.module.css";
 import moment from "moment";
 import BigNumber from "bignumber.js";
 import {ArrowBackIosNew} from "@mui/icons-material";
@@ -10,6 +11,7 @@ import VestingInfo from "./vestingInfo";
 import {useAppThemeContext} from "../../ui/AppThemeProvider";
 import stores from "../../stores";
 import {ACTIONS} from "../../stores/constants";
+import Hint from '../hint/hint';
 
 export default function existingLock({ nft, govToken, veToken }) {
   const [futureNFT, setFutureNFT] = useState(null);
@@ -23,6 +25,15 @@ export default function existingLock({ nft, govToken, veToken }) {
   const [amount, setAmount] = useState("");
   const [approvalLoading, setApprovalLoading] = useState(false);
   const [amountError, setAmountError] = useState(false);
+
+  const [feeHintAnchor, setFeeHintAnchor] = React.useState(null);
+  const openFeeHint = Boolean(feeHintAnchor);
+  const handleClickFeePopover = (event) => {
+    setFeeHintAnchor(event.currentTarget);
+  };
+  const handleCloseFeePopover = () => {
+    setFeeHintAnchor(null);
+  };
 
   const router = useRouter();
 
@@ -164,75 +175,53 @@ export default function existingLock({ nft, govToken, veToken }) {
 
   function LockAmount({ govToken }) {
     return (
-      <div className={classes.textField}>
-        <div
-          className={`${classes.massiveInputContainer} ${
-            amountError && classes.error
-          }`}
-        >
-          <div className={classes.inputRow}>
-            <div className={classes.inputColumn}>
-              <Typography className={classes.inputTitleText} noWrap>
-                Lock
-              </Typography>
+      <div className={classesLock.textField}>
+        <div className={classesLock.textFieldRow}>
+          <div className={classesLock.textFieldColumn}>
+            <div className={classesLock.textFieldSelect}>
+              {govToken?.logoURI && (
+                <img
+                  className={classesLock.displayAssetIcon}
+                  alt=""
+                  src={govToken?.logoURI}
+                  height="52px"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
+                  }}
+                />
+              )}
+              {!govToken?.logoURI && (
+                <img
+                  className={classesLock.displayAssetIcon}
+                  alt=""
+                  src={`/tokens/unknown-logo--${appTheme}.svg`}
+                  height="52px"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
+                  }}
+                />
+              )}
 
-              <div className={classes.massiveInputAssetSelect}>
-                <div className={classes.displaySelectContainer}>
-                  <div className={classes.displayDualIconContainer}>
-                    {govToken?.logoURI && (
-                      <img
-                        className={classes.displayAssetIcon}
-                        alt=""
-                        src={govToken?.logoURI}
-                        height="100px"
-                        onError={(e) => {
-                          e.target.onerror = null;
-                          e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
-                        }}
-                      />
-                    )}
-                    {!govToken?.logoURI && (
-                      <img
-                        className={classes.displayAssetIcon}
-                        alt=""
-                        src={`/tokens/unknown-logo--${appTheme}.svg`}
-                        height="100px"
-                        onError={(e) => {
-                          e.target.onerror = null;
-                          e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
-                        }}
-                      />
-                    )}
-
-                    <Typography
-                      className={[
-                        classes.smallerText,
-                        classes[`smallerText--${appTheme}`],
-                      ].join(" ")}
-                    >
-                      {govToken?.symbol}
-                    </Typography>
-                  </div>
-                </div>
-              </div>
+              <p className={classesLock.textFieldSelectText}>
+                {govToken?.symbol}
+              </p>
             </div>
+          </div>
 
-            <div className={classes.inputColumn}>
-              <Typography
-                className={classes.inputBalanceText}
-                noWrap
-                onClick={() => {
-                  setAmountPercent(100);
-                }}
-              >
-                Balance:{" "}
+          <div className={classesLock.textFieldColumn}>
+            <div className={classesLock.textFieldInputWrapper}>
+              <div className={classesLock.textFieldBalance}>
+                <span>Balance:{" "}
                 {govToken?.balance
                   ? " " + formatCurrency(govToken?.balance)
-                  : ""}
-              </Typography>
+                  : ""}</span>
+                <span className={classesLock.textFieldBalanceMax} onClick={() => { setAmountPercent(100); }}>Max</span>
+              </div>
 
               <InputBase
-                className={classes.massiveInputAmount}
+                className={classesLock.textFieldInput}
                 placeholder="0.00"
                 autoFocus={true}
                 error={amountError}
@@ -241,7 +230,7 @@ export default function existingLock({ nft, govToken, veToken }) {
                 onChange={amountChanged}
                 disabled={lockLoading}
                 inputProps={{
-                  className: classes.largeInput,
+                  className: classesLock.largeInput,
                 }}
                 InputProps={{
                   disableUnderline: true,
@@ -261,179 +250,182 @@ export default function existingLock({ nft, govToken, veToken }) {
     }
 
     return (
-      <div className={classes.setDateRow}>
-        <div
-          className={[
-            classes.vestPeriodToggle,
-            "g-flex",
-            "g-flex--align-center",
-            "g-flex--space-between",
-          ].join(" ")}
-        >
+      <div className={classesLock.setDateRow}>
+        <div className={[classesLock.periodToggle, 'g-flex', 'g-flex--align-center'].join(' ')}>
           <div
-            className={[
-              classes.vestPeriodLabel,
-              classes[
-                `vestPeriodLabel--${selectedValue === "week" ? "checked" : ""}`
-              ],
-            ].join(" ")}
+            className={[classesLock.periodToggleItem, classesLock[`periodToggleItem--${selectedValue === 'week' ? 'checked' : ''}`]].join(' ')}
             onClick={() => handleChange("week")}
           >
             1 week
           </div>
 
           <div
-            className={[
-              classes.vestPeriodLabel,
-              classes[
-                `vestPeriodLabel--${selectedValue === "month" ? "checked" : ""}`
-              ],
-            ].join(" ")}
+            className={[classesLock.periodToggleItem, classesLock[`periodToggleItem--${selectedValue === 'month' ? 'checked' : ''}`]].join(' ')}
             onClick={() => handleChange("month")}
           >
             1 month
           </div>
 
           <div
-            className={[
-              classes.vestPeriodLabel,
-              classes[
-                `vestPeriodLabel--${selectedValue === "year" ? "checked" : ""}`
-              ],
-            ].join(" ")}
+            className={[classesLock.periodToggleItem, classesLock[`periodToggleItem--${selectedValue === 'year' ? 'checked' : ''}`]].join(' ')}
             onClick={() => handleChange("year")}
           >
             1 year
           </div>
 
           <div
-            className={[
-              classes.vestPeriodLabel,
-              classes[
-                `vestPeriodLabel--${selectedValue === "years" ? "checked" : ""}`
-              ],
-            ].join(" ")}
+            className={[classesLock.periodToggleItem, classesLock[`periodToggleItem--${selectedValue === 'years' ? 'checked' : ''}`]].join(' ')}
             onClick={() => handleChange("years")}
           >
             4 years
           </div>
         </div>
 
-        <div
-          className={[
-            classes.lockDateRow,
-            `${amountError && classes.error}`,
-          ].join(" ")}
-        >
-          <div className={classes.lockDateWrapper}>
-            <Typography className={classes.smallerTextDate}>
-              Set Lock Expiry Date
-            </Typography>
+        <div className={classesLock.lockDateWrapper}>
+          <InputBase
+            className={classesLock.massiveInputAmountDate}
+            id="someDate"
+            type="date"
+            placeholder="Set Lock Expiry Date"
+            error={amountError}
+            helperText={amountError}
+            value={selectedDate}
+            onChange={handleDateChange}
+            disabled={lockLoading}
+            inputProps={{
+              className: classesLock.dateInput,
+              min: moment().add(7, "days").format("YYYY-MM-DD"),
+              max: moment().add(1460, "days").format("YYYY-MM-DD"),
+            }}
+            InputProps={{
+              disableUnderline: true,
+            }}
+          />
 
-            <InputBase
-              className={classes.massiveInputAmountDate}
-              id="someDate"
-              type="date"
-              placeholder="Set Lock Expiry Date"
-              error={amountError}
-              helperText={amountError}
-              value={selectedDate}
-              onChange={handleDateChange}
-              disabled={lockLoading}
-              inputProps={{
-                className: classes.dateInput,
-                min: moment().add(7, "days").format("YYYY-MM-DD"),
-                max: moment().add(1460, "days").format("YYYY-MM-DD"),
-              }}
-              InputProps={{
-                disableUnderline: true,
-              }}
-            />
-          </div>
+          <div className={classesLock.lockDateText}>Lock Expiry Date</div>
         </div>
       </div>
     );
   }
 
+  const isButtonDisabled = lockLoading || (futureNFT && futureNFT.lockEnds <= nft.lockEnds);
+
   return (
-    <Paper
-      elevation={0}
-      className={[classes.container3, classes["g-flex-column"]].join(" ")}
-    >
-      <p className={classes.pageTitle}>
-        <div className={classes.titleSection}>
-          <Tooltip title="Back to Vest" placement="top">
-            <IconButton onClick={onBack}>
-              <div className={classes.backIconWrap}>
-                <ArrowBackIosNew className={classes.backIcon} />
-              </div>
-            </IconButton>
-          </Tooltip>
-          <p>Back to Vest</p>
+    <>
+      <div className={classesLock.tnavWrapper}>
+        <div className={classesLock.tnav}>
+          <span className={classesLock.tnavItem} onClick={onBack}>Vest</span>
+          <span className={classesLock.tnavItemActive}>Edit Lock</span>
+        </div>
+      </div>
+    
+      <div className={classesLock.formWrapper}>
+        <div className={classesLock.title}>
+          <span>Edit Lock</span>
         </div>
 
-        <span>Edit Lock</span>
-      </p>
+        <div className={classesLock.mainBody}>
+          <LockAmount govToken={govToken} updateLockAmount={updateLockAmount} />
 
-      <div className={classes.reAddPadding3}>
-        <LockAmount govToken={govToken} updateLockAmount={updateLockAmount} />
+          <LockDuration
+            nft={nft}
+            govToken={govToken}
+            veToken={veToken}
+            updateLockDuration={updateLockDuration}
+          />
 
-        <LockDuration
-          nft={nft}
-          govToken={govToken}
-          veToken={veToken}
-          updateLockDuration={updateLockDuration}
-        />
+          <p className={classesLock.infoText}>Lock period should be multiples of 1 week (e.g. 28, 35, 42 days, etc.)</p>
+          <p className={classesLock.infoText}>
+            <span>Do you have a referral code?</span>
+            <Hint
+              hintText={'You wil get +10% APR for your Vest Rewardds by using the referral code.'}
+              open={openFeeHint}
+              anchor={feeHintAnchor}
+              handleClick={handleClickFeePopover}
+              handleClose={handleCloseFeePopover}
+              fill="#586586"
+              iconComponent={<img src="/images/ui/info-circle-gray.svg" width="12px" />}
+            />
+          </p>
+          {/* TODO: referal input */}
+          <InputBase
+            className={classesLock.referalField}
+            placeholder="Referral code"
+            // error={amountError}
+            // helperText={amountError}
+            // value={amountValue}
+            // onChange={amountChanged}
+            // disabled={lockLoading}
+            inputProps={{
+              className: classesLock.referalInput,
+            }}
+            InputProps={{
+              disableUnderline: true,
+            }}
+          />
+        </div>
 
         <VestingInfo
-            govToken={govToken}
+          govToken={govToken}
           currentNFT={nft}
           futureNFT={futureNFT}
           veToken={veToken}
-          showVestingStructure={true}
+          showVestingStructure={false}
         />
+
+        {futureNFT && futureNFT.lockEnds <= nft.lockEnds && (
+          <div className={classesLock.warningContainer}>
+            <img src="/images/ui/info-circle-gray.svg" width="18px" className={classesLock.warningIcon} />
+            <p className={classesLock.warningText}>You can only add the Vest Amount or Vest Duration</p>
+          </div>
+        )}
+
+        <div className={[classesLock.controls, classesLock.editLockControls].join(" ")}>
+          <div className={classesLock.controlsButtons}>
+            <Button
+              className={[
+                classesLock.button,
+                isButtonDisabled ? classesLock.buttonDisabled : "",
+              ]}
+              variant="contained"
+              size="large"
+              color="primary"
+              disabled={isButtonDisabled}
+              onClick={onLockAmount}
+            >
+              <span>
+                {lockLoading ? `Increasing Lock Amount` : `Increase Lock Amount`}
+              </span>
+
+              {lockLoading && (
+                <CircularProgress size={10} className={classes.loadingCircle} />
+              )}
+            </Button>
+
+            <Button
+              className={[
+                classesLock.button,
+                isButtonDisabled ? classesLock.buttonDisabled : "",
+              ]}
+              variant="contained"
+              size="large"
+              color="primary"
+              disabled={isButtonDisabled}
+              onClick={onLock}
+            >
+              <span>{lockLoading ? `Increasing Duration` : `Increase Duration`}</span>
+              {lockLoading && (
+                <CircularProgress size={10} className={classes.loadingCircle} />
+              )}
+            </Button>
+          </div>
+
+          <div className={classesLock.controlsInfo}>
+            1 {govToken?.symbol} locked for 1 year = 0.25 {veToken?.symbol}, 1{" "}
+            {govToken?.symbol} locked for 4 years = 1 {veToken?.symbol}
+          </div>
+        </div>
       </div>
-
-      <Button
-        className={[
-          classes.buttonOverride,
-          lockLoading ? classes.buttonOverrideDisabled : "",
-        ]}
-        fullWidth
-        variant="contained"
-        size="large"
-        color="primary"
-        disabled={lockLoading}
-        onClick={onLockAmount}
-      >
-        <Typography className={classes.actionButtonText}>
-          {lockLoading ? `Increasing Lock Amount` : `Increase Lock Amount`}
-        </Typography>
-
-        {lockLoading && (
-          <CircularProgress size={10} className={classes.loadingCircle} />
-        )}
-      </Button>
-
-      <Button
-        className={[
-          classes.buttonOverride,
-          classes[`buttonOverride--${appTheme}`],
-        ].join(" ")}
-        fullWidth
-        variant="contained"
-        size="large"
-        color="primary"
-        disabled={lockLoading}
-        onClick={onLock}
-      >
-        <Typography className={classes.actionButtonText}>
-          {lockLoading ? `Increasing Duration` : `Increase Duration`}
-        </Typography>
-        {lockLoading && (
-          <CircularProgress size={10} className={classes.loadingCircle} />
-        )}
-      </Button>
-    </Paper>
+    </>
   );
 }

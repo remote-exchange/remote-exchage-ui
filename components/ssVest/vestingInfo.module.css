@@ -1,0 +1,223 @@
+.vestInfoContainer {
+  margin-bottom: 20px;
+}
+
+@media (max-width: 767px) {
+  .vestInfoContainer {
+    margin-bottom: 12px;
+  }
+}
+
+.vestInfo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.vestInfo + .vestInfo {
+  margin-top: 20px;
+}
+
+@media (max-width: 767px) {
+  .vestInfo + .vestInfo {
+    margin-top: 12px;
+  }
+}
+
+.vestInfoTextWrap {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: calc(50% - 6px);
+  min-height: 48px;
+
+  padding: 12px;
+
+  font-family: "PT Root UI";
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+
+  border: 1px solid rgba(104, 114, 122, 0.4);
+  border-radius: 12px;
+}
+
+@media (max-width: 767px) {
+  .vestInfoTextWrap {
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 52px;
+    padding: 8px;
+    font-size: 12px;
+    line-height: 16px;
+  }
+}
+
+.vestInfoTextWrap > div:first-child {
+  color: #68727a;
+}
+
+@media (max-width: 767px) {
+  .vestInfoTextWrap > div:first-child {
+    margin-bottom: 4px;
+  }
+}
+
+.vestInfoTextWrap > div:last-child {
+  color: #353a42;
+}
+
+.vestInfoTextWrap:first-child::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: 12px;
+  height: 1px;
+  background-color: rgba(104, 114, 122, 0.4);
+}
+
+.amount {
+}
+
+.vestInfoTag {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+
+  width: 70px;
+  height: 100%;
+
+  font-family: "PT Root UI";
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  white-space: nowrap;
+
+  border-radius: 12px;
+
+  background: #68727a;
+  color: #f6f7f9 !important;
+}
+
+@media (max-width: 767px) {
+  .vestInfoTag {
+    padding: 4px 8px;
+    width: 45px;
+    height: 20px;
+    font-size: 10px;
+    line-height: 12px;
+    border-radius: 0px 12px;
+  }
+}
+
+.vestInfoWithTag {
+  padding-right: 82px;
+}
+
+@media (max-width: 767px) {
+  .vestInfoWithTag {
+    padding-right: 45px;
+  }
+}
+
+.vestInfoTagFuture {
+  background: #7db857;
+}
+
+/*
+  
+  @media (max-width: 767px) {
+    .vestInfo {
+      flex-direction: column;
+    }
+  }
+  
+  .vestInfoTextWrap {
+    position: relative;
+    
+    padding: 8px 28px;
+  }
+  
+  @media (max-width: 767px) {
+    .vestInfoTextWrap {
+      width: 100%;
+      padding: 8px 0;
+    }
+  }
+  
+  .vestInfoTextWrap:first-child,
+  .vestInfoTextWrap:last-child {
+    border-top: 1px solid #8191B9;
+    border-bottom: 1px solid #8191B9;
+  }
+  
+  @media (max-width: 767px) {
+    .vestInfoTextWrap:last-child {
+      border-top: none;
+    }
+  }
+  
+  .vestInfoTextWrap:first-child::after {
+    content: '';
+  
+    position: absolute;
+  
+    top: 8px;
+    bottom: 8px;
+    right: 0;
+  
+    width: 1px;
+  
+    background: #8191B9;
+  }
+  
+  @media (max-width: 767px) {
+    .vestInfoTextWrap:first-child::after {
+      content: none;
+    }
+  }
+  
+  .vestInfoTextWrap:last-child {
+    justify-content: center;
+  }
+  
+  @media (max-width: 767px) {
+    .vestInfoTextWrap:last-child {
+      justify-content: flex-start;
+    }
+  }
+  
+  .vestInfoText p {
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0 !important;
+    line-height: 150% !important;
+    color: #E4E9F4 !important;
+  }
+  
+  .vestInfoTag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    height: 24px;
+    padding: 0 10px;
+  
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+  
+    color: #E4E9F4;
+  
+    border-radius: 100px;
+  
+    background: #586586;
+  } */

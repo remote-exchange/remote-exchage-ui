@@ -93,7 +93,7 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-const headCells = [
+const headCells = [ 
   {
     id: 'NFT',
     numeric: false,
@@ -112,7 +112,7 @@ const headCells = [
     id: 'Lock Value',
     numeric: true,
     disablePadding: false,
-    label: 'Vest Value',
+    label: 'Voting Power',
   },
   {
     id: 'Lock Expires',
@@ -153,17 +153,17 @@ const sortIcon = (sortDirection) => {
   return (
       <>
         <svg
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            style={{
-              transform: sortDirection === 'desc' ? 'rotate(180deg)' : 'rotate(0deg)',
-            }}
-            xmlns="http://www.w3.org/2000/svg">
-          <path
-              d="M5.83325 8.33337L9.99992 12.5L14.1666 8.33337H5.83325Z"
-              fill={appTheme === 'dark' ? '#5F7285' : '#9BC9E4'}/>
+          style={{
+            marginRight: 10,
+            transform: sortDirection === 'desc' ? 'rotate(0deg)' : 'rotate(180deg)',
+          }}
+          width="11"
+          height="13"
+          viewBox="0 0 11 13"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M5.5 1.66663L4.79289 0.959519L5.5 0.252412L6.20711 0.959519L5.5 1.66663ZM6.5 11.6666C6.5 12.2189 6.05229 12.6666 5.5 12.6666C4.94772 12.6666 4.5 12.2189 4.5 11.6666L6.5 11.6666ZM0.792893 4.95952L4.79289 0.959519L6.20711 2.37373L2.20711 6.37373L0.792893 4.95952ZM6.20711 0.959519L10.2071 4.95952L8.79289 6.37373L4.79289 2.37373L6.20711 0.959519ZM6.5 1.66663L6.5 11.6666L4.5 11.6666L4.5 1.66663L6.5 1.66663Z" fill="#353A42"/>
         </svg>
       </>
   );
@@ -464,13 +464,13 @@ const EnhancedTableToolbar = (props) => {
         <div className={[css.controls, 'g-flex', 'g-flex--align-baseline'].join(' ')}>
           <div className={css.toolbarInfoContainer}>
             <div className={css.toolbarInfo}>
-              Lock CONE to earn voting power, rewards and boost your LP rewards.
+              Lock NF to get voting power, staking rewards, and Boost on your LP rewards.
             </div>
           </div>
 
           <div className={css.aprButton}>
             <span>{parseInt(props.veToken?.veDistApr)}%</span>
-            <span>veCONE Rewards APR:</span>
+            <span>veNF Rewards APR</span>
           </div>
 
           <div
@@ -630,36 +630,48 @@ export default function EnhancedTable({vestNFTs, govToken, veToken}) {
                             </StickyTableCell>
 
                             <TableCell className={css.cell}>
-                              <div className={css.itemTitle}>
-                                {formatCurrency(row.lockAmount)}
-                              </div>
+                              <div className={css.cellContentInRow}>
+                                <div className={css.itemTitle}>
+                                  {formatCurrency(row.lockAmount)}
+                                </div>
 
-                              <div className={css.itemText}>
-                                {govToken?.symbol}
+                                <div className={css.itemText}>
+                                  {govToken?.symbol}
+                                </div>
                               </div>
                             </TableCell>
 
                             <TableCell className={css.cell}>
-                              <div className={css.itemTitle}>
-                                {formatCurrency(row.lockValue)}
-                              </div>
+                              <div className={css.cellContentInRow}>
+                                <div className={css.itemTitle}>
+                                  {formatCurrency(row.lockValue)}
+                                </div>
 
-                              <div className={css.itemText}>
-                              {veToken?.symbol}
-                            </div>
+                                <div className={css.itemText}>
+                                  {veToken?.symbol}
+                                </div>
+                              </div>
                             </TableCell>
 
                             <TableCell className={css.cell}>
-                              <div className={css.itemTitle}>
-                                {moment.unix(row.lockEnds).format('YYYY-MM-DD')}
-                              </div>
+                              <div style={{ display: 'flex', justifyContent: 'center'}}>
+                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', width: 200, maxWidth: '100%' }}>
+                                  <div className={css.itemTitle}>
+                                    {moment.unix(row.lockEnds).format('YYYY-MM-DD')}
+                                  </div>
 
-                              <div className={css.itemText}>
-                                {(BigNumber(row.lockEnds).lt(moment().unix()) &&
-                                  BigNumber(row.lockEnds).gt(0))
-                                    ? `Expired ${moment.unix(row.lockEnds).fromNow()}`
-                                    : `Expires ${moment.unix(row.lockEnds).fromNow()}`
-                                }
+                                  <div className={css.itemTitle}>
+                                    {(BigNumber(row.lockEnds).lt(moment().unix()) &&
+                                      BigNumber(row.lockEnds).gt(0)) && (
+                                        <img src="/images/ui/info-circle-yellow.svg" width="18px" style={{ marginRight: 10 }} />
+                                      )}
+                                    {(BigNumber(row.lockEnds).lt(moment().unix()) &&
+                                      BigNumber(row.lockEnds).gt(0))
+                                        ? `Expired ${moment.unix(row.lockEnds).fromNow()}`
+                                        : `Expires ${moment.unix(row.lockEnds).fromNow()}`
+                                    }
+                                  </div>
+                                </div>
                               </div>
                             </TableCell>
 
@@ -782,7 +794,7 @@ export default function EnhancedTable({vestNFTs, govToken, veToken}) {
                             style={{
                               display: "flex",
                               alignItems: "center",
-                              width: 69,
+                              width: 79,
                               height: 36,
                               padding: "8px 16px",
                               fontSize: 14,
@@ -800,7 +812,11 @@ export default function EnhancedTable({vestNFTs, govToken, veToken}) {
                               onView(row);
                             }}
                           >
-                            Edit
+                            {(BigNumber(row.lockEnds).lt(moment().unix()) &&
+                                  BigNumber(row.lockEnds).gt(0))
+                                    ? 'Withdraw'
+                                    : 'Edit'
+                                }
                           </Button>
                         </div>
 
@@ -825,7 +841,7 @@ export default function EnhancedTable({vestNFTs, govToken, veToken}) {
 
                                     {headCell.id === 'Lock Expires' ? (
                                       <div className={[classes.cellHeadPaddings, 'g-flex'].join(' ')}>
-                                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+                                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', textAlign: 'right' }}>
                                           <div className={css.itemTitle} style={{ marginBottom: 4 }}>
                                             {moment.unix(row.lockEnds).format('YYYY-MM-DD')}
                                           </div>

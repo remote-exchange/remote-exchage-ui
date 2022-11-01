@@ -61,6 +61,17 @@
   border-radius: 12px;
 
   background: #7DB857;
+  cursor: pointer;
+}
+
+.addButton:hover,
+.addButtonMobile:hover {
+  background: #92CB6D;
+}
+
+.addButton:active,
+.addButtonMobile:active {
+  background: #60A434;
 }
 
 @media (max-width: 991px) {
@@ -136,6 +147,7 @@
 
   background: #131313;
   color: #B1F1E3;
+  cursor: pointer;
 }
 
 @media (max-width: 991px) {
@@ -352,6 +364,20 @@
   border-right: none;
 }
 
+.cellContentInRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cellContentInRow .itemTitle {
+  margin-bottom: 0;
+}
+
+.cellContentInRow .itemTitle + .itemText {
+  margin-left: 8px;
+}
+
 .vaultSourceTitle {
   margin-bottom: 4px;
   font-family: 'PT Root UI';
@@ -391,6 +417,10 @@
   }
 }
 
+.itemTitle:last-child {
+  margin-bottom: 0;
+}
+
 .itemText {
   font-family: 'PT Root UI';
   font-style: normal;
@@ -425,8 +455,19 @@
   border: 1px solid #7DB857 !important;
   border-radius: 8px !important;
 
-  background: rgba(125, 184, 87, 0.12);
+  background: rgba(125, 184, 87, 0.12) !important;
   color: #7DB857 !important;
+}
+
+.action:hover {
+  background: rgba(125, 184, 87, 0.4) !important;
+  border: 1px solid #7DB857 !important;
+}
+
+.action:active {
+  background: #7DB857 !important;
+  border: 1px solid #7DB857 !important;
+  color: #131313 !important;
 }
 
 /* table */

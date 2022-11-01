@@ -29,6 +29,27 @@ import { formatSymbol } from "../../utils";
 import css from './ssRewardsTable.module.css';
 import {descendingComparator, getComparator, stableSort, headCells} from "./reward-ui-utils";
 
+const sortIcon = (sortDirection) => {
+  const {appTheme} = useAppThemeContext();
+
+  return (
+      <>
+        <svg
+          style={{
+            marginRight: 10,
+            transform: sortDirection === 'desc' ? 'rotate(0deg)' : 'rotate(180deg)',
+          }}
+          width="11"
+          height="13"
+          viewBox="0 0 11 13"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M5.5 1.66663L4.79289 0.959519L5.5 0.252412L6.20711 0.959519L5.5 1.66663ZM6.5 11.6666C6.5 12.2189 6.05229 12.6666 5.5 12.6666C4.94772 12.6666 4.5 12.2189 4.5 11.6666L6.5 11.6666ZM0.792893 4.95952L4.79289 0.959519L6.20711 2.37373L2.20711 6.37373L0.792893 4.95952ZM6.20711 0.959519L10.2071 4.95952L8.79289 6.37373L4.79289 2.37373L6.20711 0.959519ZM6.5 1.66663L6.5 11.6666L4.5 11.6666L4.5 1.66663L6.5 1.66663Z" fill="#353A42"/>
+        </svg>
+      </>
+  );
+};
 
 const StickyTableCell = styled(TableCell)(({ theme, appTheme }) => ({
   color: appTheme === "dark" ? "#C6CDD2 !important" : "#325569 !important",
@@ -74,6 +95,7 @@ function EnhancedTableHead(props) {
                   active={orderBy === headCell.id}
                   direction={orderBy === headCell.id ? order : "asc"}
                   onClick={createSortHandler(headCell.id)}
+                  IconComponent={() => orderBy === headCell.id ? sortIcon(order) : null}
                 >
                   <div className={css.headerText}>{headCell.label}</div>
                 </TableSortLabel>
@@ -89,8 +111,8 @@ function EnhancedTableHead(props) {
                 <TableSortLabel
                   active={orderBy === headCell.id}
                   direction={orderBy === headCell.id ? order : "asc"}
-                  IconComponent={ArrowDropDown}
                   onClick={createSortHandler(headCell.id)}
+                  IconComponent={() => orderBy === headCell.id ? sortIcon(order) : null}
                 >
                   <div className={css.headerText}>{headCell.label}</div>
                 </TableSortLabel>

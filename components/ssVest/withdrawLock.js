@@ -15,6 +15,7 @@ import { ArrowBackIosNew } from "@mui/icons-material";
 import { formatCurrency, formatInputAmount } from "../../utils";
 import VestingInfo from "./vestingInfo";
 import { useAppThemeContext } from "../../ui/AppThemeProvider";
+import classesLock from "./lock.module.css";
 
 export function WithdrawLock({ nft, govToken, veToken }) {
   const [futureNFT, setFutureNFT] = useState(null);
@@ -57,7 +58,7 @@ export function WithdrawLock({ nft, govToken, veToken }) {
       .toFixed(18);
 
     setFutureNFT(tmpNFT);
-  }
+  };
 
   const setAmountPercent = (percent) => {
     const val = BigNumber(govToken.balance)
@@ -78,59 +79,45 @@ export function WithdrawLock({ nft, govToken, veToken }) {
 
   function LockAmount({ govToken }) {
     return (
-      <div className={classes.textField}>
-        <div className={`${classes.massiveInputContainer} ${amountError && classes.error}`}>
-          <div className={classes.inputRow}>
-            <div className={classes.inputColumn}>
-              <Typography className={classes.inputTitleText} noWrap>
-                Lock
-              </Typography>
+      <div className={classesLock.textField}>
+        <div className={classesLock.textFieldRow}>
+          <div className={classesLock.textFieldColumn}>
+            <div className={classesLock.textFieldSelect}>
+              {govToken?.logoURI && (
+                <img
+                  className={classes.displayAssetIcon}
+                  alt=""
+                  src={govToken?.logoURI}
+                  height="52px"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
+                  }}
+                />
+              )}
+              {!govToken?.logoURI && (
+                <img
+                  className={classes.displayAssetIcon}
+                  alt=""
+                  src={`/tokens/unknown-logo--${appTheme}.svg`}
+                  height="52px"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
+                  }}
+                />
+              )}
 
-              <div className={classes.massiveInputAssetSelect}>
-                <div className={classes.displaySelectContainer}>
-                  <div className={classes.displayDualIconContainer}>
-                    {govToken?.logoURI && (
-                      <img
-                        className={classes.displayAssetIcon}
-                        alt=""
-                        src={govToken?.logoURI}
-                        height="100px"
-                        onError={(e) => {
-                          e.target.onerror = null;
-                          e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
-                        }}
-                      />
-                    )}
-                    {!govToken?.logoURI && (
-                      <img
-                        className={classes.displayAssetIcon}
-                        alt=""
-                        src={`/tokens/unknown-logo--${appTheme}.svg`}
-                        height="100px"
-                        onError={(e) => {
-                          e.target.onerror = null;
-                          e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
-                        }}
-                      />
-                    )}
-
-                    <Typography
-                      className={[
-                        classes.smallerText,
-                        classes[`smallerText--${appTheme}`],
-                      ].join(" ")}
-                    >
-                      {govToken?.symbol}
-                    </Typography>
-                  </div>
-                </div>
-              </div>
+              <p className={classesLock.textFieldSelectText}>
+                {govToken?.symbol}
+              </p>
             </div>
+          </div>
 
-            <div className={classes.inputColumn}>
-              <Typography
-                className={classes.inputBalanceText}
-                noWrap
+          <div className={classesLock.textFieldColumn}>
+            <div className={classesLock.textFieldInputWrapper}>
+              <div
+                className={classesLock.textFieldBalance}
                 onClick={() => {
                   setAmountPercent(100);
                 }}
@@ -139,10 +126,10 @@ export function WithdrawLock({ nft, govToken, veToken }) {
                 {govToken?.balance
                   ? " " + formatCurrency(govToken?.balance)
                   : ""}
-              </Typography>
+              </div>
 
               <InputBase
-                className={classes.massiveInputAmount}
+                className={classesLock.textFieldInput}
                 placeholder="0.00"
                 autoFocus={true}
                 error={amountError}
@@ -151,7 +138,7 @@ export function WithdrawLock({ nft, govToken, veToken }) {
                 onChange={amountChanged}
                 disabled={lockLoading}
                 inputProps={{
-                  className: classes.largeInput,
+                  className: classesLock.largeInput,
                 }}
                 InputProps={{
                   disableUnderline: true,
@@ -165,37 +152,38 @@ export function WithdrawLock({ nft, govToken, veToken }) {
   }
 
   return (
-    <Paper
-      elevation={0}
-      className={[classes.container3, classes["g-flex-column"]].join(" ")}
-    >
-      <p className={classes.pageTitle}>
-        <div className={classes.titleSection}>
-          <Tooltip title="Back to Vest" placement="top">
-            <IconButton onClick={onBack}>
-              <div className={classes.backIconWrap}>
-                <ArrowBackIosNew className={classes.backIcon} />
-              </div>
-            </IconButton>
-          </Tooltip>
-          <p>Back to Vest</p>
+    <>
+      <div className={classesLock.tnavWrapper}>
+        <div className={classesLock.tnav}>
+          <span className={classesLock.tnavItem} onClick={onBack}>
+            Vest
+          </span>
+          <span className={classesLock.tnavItemActive}>Withdraw Lock</span>
+        </div>
+      </div>
+
+      <div className={classesLock.formWrapper}>
+        <div className={classesLock.title}>
+          <span>Withdraw Lock</span>
         </div>
 
-        <span>Withdraw Lock</span>
-      </p>
+        {/* TODO: 1234 */}
+        <div className={classesLock.warningContainer}>
+          <img
+            src="/images/ui/info-circle-gray.svg"
+            width="18px"
+            className={classesLock.warningIcon}
+          />
+          <p className={classesLock.warningText}>
+            veCONE NFT #1234 has expired, to continue receiving boosted rewards
+            you must unstake the expired veCONE NFT from your LP and stake one
+            that is currently locked.
+          </p>
+        </div>
 
-      <div className={classes.reAddPadding3}>
-        <LockAmount govToken={govToken} />
-
-        <Typography className={[classes.info, classes.infoWarning].join(" ")} color="textSecondary">
-          <img src="/images/ui/info-circle-yellow.svg" />
-          <span>veCONE NFT #1234 has expired, to continue receiving boosted rewards you must unstake the expired veCONE NFT from your LP and stake one that is currently locked.</span>
-        </Typography>
-
-        <Typography className={[classes.info, classes.infoError].join(" ")} color="textSecondary">
-          <img src="/images/ui/info-circle-red.svg" />
-          <span>Please reset votes connected with #1234 NFT before withdrawing!</span>
-        </Typography>
+        <div className={classesLock.mainBody}>
+          <LockAmount govToken={govToken} />
+        </div>
 
         <VestingInfo
           currentNFT={nft}
@@ -203,28 +191,43 @@ export function WithdrawLock({ nft, govToken, veToken }) {
           veToken={veToken}
           showVestingStructure={false}
         />
+
+        {/* TODO: 1234 */}
+        <div className={classesLock.warningContainer}>
+          <img
+            src="/images/ui/info-circle-gray.svg"
+            width="18px"
+            className={classesLock.warningIcon}
+          />
+          <p className={classesLock.warningText}>
+            Please reset votes connected with #1234 NFT before withdrawing!
+          </p>
+        </div>
+
+        <div className={classesLock.controls}>
+          <div className={classesLock.controlsButtons}>
+            <Button
+              className={classesLock.button}
+              variant="contained"
+              size="large"
+              color="primary"
+            >
+              <span>Reset Votes for #1234 NFT</span>
+            </Button>
+            <Button
+              className={[classesLock.button, classesLock.buttonDisabled].join(
+                " "
+              )}
+              variant="contained"
+              size="large"
+              color="primary"
+              disabled={true}
+            >
+              <span>Withdraw NFT</span>
+            </Button>
+          </div>
+        </div>
       </div>
-
-      <Button
-        className={classes.buttonOverride}
-        fullWidth
-        variant="contained"
-        size="large"
-        color="primary"
-      >
-        <Typography className={classes.actionButtonText}>Reset Votes for #1234 NFT</Typography>
-      </Button>
-
-      <Button
-        className={[classes.buttonOverride, classes.buttonOverrideDisabled].join(" ")}
-        fullWidth
-        variant="contained"
-        size="large"
-        color="primary"
-        disabled={true}
-      >
-        <Typography className={classes.actionButtonText}>Withdraw CONE</Typography>
-      </Button>
-    </Paper>
+    </>
   );
 }

@@ -2,6 +2,8 @@ import React from "react";
 import { useRouter } from "next/router";
 import { Paper, Typography, IconButton, Tooltip, Button } from "@mui/material";
 import classes from "./ssVest.module.css";
+
+import classesLock from "./lock.module.css";
 import classesMerge from "./mergeLock.module.css";
 import { ArrowBackIosNew } from "@mui/icons-material";
 import { NFTSelect } from "../../ui/NFTSelect";
@@ -19,7 +21,7 @@ export function MergeLock() {
         <div className={[classesMerge.inputCol, classesMerge.inputMergeCol].join(" ")}>
           <div className={classesMerge.inputWrapper}>
             <Typography className={classesMerge.inputTitleText} noWrap>
-              1st NFT
+              1st NFT:
             </Typography>
 
             <NFTSelect text="Select 1st NFT" />
@@ -35,7 +37,7 @@ export function MergeLock() {
         <div className={[classesMerge.inputCol, classesMerge.inputMergeCol].join(" ")}>
           <div className={classesMerge.inputWrapper}>
             <Typography className={classesMerge.inputTitleText} noWrap>
-              2nd NFT
+              2nd NFT:
             </Typography>
 
             <NFTSelect text="Select 2nd NFT" />
@@ -46,11 +48,10 @@ export function MergeLock() {
   }
 
   return (
-    <Paper
-      elevation={0}
-      className={[classes.container3, classes["g-flex-column"]].join(" ")}
-    >
-      <p className={classes.pageTitle}>
+    <div className={classesLock.formWrapper}>
+      <div className={classesLock.title}>
+        <span>Merge NFTs</span>
+
         <div className={classes.titleSection}>
           <Tooltip title="Back to Vest" placement="top">
             <IconButton onClick={onBack}>
@@ -61,11 +62,9 @@ export function MergeLock() {
           </Tooltip>
           <p>Back to Vest</p>
         </div>
+      </div>
 
-        <span>Merge NFTs</span>
-      </p>
-
-      <div className={classes.reAddPadding3}>
+      <div className={classesLock.mainBody}>
         <NFTItem />
       </div>
 
@@ -122,6 +121,6 @@ export function MergeLock() {
           Select NFTs to merge
         </Typography>
       </Button>
-    </Paper>
+    </div>
   );
 }

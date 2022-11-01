@@ -13,6 +13,8 @@ import {
 } from "@mui/material";
 import { ArrowBackIosNew, Close, Search } from "@mui/icons-material";
 import classes from "./vest.module.css";
+import classesMerge from "./merge.module.css";
+import classesLock from "../../../components/ssVest/lock.module.css";
 import { useRouter } from "next/router";
 import Form from "../../../ui/MigratorForm";
 import stores from "../../../stores";
@@ -42,14 +44,14 @@ const renderOptions = (data, callbackClick) => {
           autoFocus
           variant="outlined"
           fullWidth
-          placeholder="Search by name or paste address"
+          placeholder="Type or paste the address"
           InputProps={{
             classes: {
               root: classes.searchInput,
               inputAdornedStart: classes.searchInputText,
             },
             endAdornment: <InputAdornment position="end">
-              <Search style={{ color: '#779BF4' }} />
+              <Search style={{ color: '#CCD2E3' }} />
             </InputAdornment>,
           }}
         />
@@ -75,6 +77,10 @@ const merge = () => {
 
   const [, updateState] = useState();
   const forceUpdate = useCallback(() => updateState({}), []);
+
+  const onCreate = () => {
+    router.push('/vest/create');
+  };
 
   useEffect(() => {
     window.addEventListener("resize", () => {
@@ -151,27 +157,30 @@ const merge = () => {
     const openModal = () => setOpen(true);
 
     return (
-      <div>
-        <span className={classes.selectTitle}>1st NFT</span>
-        <div
-          onClick={openModal}
-          className={classes.tokenSelect}
-        >
+      <div className={classesMerge.selectWrapper}>
+        <div className={classesMerge.selectHeader}>
+          <span className={classesMerge.selectTitle}>1st NFT</span>
+
+          {firstSelectedNft != undefined && (
+            <div className={classesMerge.tokenSelectInfoAmount}>
+              {Number(firstSelectedNft.lockAmount)} veREMOTE
+            </div>
+          )}
+        </div>
+
+        <div onClick={openModal} className={classesMerge.tokenSelect}>
           {firstSelectedNft == undefined ? (
-            <div className={classes.tokenSelectLabel}>Select 1st NFT</div>
+            <div className={classesMerge.tokenSelectLabel}>Select NFT</div>
           ) : (
-            <div className={classes.tokenSelectInfo}>
-              <div className={classes.tokenSelectInfoCol}>
-                <div className={classes.tokenSelectInfoTitle}>NFT #{firstSelectedNft.id}</div>
-                <div className={classes.tokenSelectInfoValue}>
-                  {Number(firstSelectedNft.lockAmount)} CONE
-                </div>
+            <div className={classesMerge.tokenSelectInfo}>
+              <div className={classesMerge.tokenSelectInfoCol}>
+                <div className={classesMerge.tokenSelectInfoTitle}>{firstSelectedNft.id}</div>
               </div>
-              <div className={classes.tokenSelectInfoCol}>
-                <div className={classes.tokenSelectInfoTitle}>
+              <div className={classesMerge.tokenSelectInfoCol}>
+                <div className={classesMerge.tokenSelectInfoTextTitle}>
                   {moment.unix(firstSelectedNft.lockEnds).format("YYYY-MM-DD")}
                 </div>
-                <div className={classes.tokenSelectInfoValue}>Expiry date</div>
+                <div className={classesMerge.tokenSelectInfoValue}>Expiry date</div>
               </div>
             </div>
           )}
@@ -193,12 +202,12 @@ const merge = () => {
           <div className={[classes.dialogContainer, 'g-flex-column'].join(' ')}>
             <DialogTitle className={[classes.dialogTitle, 'g-flex-column__item-fixed'].join(' ')}>
               <div className={classes.dialogTitleRow}>
-                <div className={classes.dialogTitleLeft}>Select an NFT</div>
+                <div className={classes.dialogTitleLeft}>Select veREMOTE</div>
                 <div className={classes.dialogTitleRight}>
                   <Close
                     style={{
                       fontSize: 12,
-                      color: '#1e2c48',
+                      color: '#CCD2E3',
                       cursor: 'pointer',
                     }}
                     onClick={closeModal}
@@ -210,16 +219,22 @@ const merge = () => {
               style={{overflow: 'hidden'}}
               className={[classes.dialogContent, 'g-flex-column__item', 'g-flex-column'].join(' ')}
             >
-              {vestNFTs && renderOptions(vestNFTs, value => {
-                handleChange1(value)
-                closeModal();
-              })}
+              <div className={[classes.dialogContentInner, 'g-flex-column__item', 'g-flex-column'].join(' ')}>
+                {vestNFTs && renderOptions(vestNFTs, value => {
+                  handleChange1(value)
+                  closeModal();
+                })}
+
+                <div className={classes.descText}>Choose one of the existing NFTs or create a new one.</div>
+                <div className={classes.descButton} onClick={onCreate}>Create new NFT</div>
+              </div>
             </DialogContent>
           </div>
         </Dialog>
       </div>
     );
   };
+
   const renderNftSelect2 = () => {
     const [open, setOpen] = useState(false);
 
@@ -228,27 +243,30 @@ const merge = () => {
     const openModal = () => setOpen(true);
 
     return (
-      <div>
-        <span className={classes.selectTitle}>2nd NFT</span>
-        <div
-          onClick={openModal}
-          className={classes.tokenSelect}
-        >
+      <div className={classesMerge.selectWrapper}>
+        <div className={classesMerge.selectHeader}>
+          <span className={classesMerge.selectTitle}>2nd NFT</span>
+
+          {secondSelectedNft != undefined && (
+            <div className={classesMerge.tokenSelectInfoAmount}>
+              {Number(secondSelectedNft.lockAmount)} veREMOTE
+            </div>
+          )}
+        </div>
+
+        <div onClick={openModal} className={classesMerge.tokenSelect}>
           {secondSelectedNft == undefined ? (
-            <div className={classes.tokenSelectLabel}>Select 2nd NFT</div>
+            <div className={classesMerge.tokenSelectLabel}>Select NFT</div>
           ) : (
-            <div className={classes.tokenSelectInfo}>
-              <div className={classes.tokenSelectInfoCol}>
-                <div className={classes.tokenSelectInfoTitle}>NFT #{secondSelectedNft.id}</div>
-                <div className={classes.tokenSelectInfoValue}>
-                  {Number(secondSelectedNft.lockAmount)} CONE
-                </div>
+            <div className={classesMerge.tokenSelectInfo}>
+              <div className={classesMerge.tokenSelectInfoCol}>
+                <div className={classesMerge.tokenSelectInfoTitle}>{secondSelectedNft.id}</div>
               </div>
-              <div className={classes.tokenSelectInfoCol}>
-                <div className={classes.tokenSelectInfoTitle}>
+              <div className={classesMerge.tokenSelectInfoCol}>
+                <div className={classesMerge.tokenSelectInfoTextTitle}>
                   {moment.unix(secondSelectedNft.lockEnds).format("YYYY-MM-DD")}
                 </div>
-                <div className={classes.tokenSelectInfoValue}>Expiry date</div>
+                <div className={classesMerge.tokenSelectInfoValue}>Expiry date</div>
               </div>
             </div>
           )}
@@ -270,12 +288,12 @@ const merge = () => {
           <div className={[classes.dialogContainer, 'g-flex-column'].join(' ')}>
             <DialogTitle className={[classes.dialogTitle, 'g-flex-column__item-fixed'].join(' ')}>
               <div className={classes.dialogTitleRow}>
-                <div className={classes.dialogTitleLeft}>Select an NFT</div>
+                <div className={classes.dialogTitleLeft}>Select veREMOTE</div>
                 <div className={classes.dialogTitleRight}>
                   <Close
                     style={{
                       fontSize: 12,
-                      color: '#1e2c48',
+                      color: '#CCD2E3',
                       cursor: 'pointer',
                     }}
                     onClick={closeModal}
@@ -287,10 +305,15 @@ const merge = () => {
               style={{overflow: 'hidden'}}
               className={[classes.dialogContent, 'g-flex-column__item', 'g-flex-column'].join(' ')}
             >
-              {vestNFTs && renderOptions(vestNFTs, value => {
-                handleChange2(value);
-                closeModal();
-              })}
+              <div className={[classes.dialogContentInner, 'g-flex-column__item', 'g-flex-column'].join(' ')}>
+                {vestNFTs && renderOptions(vestNFTs, value => {
+                  handleChange2(value);
+                  closeModal();
+                })}
+
+                <div className={classes.descText}>Choose one of the existing NFTs or create a new one.</div>
+                <div className={classes.descButton} onClick={onCreate}>Create new NFT</div>
+              </div>
             </DialogContent>
           </div>
         </Dialog>
@@ -299,137 +322,125 @@ const merge = () => {
   };
 
   return (
-    <Paper elevation={0} className={classes.container3}>
-      <p className={classes.pageTitle}>
-        <div className={classes.titleSection}>
-          <Tooltip title="Back to Vest" placement="top">
-            <IconButton onClick={onBack}>
-              <div className={classes.backIconWrap}>
-                <ArrowBackIosNew className={classes.backIcon} />
-              </div>
-            </IconButton>
-          </Tooltip>
-          <p>Back to Vest</p>
+    <>
+      <div className={classesLock.tnavWrapper}>
+        <div className={classesLock.tnav}>
+          <span className={classesLock.tnavItem} onClick={onBack}>Vest</span>
+          <span className={classesLock.tnavItemActive}>Merge NFTs</span>
+        </div>
+      </div>
+
+      <div className={classesLock.formWrapper}>
+        <div className={classesLock.title}>
+          <span>Merge NFTs</span>
         </div>
 
-        <span>Merge NFTs</span>
-      </p>
+        <div className={classesLock.mainBody}>
+          <div className={classesMerge.row}>
+            <div className={classesMerge.column}>{renderNftSelect1()}</div>
 
-      <div className={classes.reAddPadding3}>
-        <Form>
-          <div className={classes.dropdownCtn}>
-            <div className={classes.dropdown}>{renderNftSelect1()}</div>
-
-            <div className={classes.divider}>
-              <div className={classes.dividerInner}>
-                <span></span>
-              </div>
-            </div>
-
-            <div className={classes.dropdown}>{renderNftSelect2()}</div>
+            <div className={classesMerge.column}>{renderNftSelect2()}</div>
           </div>
 
-          <div className={classes.info}>
-            <Typography className={classes.infoInner} color="textSecondary">
-              <img src="/images/ui/info-circle-blue.svg" />
-              <span>New NFT will have the the longest expiry date out of 2 NFTs exposed to the merge.</span>
-            </Typography>
-          </div>
+          {firstSelectedNft !== undefined && secondSelectedNft !== undefined && (
+            <div className={classesMerge.result}>
+              {firstSelectedNft.lockEnds > secondSelectedNft.lockEnds ? (
+                <div className={classesMerge.selectWrapper}>
+                  <div className={classesMerge.selectHeader}>
+                    <span className={classesMerge.selectTitle}>Result NFT</span> 
+                    <div className={classesMerge.tokenSelectInfoAmount}>
+                      {(Number(firstSelectedNft.lockAmount) + Number(secondSelectedNft.lockAmount)).toFixed(2)} veREMOTE
+                    </div> 
+                  </div>
 
-          <div className={classes.inputRow}>
-            <div className={classes.inputCol}>
-              <p className={[classes.pageTitle, classes.pageTitle2].join(" ")}>
-                <span>New NFT:</span>
-              </p>
-              <p className={classes.subtitle}>Automatically calculated</p>
-            </div>
-
-            <div className={classes.inputCol}>
-              {firstSelectedNft !== undefined && secondSelectedNft !== undefined ? (
-                <>
-                  {firstSelectedNft.lockEnds > secondSelectedNft.lockEnds ? (
-                    <div className={classes.dropdownSimple}>
-                      <span className={classes.selectTitle}>Result NFT</span>
-                      <div className={classes.selectItem}>
-                        <div className={classes.selectItemCol}>
-                          <div className={classes.selectItemTitle}>NFT #{secondSelectedNft.id}</div>
-                          <div className={classes.selectItemValue}>
-                            {(Number(firstSelectedNft.lockAmount) + Number(secondSelectedNft.lockAmount)).toFixed(2)} CONE
-                          </div>
+                  <div className={classesMerge.tokenSelect}>
+                    <div className={classesMerge.tokenSelectInfo}>
+                      <div className={classesMerge.tokenSelectInfoCol}>
+                        <div className={classesMerge.tokenSelectInfoTitle}>{secondSelectedNft.id}</div>
+                      </div>
+                      <div className={classesMerge.tokenSelectInfoCol}>
+                        <div className={classesMerge.tokenSelectInfoTextTitle}>
+                          {moment.unix(firstSelectedNft.lockEnds).format("YYYY-MM-DD")}
                         </div>
-                        <div className={classes.selectItemCol}>
-                          <div className={classes.selectItemTitle}>
-                            {moment.unix(firstSelectedNft.lockEnds).format("YYYY-MM-DD")}
-                          </div>
-                          <div className={classes.selectItemValue}>Expiry date</div>
-                        </div>
+                        <div className={classesMerge.tokenSelectInfoValue}>Expiry date</div>
                       </div>
                     </div>
-                  ) : (
-                    <div className={classes.dropdownSimple}>
-                      <span className={classes.selectTitle}>Result NFT</span>
-                      <div className={classes.selectItem}>
-                        <div className={classes.selectItemCol}>
-                          <div className={classes.selectItemTitle}>NFT #{secondSelectedNft.id}</div>
-                          <div className={classes.selectItemValue}>
-                            {(Number(firstSelectedNft.lockAmount) + Number(secondSelectedNft.lockAmount)).toFixed(2)} CONE
-                          </div>
-                        </div>
-                        <div className={classes.selectItemCol}>
-                          <div className={classes.selectItemTitle}>
-                            {moment.unix(secondSelectedNft.lockEnds).format("YYYY-MM-DD")}
-                          </div>
-                          <div className={classes.selectItemValue}>Expiry date</div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </>
+                  </div>
+                </div>
               ) : (
-                <div className={classes.dropdownSimple}>
-                  <span className={classes.selectTitle}>Result NFT</span>
-                  <div className={classes.tokenSelect}>
-                    <div className={classes.tokenSelectLabel}>Result NFT after Merge</div>
+                <div className={classesMerge.selectWrapper}>
+                  <div className={classesMerge.selectHeader}>
+                    <span className={classesMerge.selectTitle}>Result NFT</span> 
+                    <div className={classesMerge.tokenSelectInfoAmount}>
+                      {(Number(firstSelectedNft.lockAmount) + Number(secondSelectedNft.lockAmount)).toFixed(2)} veREMOTE
+                    </div> 
+                  </div>
+
+                  <div className={classesMerge.tokenSelect}>
+                    <div className={classesMerge.tokenSelectInfo}>
+                      <div className={classesMerge.tokenSelectInfoCol}>
+                        <div className={classesMerge.tokenSelectInfoTitle}>{secondSelectedNft.id}</div>
+                      </div>
+                      <div className={classesMerge.tokenSelectInfoCol}>
+                        <div className={classesMerge.tokenSelectInfoTextTitle}>
+                          {moment.unix(secondSelectedNft.lockEnds).format("YYYY-MM-DD")}
+                        </div>
+                        <div className={classesMerge.tokenSelectInfoValue}>Expiry date</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}
             </div>
-          </div>
-        </Form>
-      </div>
+          )}
+        </div>
 
-      <div>
-        {firstSelectedNft === undefined ||
-        secondSelectedNft === undefined ||
-        secondSelectedNft.id == firstSelectedNft.id ? (
-          <Button
-            fullWidth
-            variant="contained"
-            size="large"
-            color="primary"
-            className={[classes.buttonOverride, classes.buttonOverrideDisabled].join(" ")}
-            disabled
-          >
-            <Typography className={classes.actionButtonText}>
-              Select NFTs to merge
-            </Typography>
-          </Button>
-        ) : (
-          <Button
-            fullWidth
-            variant="contained"
-            size="large"
-            color="primary"
-            className={classes.buttonOverride}
-            onClick={() => merge(firstSelectedNft, secondSelectedNft)}
-          >
-            <Typography className={classes.actionButtonText}>
-              Merge NFTs
-            </Typography>
-          </Button>
+        {firstSelectedNft == undefined || secondSelectedNft == undefined && (
+          <div className={classesLock.warningContainer}>
+            <img src="/images/ui/info-circle-gray.svg" width="18px" className={classesLock.warningIcon} />
+            <p className={classesLock.warningText}>Select 2 NFTs to merge into a single one.</p>
+          </div>  
         )}
+
+        {(firstSelectedNft === undefined ||
+          secondSelectedNft === undefined ||
+          secondSelectedNft.id == firstSelectedNft.id
+        ) && (
+          <div className={classesLock.warningContainer}>
+            <img src="/images/ui/info-circle-gray.svg" width="18px" className={classesLock.warningIcon} />
+            <p className={classesLock.warningText}>New NFT will have the the longest expiry date out of 2 NFTs exposed to the merge.</p>
+          </div>
+        )}
+
+        <div className={classesLock.controls}>
+          <div className={classesLock.controlsButtons}>
+            {firstSelectedNft === undefined ||
+            secondSelectedNft === undefined ||
+            secondSelectedNft.id == firstSelectedNft.id ? (
+              <Button
+                variant="contained"
+                size="large"
+                color="primary"
+                className={[classesLock.button, classesLock.buttonDisabled].join(" ")}
+                disabled
+              >
+                <span>Merge NFT</span>
+              </Button>
+            ) : (
+              <Button
+                variant="contained"
+                size="large"
+                color="primary"
+                className={classesLock.button}
+                onClick={() => merge(firstSelectedNft, secondSelectedNft)}
+              >
+                <span>Merge NFT</span>
+              </Button>
+            )}
+          </div>
+        </div>
       </div>
-    </Paper>
+    </>
   );
 };
 

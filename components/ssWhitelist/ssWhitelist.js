@@ -233,7 +233,7 @@ export default function ssWhitelist() {
 
                   {(!nft || (!token.isWhitelisted && nft && BigNumber(nft.lockValue).lt(token.listingFee)) || (token.isWhitelisted && nft && BigNumber(nft.lockValue).gt(token.listingFee))) &&
                     <>
-                      {!token.isWhitelisted &&
+                      {/* {!token.isWhitelisted &&
                         <Hint
                           hintText={'Cannot proceed with whitelisting due to insufficient veCONE.'}
                           open={openActionHint}
@@ -243,7 +243,7 @@ export default function ssWhitelist() {
                           fill="#586586"
                         >
                         </Hint>
-                      }
+                      } */}
 
                       <div color="primary" className={classes.buttonOverrideDisabled}>
                         {token.isWhitelisted ? 'Nothing to do' : 'Vest Value < Fee'}
@@ -253,11 +253,17 @@ export default function ssWhitelist() {
                 </div>
               </div>
 
-              {/* TODO */}
-              <div className={classes.notification}>
-                <img src="/images/ui/info-circle-gray.svg" width="18px" style={{ marginRight: 15 }} />
-                <span>You cannot proceed with the whitelisting as there is not enough funds locked in the chosen veREMOTE.</span>
-              </div>
+              {(!nft || (!token.isWhitelisted && nft && BigNumber(nft.lockValue).lt(token.listingFee)) || (token.isWhitelisted && nft && BigNumber(nft.lockValue).gt(token.listingFee))) && (
+                <>
+                  {!token.isWhitelisted && (
+                    <div className={classes.notification}>
+                      <img src="/images/ui/info-circle-gray.svg" width="18px" style={{ marginRight: 15 }} />
+                      <span>You cannot proceed with the whitelisting as there is not enough funds locked in the chosen veREMOTE.</span>
+                    </div>
+                  )}
+                </>
+              )}
+              
             </div>
           </div>
         }
@@ -360,7 +366,7 @@ export default function ssWhitelist() {
 
               {(!nft || (!token.isWhitelisted && nft && BigNumber(nft.lockValue).lt(token.listingFee)) || (token.isWhitelisted && nft && BigNumber(nft.lockValue).gt(token.listingFee))) &&
                 <>
-                  {!token.isWhitelisted &&
+                  {/* {!token.isWhitelisted &&
                     <Hint
                       hintText={'Cannot proceed with whitelisting due to insufficient veCONE.'}
                       open={openActionHint}
@@ -370,7 +376,7 @@ export default function ssWhitelist() {
                       fill="#586586"
                     >
                     </Hint>
-                  }
+                  } */}
 
                   <div color="primary" className={classes.buttonOverrideDisabled}>
                     {token.isWhitelisted ? 'Nothing to do' : 'Vest value < Fee'}
@@ -378,11 +384,17 @@ export default function ssWhitelist() {
                 </>
               }
 
-              {/* TODO */}
-              <div className={classes.notification}>
-                <img src="/images/ui/info-circle-gray.svg" width="15px" style={{ marginRight: 10 }} />
-                <span>You cannot proceed with the whitelisting as there is not enough funds locked in the chosen veREMOTE.</span>
-              </div>
+              {(!nft || (!token.isWhitelisted && nft && BigNumber(nft.lockValue).lt(token.listingFee)) || (token.isWhitelisted && nft && BigNumber(nft.lockValue).gt(token.listingFee))) && (
+                <>
+                  {!token.isWhitelisted && (
+                    <div className={classes.notification}>
+                      <img src="/images/ui/info-circle-gray.svg" width="15px" style={{ marginRight: 10 }} />
+                      <span>You cannot proceed with the whitelisting as there is not enough funds locked in the chosen veREMOTE.</span>
+                    </div>
+                  )}
+                </>
+              )}
+              
             </div>
           </div>
         }

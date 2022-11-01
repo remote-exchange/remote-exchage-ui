@@ -19,6 +19,7 @@ import { ACTIONS } from "../../stores/constants";
 import { useAppThemeContext } from "../../ui/AppThemeProvider";
 import Form from "../../ui/MigratorForm";
 import SwapIconBg from "../../ui/SwapIconBg";
+import classesLock from "./lock.module.css";
 
 export default function Unlock({ nft, govToken, veToken }) {
   const router = useRouter();
@@ -67,63 +68,57 @@ export default function Unlock({ nft, govToken, veToken }) {
 
   const renderMassiveInput = (token) => {
     return (
-      <div className={classes.textField}>
-        <div className={`${classes.massiveInputContainer} ${classes.error}`}>
-          <div className={classes.inputRow}>
-            <div className={classes.inputColumn}>
-              <Typography className={classes.inputTitleText} noWrap>Lock</Typography>
+      <div className={classesLock.textField}>
+        <div className={classesLock.textFieldRow}>
+          <div className={classesLock.textFieldColumn}>
+            <div className={classesLock.textFieldSelect}>
+              {token && token.logoURI && (
+                <img
+                  className={classesLock.displayAssetIcon}
+                  alt=""
+                  src={token.logoURI}
+                  width="52px"
+                  height="52px"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
+                  }}
+                />
+              )}
+              {!(token && token.logoURI) && (
+                <img
+                  className={classesLock.displayAssetIcon}
+                  alt=""
+                  src={`/tokens/unknown-logo--${appTheme}.svg`}
+                  width="52px"
+                  height="52px"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
+                  }}
+                />
+              )}
 
-              <div className={classes.massiveInputAssetSelect}>
-                <div className={classes.displaySelectContainer}>
-                  <div className={classes.displayDualIconContainer}>
-                    {token && token.logoURI && (
-                      <img
-                        className={classes.displayAssetIcon}
-                        alt=""
-                        src={token.logoURI}
-                        width="60px"
-                        height="60px"
-                        onError={(e) => {
-                          e.target.onerror = null;
-                          e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
-                        }}
-                      />
-                    )}
-                    {!(token && token.logoURI) && (
-                      <img
-                        className={classes.displayAssetIcon}
-                        alt=""
-                        src={`/tokens/unknown-logo--${appTheme}.svg`}
-                        width="60px"
-                        height="60px"
-                        onError={(e) => {
-                          e.target.onerror = null;
-                          e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
-                        }}
-                     />
-                    )}
-
-                    <Typography className={classes.smallerText}>
-                      {token?.symbol}
-                    </Typography>
-                  </div>
-                </div>
-              </div>
+              <p className={classesLock.textFieldSelectText}>
+                {token?.symbol}
+              </p>
             </div>
+          </div>
 
-            <div className={classes.inputColumn}>
-              <Typography className={classes.inputBalanceText} noWrap>
+          <div className={classesLock.textFieldColumn}>
+            <div className={classesLock.textFieldInputWrapper}>
+              <div className={classesLock.textFieldBalance}>
                 Balance:{" "}
                 {token && token.balance ? " " + formatCurrency(token.balance) : ""}
-              </Typography>
+              </div>
 
               <InputBase
-                className={classes.massiveInputAmount}
+                className={classesLock.textFieldInput}
                 placeholder="0.00"
                 value={parseInt(nft.lockAmount).toFixed(2)}
                 disabled={true}
                 inputProps={{
-                  className: classes.largeInput,
+                  className: classesLock.largeInput,
                 }}
                 InputProps={{
                   disableUnderline: true,
@@ -137,57 +132,49 @@ export default function Unlock({ nft, govToken, veToken }) {
   };
 
   return (
-    <Paper
-      elevation={0}
-      className={[classes.container3, classes["g-flex-column"]].join(" ")}
-    >
-      <p className={classes.pageTitle}>
-        <div className={classes.titleSection}>
-          <Tooltip title="Manage Existing Lock" placement="top">
-            <IconButton onClick={onBack}>
-              <div className={classes.backIconWrap}>
-                <ArrowBackIosNew className={classes.backIcon} />
-              </div>
-            </IconButton>
-          </Tooltip>
-          <p>Back to Vest</p>
+    <>
+      <div className={classesLock.tnavWrapper}>
+        <div className={classesLock.tnav}>
+          <span className={classesLock.tnavItem} onClick={onBack}>Vest</span>
+          <span className={classesLock.tnavItemActive}>Withdraw Lock</span>
         </div>
-
-        <span>Withdraw Lock</span>
-      </p>
-
-      <Form>
-        <div className={classes.reAddPadding3}>
-          {renderMassiveInput(govToken)}
-
-          <VestingInfo currentNFT={nft} veToken={veToken} />
-
-          <Typography className={[classes.info, classes.infoWarning].join(" ")} color="textSecondary">
-            <img src="/images/ui/info-circle-yellow.svg" />
-            <span>Your lock has expired. Please withdraw your lock before you can re-lock.</span>
-          </Typography>
-        </div>
-      </Form>
-
-      <div className={classes.actionsContainer}>
-        <Button
-          fullWidth
-          variant="contained"
-          size="large"
-          color="primary"
-          disabled={lockLoading}
-          onClick={onWithdraw}
-          className={classes.buttonOverride}
-        >
-          <Typography className={classes.actionButtonText}>
-            {lockLoading ? `Withrawing` : `Withdraw`}
-          </Typography>
-
-          {lockLoading && (
-            <CircularProgress size={10} className={classes.loadingCircle} />
-          )}
-        </Button>
       </div>
-    </Paper>
+
+      <div className={classesLock.formWrapper}>
+        <div className={classesLock.title}>
+          <span>Withdraw Lock</span>
+        </div>
+
+        <div className={classesLock.mainBody}>
+          {renderMassiveInput(govToken)}          
+        </div>
+
+        <VestingInfo currentNFT={nft} veToken={veToken} />
+
+        <div className={classesLock.warningContainer}>
+          <img src="/images/ui/info-circle-gray.svg" width="18px" className={classesLock.warningIcon} />
+          <p className={classesLock.warningText}>Your lock has expired. Please withdraw your lock before you can re-lock.</p>
+        </div>
+
+        <div className={classes.actionsContainer}>
+          <Button
+            variant="contained"
+            size="large"
+            color="primary"
+            disabled={lockLoading}
+            onClick={onWithdraw}
+            className={classesLock.button}
+          >
+            <span>
+              {lockLoading ? `Withrawing` : `Withdraw`}
+            </span>
+
+            {lockLoading && (
+              <CircularProgress size={10} className={classes.loadingCircle} />
+            )}
+          </Button>
+        </div>
+      </div>
+    </>
   );
 }

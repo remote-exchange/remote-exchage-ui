@@ -70,13 +70,17 @@
   }
 }
 
+.tokenSelectSelected {
+  background-color: transparent;
+}
+
 /* .tokenSelect:hover, .tokenSelectOpen {
   border: 1px solid #D3F85A;
 } */
 
 .placeholder {
   padding: 0 12px;
-  padding-right: 30px;
+  padding-right: 40px;
 
   font-family: 'PT Root UI';
   font-style: normal;
@@ -126,12 +130,41 @@
 }
 
 .menuOption {
-  /*padding-left: 30px;*/
+  padding: 0 12px;
+  padding-right: 40px;
+  font-family: 'PT Root UI';
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #EAE8E1;
+}
+
+@media (max-width: 767px) {
+  .menuOption {
+    padding: 1px 8px 0;
+    padding-right: 30px;
+    font-size: 14px;
+    line-height: 20px;
+  }
 }
 
 .menuOptionSec {
-  margin-left: 15px;
-  margin-right: 10px;
+  /* margin-left: 15px;
+  margin-right: 10px; */
+
+  font-family: 'PT Root UI';
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+
+  color: #9A9FAF;
+}
+
+@media (max-width: 767px) {
+  .menuOptionSec {
+    font-size: 14px;
+    line-height: 20px;
+  }
 }
 
 .list,

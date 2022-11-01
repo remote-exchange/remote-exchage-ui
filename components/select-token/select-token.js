@@ -42,7 +42,12 @@ function TokenSelect(props) {
     <Select
       open={openSelectToken}
       onClick={openSelect}
-      className={[classes.tokenSelect, classes[`tokenSelect--${appTheme}`], openSelectToken ? classes.tokenSelectOpen : '',].join(' ')}
+      className={[
+        classes.tokenSelect,
+        classes[`tokenSelect--${appTheme}`],
+        openSelectToken ? classes.tokenSelectOpen : '',
+        value ? classes.tokenSelectSelected : '',
+      ].join(' ')}
       fullWidth
       classes={{
         select: classes.selectWrapper,
@@ -93,26 +98,15 @@ function TokenSelect(props) {
             key={option.id}
             value={option}>
             <div
-              className={[classes.menuOption, 'g-flex', 'g-flex--align-center', 'g-flex--space-between'].join(' ')}>
-              <Typography
-                style={{
-                  fontWeight: 500,
-                  fontSize: 16,
-                  color: '#D3F85A',
-                }}>
-                #{option.id}
-              </Typography>
+              className={[classes.menuOption, 'g-flex', 'g-flex--align-center', 'g-flex--space-between'].join(' ')}
+            >
+              <div>#{option.id}</div>
 
               <div className={[classes.menuOptionSec, 'g-flex-column'].join(' ')}>
-                <Typography
-                  style={{
-                    fontWeight: 400,
-                    fontSize: 16,
-                    color: '#8191B9',
-                  }}>
+                <div>
                   {formatCurrency(option.lockValue)}
                   {symbol ? ' ' + symbol : ''}
-                </Typography>
+                </div>
 
               </div>
             </div>

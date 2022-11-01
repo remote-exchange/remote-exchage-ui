@@ -65,6 +65,18 @@
   border-radius: 12px;
 
   background: #7DB857;
+
+  cursor: pointer;
+}
+
+.addButton:hover,
+.addButtonMobile:hover {
+  background: #92CB6D;
+}
+
+.addButton:active,
+.addButtonMobile:active {
+  background: #60A434;
 }
 
 @media (max-width: 991px) {
