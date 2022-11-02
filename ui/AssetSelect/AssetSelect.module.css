@@ -47,9 +47,7 @@
   height: 92px;
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
-  padding: 18px 4px 16px 8px;
-  /*padding: 18px 4px 16px 16px;*/
+  padding: 18px 23px 16px 8px;
   transition: fill 0.16s ease;
   fill: #9BC9E4;
 }
