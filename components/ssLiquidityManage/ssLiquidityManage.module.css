@@ -154,8 +154,11 @@
 .flyPercent {
   position: absolute;
   right: 28px;
-  font-size: 30px;
-  color: #8191B9 !important;
+  color: #68727A !important;
+  bottom: 10px;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 52px;
 }
 
 .flyPercentWithdraw {
@@ -591,9 +594,9 @@ input[type=number].mediumInputAmount {
 
 .inputBalanceTextContainerForPair {
   position: absolute;
-  left: 551px;
-  top: 14px;
-  width: 198px;
+  left: 20px;
+  top: 158px;
+  width: 800px;
 }
 
 .walletIcon {
@@ -618,7 +621,7 @@ input[type=number].mediumInputAmount {
   font-weight: 500 !important;
   font-size: 14px !important;
   line-height: 20px !important;
-  color: #F6F7F9;
+  color: #9A9FAF;
 }
 
 .inputBalanceText {
@@ -632,6 +635,11 @@ input[type=number].mediumInputAmount {
   align-items: center;
 }
 
+.massiveInputContainerLong {
+  display: flex;
+  flex-direction: column;
+}
+
 .massiveInputAssetSelectSingle {
   padding-top: 56px;
   padding-left: 20px;
@@ -642,11 +650,13 @@ input[type=number].mediumInputAmount {
   margin-bottom: 4px;
 }
 .massiveInputAssetSelect {
-
+  border: 1px solid rgba(104, 114, 122, 0.4);
+  border-radius: 16px;
+  padding: 20px;
+  gap: 40px;
   width: 100%;
-  margin-bottom: 4px;
+  margin-bottom: 12px;
 }
-
 
 .largeInput {
   padding: 0 !important;
@@ -655,7 +665,7 @@ input[type=number].mediumInputAmount {
   line-height: 52px !important;
   border: none !important;
   outline: none !important;
-  color: #68727A !important;
+  color: #F6F7F9 !important;
 }
 
 /*.largeInput--dark {
@@ -928,6 +938,16 @@ input[type=number].mediumInputAmount {
   border: 1px solid rgba(104, 114, 122, 0.4) !important;
   border-radius: 16px;
   margin-left: 20px;
+}
+
+.massiveInputAmountWrapperLong {
+  display: flex;
+  padding: 80px 20px 0 20px;
+  /*width: 420px;*/
+  height: 152px;
+  border: 1px solid rgba(104, 114, 122, 0.4) !important;
+  border-radius: 16px;
+  /*margin-left: 20px;*/
 }
 
 .massiveInputAmount {
@@ -1215,16 +1235,37 @@ input[type=number].mediumInputAmount {
 }
 
 .menuOption {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  /*width: 100%;*/
-  padding: 6px 38px 6px 12px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px !important;
+  gap: 10px;
+  width: 440px;
+  height: 80px;
+  background: #131313;
+  border: 1px solid rgba(104, 114, 122, 0.4);
+  border-radius: 12px;
 }
 
+.menuOptionDisabled {
+  opacity: 0.2;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px !important;
+  gap: 10px;
+  width: 440px;
+  height: 80px;
+  background: #131313;
+  border-radius: 12px;
+}
 
 .nftRow {
-  margin-top: 20px;
+  flex-direction: column;
+  /*margin-top: 20px;*/
   border-radius: 12px;
   display: flex;
   justify-content: space-between;
@@ -1235,20 +1276,21 @@ input[type=number].mediumInputAmount {
   display: flex;
   min-width: 380px;
   align-items: center;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  color: #E4E9F4;
-  padding: 10px 16px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #F6F7F9;
+  /*padding: 10px 16px;*/
   min-height: 56px;
 }
 
 .nftItems {
   display: flex;
-  width: 375px;
-  background-color: #181d2d;
+  /*width: 375px;*/
+  /*background: rgba(177, 241, 227, 0.12);*/
+  border: 1px solid #B1F1E3;
   border-radius: 12px;
-  color: #D3F85A;
+  color: #EAE8E1;
 }
 
 
@@ -1385,6 +1427,30 @@ input[type=number].mediumInputAmount {
   color: #4CADE6;
 } */
 
+.tokenSelector {
+  cursor: pointer;
+  display: flex;
+  width: 100%;
+  padding: 12px;
+  justify-content: space-between;
+}
+
+.selectorLeft {
+  display: flex;
+  color: #EAE8E1;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+}
+.selectorRight {
+  display: flex;
+  gap: 10px;
+  color: #9A9FAF;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+}
+
 .tokenSelect {
   border: 1px solid transparent;
   border-radius: 0 !important;
@@ -1462,13 +1528,6 @@ input[type=number].mediumInputAmount {
 
 }
 
-.nftword {
-  display: none;
-}
-.list--dark > li > .menuOption .nftword {
-  display: inline-flex;
-  margin-right: 4px;
-}
 
 .list > li:not(:last-of-type) > .menuOption,
 .list--dark > li:not(:last-of-type) > .menuOption {
@@ -2900,4 +2959,59 @@ input[type=number].mediumInputAmount {
   font-size: 16px;
   line-height: 24px;
   color: #F6F7F9;
+}
+
+.nfts {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.nftLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 12px;
+}
+.nftRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 14px;
+}
+
+.nftword {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+  color: #F6F7F9;
+}
+.nftExpires {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #9A9FAF;
+}
+.nftValue {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #F6F7F9;
+}
+.nftSymbol {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #9A9FAF;
+}
+
+.nftChoose {
+  color: #9A9FAF;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: flex-start;
 }

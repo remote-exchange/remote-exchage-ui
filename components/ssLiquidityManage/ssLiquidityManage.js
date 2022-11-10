@@ -176,7 +176,7 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
     setVestNFTs(nfts);
 
     if (nfts.length > 0) {
-      if (token == null) {
+      if (token == null && nfts[0].attachments == '0') {
         setToken(nfts[0]);
       }
     }
@@ -460,8 +460,8 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
     });
   };
 
-  const handleChange = (event) => {
-    setToken(event.target.value);
+  const handleSelectToken = (t) => {
+    setToken(t);
     setOpenSelectToken(false);
   };
 
@@ -1024,7 +1024,7 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
           {type === "amount0"
             ? createLP
               ? `1st ${windowWidth > 530 ? "token :" : ""}`
-              : "LP"
+              : ""
             : type !== "withdraw"
             ? `2nd ${windowWidth > 530 ? "token :" : ""}`
             : "LP"}
@@ -1102,10 +1102,10 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
                     <div
                         style={{
                           cursor: "pointer",
-                          fontWeight: 500,
+                          fontWeight: 700,
                           fontSize: 14,
-                          lineHeight: "120%",
-                          color: appTheme === "dark" ? "#4CADE6" : "#0B5E8E",
+                          lineHeight: "20px",
+                          color: '#B1F1E3',
                         }}
                         onClick={() => setAmountPercent(assetValue, "stake")}
                     >
@@ -1116,7 +1116,7 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
         )}
 
         <div
-          className={`${classes.massiveInputContainer} ${
+          className={`${(type !== "withdraw" && !createLP) ? classes.massiveInputContainerLong : classes.massiveInputContainer} ${
             (amountError || assetError) && classes.error
           }`}
         >
@@ -1137,7 +1137,7 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
           </div>
 
           {type !== "withdraw" && (
-            <div className={classes.massiveInputAmountWrapper}>
+            <div className={createLP ? classes.massiveInputAmountWrapper : classes.massiveInputAmountWrapperLong}>
               <InputBase
                 className={classes.massiveInputAmount}
                 placeholder="0.00"
@@ -1737,111 +1737,128 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
 
   const renderTokenSelect = () => {
     return (
-      <Select
-          // onClick={openSelect}
-        className={[
-          classes.tokenSelect,
-          classes[`tokenSelect--${appTheme}`],
-            openSelectToken ? classes.tokenSelectOpen : '',
-        ].join(" ")}
-        fullWidth
-        value={token}
-        {...{
-          displayEmpty: token === null ? true : undefined,
-          renderValue:
-            token === null
-              ? (selected) => {
-                  if (selected === null) {
-                    return (
-                      <div
-                        style={{
-                          padding: 5,
-                          paddingLeft: 15.5,
-                          paddingRight: 10,
-                          fontWeight: 400,
-                          fontSize: 16,
-                          color: '#D3F85A',
-                        }}
-                      >
-                        Select {veToken?.symbol} NFT
-                      </div>
-                    );
-                  }
+        <>
+        <div className={classes.tokenSelector} onClick={openSelect}>
+          <div className={classes.selectorLeft}>{token ? `#${token.id}` : `Select ${veToken?.symbol}` }</div>
+          <div className={classes.selectorRight}>{token ? (
+              <Typography
+                  className={classes.menuOptionSecText}
+              >
+                {formatCurrency(token.lockValue)} {veToken?.symbol}
+              </Typography>
+          ): null}
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.2929 15.7929L5.38995 9.88995C4.508 9.008 5.13263 7.5 6.3799 7.5L17.6201 7.5C18.8674 7.5 19.492 9.008 18.6101 9.88995L12.7071 15.7929C12.3166 16.1834 11.6834 16.1834 11.2929 15.7929Z" fill="#B1F1E3"/>
+            </svg>
+          </div>
+        </div>
+          <Dialog
+              className={classes.dialogScale}
+              classes={{
+                root: classes.rootPaper,
+                scrollPaper: classes.topScrollPaper,
+                paper: classes.paperBody,
+              }}
+              open={openSelectToken}
+              onClose={closeSelect}
+              onClick={(e) => {
+                if (e.target.classList.contains('MuiDialog-container')) {
+                  closeSelect()
                 }
-              : undefined,
-        }}
-        MenuProps={{
-          classes: {
-            list: appTheme === "dark" ? classes["list--dark"] : classes.list,
-            paper: classes.listPaper,
-            // root: '',
-          },
-        }}
-        open={openSelectToken}
-        onClose={closeSelect}
-        onOpen={openSelect}
-        onChange={handleChange}
-        IconComponent={selectArrow}
-        inputProps={{
-          className:
-            appTheme === "dark"
-              ? classes["tokenSelectInput--dark"]
-              : classes.tokenSelectInput,
-        }}
-      >
-        {!vestNFTs.length &&
-            <div className={classes.noNFT}>
-              <div className={classes.noNFTtext}>
-                You receive NFT by creating a Lock of your CONE for some time, the more CONE you lock and for the longest time, the more Voting Power your NFT will have.
-              </div>
-              <div className={classes.noNFTlinks}>
-                <span className={classes.noNFTlinkButton} onClick={() => {router.push("/swap")}}>BUY CONE</span>
-                <span className={classes.noNFTlinkButton} onClick={() => {router.push("/vest")}}>LOCK CONE FOR NFT</span>
-              </div>
+              }}
+              fullWidth={true}
+              maxWidth={"sm"}
+              TransitionComponent={Transition}
+              fullScreen={false}
+          >
+            <div className={classes.tvAntenna}>
+              <svg width="56" height="28" viewBox="0 0 56 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clipPath="url(#clip0_116_22640)">
+                  <path fillRule="evenodd" clipRule="evenodd" d="M53.7324 1.53632C51.8193 0.431753 49.3729 1.08725 48.2683 3.00042C47.4709 4.38158 47.5908 6.04061 48.4389 7.27208L33.2833 22.4277C31.9114 21.3226 30.1671 20.6611 28.2683 20.6611C26.2328 20.6611 24.3748 21.4213 22.9629 22.6733L7.56181 7.27224C8.40988 6.04078 8.52973 4.38181 7.73235 3.00071C6.62778 1.08754 4.18142 0.432036 2.26825 1.53661C0.355075 2.64117 -0.300425 5.08754 0.804144 7.00071C1.86628 8.84038 4.16909 9.51716 6.04549 8.58435L21.6406 24.1794C20.7743 25.4579 20.2683 27.0004 20.2683 28.6611H36.2683C36.2683 26.8626 35.6748 25.2026 34.6729 23.8665L49.9553 8.58413C51.8317 9.51684 54.1344 8.84005 55.1965 7.00042C56.3011 5.08725 55.6456 2.64089 53.7324 1.53632Z" fill="#EAE8E1"/>
+                </g>
+                <defs>
+                  <clipPath id="clip0_116_22640">
+                    <rect width="56" height="28" fill="white"/>
+                  </clipPath>
+                </defs>
+              </svg>
             </div>
-        }
-        {vestNFTs &&
-          vestNFTs.map((option) => {
-            return (
-              <MenuItem key={option.id} value={option}>
-                <div
-                  className={[
-                    classes.menuOption,
-                    "g-flex",
-                    "g-flex--align-center",
-                    "g-flex--space-between",
-                  ].join(" ")}
-                >
-                  <Typography
-                    className={classes.menuOptionLabel}
-                    style={{
-                      // fontWeight: 500,
-                      // fontSize: 12,
-                      // marginRight: 30,
-                      color: "#D3F85A",
-                    }}
-                  >
-                    <span className={classes.nftword}>NFT </span>#{option.id}
-                  </Typography>
+            <div className={classes.realDialog}>
+              <DialogTitle
+                  className={classes.dialogTitle}
+                  style={{
+                    padding: 20,
+                    fontWeight: 700,
+                    fontSize: 24,
+                    lineHeight: '32px',
+                    color: '#131313',
+                  }}>
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                }}>
+                  <div>
+                    Select {veToken?.symbol}
+                  </div>
 
                   <div
-                    className={[
-                      classes.menuOptionSec,
-                      "g-flex",
-                      "g-flex--align-center",
-                    ].join(" ")}
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        width: 20,
+                        height: 20,
+                        cursor: 'pointer',
+                      }}
+                      onClick={closeSelect}
                   >
-                    <Typography
-                        className={classes.menuOptionSecText}
-                    >
-                      {formatCurrency(option.lockValue)} {veToken?.symbol}
-                    </Typography>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fillRule="evenodd" clipRule="evenodd" d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM12 13.4142L8.70711 16.7071L7.29289 15.2929L10.5858 12L7.29289 8.70711L8.70711 7.29289L12 10.5858L15.2929 7.29289L16.7071 8.70711L13.4142 12L16.7071 15.2929L15.2929 16.7071L12 13.4142Z" fill="#131313"/>
+                    </svg>
                   </div>
                 </div>
-              </MenuItem>
-            );
-          })}
-      </Select>
+              </DialogTitle>
+
+              <DialogContent
+                  // className={classes.dialogContent}
+                  style={{ padding: '4px 20px 20px' }}>
+                <div className={classes.inner}>
+                  {vestNFTs && (
+                      <div className={classes.nfts}>
+                        {vestNFTs.map((option) => {
+                          return (
+                              <div
+                                  key={option.id}
+                                  className={[
+                                    parseInt(option.attachments) === 1 ? classes.menuOptionDisabled : classes.menuOption,
+                                  ].join(" ")}
+                                  onClick={() => {
+                                    if (parseInt(option.attachments) === 0) {
+                                      handleSelectToken(option)
+                                    }
+                                  }}
+                              >
+                                <div className={classes.nftLeft}>
+                                  <span className={classes.nftword}>{option.id}</span>
+                                  <span className={classes.nftExpires}>Expires: </span>
+                                </div>
+                                <div className={classes.nftRight}>
+                                  <span className={classes.nftValue}>{formatCurrency(option.lockValue)} </span>
+                                  <span className={classes.nftSymbol}>{veToken?.symbol}</span>
+                                </div>
+                              </div>
+                          );
+                        })}
+                      </div>
+                  )}
+                  <div className={classes.nftChoose}>Choose one of the existing NFTs or create a new one.</div>
+                  <div onClick={() => { router.push('/vest')}} className={classes.settingsSaveButton}>Create new NFT</div>
+                </div>
+              </DialogContent>
+            </div>
+          </Dialog>
+        </>
     );
   };
 
@@ -1871,7 +1888,7 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
     }
   }, [withdrawAsset?.gauge?.tokenId, vestNFTs.length]);
 
-  const isShowBoostCalculator = !!pair && pair.gauge !== null;
+  const isShowBoostCalculator = !!pair && pair.gauge !== null && asset0;
 
   useEffect(() => {
     if (!!asset0 && !!asset1) {
@@ -2231,7 +2248,7 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
                             <>
                               <div className={classes.nftRow} style={{width: '100%',}}>
                                 <div className={classes.nftTitle}>
-                                  Attach {VE_TOKEN_NAME} to your LP to receive boosted rewards
+                                  Connect {VE_TOKEN_NAME} for Boosted APR:
                                 </div>
                                 <div className={classes.nftItems}>{renderTokenSelect()}</div>
                               </div>
@@ -2372,7 +2389,7 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
                       {/*</Popover>*/}
                       {/*</div>*/}
 
-                      {!createLP &&
+                      {!createLP && (amount0 === "" || !pair) &&
                           <div
                               className={[
                                 classes.disclaimerContainer,
@@ -2380,11 +2397,11 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
 
                               ].join(" ")}
                           >
-                            <div className={classes.disclaimerContainerWarnSymbol}>
-                              !
-                            </div>
+                            <svg style={{marginRight: 12,}} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path fillRule="evenodd" clipRule="evenodd" d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM13 8C13 8.55228 12.5523 9 12 9C11.4477 9 11 8.55228 11 8C11 7.44772 11.4477 7 12 7C12.5523 7 13 7.44772 13 8ZM12.75 17V11H11.25V17H12.75Z" fill="#68727A"/>
+                            </svg>
                             <div>
-                              Select veCONE NFT for your LP Stake to get an APR boost in proportion to Voting Power.
+                              Select a liquidity pair you want to stake and enter the amount in percentages.
                             </div>
                           </div>
                       }
@@ -2534,9 +2551,7 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
                             ].join(" ")}
                         >
               <span className={classes.actionButtonText}>
-                {!withdrawAsset && amount0 === "" && "Select LP & Enter Amount"}
-                {withdrawAsset && amount0 !== "" && "Stake LP"}
-                {withdrawAsset && amount0 === "" && "Enter Amount"}
+                Stake Liquidity
               </span>
                           {/*{depositLoading && (
                             <Loader color={appTheme === "dark" ? "#8F5AE8" : "#8F5AE8"} />
