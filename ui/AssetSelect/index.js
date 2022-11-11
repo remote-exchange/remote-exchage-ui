@@ -410,7 +410,7 @@ const AssetSelect = (
             {typeIcon === 'double' &&
               <div className={classes.assetSelectMenuItem}>
                 <div
-                  className={classes.displayDualIconContainer}>
+                  className={classes.displayDualIconContainerDoubled}>
                   <img
                     className={[classes.displayAssetIcon, classes.displayAssetIconSecond, classes[`displayAssetIconSecond--${appTheme}`]].join(' ')}
                     alt=""

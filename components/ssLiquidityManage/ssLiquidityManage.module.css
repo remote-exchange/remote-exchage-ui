@@ -163,10 +163,12 @@
 
 .flyPercentWithdraw {
   position: absolute;
-  top: 20px;
-  right: 28px;
-  font-size: 30px;
-  color: #8191B9 !important;
+  bottom: 10px;
+  right: -6px;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 52px;
+  color: #68727A !important;
 }
 
 .quoteLoaderDivider,
@@ -595,8 +597,9 @@ input[type=number].mediumInputAmount {
 .inputBalanceTextContainerForPair {
   position: absolute;
   left: 20px;
-  top: 158px;
+  top: 124px;
   width: 800px;
+  align-items: flex-end !important;
 }
 
 .walletIcon {
@@ -960,11 +963,11 @@ input[type=number].mediumInputAmount {
 }
 
 .massiveInputAmountUnstake {
-  position: absolute !important;
-  left: 20px;
-  top: 22px;
+  /*position: absolute !important;*/
+  /*left: 20px;*/
+  /*top: 22px;*/
   border: none !important;
-  margin-right: 20px !important;
+  /*margin-right: 20px !important;*/
 }
 
 .massiveInputAddress {
@@ -1798,9 +1801,12 @@ input[type=number].mediumInputAmount {
 }
 
 .liqWrapper {
-  background-color: #131314;
-  border-radius: 12px;
-  padding: 4px 0;
+  /*background-color: #131314;*/
+  border: 1px solid rgba(104, 114, 122, 0.4);
+  border-radius: 16px;
+  padding: 20px 20px 6px 20px;
+  /*margin-top: 12px;*/
+  width: 100%;
 }
 
 .liqTokens {
@@ -1817,7 +1823,7 @@ input[type=number].mediumInputAmount {
 .liqHeader {
   position: relative;
   height: 40px;
-  padding-left: 24px;
+  /*padding-left: 24px;*/
   font-weight: 500;
   font-size: 14px;
   line-height: 120%;
@@ -1825,7 +1831,8 @@ input[type=number].mediumInputAmount {
 }
 
 .liqHeaderWithdraw {
-  padding-left: 42px;
+  /*padding-left: 42px;*/
+  align-items: flex-start !important;
 }
 
 .walletIcon {
@@ -1848,15 +1855,15 @@ input[type=number].mediumInputAmount {
 
 .liqBody {
   position: relative;
-  height: 78px;
-  margin: 0 0 12px 20px;
-  padding-left: 20px;
+  /*height: 78px;*/
+  /*margin: 0 0 12px 20px;*/
+  /*padding-left: 20px;*/
   border-top: none;
 }
 
 .liqBodyIn {
-  background: #171D2D;
-  margin: 0 20px 0 40px;
+  /*background: #171D2D;*/
+  /*margin: 0 20px 0 40px;*/
   border-radius: 12px;
 }
 
@@ -3014,4 +3021,61 @@ input[type=number].mediumInputAmount {
   margin-bottom: 20px;
   display: flex;
   justify-content: flex-start;
+}
+
+.connectedNft {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  gap: 12px;
+}
+
+.connectedNftText {
+  display: flex;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #F6F7F9;
+}
+
+.connectedNftBlock {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #B1F1E3;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.connectedNftId {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #EAE8E1;
+}
+
+.connectedNftAmount {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #9A9FAF;
+}
+
+.withdrawWarn {
+  display: flex;
+  padding: 16px;
+  gap: 12px;
+  align-items: center;
+  background: rgba(69, 155, 14, 0.12);
+  border: 1px solid #459B0E;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #459B0E;
+}
+
+.leftBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
 }

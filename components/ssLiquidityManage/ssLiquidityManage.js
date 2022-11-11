@@ -1027,7 +1027,7 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
               : ""
             : type !== "withdraw"
             ? `2nd ${windowWidth > 530 ? "token :" : ""}`
-            : "LP"}
+            : ""}
         </Typography>
 
         {createLP && type !== "withdraw" &&
@@ -1165,29 +1165,149 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
               {!createLP && <span className={classes.flyPercent}>%</span>}
             </div>
           )}
-
-          {/*{type === "withdraw" && (
-            <>
-              <div
-                className={[
-                  classes.tokenText,
-                  classes[`tokenText--${appTheme}`],
-                ].join(" ")}
-              >
-                {formatSymbol(assetValue?.symbol)}
-              </div>
-
-              <div
-                className={[
-                  classes.tokenTextLabel,
-                  classes[`tokenTextLabel--${appTheme}`],
-                ].join(" ")}
-              >
-                Variable pool
-              </div>
-            </>
-          )}*/}
         </div>
+
+        {type === "withdraw" && withdrawAsset !== null && withdrawAction !== "" && (
+            <div
+                className={["g-flex", classes.liqWrapper].join(" ")}
+            >
+              <div className={["g-flex-column", "g-flex__item"].join(" ")}>
+                {withdrawAction === "remove" && (
+                    <div
+                        className={[
+                          classes.liqHeader,
+                          classes.liqHeaderWithdraw,
+                          classes[`liqHeader--${appTheme}`],
+                          "g-flex",
+                          "g-flex--align-center",
+                          "g-flex--space-between",
+                        ].join(" ")}
+                    >
+
+                      <div className={["g-flex", "g-flex--align-center"].join(" ")}>
+                        <span>Balance:</span>
+
+                        <Typography
+                            className={[
+                              classes.inputBalanceText,
+                              "g-flex__item",
+                            ].join(" ")}
+                            noWrap
+                        >
+                          {parseFloat(withdrawAsset?.balance) > 0
+                              ? parseFloat(withdrawAsset?.balance).toFixed(10)
+                              : "0.00"}
+                        </Typography>
+                      </div>
+
+                      <div
+                          style={{
+                            cursor: "pointer",
+                            fontWeight: 700,
+                            fontSize: 14,
+                            lineHeight: "20px",
+                            color: '#B1F1E3',
+                          }}
+                          onClick={() => setAmountPercent(withdrawAsset, "withdraw")}
+                      >
+                        MAX
+                      </div>
+                    </div>
+                )}
+                {withdrawAction !== "remove" && (
+                    <div
+                        className={[
+                          classes.liqHeader,
+                          classes.liqHeaderWithdraw,
+                          "g-flex",
+                          "g-flex--align-center",
+                          "g-flex--space-between",
+                        ].join(" ")}
+                    >
+                      <div className={["g-flex", "g-flex--align-center"].join(" ")}>
+                        {/*<span>Balance:</span>*/}
+
+                        <Typography
+                            className={[
+                              classes.inputBalanceText,
+                              "g-flex__item",
+                            ].join(" ")}
+                            noWrap
+                        >
+                          Balance: {parseFloat(withdrawAsset?.gauge?.balance) > 0
+                              ? parseFloat(withdrawAsset?.gauge?.balance).toFixed(10)
+                              : "0.00"}
+                        </Typography>
+                      </div>
+
+                      <div
+                          style={{
+                            cursor: "pointer",
+                            fontWeight: 700,
+                            fontSize: 14,
+                            lineHeight: "20px",
+                            color: '#B1F1E3',
+                          }}
+                          onClick={() =>
+                              setAmountPercentGauge(withdrawAsset, "withdraw")
+                          }
+                      >
+                        MAX
+                      </div>
+                    </div>
+                )}
+
+                <div
+                    className={[
+                      classes.liqBody,
+                      classes.liqBodyIn,
+                      classes[`liqBody--${appTheme}`],
+                      "g-flex",
+                      "g-flex--align-center",
+                    ].join(" ")}
+                >
+                  <span className={classes.flyPercentWithdraw}>%</span>
+                  <InputBase
+                      className={classes.massiveInputAmountUnstake}
+                      placeholder="0.00"
+                      error={amount1Error}
+                      helperText={amount1Error}
+                      value={withdrawAmount}
+                      onChange={() => withdrawAmountChanged(withdrawAsset)}
+                      disabled={
+                          depositLoading ||
+                          stakeLoading ||
+                          depositStakeLoading ||
+                          createLoading ||
+                          (withdrawAction !== "remove" && !withdrawAsset?.gauge?.balance) ||
+                          ((withdrawAction === "remove" || withdrawAction === "unstake-remove") && (!withdrawAsset?.balance || !BigNumber(withdrawAsset?.balance).gt(0)))
+                      }
+                      onFocus={amount1Focused ? amount1Focused : null}
+                      inputProps={{
+                        className: [
+                          classes.largeInput,
+                          classes[`largeInput--${appTheme}`],
+                        ].join(" "),
+                      }}
+                      InputProps={{
+                        // startAdornment: "%",
+                        disableUnderline: true,
+                      }}
+                  />
+                </div>
+              </div>
+            </div>
+        )}
+
+        {type === "withdraw" && withdrawAsset !== null && pair?.gauge?.veId && vestNFTs.filter(t => t.id == pair?.gauge?.veId).length &&
+            <div className={classes.connectedNft}>
+              <div className={classes.connectedNftText}>Connected NFT to this LP Deposit:</div>
+              <div className={classes.connectedNftBlock}>
+                <div className={classes.connectedNftId}>#{pair?.gauge?.veId}</div>
+                <div className={classes.connectedNftAmount}>{formatCurrency(vestNFTs.filter(t => t.id == pair?.gauge?.veId)[0].lockValue)} {veToken?.symbol}</div>
+              </div>
+            </div>
+        }
       </div>
     );
   };
@@ -1244,9 +1364,7 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
               <div>My Pool</div>
               <div>
                 {withdrawAsset?.balance ?? '0.0'}
-                <span className={classes.myLiqSpacer}></span>
               </div>
-              <div className={classes.myLiqSplit}></div>
             </div>
             <div className={classes.myLiqBal}>
               <div>
@@ -1254,108 +1372,6 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
                 My Stake
               </div>
               <div>{withdrawAsset?.gauge?.balance ?? '0.00'}</div>
-            </div>
-          </div>
-        </div>
-
-        <div className={[classes.togglesWithdraw, "g-flex-column"].join(" ")}>
-          <div className={["g-flex", "g-flex--align-center"].join(" ")}>
-            <div
-              className={[
-                classes.toggleOption,
-                classes[`toggleOption--${appTheme}`],
-                `${withdrawAction === "unstake" && classes.active}`,
-              ].join(" ")}
-              onClick={() => {
-                setWithdrawAction("unstake");
-              }}
-            >
-              {renderToggleIcon("unstake")}
-
-              <Typography
-                className={[
-                  classes.toggleOptionText,
-                  classes[`toggleOptionText--${appTheme}`],
-                ].join(" ")}
-              >
-                I want to unstake LP
-              </Typography>
-
-              <Tooltip
-                  active={true}
-                  title='Select "I want to unstake LP" if you have staked LP in the gauge.'
-                  componentsProps={{
-                    tooltip: {
-                      style: {
-                        padding: '12px 24px',
-                        fontSize: 16,
-                        fontWeight: 400,
-                        lineHeight: '24px',
-                        
-                        border: '1px solid #779BF4',
-                        borderRadius: 12,
-
-                        background: '#1F2B49',
-                        color: '#E4E9F4',
-                      }
-                    },
-                  }}
-              >
-                <div className={classes.tooltipCircle}>
-                  <svg width="10" height="10" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2.23914 0.95C2.91914 0.95 3.46247 1.13667 3.86914 1.51C4.28247 1.88333 4.48914 2.39333 4.48914 3.04C4.48914 3.71333 4.27581 4.22 3.84914 4.56C3.42247 4.9 2.85581 5.07 2.14914 5.07L2.10914 5.86H1.11914L1.06914 4.29H1.39914C2.04581 4.29 2.53914 4.20333 2.87914 4.03C3.22581 3.85667 3.39914 3.52667 3.39914 3.04C3.39914 2.68667 3.29581 2.41 3.08914 2.21C2.88914 2.01 2.60914 1.91 2.24914 1.91C1.88914 1.91 1.60581 2.00667 1.39914 2.2C1.19247 2.39333 1.08914 2.66333 1.08914 3.01H0.0191407C0.0191407 2.61 0.109141 2.25333 0.289141 1.94C0.469141 1.62667 0.725807 1.38333 1.05914 1.21C1.39914 1.03667 1.79247 0.95 2.23914 0.95ZM1.59914 8.07C1.39247 8.07 1.21914 8 1.07914 7.86C0.939141 7.72 0.869141 7.54667 0.869141 7.34C0.869141 7.13333 0.939141 6.96 1.07914 6.82C1.21914 6.68 1.39247 6.61 1.59914 6.61C1.79914 6.61 1.96914 6.68 2.10914 6.82C2.24914 6.96 2.31914 7.13333 2.31914 7.34C2.31914 7.54667 2.24914 7.72 2.10914 7.86C1.96914 8 1.79914 8.07 1.59914 8.07Z" fill="#586586"/>
-                  </svg>
-                </div>
-              </Tooltip>
-
-            </div>
-
-            <div
-              className={[
-                classes.toggleOption,
-                classes[`toggleOption--${appTheme}`],
-                `${withdrawAction === "remove" && classes.active}`,
-              ].join(" ")}
-              onClick={() => {
-                setWithdrawAction("remove");
-              }}
-            >
-              {renderToggleIcon("remove")}
-
-              <Typography
-                className={[
-                  classes.toggleOptionText,
-                  classes[`toggleOptionText--${appTheme}`],
-                ].join(" ")}
-              >
-                I want to remove LP
-              </Typography>
-
-              <Tooltip
-                  title='Select "I want to remove LP" if you have unstaked LP and want to remove liquidity.'
-                  componentsProps={{
-                    tooltip: {
-                      style: {
-                        padding: '12px 24px',
-                        fontSize: 16,
-                        fontWeight: 400,
-                        lineHeight: '24px',
-                        
-                        border: '1px solid #779BF4',
-                        borderRadius: 12,
-
-                        background: '#1F2B49',
-                        color: '#E4E9F4',
-                      }
-                    },
-                  }}
-              >
-                <div className={classes.tooltipCircle}>
-                  <svg width="10" height="10" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2.23914 0.95C2.91914 0.95 3.46247 1.13667 3.86914 1.51C4.28247 1.88333 4.48914 2.39333 4.48914 3.04C4.48914 3.71333 4.27581 4.22 3.84914 4.56C3.42247 4.9 2.85581 5.07 2.14914 5.07L2.10914 5.86H1.11914L1.06914 4.29H1.39914C2.04581 4.29 2.53914 4.20333 2.87914 4.03C3.22581 3.85667 3.39914 3.52667 3.39914 3.04C3.39914 2.68667 3.29581 2.41 3.08914 2.21C2.88914 2.01 2.60914 1.91 2.24914 1.91C1.88914 1.91 1.60581 2.00667 1.39914 2.2C1.19247 2.39333 1.08914 2.66333 1.08914 3.01H0.0191407C0.0191407 2.61 0.109141 2.25333 0.289141 1.94C0.469141 1.62667 0.725807 1.38333 1.05914 1.21C1.39914 1.03667 1.79247 0.95 2.23914 0.95ZM1.59914 8.07C1.39247 8.07 1.21914 8 1.07914 7.86C0.939141 7.72 0.869141 7.54667 0.869141 7.34C0.869141 7.13333 0.939141 6.96 1.07914 6.82C1.21914 6.68 1.39247 6.61 1.59914 6.61C1.79914 6.61 1.96914 6.68 2.10914 6.82C2.24914 6.96 2.31914 7.13333 2.31914 7.34C2.31914 7.54667 2.24914 7.72 2.10914 7.86C1.96914 8 1.79914 8.07 1.59914 8.07Z" fill="#586586"/>
-                  </svg>
-                </div>
-              </Tooltip>
             </div>
           </div>
         </div>
@@ -1370,215 +1386,7 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
             </div>
         )}
 
-        {withdrawAsset !== null && withdrawAction !== "" && (
-          <div
-            className={["g-flex", classes.liqWrapper].join(" ")}
-            style={{ width: "100%", marginTop: 20 }}
-          >
-            <div className={["g-flex-column", "g-flex__item-fixed", classes.liqTokens].join(" ")}>
-              <div
-                className={[
-                  classes.liqHeader,
-                  classes[`liqHeader--${appTheme}`],
-                  classes.liqHeaderLabel,
-                  "g-flex",
-                  "g-flex--align-center",
-                ].join(" ")}
-              >
-                <div>LP token</div>
-              </div>
 
-              <div
-                className={[
-                  classes.liqBody,
-                  classes[`liqBody--${appTheme}`],
-                  classes.liqBodyLabel,
-                  classes.liqBodyLabelOutline,
-                  "g-flex",
-                  "g-flex--align-center",
-                ].join(" ")}
-              >
-                <div
-                  className={[
-                    classes.liqBodyIconContainer,
-                    classes[`liqBodyIconContainer--${appTheme}`],
-                  ].join(" ")}
-                >
-                  <img
-                    className={classes.liqBodyIcon}
-                    alt=""
-                    src={
-                      withdrawAsset ? `${withdrawAsset?.token0?.logoURI}` : ""
-                    }
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
-                    }}
-                  />
-                </div>
-
-                <div
-                  className={[
-                    classes.liqBodyIconContainer,
-                    classes[`liqBodyIconContainer--${appTheme}`],
-                  ].join(" ")}
-                >
-                  <img
-                    className={classes.liqBodyIcon}
-                    alt=""
-                    src={
-                      withdrawAsset ? `${withdrawAsset?.token1?.logoURI}` : ""
-                    }
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
-                    }}
-                  />
-                </div>
-              </div>
-
-              <div
-                  className={[
-                    classes.tokenTextSecond,
-                    classes[`tokenTextSecond--${appTheme}`],
-                  ].join(" ")}
-              >
-                {withdrawAsset?.symbol}
-
-                <Typography className={classes.labelSelectSecondary}>
-                  {withdrawAsset?.isStable ? 'Stable pool' : 'Volatile Pool'}
-                </Typography>
-              </div>
-            </div>
-
-            <div className={["g-flex-column", "g-flex__item"].join(" ")}>
-              {withdrawAction === "remove" && (
-                <div
-                  className={[
-                    classes.liqHeader,
-                    classes.liqHeaderWithdraw,
-                    classes[`liqHeader--${appTheme}`],
-                    "g-flex",
-                    "g-flex--align-center",
-                    "g-flex--space-between",
-                  ].join(" ")}
-                >
-
-                  <div className={["g-flex", "g-flex--align-center"].join(" ")}>
-                    <img
-                      src="/images/ui/icon-wallet.svg"
-                      className={classes.walletIcon}
-                    />
-
-                    <Typography
-                      className={[
-                        classes.inputBalanceText,
-                        "g-flex__item",
-                      ].join(" ")}
-                      noWrap
-                    >
-                      {parseFloat(withdrawAsset?.balance) > 0
-                        ? parseFloat(withdrawAsset?.balance).toFixed(10)
-                        : "0.00"}
-                    </Typography>
-                  </div>
-
-                  <div
-                    className={[
-                      classes.balanceMax,
-                      classes[`balanceMax--${appTheme}`],
-                    ].join(" ")}
-                    onClick={() => setAmountPercent(withdrawAsset, "withdraw")}
-                  >
-                    MAX
-                  </div>
-                </div>
-              )}
-              {withdrawAction !== "remove" && (
-                <div
-                  className={[
-                    classes.liqHeader,
-                    classes.liqHeaderWithdraw,
-                    classes[`liqHeader--${appTheme}`],
-                    "g-flex",
-                    "g-flex--align-center",
-                    "g-flex--space-between",
-                  ].join(" ")}
-                >
-                  <div className={["g-flex", "g-flex--align-center"].join(" ")}>
-                    <img
-                      src="/images/ui/icon-wallet.svg"
-                      className={classes.walletIcon}
-                    />
-
-                    <Typography
-                      className={[
-                        classes.inputBalanceText,
-                        "g-flex__item",
-                      ].join(" ")}
-                      noWrap
-                    >
-                      {parseFloat(withdrawAsset?.gauge?.balance) > 0
-                        ? parseFloat(withdrawAsset?.gauge?.balance).toFixed(10)
-                        : "0.00"}
-                    </Typography>
-                  </div>
-
-                  <div
-                    className={[
-                      classes.balanceMax,
-                      classes[`balanceMax--${appTheme}`],
-                    ].join(" ")}
-                    onClick={() =>
-                      setAmountPercentGauge(withdrawAsset, "withdraw")
-                    }
-                  >
-                    MAX
-                  </div>
-                </div>
-              )}
-
-              <div
-                className={[
-                  classes.liqBody,
-                  classes.liqBodyIn,
-                  classes[`liqBody--${appTheme}`],
-                  "g-flex",
-                  "g-flex--align-center",
-                ].join(" ")}
-              >
-                <span className={classes.flyPercentWithdraw}>%</span>
-                <InputBase
-                  className={classes.massiveInputAmountUnstake}
-                  placeholder="0.00"
-                  error={amount1Error}
-                  helperText={amount1Error}
-                  value={withdrawAmount}
-                  onChange={() => withdrawAmountChanged(withdrawAsset)}
-                  disabled={
-                    depositLoading ||
-                    stakeLoading ||
-                    depositStakeLoading ||
-                    createLoading ||
-                      (withdrawAction !== "remove" && !withdrawAsset?.gauge?.balance) ||
-                      ((withdrawAction === "remove" || withdrawAction === "unstake-remove") && (!withdrawAsset?.balance || !BigNumber(withdrawAsset?.balance).gt(0)))
-                  }
-                  onFocus={amount1Focused ? amount1Focused : null}
-                  inputProps={{
-                    className: [
-                      classes.largeInput,
-                      classes[`largeInput--${appTheme}`],
-                    ].join(" "),
-                  }}
-                  InputProps={{
-                    // startAdornment: "%",
-                    disableUnderline: true,
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-        )}
 
         {withdrawAsset !== null &&
           withdrawAction !== null &&
@@ -2092,27 +1900,37 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
           <span className={classes.curPage}>Manage Liquidity</span>
         </div>
         <div className={classes.mainContent}>
-          <div className={classes.manageBlock}>
-            <div className={classes.blockTitle}>MANAGE LIQUIDITY</div>
-            <div className={classes.blockInner}>
-              <div className={classes.manageRow}>
-                <div className={activeTab === "deposit" ? classes.manageBtnActive : classes.manageBtn} onClick={toggleDeposit}>Add liquidity</div>
-                <div className={activeTab !== "deposit" ? classes.manageBtnActive : classes.manageBtn} onClick={toggleWithdraw}>Withdraw</div>
+          <div className={classes.leftBlock}>
+            <div className={classes.manageBlock}>
+              <div className={classes.blockTitle}>MANAGE LIQUIDITY</div>
+              <div className={classes.blockInner}>
+                <div className={classes.manageRow}>
+                  <div className={activeTab === "deposit" ? classes.manageBtnActive : classes.manageBtn} onClick={toggleDeposit}>Add liquidity</div>
+                  <div className={activeTab !== "deposit" ? classes.manageBtnActive : classes.manageBtn} onClick={toggleWithdraw}>Withdraw</div>
+                </div>
+                {activeTab === "deposit" &&
+                    <div className={classes.manageRow}>
+                      <div className={createLP ? classes.manageBtnActive : classes.manageBtn} onClick={!createLP ? switchToggleCreateLP : () => {}}>Create LP</div>
+                      <div className={!createLP ? classes.manageBtnActive : classes.manageBtn} onClick={createLP ? switchToggleCreateLP : () => {}}>Stake LP</div>
+                    </div>
+                }
+                {activeTab !== "deposit" && withdrawAction &&
+                    <div className={classes.manageRow}>
+                      <div className={withdrawAction === 'unstake' ? classes.manageBtnActive : classes.manageBtn} onClick={() => { setWithdrawAction("unstake") }}>Unstake LP</div>
+                      <div className={withdrawAction === 'remove' ? classes.manageBtnActive : classes.manageBtn} onClick={() => { setWithdrawAction("remove") }}>Remove LP</div>
+                    </div>
+                }
               </div>
-              {activeTab === "deposit" &&
-                  <div className={classes.manageRow}>
-                    <div className={createLP ? classes.manageBtnActive : classes.manageBtn} onClick={!createLP ? switchToggleCreateLP : () => {}}>Create LP</div>
-                    <div className={!createLP ? classes.manageBtnActive : classes.manageBtn} onClick={createLP ? switchToggleCreateLP : () => {}}>Stake LP</div>
-                  </div>
-              }
-              {activeTab !== "deposit" && withdrawAction &&
-                  <div className={classes.manageRow}>
-                    <div className={withdrawAction === 'unstake' ? classes.manageBtnActive : classes.manageBtn} onClick={() => { setWithdrawAction("unstake") }}>Unstake LP</div>
-                    <div className={withdrawAction === 'remove' ? classes.manageBtnActive : classes.manageBtn} onClick={() => { setWithdrawAction("remove") }}>Remove LP</div>
-                  </div>
-              }
-            </div>
 
+            </div>
+            {activeTab === "withdraw" &&
+                <div className={classes.withdrawWarn}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd" clipRule="evenodd" d="M21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21C16.9706 21 21 16.9706 21 12ZM13 16C13 15.4477 12.5523 15 12 15C11.4477 15 11 15.4477 11 16C11 16.5523 11.4477 17 12 17C12.5523 17 13 16.5523 13 16ZM12.75 7V13H11.25V7H12.75Z" fill="#459B0E"/>
+                  </svg>
+                  <span>Please claim any rewards before withdrawing.</span>
+                </div>
+            }
           </div>
           <Paper elevation={0} className={[classes.container, "g-flex-column"].join(' ')}>
 
@@ -2710,6 +2528,23 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
                         </div>
                     }
 
+                    {withdrawAction === "unstake" && (withdrawAmount === "" || !withdrawAsset) &&
+                        <div
+                            className={[
+                              classes.disclaimerContainer,
+                              classes.disclaimerContainerDefault,
+
+                            ].join(" ")}
+                        >
+                          <svg style={{marginRight: 12,}} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fillRule="evenodd" clipRule="evenodd" d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM13 8C13 8.55228 12.5523 9 12 9C11.4477 9 11 8.55228 11 8C11 7.44772 11.4477 7 12 7C12.5523 7 13 7.44772 13 8ZM12.75 17V11H11.25V17H12.75Z" fill="#68727A"/>
+                          </svg>
+                          <div>
+                            Select a liquidity pair you want to unstake and enter the amount in percentages.
+                          </div>
+                        </div>
+                    }
+
                   </div>
                   <Button
                       variant="contained"
@@ -2726,29 +2561,13 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
                         classes[`buttonOverride--${appTheme}`],
                       ].join(" ")}
                   >
-            <span className={classes.actionButtonText}>
-              {withdrawAsset !== null && (
-                  <>
-                    {withdrawAction === "" && "Select the action"}
-
-                    {parseFloat(withdrawAmount) > 0 &&
-                        withdrawAction === "unstake" &&
-                        "Unstake LP"}
-
-                    {parseFloat(withdrawAmount) > 0 &&
-                        withdrawAction === "remove" &&
-                        "Remove LP"}
-
-                    {(withdrawAction !== "" && (parseFloat(withdrawAmount) === 0 || withdrawAmount === "")) &&
-                        "Enter Amount"}
-                  </>
-              )}
-
-              {withdrawAsset === null && "Select LP & action"}
-            </span>
-                    {/*{depositLoading && (
-                      <Loader color={appTheme === "dark" ? "#8F5AE8" : "#8F5AE8"} />
-                  )}*/}
+                    <span className={classes.actionButtonText}>
+                        <>
+                          {withdrawAction === "" && "Select the action"}
+                          {withdrawAction === "unstake" && "Unstake Liquidity"}
+                          {withdrawAction === "remove" && "Remove Liquidity"}
+                        </>
+                    </span>
                   </Button>
                 </>
             )}
