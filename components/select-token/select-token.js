@@ -94,12 +94,8 @@ function TokenSelect(props) {
       }
       {options?.map((option) => {
         return (
-          <MenuItem
-            key={option.id}
-            value={option}>
-            <div
-              className={[classes.menuOption, 'g-flex', 'g-flex--align-center', 'g-flex--space-between'].join(' ')}
-            >
+          <MenuItem key={option.id} value={option}>
+            <div className={[classes.menuOption, 'g-flex', 'g-flex--align-center', 'g-flex--space-between'].join(' ')}>
               <div>#{option.id}</div>
 
               <div className={[classes.menuOptionSec, 'g-flex-column'].join(' ')}>
@@ -107,7 +103,6 @@ function TokenSelect(props) {
                   {formatCurrency(option.lockValue)}
                   {symbol ? ' ' + symbol : ''}
                 </div>
-
               </div>
             </div>
           </MenuItem>

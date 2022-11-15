@@ -48,7 +48,11 @@
 
 .main {
   position: relative;
-  padding: 70px 20px 0;
+  padding: 70px 20px 50px;
+}
+
+.mainHome {
+  padding: 70px 0 0;
 }
 
 .containerInner {
@@ -66,10 +70,18 @@
   .main {
     padding: 48px 20px;
   }
+
+  .mainHome {
+    padding: 48px 0 0;
+  }
 }
 
 @media screen and (max-width: 680px) {
   .main {
     padding: 48px 12px;
+  }
+
+  .mainHome {
+    padding: 48px 0 0;
   }
 }

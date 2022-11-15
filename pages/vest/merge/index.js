@@ -14,6 +14,7 @@ import {
 import { ArrowBackIosNew, Close, Search } from "@mui/icons-material";
 import classes from "./vest.module.css";
 import classesMerge from "./merge.module.css";
+import classesDialog from './dialog.module.css';
 import classesLock from "../../../components/ssVest/lock.module.css";
 import { useRouter } from "next/router";
 import Form from "../../../ui/MigratorForm";
@@ -39,7 +40,7 @@ const renderAssetOption = (item, callbackClick) => {
 const renderOptions = (data, callbackClick) => {
   return (
     <>
-      <div className={classes.searchInline}>
+      <div className={classesDialog.searchInline}>
         <TextField
           autoFocus
           variant="outlined"
@@ -47,22 +48,26 @@ const renderOptions = (data, callbackClick) => {
           placeholder="Type or paste the address"
           InputProps={{
             classes: {
-              root: classes.searchInput,
-              inputAdornedStart: classes.searchInputText,
+              root: classesDialog.searchInput,
+              inputAdornedEnd: classesDialog.searchInputText,
+              input: classesDialog.searchInputInput,
             },
             endAdornment: <InputAdornment position="end">
-              <Search style={{ color: '#CCD2E3' }} />
+              <div className={classesDialog.searchInputIcon}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18 11C18 14.866 14.866 18 11 18C7.13401 18 4 14.866 4 11C4 7.13401 7.13401 4 11 4C14.866 4 18 7.13401 18 11Z" fill="#9A9FAF"/>
+                  <path d="M20 20L18 18" stroke="#9A9FAF" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
             </InputAdornment>,
           }}
         />
       </div>
 
-      <div className={[classes.dialogOptions, "g-flex-column__item"].join(" ")}>
-        <div className={classes.items}>
-          {data.map(asset => {
-            return renderAssetOption(asset, callbackClick);
-          })}
-        </div>
+      <div className={classesDialog.dialogOptions}>
+        {data.map(asset => {
+          return renderAssetOption(asset, callbackClick);
+        })}
       </div>
     </>
   );
@@ -188,47 +193,35 @@ const merge = () => {
 
         <Dialog
           open={open}
-          width={782}
-          classes={{
-            paperScrollPaper: classes.paperScrollPaper,
-            paper: classes.paper
-          }}
+          PaperProps={{ style: { width: "100%", maxWidth: 800, background: 'transpaarent', borderRadius: 20 } }}
           onClick={(e) => {
             if (e.target.classList.contains('MuiDialog-container')) {
               closeModal();
             }
           }}
+          classes={{
+            paperScrollPaper: classesDialog.paperScrollPaper,
+            paper: classesDialog.paper,
+            scrollPaper: classesDialog.scrollPaper,
+          }}
         >
-          <div className={[classes.dialogContainer, 'g-flex-column'].join(' ')}>
-            <DialogTitle className={[classes.dialogTitle, 'g-flex-column__item-fixed'].join(' ')}>
-              <div className={classes.dialogTitleRow}>
-                <div className={classes.dialogTitleLeft}>Select veREMOTE</div>
-                <div className={classes.dialogTitleRight}>
-                  <Close
-                    style={{
-                      fontSize: 12,
-                      color: '#CCD2E3',
-                      cursor: 'pointer',
-                    }}
-                    onClick={closeModal}
-                  />
-                </div>
+          <div className={classesDialog.dialogContainer}>
+            <div className={classesDialog.dialogContainerInner}>
+              <div className={classesDialog.dialogTitleWrapper}>
+                <div className={classesDialog.dialogTitle}>Select veREMOTE</div>
+                <div className={classesDialog.dialogClose} onClick={closeModal} />
               </div>
-            </DialogTitle>
-            <DialogContent
-              style={{overflow: 'hidden'}}
-              className={[classes.dialogContent, 'g-flex-column__item', 'g-flex-column'].join(' ')}
-            >
-              <div className={[classes.dialogContentInner, 'g-flex-column__item', 'g-flex-column'].join(' ')}>
+
+              <div className={classesDialog.dialogContent}>
                 {vestNFTs && renderOptions(vestNFTs, value => {
                   handleChange1(value)
                   closeModal();
                 })}
 
-                <div className={classes.descText}>Choose one of the existing NFTs or create a new one.</div>
-                <div className={classes.descButton} onClick={onCreate}>Create new NFT</div>
+                <div className={classesDialog.descText}>Choose one of the existing NFTs or create a new one.</div>
+                <div className={classesDialog.descButton} onClick={onCreate}>Create new NFT</div>
               </div>
-            </DialogContent>
+            </div>
           </div>
         </Dialog>
       </div>
@@ -274,47 +267,35 @@ const merge = () => {
 
         <Dialog
           open={open}
-          width={782}
-          classes={{
-            paperScrollPaper: classes.paperScrollPaper,
-            paper: classes.paper
-          }}
+          PaperProps={{ style: { width: "100%", maxWidth: 800, background: 'transpaarent', borderRadius: 20 } }}
           onClick={(e) => {
             if (e.target.classList.contains('MuiDialog-container')) {
               closeModal();
             }
           }}
+          classes={{
+            paperScrollPaper: classesDialog.paperScrollPaper,
+            paper: classesDialog.paper,
+            scrollPaper: classesDialog.scrollPaper,
+          }}
         >
-          <div className={[classes.dialogContainer, 'g-flex-column'].join(' ')}>
-            <DialogTitle className={[classes.dialogTitle, 'g-flex-column__item-fixed'].join(' ')}>
-              <div className={classes.dialogTitleRow}>
-                <div className={classes.dialogTitleLeft}>Select veREMOTE</div>
-                <div className={classes.dialogTitleRight}>
-                  <Close
-                    style={{
-                      fontSize: 12,
-                      color: '#CCD2E3',
-                      cursor: 'pointer',
-                    }}
-                    onClick={closeModal}
-                  />
-                </div>
+          <div className={classesDialog.dialogContainer}>
+            <div className={classesDialog.dialogContainerInner}>
+              <div className={classesDialog.dialogTitleWrapper}>
+                <div className={classesDialog.dialogTitle}>Select veREMOTE</div>
+                <div className={classesDialog.dialogClose} onClick={closeModal} />
               </div>
-            </DialogTitle>
-            <DialogContent
-              style={{overflow: 'hidden'}}
-              className={[classes.dialogContent, 'g-flex-column__item', 'g-flex-column'].join(' ')}
-            >
-              <div className={[classes.dialogContentInner, 'g-flex-column__item', 'g-flex-column'].join(' ')}>
+
+              <div className={classesDialog.dialogContent}>
                 {vestNFTs && renderOptions(vestNFTs, value => {
                   handleChange2(value);
                   closeModal();
                 })}
 
-                <div className={classes.descText}>Choose one of the existing NFTs or create a new one.</div>
-                <div className={classes.descButton} onClick={onCreate}>Create new NFT</div>
+                <div className={classesDialog.descText}>Choose one of the existing NFTs or create a new one.</div>
+                <div className={classesDialog.descButton} onClick={onCreate}>Create new NFT</div>
               </div>
-            </DialogContent>
+            </div>
           </div>
         </Dialog>
       </div>

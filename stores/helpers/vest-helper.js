@@ -515,7 +515,7 @@ export const merge = async (
 
     notifications.push({
       uuid: mergeTXID,
-      description: `Merge veCONE`,
+      description: `Merge veRemote`,
       status: "WAITING",
     });
 

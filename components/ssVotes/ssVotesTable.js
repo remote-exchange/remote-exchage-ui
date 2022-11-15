@@ -15,7 +15,7 @@ import {
   Skeleton,
   Accordion,
   AccordionSummary,
-  AccordionDetails, Button, DialogTitle, DialogContent, Dialog, InputBase, MenuItem, Select,
+  AccordionDetails, Button, DialogTitle, DialogContent, Dialog, InputBase, MenuItem, Select, AccordionActions,
 } from '@mui/material';
 import numeral from "numeral";
 import BigNumber from 'bignumber.js';
@@ -26,22 +26,18 @@ import TablePaginationActions from '../table-pagination/table-pagination';
 import SortSelect from '../select-sort/select-sort';
 import { formatSymbol } from '../../utils';
 import css from "./ssVotesTable.module.css";
+import cssVoteModal from "./voteModal.module.css";
 import cssTokenSelect from '../select-token/select-token.module.css';
 
 const CustomSlider = styled(Slider)(({theme, appTheme, disabled}) => {
-
   const MuiSliderthumb = {
     backgroundColor: '#C0E255',
   }
 
-  const MuiSliderTrack = {
-    // backgroundColor: '#9BC9E4',
-  }
+  const MuiSliderTrack = {}
 
   const MuiSliderRail = {
-    background: appTheme === 'dark'
-      ? 'linear-gradient(to left, #1B4F20 50%, #631515 50%)'
-      : 'linear-gradient(to left, #A2E3A9 50%, #EC9999 50%)'
+    background: 'linear-gradient(to left, rgba(69, 155, 14, 0.12) 50%, rgba(155, 14, 14, 0.12) 50%)',
   }
 
   if (disabled) {
@@ -51,15 +47,16 @@ const CustomSlider = styled(Slider)(({theme, appTheme, disabled}) => {
   }
 
   return ({
-    color: appTheme === 'dark' ? '#3880ff' : '#3880ff',
-    height: 4,
-    padding: '15px 0',
+    height: 8,
+    padding: '10px 0',
+
     '& .MuiSlider-thumb': {
-      borderRadius: 12,
-      height: 12,
-      width: 24,
-      backgroundColor: MuiSliderthumb.backgroundColor,
+      height: 20,
+      width: 20,
+      borderRadius: '50%',
+      backgroundColor: '#B1F1E3',
       boxShadow: 'none',
+
       '&:focus, &:hover, &.Mui-active': {
         boxShadow: 'none',
         '@media (hover: none)': {
@@ -68,20 +65,7 @@ const CustomSlider = styled(Slider)(({theme, appTheme, disabled}) => {
       },
     },
     '& .MuiSlider-valueLabel': {
-      fontSize: 16,
-      fontWeight: 500,
-      top: -8,
-      // border: '1px solid #0B5E8E',
-      background: 'transparent',
-      padding: 5,
-      borderRadius: 0,
-      '&:before': {
-        borderBottom: '1px solid #0B5E8E',
-        borderRight: '1px solid #0B5E8E',
-      },
-      '& *': {
-        color: '#E4E9F4',
-      },
+      display: 'none',
     },
     '& .MuiSlider-track': {
       border: 'none',
@@ -89,8 +73,10 @@ const CustomSlider = styled(Slider)(({theme, appTheme, disabled}) => {
       opacity: 0,
     },
     '& .MuiSlider-rail': {
+      height: 8,
+      border: '1px solid #353A42',
+      borderRadius: '8px 8px',
       opacity: 1,
-      // backgroundColor: '#9BC9E4',
       background: MuiSliderRail.background,
     },
     '& .MuiSlider-mark': {
@@ -99,7 +85,6 @@ const CustomSlider = styled(Slider)(({theme, appTheme, disabled}) => {
       height: 2,
       width: 2,
       '&.MuiSlider-markActive': {
-        // backgroundColor: disabled ? MuiSliderTrack.backgroundColor : '#CFE5F2',
         opacity: 0,
       },
     },
@@ -243,31 +228,42 @@ const headCells = [
     numeric: true,
     disablePadding: false,
     label: 'My Stake',
+    isHideInDetails: false,
   },
   {
     id: 'liquidity',
     numeric: true,
     disablePadding: false,
     label: 'Total Liquidity',
+    isHideInDetails: false,
+  },
+  {
+    id: 'bribes',
+    numeric: true,
+    disablePadding: false,
+    label: 'Bribes',
+    isHideInDetails: false,
+  },
+  {
+    id: 'bribesApy',
+    numeric: true,
+    disablePadding: false,
+    label: 'Bribes apr %',
+    isHideInDetails: false,
   },
   {
     id: 'totalVotes',
     numeric: true,
     disablePadding: false,
     label: 'Total Votes',
-    isHideInDetails: true,
-  },
-  {
-    id: 'apy',
-    numeric: true,
-    disablePadding: false,
-    label: 'Bribes',
+    isHideInDetails: false,
   },
   {
     id: 'myVotes',
     numeric: true,
     disablePadding: false,
     label: 'My Votes',
+    isHideInDetails: false,
   },
 ];
 
@@ -294,17 +290,17 @@ const sortIcon = (sortDirection) => {
   return (
     <>
       <svg
-        width="20"
-        height="20"
-        viewBox="0 0 20 20"
-        fill="none"
         style={{
-          transform: sortDirection === 'desc' ? 'rotate(180deg)' : 'rotate(0deg)',
+          marginRight: 10,
+          transform: sortDirection === 'desc' ? 'rotate(0deg)' : 'rotate(180deg)',
         }}
-        xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M5.83325 8.33337L9.99992 12.5L14.1666 8.33337H5.83325Z"
-          fill={appTheme === 'dark' ? '#5F7285' : '#9BC9E4'}/>
+        width="11"
+        height="13"
+        viewBox="0 0 11 13"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M5.5 1.66663L4.79289 0.959519L5.5 0.252412L6.20711 0.959519L5.5 1.66663ZM6.5 11.6666C6.5 12.2189 6.05229 12.6666 5.5 12.6666C4.94772 12.6666 4.5 12.2189 4.5 11.6666L6.5 11.6666ZM0.792893 4.95952L4.79289 0.959519L6.20711 2.37373L2.20711 6.37373L0.792893 4.95952ZM6.20711 0.959519L10.2071 4.95952L8.79289 6.37373L4.79289 2.37373L6.20711 0.959519ZM6.5 1.66663L6.5 11.6666L4.5 11.6666L4.5 1.66663L6.5 1.66663Z" fill="#353A42"/>
       </svg>
     </>
   );
@@ -320,87 +316,52 @@ function EnhancedTableHead(props) {
 
   return (
     <TableHead>
-      <TableRow
-        style={{
-          // border: '1px solid #9BC9E4',
-          // borderColor: appTheme === 'dark' ? '#5F7285' : '#9BC9E4',
-          whiteSpace: 'nowrap',
-        }}>
+      <TableRow style={{ whiteSpace: 'nowrap' }}>
         {headCells.map((headCell) => (
           <>
-            {
-              headCell.isSticky
-                ? <StickyTableCell
-                  appTheme={appTheme}
-                  key={headCell.id}
-                  align={headCell.numeric ? 'right' : 'left'}
-                  padding={'normal'}
-                  sortDirection={orderBy === headCell.id ? order : false}
-                  style={{
-                    background: '#060B17',
-                    borderBottom: `1px solid #d3f85a`,
-                    // zIndex: 10,
-                  }}>
-                  <TableSortLabel
-                    active={orderBy === headCell.id}
-                    direction={orderBy === headCell.id ? order : 'asc'}
-                    IconComponent={() => orderBy === headCell.id ? sortIcon(order) : null}
-                    onClick={createSortHandler(headCell.id)}>
-                    <Typography
-                      className={classes.headerText}
-                      style={{
-                        fontWeight: 500,
-                        fontSize: 14,
-                        lineHeight: '115%',
-                        color: '#8191B9',
-                      }}>
-                      {headCell.label}
-                    </Typography>
-                    {/*{orderBy === headCell.id
-                        ? <span className={classes.visuallyHidden}>
-                            {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                          </span>
-                        : null
-                      }*/}
-                  </TableSortLabel>
-                </StickyTableCell>
-                : <StyledTableCell
-                  style={{
-                    background: '#060B17',
-                    borderBottom: `1px solid #d3f85a`,
-                    color: '#8191B9',
-                  }}
-                  key={headCell.id}
-                  align={headCell.numeric ? 'right' : 'left'}
-                  padding={'normal'}
-                  sortDirection={orderBy === headCell.id ? order : false}>
-                  <TableSortLabel
-                    active={orderBy === headCell.id}
-                    direction={orderBy === headCell.id ? order : 'asc'}
-                    IconComponent={() => orderBy === headCell.id ? sortIcon(order) : null}
-                    style={{
-                      color: appTheme === 'dark' ? '#C6CDD2' : '#325569',
-                    }}
-                    onClick={createSortHandler(headCell.id)}>
-                    <Typography
-                      className={classes.headerText}
-                      style={{
-                        fontWeight: 500,
-                        fontSize: 14,
-                        lineHeight: '115%',
-                        color: '#8191B9',
-                      }}>
-                      {headCell.label}
-                    </Typography>
-                    {/*{orderBy === headCell.id
-                        ? <span className={classes.visuallyHidden}>
-                    {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                  </span>
-                        : null
-                      }*/}
-                  </TableSortLabel>
-                </StyledTableCell>
-            }
+            {headCell.isSticky ? (
+              <StickyTableCell
+                className={css.headCell}
+                appTheme={appTheme}
+                key={headCell.id}
+                align={headCell.numeric ? 'right' : 'left'}
+                padding={'normal'}
+                sortDirection={orderBy === headCell.id ? order : false}
+                style={{
+                  // zIndex: 10,
+                }}
+              >
+                <TableSortLabel
+                  active={orderBy === headCell.id}
+                  direction={orderBy === headCell.id ? order : 'asc'}
+                  IconComponent={() => orderBy === headCell.id ? sortIcon(order) : null}
+                  onClick={createSortHandler(headCell.id)}
+                >
+                  <div className={css.headerText}>
+                    {headCell.label}
+                  </div>
+                </TableSortLabel>
+              </StickyTableCell>
+            ) : (
+              <StyledTableCell
+                className={css.headCell}
+                key={headCell.id}
+                align={headCell.numeric ? 'right' : 'left'}
+                padding={'normal'}
+                sortDirection={orderBy === headCell.id ? order : false}
+              >
+                <TableSortLabel
+                  active={orderBy === headCell.id}
+                  direction={orderBy === headCell.id ? order : 'asc'}
+                  IconComponent={() => orderBy === headCell.id ? sortIcon(order) : null}
+                  onClick={createSortHandler(headCell.id)}
+                >
+                  <div className={css.headerText}>
+                    {headCell.label}
+                  </div>
+                </TableSortLabel>
+              </StyledTableCell>
+            )}
           </>
         ))}
       </TableRow>
@@ -678,38 +639,17 @@ const useStyles = makeStyles((theme) => {
     },
     doubleImages: {
       display: 'flex',
-      position: 'relative',
-      width: '80px',
-      height: '35px',
     },
     img1Logo: {
-      position: 'absolute',
-      left: '0px',
-      top: '0px',
+      border: '1px solid #131313',
       borderRadius: '30px',
-      outline: '2px solid #DBE6EC',
       background: '#13B5EC',
     },
     img2Logo: {
-      position: 'absolute',
-      left: '28px',
-      // zIndex: '1',
-      top: '0px',
-      outline: '2px solid #DBE6EC',
-      background: '#13B5EC',
+      marginLeft: -16,
+      border: '1px solid #131313',
       borderRadius: '30px',
-    },
-    'img1Logo--dark': {
-      outline: '2px solid #151718',
-      ["@media (max-width:660px)"]: {
-        outline: '2px solid #24292d',
-      }
-    },
-    'img2Logo--dark': {
-      outline: '2px solid #151718',
-      ["@media (max-width:660px)"]: {
-        outline: '2px solid #24292d',
-      }
+      background: '#13B5EC',
     },
     inlineEnd: {
       display: 'flex',
@@ -724,11 +664,11 @@ const useStyles = makeStyles((theme) => {
     },
     sortSelect: {
       position: 'absolute',
-      top: 65,
-      right: 48,
+      top: 87,
+      right: 40,
       ["@media (max-width:680px)"]: {
-        top: 53,
-        right: 12,
+        top: 68,
+        right: 32,
       },
     },
     accordionSummaryContent: {
@@ -876,83 +816,39 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
 
   function tableCellContent(data1, data2, symbol1, symbol2) {
     return (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-        }}>
-        <div
-          className={classes.inlineEnd}
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-end',
-
-          }}>
-          <Typography
-            className={classes.textSpaced}
-            style={{
-              marginBottom: 8,
-              fontWeight: 400,
-              fontSize: 14,
-              lineHeight: '115%',
-              color: '#E4E9F4',
-            }}>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", textAlign: "right" }}>
+          <div className={css.itemTitle} style={{ marginBottom: 2 }}>
             {data1}
-          </Typography>
+          </div>
 
-          <Typography
-            className={classes.textSpaced}
-            style={{
-              fontWeight: 400,
-              fontSize: 14,
-              lineHeight: '115%',
-              color: '#E4E9F4',
-            }}>
+          <div className={css.itemTitle}>
             {data2}
-          </Typography>
+          </div>
         </div>
 
         {(symbol1 || symbol2) &&
-          <div
-            className={classes.inlineEnd}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-end',
-              paddingLeft: 10,
-            }}>
-
-            <Typography
-              className={`${classes.textSpaced} ${classes.symbol}`}
-              style={{
-                marginBottom: 8,
-                fontWeight: 400,
-                fontSize: 14,
-                lineHeight: '115%',
-                color: '#8191B9',
-              }}>
+          <div style={{ paddingLeft: 8, display: "flex", flexDirection: "column", alignItems: "flex-start", textAlign: 'left' }}>
+            <div className={`${css.itemText} ${classes.symbol}`} style={{ marginBottom: 2 }}>
               {symbol1}
-            </Typography>
+            </div>
 
-            <Typography
-              className={`${classes.textSpaced} ${classes.symbol}`}
-              style={{
-                fontWeight: 400,
-                fontSize: 14,
-                lineHeight: '120%',
-                color: '#8191B9',
-              }}>
+            <div className={`${css.itemText} ${classes.symbol}`}>
               {symbol2}
-            </Typography>
+            </div>
           </div>
         }
       </div>
     );
   }
 
-  const handleChangeAccordion = (panel) => (event, newExpanded) => {
-    setExpanded(newExpanded ? panel : false);
+  const handleChangeAccordion = (event, newExpanded) => {
+    console.log("newExpanded", newExpanded)
+    if (newExpanded === expanded) {
+      setExpanded(false);
+      return;
+    }
+    setExpanded(newExpanded ? newExpanded : false);
   };
 
   const closeModal = () => {
@@ -968,7 +864,6 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
     setWindowWidth(window.innerWidth);
   });
 
-
   const [voteTooltipOpen, setVoteTooltipOpen] = useState(false);
 
   const [openSelectToken, setOpenSelectToken] = useState(false);
@@ -981,41 +876,28 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
     }
   };
 
+  // cssVoteModal
   return (
     <>
       {windowWidth >= 806 &&
-        <div
-          style={{
-            marginTop: 0, /*((windowWidth <= 1360 && showSearch) || windowWidth <= 1210) ? 45 : 0,*/
-            border: '1px solid #D3F85A',
-            borderRadius: 12,
-            overflow: 'hidden',
-          }}
-          className={classes.cont}
-        >
-          <TableContainer
-            className={'g-flex-column__item'}
-            style={{
-              overflow: 'auto',
-              // maxHeight: 1000,/*tableHeight,*/
-              height: 'auto',
-              background: appTheme === 'dark' ? '#24292D' : '#dbe6ec',
-            }}>
+        <div>
+          <div className={css.tableWrapper}>
+            <TableContainer className={['g-flex-column__item', css.tableContainer].join(" ")}>
             <Table
               stickyHeader
               className={classes.table}
               aria-labelledby="tableTitle"
               size={'medium'}
-              aria-label="enhanced table">
+              aria-label="enhanced table"
+            >
               <EnhancedTableHead
                 classes={classes}
                 order={order}
                 orderBy={orderBy}
-                onRequestSort={handleRequestSort}/>
+                onRequestSort={handleRequestSort}
+              />
 
-              <TableBody classes={{
-                root: classes.tableBody,
-              }}>
+              <TableBody classes={{ root: classes.tableBody }}>
                 {stableSort(gauges, getComparator(order, orderBy, sliderValues))
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row, index) => {
@@ -1031,16 +913,11 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
 
                     return (
                       <TableRow key={row?.gauge?.address}>
-                        <StickyTableCell
-                          style={{
-                            background: '#171D2D',
-                            borderBottom: '1px solid #323B54',
-                          }}
-                          className={classes.cell}>
+                        <StickyTableCell className={css.cell}>
                           <div className={classes.inline}>
                             <div className={classes.doubleImages}>
                               <img
-                                className={[classes.img1Logo, classes[`img1Logo--${appTheme}`]].join(' ')}
+                                className={classes.img1Logo}
                                 src={(row && row.token0 && row.token0.logoURI) ? row.token0.logoURI : ``}
                                 width="36"
                                 height="36"
@@ -1051,7 +928,7 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
                                 }}
                               />
                               <img
-                                className={[classes.img2Logo, classes[`img2Logo--${appTheme}`]].join(' ')}
+                                className={classes.img2Logo}
                                 src={(row && row.token1 && row.token1.logoURI) ? row.token1.logoURI : ``}
                                 width="36"
                                 height="36"
@@ -1062,218 +939,295 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
                                 }}
                               />
                             </div>
-                            <div>
-                              <Typography
-                                className={classes.textSpaced}
-                                style={{
-                                  marginBottom: 4,
-                                  fontWeight: 500,
-                                  fontSize: 16,
-                                  lineHeight: '125%',
-                                  color: '#E4E9F4',
-                                }}
-                                noWrap>
+                            <div style={{ marginLeft: 12 }}>
+                              <div className={css.vaultSourceTitle}>
                                 {formatSymbol(row?.symbol)}
-                              </Typography>
-                              <Typography
-                                className={classes.textSpaced}
-                                style={{
-                                  fontWeight: 400,
-                                  fontSize: 14,
-                                  lineHeight: '115%',
-                                  color: '#8191B9',
-                                }}
-                                noWrap>
+                              </div>
+                              <div className={css.vaultSourceSubtitle}>
                                 {row?.isStable ? 'Stable Pool' : 'Volatile Pool'}
-                              </Typography>
+                              </div>
                             </div>
                           </div>
                         </StickyTableCell>
-                        <TableCell
-                          className={classes.cell}
-                          align="right"
-                          style={{
-                            background: '#171D2D',
-                            borderBottom: '1px solid #323B54',
-                            overflow: 'hidden',
-                          }}>
-                            
-                          {
-                            tableCellContent(
-                              `${(numeral(BigNumber(row?.tvl).toLocaleString()).format('($ 0a)'))} `,
-                              null,
-                              null,
-                              null,
-                            )
-                          }
+
+                        <TableCell className={css.cell}>
+                          {tableCellContent(
+                            `${(numeral(BigNumber(row?.tvl).toLocaleString()).format('($ 0a)'))}`,
+                            null,
+                            null,
+                            null,
+                          )}
                         </TableCell>
-                        <TableCell
-                          className={classes.cell}
-                          align="right"
-                          style={{
-                            background: '#171D2D',
-                            borderBottom: '1px solid #323B54',
-                            overflow: 'hidden',
-                          }}>
-                          {
-                            tableCellContent(
-                              `${formatCurrency(BigNumber(row?.gauge?.derivedAPR), 0)}%`,
-                              `${formatCurrency(BigNumber(row?.gauge?.expectAPRDerived), 0)}%`,
-                              'Current',
-                              'Next week'
-                            )
-                          }
-                          
+
+                        <TableCell className={css.cell}>
+                          {tableCellContent(
+                            `${formatCurrency(BigNumber(row?.gauge?.derivedAPR), 0)}%`,
+                            `${formatCurrency(BigNumber(row?.gauge?.expectAPRDerived), 0)}%`,
+                            'Current',
+                            'Next week'
+                          )}
                         </TableCell>
                         
-                        <TableCell
-                          className={classes.cell}
-                          align="right"
-                          style={{
-                            background: '#171D2D',
-                            borderBottom: '1px solid #323B54',
-                            overflow: 'hidden',
-                          }}>
-                          {
-                            tableCellContent(
-                              formatCurrency(BigNumber(row?.gauge?.balance).div(row?.gauge?.totalSupply).times(row?.gauge?.reserve0)),
-                              formatCurrency(BigNumber(row?.gauge?.balance).div(row?.gauge?.totalSupply).times(row?.gauge?.reserve1)),
-                              row.token0.symbol,
-                              row.token1.symbol,
-                            )
+                        <TableCell className={css.cell}>
+                          {tableCellContent(
+                            formatCurrency(BigNumber(row?.gauge?.balance).div(row?.gauge?.totalSupply).times(row?.gauge?.reserve0)),
+                            formatCurrency(BigNumber(row?.gauge?.balance).div(row?.gauge?.totalSupply).times(row?.gauge?.reserve1)),
+                            row.token0.symbol,
+                            row.token1.symbol,
+                          )}
+                        </TableCell>
+
+                        <TableCell className={css.cell}>
+                          {tableCellContent(
+                            formatCurrency(BigNumber(row?.reserve0)),
+                            formatCurrency(BigNumber(row?.reserve1)),
+                            row.token0.symbol,
+                            row.token1.symbol,
+                          )}
+                        </TableCell>
+
+                        <TableCell className={css.cell}>
+                          {row?.gaugebribes.bribeTokens.length ? (
+                            row?.gaugebribes.bribeTokens
+                              .filter(x => !BigNumber(x?.left).isZero())
+                              .map((bribe, idx) => {
+                                return (
+                                  <>
+                                    {tableCellContent(
+                                      formatCurrency(bribe.left),
+                                      null,
+                                      bribe.token.symbol,
+                                      null,
+                                    )}
+                                  </>
+                                );
+                              })
+                            ) : null
                           }
                         </TableCell>
 
-                        <TableCell
-                          className={classes.cell}
-                          align="right"
-                          style={{
-                            background: '#171D2D',
-                            borderBottom: '1px solid #323B54',
-                            overflow: 'hidden',
-                          }}>
-                          {
-                            tableCellContent(
-                              formatCurrency(BigNumber(row?.reserve0)),
-                              formatCurrency(BigNumber(row?.reserve1)),
-                              row.token0.symbol,
-                              row.token1.symbol,
-                            )
+                        <TableCell className={css.cell}>
+                          {row?.gaugebribes.bribeTokens.length ? (
+                            row?.gaugebribes.bribeTokens
+                              .filter(x => !BigNumber(x?.left).isZero())
+                              .map((bribe, idx) => {
+                                return (
+                                  <>
+                                    {tableCellContent(
+                                      `${Number(bribe.apr).toFixed(1)}%`,
+                                      null,
+                                      bribe.token.symbol,
+                                      null,
+                                    )}
+                                  </>
+                                );
+                              })
+                            ) : null
                           }
                         </TableCell>
 
-                        <TableCell
-                          className={classes.cell}
-                          align="right"
-                          style={{
-                            background: '#171D2D',
-                            borderBottom: '1px solid #323B54',
-                            overflow: 'hidden',
-                          }}>
-                          {
-                            tableCellContent(
-                              formatCurrency(row?.gauge?.weight),
-                              `${formatCurrency(row?.gauge?.weightPercent)} %`,
-                              null,
-                              null,
-                            )
-                          }
+                        <TableCell className={css.cell}>
+                          {tableCellContent(
+                            formatCurrency(row?.gauge?.weight),
+                            `${formatCurrency(row?.gauge?.weightPercent)} %`,
+                            null,
+                            null,
+                          )}
                         </TableCell>
 
-                        <TableCell
-                          className={classes.cell}
-                          align="right"
-                          style={{
-                            background: '#171D2D',
-                            borderBottom: '1px solid #323B54',
-                            overflow: 'hidden',
-                          }}>
-                          {
-                            row?.gaugebribes.bribeTokens.length ? (
-                                row?.gaugebribes.bribeTokens
-                                  .filter(x => !BigNumber(x?.left).isZero())
-                                  .map((bribe, idx) => {
-                                  return (
-                                    <>
-                                      {
-                                        tableCellContent(
-                                          formatCurrency(bribe.left),
-                                          null,
-                                          bribe.token.symbol + ` (${Number(bribe.apr).toFixed(1)}% APR)`,
-                                          null,
-                                        )
-                                      }
-                                    </>
-                                  );
-                                })
-                              )
-                              : null
-                          }
-                        </TableCell>
+                        <TableCell className={css.cell}>
+                          <div style={{ display: "flex", justifyContent: 'flex-end', alignItems: 'center' }}>
+                            <div style={{ textAlign: 'right' }}>
+                              <div style={{ display: "flex", justifyContent: "center" }}>
+                                <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
+                                  <div className={css.itemTitle} style={{ marginBottom: 2 }}>
+                                    {formatCurrency(BigNumber(sliderValue).div(100).times(token?.lockValue))}
+                                  </div>
 
-                        <TableCell
-                          className={classes.cell}
-                          align="right"
-                          style={{
-                            background: '#171D2D',
-                            borderBottom: '1px solid #323B54',
-                            // overflow: 'hidden',
-                          }}>
-                          <div style={{
-                            display: 'flex',
-                            justifyContent: 'flex-end',
-                            alignItems: 'center',
-                            position: 'relative',
-                          }}>
-                            <div>
-                              {
-                                tableCellContent(
-                                    formatCurrency(BigNumber(sliderValue).div(100).times(token?.lockValue)),
-                                    `${formatCurrency(sliderValue)} %`,
-                                    null,
-                                    null,
-                                )
-                              }
+                                  <div
+                                    className={css.itemTitle}
+                                    style={{
+                                      color: sliderValue > 0
+                                        ? "#459B0E"
+                                        : sliderValue < 0 ? "#9B0E0E" : "#9A9FAF"
+                                    }}
+                                  >
+                                    {`${formatCurrency(sliderValue)} %`}
+                                  </div>
+                                </div>
+                              </div>
                             </div>
-                            <div>
+                            <div style={{ paddingLeft: 10 }}>
                               <Button
-                                  variant="outlined"
-                                  color="primary"
-                                  style={{
-                                    padding: '7px 14px',
-                                    border: `1px solid rgb(211, 248, 90)`,
-                                    borderRadius: 12,
-                                    fontWeight: 600,
-                                    fontSize: 14,
-                                    lineHeight: '120%',
-                                    color: 'rgb(211, 248, 90)',
-                                    textTransform: 'uppercase',
-                                    marginLeft: 20,
-                                    background: voteTooltipOpen == row.address ? '#C0E255' : 'transparent',
-                                  }}
-                                  onClick={(event) => {
-                                    event.stopPropagation();
-                                    event.preventDefault();
+                                variant="outlined"
+                                color="primary"
+                                className={css.action}
+                                onClick={(event) => {
+                                  event.stopPropagation();
+                                  event.preventDefault();
 
-                                    if (voteTooltipOpen == row.address) {
-                                      setVoteTooltipOpen(false)
-                                    } else {
-                                      setVoteTooltipOpen(row.address)
-                                    }
-                                  }}>
+                                  if (voteTooltipOpen == row.address) {
+                                    setVoteTooltipOpen(false)
+                                  } else {
+                                    setVoteTooltipOpen(row.address)
+                                  }
+                                }}
+                              >
                                 VOTE
                               </Button>
-                              <div
-                                  className={classes.voteTooltip}
-                                  style={{display: voteTooltipOpen == row.address ? 'flex' : 'none'}}
+
+                              <Dialog
+                                open={voteTooltipOpen == row.address}
+                                PaperProps={{ style: { width: "100%", maxWidth: 520, background: 'transpaarent', borderRadius: 20 } }}
+                                onClick={(e) => {
+                                  if (e.target.classList.contains('MuiDialog-container')) {
+                                    closeModal();
+                                  }
+                                }}
+                                // classes={{
+                                  // paperScrollPaper: classesDialog.paperScrollPaper,
+                                  // paper: classesDialog.paper,
+                                  // scrollPaper: classesDialog.scrollPaper,
+                                // }}
                               >
-                                <div className={classes.voteTooltipSliderValues}>
-                                  <span style={{width: 36,}}>-100</span>
-                                  <span>0</span>
-                                  <span style={{width: 36,}}>100</span>
+                              <div
+                                // className={cssVoteModal.voteTooltip}
+                                // style={{display: voteTooltipOpen == row.address ? 'block' : 'none'}}
+                              >
+                                <div className={cssVoteModal.voteTooltipHeader}>
+                                  <span className={cssVoteModal.voteTooltipTitle}>Vote for the Pool</span>
+                                  <span className={cssVoteModal.voteTooltipClose} onClick={() => {
+                                    setVoteTooltipOpen(false)
+                                  }} />
                                 </div>
-                                <div className={classes.voteTooltipSlider}>
-                                  <CustomSlider
+
+                                <div className={cssVoteModal.voteTooltipBody}>
+                                  <div className={classes.tokenSelect}>
+                                    <Select
+                                      open={openSelectToken === row.address}
+                                      onClick={() => {toggleSelect(row)}}
+                                      className={[
+                                        cssTokenSelect.tokenSelect,
+                                        openSelectToken ? cssTokenSelect.tokenSelectOpen : '',
+                                        token ? cssTokenSelect.tokenSelectSelected : '',
+                                      ].join(' ')}
+                                      classes={{
+                                        select: cssTokenSelect.selectWrapper,
+                                      }}
+                                      fullWidth
+                                      MenuProps={{
+                                        classes: {
+                                          list: appTheme === 'dark' ? cssTokenSelect['list--dark'] : cssTokenSelect.list,
+                                          paper: cssTokenSelect.listPaper,
+                                        },
+                                      }}
+                                      value={token}
+                                      {...{
+                                        displayEmpty: token === null ? true : undefined,
+                                        renderValue: token === null ? (selected) => {
+                                          if (selected === null) {
+                                            return (
+                                              <div className={cssTokenSelect.placeholder}>
+                                                Select veCONE NFT
+                                              </div>
+                                            );
+                                          }
+                                        } : undefined,
+                                      }}
+                                      onChange={handleChangeNFT}
+                                      IconComponent={arrowIcon}
+                                      inputProps={{
+                                        className: appTheme === 'dark' ? cssTokenSelect['tokenSelectInput--dark'] : cssTokenSelect.tokenSelectInput,
+                                      }}>
+                                      {(!vestNFTs || !vestNFTs.length) &&
+                                        <div className={cssTokenSelect.noNFT}>
+                                          <div className={cssTokenSelect.noNFTtext}>
+                                          You receive NFT by creating a Lock of your CONE for some time, the more CONE you lock and for
+                                          the longest time, the more Voting Power your NFT will have.
+                                          </div>
+                                          <div className={cssTokenSelect.noNFTlinks}>
+                                            <span
+                                              className={cssTokenSelect.noNFTlinkButton}
+                                              onClick={() => {
+                                                router.push("/swap")
+                                              }}
+                                            >
+                                              BUY CONE
+                                            </span>
+                                            <span
+                                              className={cssTokenSelect.noNFTlinkButton}
+                                              onClick={() => {
+                                                router.push("/vest")
+                                              }}>
+                                                LOCK CONE FOR NFT
+                                            </span>
+                                          </div>
+                                        </div>
+                                      }
+                                      {vestNFTs?.map((option) => {
+                                        return (
+                                          <MenuItem key={option.id} value={option}>
+                                            <div className={[cssTokenSelect.menuOption, 'g-flex', 'g-flex--align-center', 'g-flex--space-between'].join(' ')}>
+                                              <div>
+                                                #{option.id}
+                                              </div>
+
+                                              <div className={[cssTokenSelect.menuOptionSec, 'g-flex-column'].join(' ')}>
+                                                <div>
+                                                  {formatCurrency(option.lockValue)}
+                                                  {veToken?.symbol ? ' ' + veToken.symbol : ''}
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </MenuItem>
+                                        );
+                                      })}
+                                    </Select>
+                                  </div>
+
+                                  <div className={cssVoteModal.inlinePair}>
+                                    <div className={cssVoteModal.doubleImages}>
+                                      <img
+                                        className={classes.img1Logo}
+                                        src={(row && row.token0 && row.token0.logoURI) ? row.token0.logoURI : ``}
+                                        width="52"
+                                        height="52"
+                                        alt=""
+                                        onError={(e) => {
+                                          e.target.onerror = null;
+                                          e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
+                                        }}
+                                      />
+                                      <img
+                                        className={classes.img2Logo}
+                                        src={(row && row.token1 && row.token1.logoURI) ? row.token1.logoURI : ``}
+                                        width="52"
+                                        height="52"
+                                        alt=""
+                                        onError={(e) => {
+                                          e.target.onerror = null;
+                                          e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
+                                        }}
+                                      />
+                                    </div>
+
+                                    <div style={{ marginLeft: 12 }}>
+                                      <div className={css.vaultSourceTitle}>
+                                        {formatSymbol(row?.symbol)}
+                                      </div>
+                                      <div className={css.vaultSourceSubtitle}>
+                                        {row?.isStable ? 'Stable Pool' : 'Volatile Pool'}
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <div className={cssVoteModal.voteTooltipSlider}>
+                                    <div className={cssVoteModal.voteTooltipSliderValues}>
+                                      <span style={{width: 36,}}>-100</span>
+                                      {/* <span>0</span> */}
+                                      <span style={{width: 36,}}>100</span>
+                                    </div>
+                                    <CustomSlider
                                       appTheme={appTheme}
                                       valueLabelDisplay="on"
                                       value={sliderValue}
@@ -1285,52 +1239,52 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
                                       marks
                                       step={1}
                                       disabled={noTokenSelected}
-                                  />
-                                </div>
-
-                                <div className={classes.voteTooltipBody}>
-                                  <div className={classes.voteTooltipText}>
-                                    Move slider or edit your vote manually
-                                  </div>
-                                  <div className={classes.voteTooltipVoteBlock}>
-                                    <div className={classes.voteTooltipVoteBlockTitle}>Your Vote</div>
-                                    <InputBase
-                                        value={sliderValue}
-                                        onChange={(event, value) => {
-                                          onSliderChange(event, event.target.value, row);
-                                        }}
-                                        inputProps={{
-                                          className: classes.voteTooltipVoteBlockInput,
-                                        }}
-                                        InputProps={{
-                                          disableUnderline: true,
-                                        }}
                                     />
-                                    <div className={classes.voteTooltipVoteBlockInputAddornment}>%</div>
+                                  </div>
+
+                                  <div className={cssVoteModal.yourVoteTitle}>Your Vote</div>
+                                  <div className={cssVoteModal.yourVoteText}>Move slider or edit your vote % in the input below</div>
+
+                                  <div className={cssVoteModal.voteTooltipVoteBlock}>
+                                    <InputBase
+                                      value={sliderValue}
+                                      onChange={(event, value) => {
+                                        onSliderChange(event, event.target.value, row);
+                                      }}
+                                      inputProps={{
+                                        className: cssVoteModal.voteTooltipVoteBlockInput,
+                                      }}
+                                      InputProps={{
+                                        disableUnderline: true,
+                                      }}
+                                    />
+                                    <div className={cssVoteModal.voteTooltipVoteBlockInputAddornment}>%</div>
+                                  </div>
+
+                                  <div className={cssVoteModal.voteTooltipButton}>
+                                    Cast Vote
                                   </div>
                                 </div>
                               </div>
+                              </Dialog>
                             </div>
                           </div>
                         </TableCell>
-                        
                       </TableRow>
                     );
                   })}
               </TableBody>
             </Table>
-          </TableContainer>
+            </TableContainer>
+          </div>
 
-          <TablePagination
-            className={'g-flex-column__item-fixed'}
+          <TablePagination className={'g-flex-column__item-fixed'}
             style={{
               width: '100%',
-              padding: '0 30px',
-              background: '#060B17',
-              borderTop: '1px solid #d3f85a',
+              padding: '0 20px',
+              borderRadius: 20,
+              background: '#131313',
               color: '#8191B9',
-              // fontSize: 14,
-              // fontWeight: 500,
             }}
             labelRowsPerPage={window.innerWidth < 550 ? '' : 'Rows per page:'}
             rowsPerPageOptions={window.innerWidth < 435 ? [] : [5, 10, 25]}
@@ -1358,140 +1312,65 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
         </div>
       }
 
-
       <div className={classes.sortSelect} style={{display: windowWidth < 806 ? 'flex' : 'none'}}>
         {SortSelect({value: sortValueId, options, handleChange: handleChangeSort, sortDirection})}
       </div>
 
       {windowWidth < 806 && (
         <>
-          <div style={{
-            overflow: 'auto',
-            marginTop: 136,
-          }}>
+          <div style={{ overflow: 'auto' }}>
             {stableSort(gauges, getComparator(order, orderBy, sliderValues))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  if (!row) {
-                    return null;
-                  }
-                  const labelId = `accordion-${index}`;
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row, index) => {
+                if (!row) {
+                  return null;
+                }
+                const labelId = `accordion-${index}`;
 
-              let sliderValue = sliderValues.find((el) => el.address === row?.address)?.value;
-              if (sliderValue) {
-                sliderValue = BigNumber(sliderValue).toNumber(0);
-              } else {
-                sliderValue = 0;
-              }
+                let sliderValue = sliderValues.find((el) => el.address === row?.address)?.value;
+                if (sliderValue) {
+                  sliderValue = BigNumber(sliderValue).toNumber(0);
+                } else {
+                  sliderValue = 0;
+                }
 
-                  return (
-                      <>
-                        <Dialog
-                            open={voteDialogOpen === row.address}
-                            onClose={closeModal}
-                            onClick={(e) => {
-                              if (e.target.classList.contains('MuiDialog-container')) {
-                                closeModal()
-                              }
-                            }}
-                            fullWidth={false}
-                            fullScreen={false}
-                            BackdropProps={{style: {backgroundColor: 'transparent'}}}
-                            classes={{
-                              paper: classes.dialogPaper,
-                              scrollPaper: classes.dialogBody,
-                            }}>
-                          <div>
-                            <DialogTitle style={{
-                              padding: 24,
-                              paddingBottom: 20,
-                              fontWeight: 500,
-                              fontSize: 20,
-                              lineHeight: '28px',
-                            }}>
-                              <div style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'space-between',
-                              }}>
-                                <div style={{
-                                  color: '#E4E9F4',
-                                }}>
-                                  Vote
-                                </div>
-
-                                <svg onClick={closeModal} style={{
-                                  cursor: 'pointer',
-                                }} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M14.19 0H5.81C2.17 0 0 2.17 0 5.81V14.18C0 17.83 2.17 20 5.81 20H14.18C17.82 20 19.99 17.83 19.99 14.19V5.81C20 2.17 17.83 0 14.19 0ZM13.36 12.3C13.65 12.59 13.65 13.07 13.36 13.36C13.21 13.51 13.02 13.58 12.83 13.58C12.64 13.58 12.45 13.51 12.3 13.36L10 11.06L7.7 13.36C7.55 13.51 7.36 13.58 7.17 13.58C6.98 13.58 6.79 13.51 6.64 13.36C6.35 13.07 6.35 12.59 6.64 12.3L8.94 10L6.64 7.7C6.35 7.41 6.35 6.93 6.64 6.64C6.93 6.35 7.41 6.35 7.7 6.64L10 8.94L12.3 6.64C12.59 6.35 13.07 6.35 13.36 6.64C13.65 6.93 13.65 7.41 13.36 7.7L11.06 10L13.36 12.3Z" fill="#8191B9"/>
-                                </svg>
-                        </div>
-                      </DialogTitle>
-
-                      <DialogContent style={{
-                        padding: 24,
-                        paddingTop: 0,
-                      }}>
-
-                        <div className={classes.inlinePair}>
-                          <div className={classes.doubleImages}>
-                            <img
-                                className={[classes.img1Logo, classes[`img1Logo--${appTheme}`]].join(' ')}
-                                src={(row && row.token0 && row.token0.logoURI) ? row.token0.logoURI : ``}
-                                width="37"
-                                height="37"
-                                alt=""
-                                onError={(e) => {
-                                  e.target.onerror = null;
-                                  e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
-                                }}
-                            />
-                            <img
-                                className={[classes.img2Logo, classes[`img2Logo--${appTheme}`]].join(' ')}
-                                src={(row && row.token1 && row.token1.logoURI) ? row.token1.logoURI : ``}
-                                width="37"
-                                height="37"
-                                alt=""
-                                onError={(e) => {
-                                  e.target.onerror = null;
-                                  e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
-                                }}
-                            />
-                          </div>
-                          <div>
-                            <Typography
-                                className={classes.textSpaced}
-                                style={{
-                                  fontWeight: 500,
-                                  fontSize: 16,
-                                  lineHeight: '20px',
-                                  color: '#E4E9F4',
-                                  marginBottom: 2,
-                                }}
-                                noWrap>
-                              {formatSymbol(row?.symbol)}
-                            </Typography>
-                            <Typography
-                                className={classes.textSpaced}
-                                style={{
-                                  fontWeight: 400,
-                                  fontSize: 14,
-                                  lineHeight: '16px',
-                                  color: '#8191B9',
-                                }}
-                                noWrap>
-                              {row?.isStable ? 'Stable Pool' : 'Volatile Pool'}
-                            </Typography>
-                          </div>
+                return (
+                  <>
+                    <Dialog
+                      open={voteDialogOpen === row.address}
+                      PaperProps={{ style: { width: "100%", maxWidth: 520, background: 'transpaarent', borderRadius: 20 } }}
+                      onClose={closeModal}
+                      onClick={(e) => {
+                        if (e.target.classList.contains('MuiDialog-container')) {
+                          closeModal()
+                        }
+                      }}
+                      // fullWidth={false}
+                      // fullScreen={false}
+                      // BackdropProps={{style: {backgroundColor: 'transparent'}}}
+                      // classes={{
+                      //   paper: classes.dialogPaper,
+                      //   scrollPaper: classes.dialogBody,
+                      // }}
+                    >
+                      <div>
+                        <div className={cssVoteModal.voteTooltipHeader}>
+                          <span className={cssVoteModal.voteTooltipTitle}>Vote for the Pool</span>
+                          <span className={cssVoteModal.voteTooltipClose} onClick={closeModal} />
                         </div>
 
-                        <div className={classes.tokenSelect}>
-                          <Select
+                        <div className={cssVoteModal.voteTooltipBody}>
+                          <div className={classes.tokenSelect}>
+                            <Select
                               open={openSelectToken === row.address}
                               onClick={() => {toggleSelect(row)}}
-                              className={[cssTokenSelect.tokenSelect, cssTokenSelect[`tokenSelect--${appTheme}`], openSelectToken ? cssTokenSelect.tokenSelectOpen : '',].join(' ')}
-                              style={{
-                                border: '1px solid #D3F85A', // always visible
+                              className={[
+                                cssTokenSelect.tokenSelect,
+                                openSelectToken ? cssTokenSelect.tokenSelectOpen : '',
+                                token ? cssTokenSelect.tokenSelectSelected : '',
+                              ].join(' ')}
+                              classes={{
+                                select: cssTokenSelect.selectWrapper,
                               }}
                               fullWidth
                               MenuProps={{
@@ -1506,9 +1385,9 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
                                 renderValue: token === null ? (selected) => {
                                   if (selected === null) {
                                     return (
-                                        <div className={cssTokenSelect.placeholder}>
-                                          Select veCONE NFT
-                                        </div>
+                                      <div className={cssTokenSelect.placeholder}>
+                                        Select veCONE NFT
+                                      </div>
                                     );
                                   }
                                 } : undefined,
@@ -1518,96 +1397,130 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
                               inputProps={{
                                 className: appTheme === 'dark' ? cssTokenSelect['tokenSelectInput--dark'] : cssTokenSelect.tokenSelectInput,
                               }}>
-                            {(!vestNFTs || !vestNFTs.length) &&
+                              {(!vestNFTs || !vestNFTs.length) &&
                                 <div className={cssTokenSelect.noNFT}>
                                   <div className={cssTokenSelect.noNFTtext}>
                                     You receive NFT by creating a Lock of your CONE for some time, the more CONE you lock and for
                                     the longest time, the more Voting Power your NFT will have.
                                   </div>
                                   <div className={cssTokenSelect.noNFTlinks}>
-                        <span className={cssTokenSelect.noNFTlinkButton} onClick={() => {
-                          router.push("/swap")
-                        }}>BUY CONE</span>
-                                    <span className={cssTokenSelect.noNFTlinkButton} onClick={() => {
-                                      router.push("/vest")
-                                    }}>LOCK CONE FOR NFT</span>
+                                    <span
+                                      className={cssTokenSelect.noNFTlinkButton}
+                                      onClick={() => {
+                                        router.push("/swap")
+                                      }}
+                                    >
+                                      BUY CONE
+                                    </span>
+                                    <span
+                                      className={cssTokenSelect.noNFTlinkButton}
+                                      onClick={() => {
+                                        router.push("/vest")
+                                      }}
+                                    >
+                                      LOCK CONE FOR NFT
+                                    </span>
                                   </div>
                                 </div>
-                            }
-                            {vestNFTs?.map((option) => {
-                              return (
-                                  <MenuItem
-                                      key={option.id}
-                                      value={option}>
-                                    <div
-                                        className={[cssTokenSelect.menuOption, 'g-flex', 'g-flex--align-center', 'g-flex--space-between'].join(' ')}>
-                                      <Typography
-                                          style={{
-                                            fontWeight: 500,
-                                            fontSize: 16,
-                                            color: '#D3F85A',
-                                          }}>
-                                        #{option.id}
-                                      </Typography>
-
+                              }
+                              {vestNFTs?.map((option) => {
+                                return (
+                                  <MenuItem key={option.id} value={option}>
+                                    <div className={[cssTokenSelect.menuOption, 'g-flex', 'g-flex--align-center', 'g-flex--space-between'].join(' ')}>
+                                      <div>#{option.id}</div>
                                       <div className={[cssTokenSelect.menuOptionSec, 'g-flex-column'].join(' ')}>
-                                        <Typography
-                                            style={{
-                                              fontWeight: 400,
-                                              fontSize: 16,
-                                              color: '#8191B9',
-                                            }}>
+                                        <div>
                                           {formatCurrency(option.lockValue)}
                                           {veToken?.symbol ? ' ' + veToken.symbol : ''}
-                                        </Typography>
-
+                                        </div>
                                       </div>
                                     </div>
                                   </MenuItem>
-                              );
-                            })}
-                          </Select>
-                        </div>
+                                );
+                              })}
+                            </Select>
+                          </div>
 
-                        <div className={classes.voteTooltipSliderValues}>
-                          <span style={{width: 36,}}>-100</span>
-                          <span>0</span>
-                          <span style={{width: 36,}}>100</span>
-                        </div>
+                          <div className={cssVoteModal.inlinePair}>
+                            <div className={cssVoteModal.doubleImages}>
+                              <img
+                                className={classes.img1Logo}
+                                src={(row && row.token0 && row.token0.logoURI) ? row.token0.logoURI : ``}
+                                width="52"
+                                height="52"
+                                alt=""
+                                onError={(e) => {
+                                  e.target.onerror = null;
+                                  e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
+                                }}
+                              />
+                              <img
+                                className={classes.img2Logo}
+                                src={(row && row.token1 && row.token1.logoURI) ? row.token1.logoURI : ``}
+                                width="52"
+                                height="52"
+                                alt=""
+                                onError={(e) => {
+                                  e.target.onerror = null;
+                                  e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
+                                }}
+                              />
+                            </div>
 
-                        <CustomSlider
-                          appTheme={appTheme}
-                          valueLabelDisplay="auto"
-                          value={sliderValue}
-                          onChange={(event, value) => {
-                            onSliderChange(event, value, row);
-                          }}
-                          min={-100}
-                          max={100}
-                          marks
-                          step={1}
-                        />
+                            <div style={{ marginLeft: 12 }}>
+                              <div className={css.vaultSourceTitle}>
+                                {formatSymbol(row?.symbol)}
+                              </div>
+                              <div className={css.vaultSourceSubtitle}>
+                                {row?.isStable ? 'Stable Pool' : 'Volatile Pool'}
+                              </div>
+                            </div>
+                          </div>
 
-                        <div className={classes.voteTooltipTextModal}>
-                          Move slider or edit your vote manually
-                        </div>
-
-                        <div className={classes.voteTooltipVoteBlockModal}>
-                          <div className={classes.voteTooltipVoteBlockTitle}>Your Vote</div>
-                          <InputBase
+                          <div className={cssVoteModal.voteTooltipSlider}>
+                            <div className={cssVoteModal.voteTooltipSliderValues}>
+                              <span style={{width: 36,}}>-100</span>
+                              {/* <span>0</span> */}
+                              <span style={{width: 36,}}>100</span>
+                            </div>
+                            <CustomSlider
+                              appTheme={appTheme}
+                              valueLabelDisplay="on"
                               value={sliderValue}
                               onChange={(event, value) => {
-                                onSliderChange(event, event.target.value, row);
+                                onSliderChange(event, value, row);
                               }}
-                              inputProps={{
-                                className: classes.voteTooltipVoteBlockInputModal,
-                              }}
-                              InputProps={{
-                                disableUnderline: true,
-                              }}
-                          />
-                          <div className={classes.voteTooltipVoteBlockInputAddornment}>%</div>
+                              min={-100}
+                              max={100}
+                              marks
+                              step={1}
+                              disabled={noTokenSelected}
+                            />
                         </div>
+
+                        <div className={cssVoteModal.yourVoteTitle}>Your Vote</div>
+                        <div className={cssVoteModal.yourVoteText}>Move slider or edit your vote % in the input below</div>
+
+                        <div className={cssVoteModal.voteTooltipVoteBlock}>
+                          <InputBase
+                            value={sliderValue}
+                            onChange={(event, value) => {
+                              onSliderChange(event, event.target.value, row);
+                            }}
+                            inputProps={{
+                              className: cssVoteModal.voteTooltipVoteBlockInput,
+                            }}
+                            InputProps={{
+                              disableUnderline: true,
+                            }}
+                          />
+                          <div className={cssVoteModal.voteTooltipVoteBlockInputAddornment}>%</div>
+                        </div>
+
+                        <div className={cssVoteModal.voteTooltipButton}>
+                          Cast Vote
+                        </div>
+                      </div>
 
                        {/* <Button
                           variant="outlined"
@@ -1626,465 +1539,238 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
                           onClick={closeModal}>
                           Save & Close
                         </Button>*/}
-                      </DialogContent>
-                    </div>
-                  </Dialog>
+                      </div>
+                    </Dialog>
 
-                        <Accordion
-                            key={labelId}
-                            style={{
-                              margin: 0,
-                              marginBottom: 20,
-                              background: '#171D2D',
-                              borderRadius: 12,
-                              // border: `1px solid ${appTheme === 'dark' ? '#2D3741' : '#9BC9E4'}`,
-                            }}
-                            disableGutters={true}
-                            expanded={expanded === labelId}
-                            onChange={handleChangeAccordion(labelId)}>
-                          <AccordionSummary
-                              style={{
-                                padding: 0,
-                              }}
-                              classes={{
-                                content: classes.accordionSummaryContent,
-                              }}
-                              expandIcon={null}
-                              aria-controls="panel1a-content">
-                            <div className={['g-flex-column', 'g-flex-column__item'].join(' ')}>
-                              <div className={[classes.cellHeadPaddings, 'g-flex', 'g-flex--align-center'].join(' ')}>
-                                <div className={classes.doubleImages}>
-                                  <img
-                                      className={[classes.img1Logo, classes[`img1Logo--${appTheme}`]].join(' ')}
-                                      src={(row && row.token0 && row.token0.logoURI) ? row.token0.logoURI : ``}
-                                      width="36"
-                                      height="36"
-                                      alt=""
-                                      onError={(e) => {
-                                        e.target.onerror = null;
-                                        e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
-                                      }}
-                                  />
-                                  <img
-                                      className={[classes.img2Logo, classes[`img2Logo--${appTheme}`]].join(' ')}
-                                      src={(row && row.token1 && row.token1.logoURI) ? row.token1.logoURI : ``}
-                                      width="36"
-                                      height="36"
-                                      alt=""
-                                      onError={(e) => {
-                                        e.target.onerror = null;
-                                        e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
-                                      }}
-                                  />
-                                </div>
+                    <div
+                      key={labelId}
+                      style={{
+                        margin: 0,
+                        marginBottom: 12,
+                        paddingBottom: 12,
+                        background: '#131313',
+                        borderRadius: 16,
+                      }}
+                    >
+                      <div className={['g-flex-column', 'g-flex-column__item'].join(' ')}>
+                        <div
+                          style={{ justifyContent: 'space-between' }}
+                          className={[classes.cellHeadPaddings, 'g-flex', 'g-flex--align-center'].join(' ')}
+                        >
+                          <div className={classes.inline}>
+                            <div className={classes.doubleImages}>
+                              <img
+                                className={classes.img1Logo}
+                                src={(row && row.token0 && row.token0.logoURI) ? row.token0.logoURI : ``}
+                                width="36"
+                                height="36"
+                                alt=""
+                                onError={(e) => {
+                                  e.target.onerror = null;
+                                  e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
+                                }}
+                              />
+                              <img
+                                className={classes.img2Logo}
+                                src={(row && row.token1 && row.token1.logoURI) ? row.token1.logoURI : ``}
+                                width="36"
+                                height="36"
+                                alt=""
+                                onError={(e) => {
+                                  e.target.onerror = null;
+                                  e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
+                                }}
+                              />
+                            </div>
 
-                                <div>
-                                  <Typography
-                                      className={classes.textSpaced}
-                                      style={{
-                                        marginBottom: 4,
-                                        fontWeight: 500,
-                                        fontSize: 16,
-                                        lineHeight: '20px',
-                                        color: '#E4E9F4',
-                                      }}
-                                      noWrap>
-                                    {row?.symbol}
-                                  </Typography>
-                                  <Typography
-                                      className={classes.textSpaced}
-                                      style={{
-                                        fontWeight: 400,
-                                        fontSize: 14,
-                                        lineHeight: '16px',
-                                        color: '#8191B9',
-                                      }}
-                                      noWrap>
-                                    {row?.isStable ? 'Stable Pool' : 'Volatile Pool'}
-                                  </Typography>
-                                </div>
-                              </div>
-
-                              <div
-                                  style={{
-                                    // borderTop: `1px solid ${appTheme === 'dark' ? '#2D3741' : '#9BC9E4'}`,
-                                    // borderBottom: `1px solid ${appTheme === 'dark' ? '#2D3741' : '#9BC9E4'}`,
-                                  }}
-                                  className={['g-flex', 'g-flex--align-center'].join(' ')}>
-                                <div
-                                    style={{
-                                      width: '50%',
-                                      // borderRight: `1px solid ${appTheme === 'dark' ? '#2D3741' : '#9BC9E4'}`,
-                                    }}>
-                                  <Typography
-                                      className={classes.cellHeadPaddings}
-                                      style={{
-                                        background: '#060B17',
-                                        fontWeight: 500,
-                                        fontSize: 14,
-                                        lineHeight: '120%',
-                                        // borderBottom: `1px solid ${appTheme === 'dark' ? '#2D3741' : '#9BC9E4'}`,
-                                        color: '#8191B9',
-                                      }}
-                                      noWrap>
-                                    My Votes
-                                  </Typography>
-
-                                  <div
-                                    className={classes.cellPaddings}
-                                    style={{
-                                      display: 'flex',
-                                      alignItems: 'center',
-                                      height: 72,
-                                      borderRight: '1px solid rgb(6, 11, 23)',
-                                    }}
-                                  >
-                                    <div style={{display: 'flex',}}>
-                                      <div
-                                          // className={classes.inlineEnd}
-                                          style={{
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            // alignItems: 'flex-end',
-                                          }}
-                                      >
-                                        <Typography
-                                            className={classes.textSpaced}
-                                            style={{
-                                              marginBottom: 4,
-                                              fontWeight: 400,
-                                              fontSize: 14,
-                                              lineHeight: '120%',
-                                              color: '#E4E9F4',
-                                              whiteSpace: 'nowrap',
-                                            }}>
-                                          {formatCurrency(BigNumber(sliderValue).div(100).times(token?.lockValue))}
-                                        </Typography>
-
-                                        <Typography
-                                            className={classes.textSpaced}
-                                            style={{
-                                              fontWeight: 400,
-                                              fontSize: 14,
-                                              lineHeight: '120%',
-                                              color: '#E4E9F4',
-                                              whiteSpace: 'nowrap',
-                                            }}>
-                                          {`${formatCurrency(sliderValue)} %`}
-                                        </Typography>
-                                      </div>
-
-                                      <Button
-                                          variant="outlined"
-                                          color="primary"
-                                          style={{
-                                            padding: '7px 14px',
-                                            border: `1px solid rgb(211, 248, 90)`,
-                                            borderRadius: 12,
-                                            fontWeight: 600,
-                                            fontSize: 14,
-                                            lineHeight: '120%',
-                                            color: 'rgb(211, 248, 90)',
-                                            textTransform: 'uppercase',
-                                            marginLeft: 20,
-                                          }}
-                                          onClick={(event) => {
-                                            event.stopPropagation();
-                                            event.preventDefault();
-
-                                            openVoteDialog(row);
-                                          }}>
-                                        Vote
-                                      </Button>
-                                    </div>
-                                  </div>
-                                </div>
-
-                                <div
-                                    style={{
-                                      width: '50%',
-                                    }}>
-                                  <Typography
-                                      className={classes.cellHeadPaddings}
-                                      style={{
-                                        background: '#060B17',
-                                        fontWeight: 500,
-                                        fontSize: 14,
-                                        lineHeight: '120%',
-                                        // borderBottom: `1px solid ${appTheme === 'dark' ? '#2D3741' : '#9BC9E4'}`,
-                                        color: '#8191B9',
-                                        textAlign: 'right',
-                                      }}
-                                      noWrap>
-                                    TVL / APR
-                                  </Typography>
-
-                                  <div
-                                      className={classes.cellPaddings}
-                                      style={{
-                                        display: 'flex',
-                                        justifyContent: 'flex-end',
-                                        alignItems: 'center',
-                                        height: 72,
-                                      }}>
-                                    <div
-                                        className={classes.inlineEnd}
-                                        style={{
-                                          display: 'flex',
-                                          flexDirection: 'column',
-                                          alignItems: 'flex-end',
-                                        }}>
-                                      <Typography
-                                          className={classes.textSpaced}
-                                          style={{
-                                            marginBottom: 4,
-                                            fontWeight: 400,
-                                            fontSize: 14,
-                                            lineHeight: '120%',
-                                            color: '#E4E9F4',
-                                            textAlign: 'right',
-                                            whiteSpace: 'nowrap',
-                                          }}>
-                                        Current: {`${formatCurrency(BigNumber.sum(BigNumber(row?.gauge?.derivedAPR)), 0)}%`}
-										<br />
-										Next: {`${formatCurrency(BigNumber(row?.gauge?.expectAPRDerived), 0)}%`}
-                                    </Typography>
-                                    {/* <Typography
-                                          className={classes.textSpaced}
-                                          style={{
-                                            fontWeight: 400,
-                                            fontSize: 14,
-                                            lineHeight: '120%',
-                                            color: '#E4E9F4',
-                                            whiteSpace: 'nowrap',
-                                          }}>
-                                        Boosted: {`${
-                                            formatCurrency(BigNumber.sum(BigNumber(row?.gauge?.apr).div(100).times(40),
-                                                BigNumber(row?.gauge?.boostedApr0),
-                                                BigNumber(row?.gauge?.boostedApr1)
-                                            ), 0)
-                                        }%→${
-                                            formatCurrency(BigNumber.sum(BigNumber(row?.gauge?.apr),
-                                                BigNumber(row?.gauge?.boostedApr0),
-                                                BigNumber(row?.gauge?.boostedApr1)
-                                            ),0)
-                                        }%`}
-                                      </Typography> */}
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div
-                                  style={{
-                                    padding: '10px 20px',
-                                    background: '#060B17',
-                                  }}
-                                  className={['g-flex', 'g-flex--align-center', 'g-flex--space-between'].join(' ')}>
-                                <Typography
-                                    style={{
-                                      fontWeight: 500,
-                                      fontSize: 14,
-                                      lineHeight: '120%',
-                                      color: '#779BF4',
-                                    }}
-                                    noWrap>
-                                  {expanded !== labelId ? 'Show' : 'Hide'} details
-                                </Typography>
-
-                                {expanded !== labelId &&
-                                    <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                      <path d="M25.5 13C25.5 6.1125 19.8875 0.5 13 0.499999C6.1125 0.499999 0.5 6.1125 0.499999 13C0.499999 19.8875 6.1125 25.5 13 25.5C19.8875 25.5 25.5 19.8875 25.5 13ZM12.3375 16.4875L7.925 12.075C7.7375 11.8875 7.65 11.65 7.65 11.4125C7.65 11.175 7.7375 10.9375 7.925 10.75C8.2875 10.3875 8.8875 10.3875 9.25 10.75L13 14.5L16.75 10.75C17.1125 10.3875 17.7125 10.3875 18.075 10.75C18.4375 11.1125 18.4375 11.7125 18.075 12.075L13.6625 16.4875C13.3 16.8625 12.7 16.8625 12.3375 16.4875Z" fill="#779BF4"/>
-                                    </svg>
-                                }
-
-                                {expanded === labelId &&
-                                    <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                      <path d="M25.5 13C25.5 19.8875 19.8875 25.5 13 25.5C6.1125 25.5 0.5 19.8875 0.499999 13C0.499999 6.1125 6.1125 0.500001 13 0.500001C19.8875 0.5 25.5 6.1125 25.5 13ZM12.3375 9.5125L7.925 13.925C7.7375 14.1125 7.65 14.35 7.65 14.5875C7.65 14.825 7.7375 15.0625 7.925 15.25C8.2875 15.6125 8.8875 15.6125 9.25 15.25L13 11.5L16.75 15.25C17.1125 15.6125 17.7125 15.6125 18.075 15.25C18.4375 14.8875 18.4375 14.2875 18.075 13.925L13.6625 9.5125C13.3 9.1375 12.7 9.1375 12.3375 9.5125Z" fill="#779BF4"/>
-                                    </svg>
-                                }
+                            <div style={{ marginLeft: 12 }}>
+                              <div className={css.vaultSourceTitle}>{row?.symbol}</div>
+                              <div className={css.vaultSourceSubtitle}>
+                                {row?.isStable ? 'Stable Pool' : 'Volatile Pool'}
                               </div>
                             </div>
-                          </AccordionSummary>
+                          </div>
 
-                          <AccordionDetails
-                              style={{
-                                padding: 0,
-                              }}>
-                            {headCells.map((headCell) => (
+                          <Button
+                            variant="outlined"
+                            color="primary"
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              width: 69,
+                              height: 36,
+                              padding: "8px 16px",
+                              fontSize: 14,
+                              lineHeight: 20,
+                              fontWeight: 500,
+                              borderRadius: 8,
+                              border: "1px solid #7DB857",
+                              background: "rgba(125, 184, 87, 0.12)",
+                              color: "#7DB857",
+                            }}
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              event.preventDefault();
+
+                              openVoteDialog(row);
+                            }}
+                          >
+                            Vote
+                          </Button>        
+                        </div>
+
+                        <div className={css.mobileItem}>
+                          <div className={css.mobileItemTable}>
+                            <div className={css.mobileItemRow}>
+                              <div className={css.mobileItemCell}>TVL</div>
+                              <div className={css.mobileItemCell}>
+                                {tableCellContent(
+                                  `${(numeral(BigNumber(row?.tvl).toLocaleString()).format('($ 0a)'))}`,
+                                  null,
+                                  null,
+                                  null,
+                                )}
+                              </div>
+                            </div>
+                            <div className={css.mobileItemRow}>
+                              <div className={css.mobileItemCell}>APR %</div>
+                              <div className={css.mobileItemCell}>
+                                {tableCellContent(
+                                  `${formatCurrency(BigNumber(row?.gauge?.derivedAPR), 0)}%`,
+                                  `${formatCurrency(BigNumber(row?.gauge?.expectAPRDerived), 0)}%`,
+                                  'Current',
+                                  'Next week'
+                                )}
+                              </div>
+                            </div>
+                            {(expanded === labelId) && (
+                              headCells.map((headCell) => (
                                 <>
                                   {!headCell.isHideInDetails &&
-                                      <div
-                                          style={{
-                                            height: 72,
-                                            borderTop: `1px solid #060B17`,
-                                          }}
-                                          className={['g-flex', 'g-flex--align-center'].join(' ')}>
-                                        <Typography
-                                            className={classes.cellHeadPaddings}
-                                            style={{
-                                              width: '50%',
-                                              height: '100%',
-                                              display: 'flex',
-                                              alignItems: 'center',
-                                              fontWeight: 500,
-                                              fontSize: 14,
-                                              lineHeight: '120%',
-                                              color: '#8191B9',
-                                              borderRight: `1px solid #060B17`,
-                                            }}
-                                            noWrap
-                                        >
-                                          {headCell.label}
-                                        </Typography>
+                                    <div className={css.mobileItemRow}>
+                                      <div className={css.mobileItemCell}>
+                                        {headCell.label}
+                                      </div>
 
-                                        <div
-                                            className={classes.cellPaddings}
-                                            style={{
-                                              width: '50%',
-                                              display: 'flex',
-                                              justifyContent: 'flex-end',
-                                            }}>
-                                          <div
-                                              className={classes.inlineEnd}
-                                              style={{
-                                                display: 'flex',
-                                                flexDirection: 'column',
-                                                alignItems: 'flex-end',
-                                              }}>
-                                            <Typography
-                                                className={classes.textSpaced}
-                                                style={{
-                                                  fontWeight: 400,
-                                                  fontSize: 14,
-                                                  lineHeight: '120%',
-                                                  color: '#E4E9F4',
-                                                  whiteSpace: 'nowrap',
-                                                }}>
-                                              {headCell.id === 'tvl' && `${(numeral(BigNumber(row?.tvl).toLocaleString()).format('($ 0a)'))} `}
-                                              {headCell.id === 'apr' && `${
-                                                  formatCurrency(row?.gauge?.derivedAPR, 0)
-                                              }%`}
-                                              {headCell.id === 'balance' && formatCurrency(BigNumber(row?.gauge?.balance).div(row?.gauge?.totalSupply).times(row?.gauge?.reserve0))}
-                                              {headCell.id === 'liquidity' && formatCurrency(BigNumber(row?.reserve0))}
-                                              {headCell.id === 'apy' && row?.gaugebribes.bribeTokens.length ? (
-                                                      row?.gaugebribes.bribeTokens
-                                                        .filter(x => !BigNumber(x?.left).isZero())
-                                                        .map((bribe, idx) => {
-                                                        return (
-                                                            <div className={['g-flex-column', 'g-flex--align-end'].join(' ')}>
-                                                              {`${Number(bribe.apr).toFixed(1)}% APR`}
-                                                            </div>
-                                                        );
-                                                      })
-                                                  )
-                                                  : null}
-
-                                    {headCell.id === 'myVotes' && formatCurrency(BigNumber(sliderValue).div(100).times(token?.lockValue))}
-                                  </Typography>
-
-                                            <Typography
-                                                className={classes.textSpaced}
-                                                style={{
-                                                  fontWeight: 400,
-                                                  fontSize: 14,
-                                                  lineHeight: '120%',
-                                                  color: '#E4E9F4',
-                                                  whiteSpace: 'nowrap',
-                                                }}>
-
-                                    {headCell.id === 'balance' && formatCurrency(BigNumber(row?.gauge?.balance).div(row?.gauge?.totalSupply).times(row?.gauge?.reserve1))}
-                                    {headCell.id === 'liquidity' && formatCurrency(BigNumber(row?.reserve1))}
-                                    {headCell.id === 'apy' && ''}
-                                    {headCell.id === 'myVotes' && `${formatCurrency(sliderValue)} %`}
-                                  </Typography>
+                                      <div className={css.mobileItemCell}>
+                                        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
+                                        <div className={css.itemTitle} style={{ marginBottom: 4 }}>
+                                          {headCell.id === 'tvl' && `${(numeral(BigNumber(row?.tvl).toLocaleString()).format('($ 0a)'))} `}
+                                          {headCell.id === 'apr' && `${formatCurrency(row?.gauge?.derivedAPR, 0)}%`}
+                                          {headCell.id === 'balance' && formatCurrency(BigNumber(row?.gauge?.balance).div(row?.gauge?.totalSupply).times(row?.gauge?.reserve0))}
+                                          {headCell.id === 'liquidity' && formatCurrency(BigNumber(row?.reserve0))}
+                                          {headCell.id === 'apy' && row?.gaugebribes.bribeTokens.length ? (
+                                            row?.gaugebribes.bribeTokens
+                                              .filter(x => !BigNumber(x?.left).isZero())
+                                              .map((bribe, idx) => {
+                                                return (
+                                                  <div className={['g-flex-column', 'g-flex--align-end'].join(' ')}>
+                                                    {`${Number(bribe.apr).toFixed(1)}% APR`}
+                                                  </div>
+                                                );
+                                              })
+                                          ) : null}
+                                          {headCell.id === 'myVotes' && formatCurrency(BigNumber(sliderValue).div(100).times(token?.lockValue))}
                                         </div>
 
-                                          <div
-                                              className={classes.inlineEnd}
-                                              style={{
-                                                display: 'flex',
-                                                flexDirection: 'column',
-                                                alignItems: 'flex-end',
-                                                paddingLeft: 10,
-                                              }}>
-                                            <Typography
-                                                className={`${classes.textSpaced} ${classes.symbol}`}
-                                                style={{
-                                                  marginBottom: 4,
-                                                  fontWeight: 400,
-                                                  fontSize: 14,
-                                                  lineHeight: '120%',
-                                                  color: '#8191B9',
-                                                }}>
+                                        <div className={css.itemTitle}>
+                                          {headCell.id === 'balance' && formatCurrency(BigNumber(row?.gauge?.balance).div(row?.gauge?.totalSupply).times(row?.gauge?.reserve1))}
+                                          {headCell.id === 'liquidity' && formatCurrency(BigNumber(row?.reserve1))}
+                                          {headCell.id === 'apy' && ''}
+                                          {headCell.id === 'myVotes' && `${formatCurrency(sliderValue)} %`}
+                                        </div>
+                                        </div>
 
-                                              {headCell.id === 'balance' && formatSymbol(row.token0.symbol)}
-                                              {headCell.id === 'liquidity' && formatSymbol(row.token0.symbol)}
-                                              {headCell.id === 'apy' && row?.gaugebribes.bribeTokens.length ? (
-                                                      row?.gaugebribes.bribeTokens
-                                                        .filter(x => !BigNumber(x?.left).isZero())
-                                                        .map((bribe, idx) => {
-                                                        return (
-                                                            <div className={['g-flex-column', 'g-flex--align-end'].join(' ')}>
-                                                              {
-                                                                formatSymbol(bribe.token.symbol)
-                                                              }
-                                                            </div>
-                                                        );
-                                                      })
-                                                  )
-                                                  : null}
-                                              {headCell.id === 'myVotes' && formatSymbol(row.token0.symbol)}
-                                            </Typography>
+                                        <div style={{ paddingLeft: 8, display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+                                        <div className={css.itemText} style={{ marginBottom: 4 }}>
+                                          {headCell.id === 'balance' && formatSymbol(row.token0.symbol)}
+                                          {headCell.id === 'liquidity' && formatSymbol(row.token0.symbol)}
+                                          {headCell.id === 'apy' && row?.gaugebribes.bribeTokens.length ? (
+                                            row?.gaugebribes.bribeTokens
+                                              .filter(x => !BigNumber(x?.left).isZero())
+                                              .map((bribe, idx) => {
+                                                return (
+                                                  <div className={['g-flex-column', 'g-flex--align-end'].join(' ')}>
+                                                    {formatSymbol(bribe.token.symbol)}
+                                                  </div>
+                                                );
+                                              })
+                                          ) : null}
+                                          {headCell.id === 'myVotes' && formatSymbol(row.token0.symbol)}
+                                        </div>
 
-                                            <Typography
-                                                className={`${classes.textSpaced} ${classes.symbol}`}
-                                                style={{
-                                                  fontWeight: 400,
-                                                  fontSize: 14,
-                                                  lineHeight: '120%',
-                                                  color: '#8191B9',
-                                                }}
-                                            >
-                                              {headCell.id === 'balance' && formatSymbol(row.token1.symbol)}
-                                              {headCell.id === 'liquidity' && formatSymbol(row.token1.symbol)}
-                                              {headCell.id === 'apy' && ''}
-                                              {headCell.id === 'myVotes' && formatSymbol(row.token1.symbol)}
-                                            </Typography>
-                                          </div>
+                                        <div className={css.itemText}>
+                                          {headCell.id === 'balance' && formatSymbol(row.token1.symbol)}
+                                          {headCell.id === 'liquidity' && formatSymbol(row.token1.symbol)}
+                                          {headCell.id === 'apy' && ''}
+                                          {headCell.id === 'myVotes' && formatSymbol(row.token1.symbol)}
+                                        </div>
                                         </div>
                                       </div>
+                                    </div>
                                   }
                                 </>
-                            ))}
-                          </AccordionDetails>
-                        </Accordion>
-                      </>
-                  );
-                })
+                              ))
+                            )}
+                          </div>
+
+                          <div
+                            className={css.mobileItemHiddenContentToggle}
+                            onClick={(e) => {
+                              console.log('test')
+                              handleChangeAccordion(e, labelId)
+                            }
+                          }>
+                            <div
+                              style={{
+                                fontFamily: 'PT Root UI',
+                                fontWeight: 700,
+                                fontSize: 16,
+                                lineHeight: '100%',
+                                color: '#EAE8E1',
+                              }}
+                              noWrap
+                            >
+                              {expanded !== labelId ? 'Show' : 'Hide'} more details
+                            </div>
+
+                            {expanded !== labelId &&
+                              <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M0.979238 5.27094C2.36454 3.19808 5.26851 0 9.99995 0C14.7314 0 17.6354 3.19808 19.0207 5.27094C19.4855 5.96655 19.718 6.31435 19.6968 6.95691C19.6757 7.59948 19.4088 7.94688 18.8752 8.64168C17.2861 10.7107 14.1129 14 9.99995 14C5.88699 14 2.71384 10.7107 1.12471 8.64168C0.591062 7.94688 0.324239 7.59948 0.303083 6.95691C0.281927 6.31435 0.514364 5.96655 0.979238 5.27094ZM9.99995 11C12.2091 11 13.9999 9.20914 13.9999 7C13.9999 4.79086 12.2091 3 9.99995 3C7.79081 3 5.99995 4.79086 5.99995 7C5.99995 9.20914 7.79081 11 9.99995 11Z" fill="#7DB857"/>
+                              </svg>                        
+                            }
+
+                            {expanded === labelId &&
+                              <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M0.979238 5.27094C2.36454 3.19808 5.26851 0 9.99995 0C14.7314 0 17.6354 3.19808 19.0207 5.27094C19.4855 5.96655 19.718 6.31435 19.6968 6.95691C19.6757 7.59948 19.4088 7.94688 18.8752 8.64168C17.2861 10.7107 14.1129 14 9.99995 14C5.88699 14 2.71384 10.7107 1.12471 8.64168C0.591062 7.94688 0.324239 7.59948 0.303083 6.95691C0.281927 6.31435 0.514364 5.96655 0.979238 5.27094ZM9.99995 11C12.2091 11 13.9999 9.20914 13.9999 7C13.9999 4.79086 12.2091 3 9.99995 3C7.79081 3 5.99995 4.79086 5.99995 7C5.99995 9.20914 7.79081 11 9.99995 11Z" fill="#7DB857"/>
+                              </svg>
+                            }
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                );
+              })
             }
           </div>
-        <TablePagination
+
+          <TablePagination
             className={'g-flex-column__item-fixed'}
             style={{
-              width: '100%',
-              padding: '0 30px',
-              background: '#060B17',
-              // border: '1px solid #86B9D6',
-              // borderColor: appTheme === 'dark' ? '#5F7285' : '#86B9D6',
-              // borderRadius: 12,
-              marginBottom: 40,
+              width: "100%",
+              padding: "0 20px",
+              borderRadius: 20,
+              background: '#131313',
               color: '#8191B9',
-              // fontSize: 14,
-              // fontWeight: 500,
             }}
+            ActionsComponent={TablePaginationActions}
+            rowsPerPageOptions={window.innerWidth < 435 ? [] : [5, 10, 25]}
             component="div"
             count={gauges.length}
             rowsPerPage={rowsPerPage}
             page={page}
             labelRowsPerPage={window.innerWidth < 550 ? null : 'Rows per page:'}
-            rowsPerPageOptions={window.innerWidth < 435 ? [] : [5, 10, 25]}
-            ActionsComponent={TablePaginationActions}
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
             classes={{

@@ -266,7 +266,7 @@
   line-height: 20px;
   white-space: nowrap;
 
-  color: #9a9faf;
+  color: #F6F7F9;
 }
 
 @media (max-width: 767px) {
@@ -686,6 +686,15 @@
   background: rgba(104, 114, 122, 0.12);
 }
 
+.warningContainerWarning {
+  border: 1px solid #EB9617;
+  background: rgba(235, 150, 23, 0.12);
+}
+
+.warningContainerWarning .warningText {
+  color: #EB9617;
+}
+
 @media (max-width: 767px) {
   .warningContainer {
     margin-bottom: 12px;
@@ -786,3 +795,156 @@
 .button::after {
   right: -12px;
 }
+
+/* nft */
+
+.nftContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: 152px;
+
+  padding: 20px;
+
+  border: 1px solid rgba(104, 114, 122, 0.4);
+  border-radius: 16px;
+
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+
+  border-radius: 12px;
+
+  background: #131313;
+  color: #F6F7F9;
+}
+
+@media (max-width: 767px) {
+  .nftContainer {
+    display: none;
+  }
+}
+
+.nftContainerRow {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.nftContainerCol {}
+
+.nftContainerCol:last-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.nftContainerTitleLarge {
+  font-family: 'PT Root UI';
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 52px;
+
+  color: #F6F7F9;
+}
+
+.nftContainerTitle {
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 4px;
+
+  font-family: 'PT Root UI';
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  
+  color: #F6F7F9;  
+}
+
+.nftContainerValue {
+  display: flex;
+  align-items: center;
+
+  font-family: 'PT Root UI';
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  
+  color: #9A9FAF;
+}
+
+.nftContainerMobile {
+  display: none;
+
+  height: 48px;
+
+  padding: 8px;
+
+  border: 1px solid rgba(104, 114, 122, 0.4);
+  border-radius: 16px;
+
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+
+  border-radius: 8px;
+
+  background: #131313;
+  color: #F6F7F9;
+}
+
+@media (max-width: 767px) {
+  .nftContainerMobile {
+    display: flex;
+  }
+}
+
+.nftContainerRowMobile {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.nftContainerColMobile {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.nftContainerTitleLargeMobile {
+  margin-bottom: 4px;
+
+  font-family: 'PT Root UI';
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 16px;
+
+  color: #F6F7F9;
+}
+
+.nftContainerTitleMobile {
+  font-family: 'PT Root UI';
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+
+  color: #F6F7F9;
+}
+
+.nftContainerValueMobile {
+  font-family: 'PT Root UI';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 12px;
+
+  color: #9A9FAF;
+}
+

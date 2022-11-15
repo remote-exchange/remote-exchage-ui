@@ -1,0 +1,223 @@
+.voteTooltip {
+  z-index: 10;
+
+  position: absolute;
+
+  top: 46px;
+  right: 14px;
+
+  width: 520px;
+
+  padding: 20px;
+
+  border-radius: 20px;
+
+  background: #eae8e1;
+}
+
+/* header */
+
+.voteTooltipHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 20px;
+  padding: 20px 20px 0;
+}
+
+.voteTooltipTitle {
+  font-family: "PT Root UI";
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+
+  color: #131313;
+}
+
+.voteTooltipClose {
+  position: relative;
+
+  width: 18px;
+  height: 18px;
+
+  border-radius: 50%;
+  background-color: #131313;
+
+  cursor: pointer !important;
+}
+
+.voteTooltipClose::before,
+.voteTooltipClose::after {
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 10px;
+  height: 2px;
+
+  background-color: #ccd2e3;
+}
+
+.voteTooltipClose::before {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.voteTooltipClose::after {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+/* body */
+
+.voteTooltipBody {
+  min-height: 200px;
+  margin: 0 20px 20px;
+  padding: 20px;
+  text-align: left;
+  border-radius: 20px;
+  background: #131313;
+}
+
+.inlinePair {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 12px;
+
+  border: 1px solid rgba(104, 114, 122, 0.4);
+  border-radius: 12px;
+  background: #131313;
+}
+
+.doubleImages {
+  display: flex;
+  align-items: center;
+}
+
+.voteTooltipSliderValues {
+  display: flex;
+  justify-content: space-between;
+
+  margin-bottom: 0px;
+
+  font-family: "PT Root UI";
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #9a9faf;
+}
+
+.voteTooltipSlider {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.yourVoteTitle {
+  margin-bottom: 12px;
+
+  font-family: "PT Root UI";
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+  text-align: left;
+
+  color: #f6f7f9;
+}
+
+.yourVoteText {
+  margin-bottom: 12px;
+
+  font-family: "PT Root UI";
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: left;
+
+  color: #9a9faf;
+}
+
+.voteTooltipVoteBlock {
+  position: relative;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 12px;
+
+  width: 100%;
+  height: 48px;
+
+  border: 1px solid #9a9faf;
+  border-radius: 12px;
+}
+
+.voteTooltipVoteBlockTitle {
+  margin-left: 14px;
+
+  font-size: 16px;
+  font-weight: 500;
+
+  color: #e4e9f4;
+}
+
+.voteTooltipVoteBlockInput {
+  font-family: "PT Root UI" !important;
+  font-weight: 500 !important;
+  font-size: 16px !important;
+  line-height: 24px !important;
+
+  color: #eae8e1 !important;
+}
+
+.voteTooltipVoteBlockInputAddornment {
+  position: absolute;
+
+  right: 12px;
+
+  font-family: "PT Root UI";
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+
+  color: #9a9faf;
+}
+
+.voteTooltipButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 20px;
+  padding: 0 16px;
+
+  width: 100%;
+  height: 64px;
+
+  font-family: "PT Root UI";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+
+  border-radius: 12px;
+
+  background: #68727a;
+  color: #ffffff;
+
+  cursor: pointer;
+}
+
+@media (max-width: 767px) {
+  .voteTooltipButton {
+    height: 48px;
+    margin-top: 12px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 16px;
+  }
+}

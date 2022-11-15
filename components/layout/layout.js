@@ -48,7 +48,15 @@ export default function Layout({
           <Header backClicked={backClicked} changeTheme={changeTheme} title={ title } />
         )}
         <SnackbarController />
-        <main className={[classes.main, 'g-flex-column__item', 'g-flex-column', 'g-scroll-y'].join(' ')}>
+        <main
+          className={[
+            classes.main,
+            isHomePage ? classes.mainHome : '',
+            'g-flex-column__item',
+            'g-flex-column',
+            'g-scroll-y'
+          ].join(' ')}
+        >
           <div className={[classes.containerInner, 'g-flex-column'].join(' ')}>
             {children}
           </div>

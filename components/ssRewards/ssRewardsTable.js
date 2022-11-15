@@ -76,7 +76,6 @@ function EnhancedTableHead(props) {
 
   const { appTheme } = useAppThemeContext();
 
-  // TODO SORT ICON
   return (
     <TableHead>
       <TableRow style={{ whiteSpace: "nowrap" }}>
@@ -486,7 +485,7 @@ export default function EnhancedTable({ rewards, vestNFTs, tokenID }) {
         </div>
 
         {(symbol1 || symbol2) && (
-          <div style={{ paddingLeft: 8, display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+          <div style={{ paddingLeft: 8, display: "flex", flexDirection: "column", alignItems: "flex-start", textAlign: 'left'}}>
             <div className={`${css.itemText} ${classes.symbol}`} style={{ marginBottom: 2 }}>
               {symbol1}
             </div>
@@ -1087,6 +1086,7 @@ export default function EnhancedTable({ rewards, vestNFTs, tokenID }) {
                 })
             : null}
           </div>
+
           <TablePagination
             className={"g-flex-column__item-fixed"}
             style={{
@@ -1097,13 +1097,12 @@ export default function EnhancedTable({ rewards, vestNFTs, tokenID }) {
               color: '#8191B9',
             }}
             ActionsComponent={TablePaginationActions}
-            rowsPerPageOptions={[5, 10, 25]}
+            rowsPerPageOptions={window.innerWidth < 435 ? [] : [5, 10, 25]}
             component="div"
             count={rewards.length}
             rowsPerPage={rowsPerPage}
             page={page}
             labelRowsPerPage={window.innerWidth < 550 ? null : "Rows per page:"}
-            rowsPerPageOptions={window.innerWidth < 435 ? [] : [5, 10, 25]}
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
             classes={{

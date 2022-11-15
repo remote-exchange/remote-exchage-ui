@@ -176,140 +176,94 @@ export default function ssVotes() {
 
   return (
     <>
-      <div
-        className={[
-          classes.topBarContainer,
-          "g-flex",
-          "g-flex--align-center",
-          "g-flex--space-between",
-        ].join(" ")}
-      >
-          <div className={classes.title}>
-              Vote
-          </div>
-          <div className={[classes.yourVotes, "g-flex", "g-flex--align-center"].join(" ")}>
-              <Typography
-                  style={{
-                      fontWeight: 400,
-                      fontSize: windowWidth < 660 ? 14 : 16,
-                      color: '#E4E9F4',
-                      whiteSpace: "nowrap",
-                  }}
-              >
-                  Your Votes:
-              </Typography>
+      <div className={classes.toolbarContainer}>
+        <div className={classes.toolbarContainerRow}>
+          <div className={classes.pageTitle}>Vote</div>
 
-              <Typography
+          <div className={classes.yourVotesWrapper}>
+            <div className={classes.yourVotes}>
+              <div className={classes.yourVotesTitle}>Your Votes:</div>
+              <div className={[
+                classes.yourVotesValue,
+                `${BigNumber(totalVotes).gt(100)
+                  ? classes.errorText
+                  : classes.helpText}`,
+                noTokenSelected ? classes.infoSectionPercentDisabled : "",
+                ].join(" ")}
+              >
+                {formatCurrency(totalVotes)}%
+              </div>
+
+              <div className={classes.yourVotesControls}>
+                <Button
                   className={[
-                      `${
-                          BigNumber(totalVotes).gt(100)
-                              ? classes.errorText
-                              : classes.helpText
-                      }`,
-                      noTokenSelected ? classes.infoSectionPercentDisabled : "",
+                    classes.yourVotesControl,
+                    classes.yourVotesControlActive,
+                    noTokenSelected || disableCastVotes
+                      ? classes.yourVotesControlDisabled
+                      : null,
                   ].join(" ")}
-              >
-                  {formatCurrency(totalVotes)} %
-              </Typography>
-          </div>
-        <div
-          style={{
-            // position: "relative",
-          }}
-          className={["g-flex", "g-flex--align-center"].join(" ")}
-        >
-          <div
-            className={[
-              classes.infoSection,
-              classes[`infoSection--${appTheme}`],
-              "g-flex",
-              "g-flex--align-center",
-              "g-flex--no-wrap",
-              "g-flex--space-between",
-            ].join(" ")}
-          >
-            <Button
-              className={[
-                classes.buttonOverrideFixedCast,
-                noTokenSelected || disableCastVotes
-                  ? classes[`buttonOverrideFixedDisabled--${appTheme}`]
-                  : null,
-              ].join(" ")}
-              variant="contained"
-              size="large"
-              color="primary"
-              disabled={
-                disableCastVotes ||
-                voteLoading ||
-                BigNumber(totalVotes).eq(0) ||
-                BigNumber(totalVotes).gt(100)
-              }
-              onClick={onVote}
-            >
-                {voteLoading ? `Casting Votes` : `Cast Votes`}
-              {voteLoading && (
-                <CircularProgress size={10} className={classes.loadingCircle} />
-              )}
-            </Button>
-            <Button
-              className={[
-                classes.buttonOverrideFixedReset,
-                noTokenSelected || disableCastVotes
-                  ? classes[`buttonOverrideFixedDisabled--${appTheme}`]
-                  : null,
-              ].join(" ")}
-              variant="contained"
-              size="large"
-              color="primary"
-              disabled={voteLoading}
-              onClick={onResetVotes}
-            >
-              <Typography
-                style={{
-                  fontWeight: 600,
-                  fontSize: windowWidth < 660 ? 14 : 18,
-                  color: '#779BF4',
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {voteLoading ? (windowWidth >= 806 ? `Reseting Votes` : 'Reseting') : (windowWidth >= 806 ? `Reset Votes` : 'Reset')}
-              </Typography>
-              {voteLoading && (
-                <CircularProgress size={10} className={classes.loadingCircle} />
-              )}
-            </Button>
+                  variant="contained"
+                  size="large"
+                  color="primary"
+                  disabled={
+                    disableCastVotes ||
+                    voteLoading ||
+                    BigNumber(totalVotes).eq(0) ||
+                    BigNumber(totalVotes).gt(100)
+                  }
+                  onClick={onVote}
+                >
+                  {voteLoading ? `Casting Votes` : `Cast Votes`}
+                  {voteLoading && (
+                    <CircularProgress size={10} className={classes.loadingCircle} />
+                  )}
+                </Button>
+                <Button
+                  className={[
+                    classes.yourVotesControl,
+                    noTokenSelected || disableCastVotes
+                      ? classes.yourVotesControlDisabled
+                      : null,
+                  ].join(" ")}
+                  variant="contained"
+                  size="large"
+                  color="primary"
+                  disabled={voteLoading}
+                  onClick={onResetVotes}
+                >
+                  {voteLoading ? (windowWidth >= 806 ? `Reseting Votes` : 'Reseting') : "Reset"}
+                  {voteLoading && (
+                    <CircularProgress size={10} className={classes.loadingCircle} />
+                  )}
+                </Button>
+              </div>
+            </div>
           </div>
 
-          <div
-            className={[
-              classes.addButton,
-              classes[`addButton--${appTheme}`],
-              "g-flex",
-              "g-flex--align-center",
-              "g-flex--justify-center",
-            ].join(" ")}
-            onClick={onBribe}
-          >
-            <Typography
-              className={[
-                classes.actionButtonText,
-                classes[`actionButtonText--${appTheme}`],
-                "g-flex",
-                "g-flex--align-center",
-                "g-flex--justify-center",
-              ].join(" ")}
-            >
+          <div className={classes.addButton} onClick={onBribe}>
+            <div className={classes.actionButtonText}>
               Create Bribe
-            </Typography>
+            </div>
+          </div>
+
+          <div className={classes.addButtonMobile} onClick={onBribe}>
+            <span>Bribe +</span>
           </div>
         </div>
 
-        <div
-          className={[classes.controls, "g-flex", "g-flex--align-center"].join(
-            " "
-          )}
-        >
-          {1/*(windowWidth > 1200 || showSearch)*/ && (
+        <div className={[classes.controls, "g-flex", "g-flex--align-baseline"].join(" ")}>
+          <div className={classes.select}>
+            {TokenSelect({
+              value: token,
+              options: vestNFTs,
+              symbol: veToken?.symbol,
+              handleChange,
+              placeholder: "Select veREMOTE",
+            })}
+          </div>
+
+          <div className={classes.field}>
             <TextField
               className={classes.searchInputRoot}
               variant="outlined"
@@ -318,12 +272,6 @@ export default function ssVotes() {
               value={search}
               onChange={onSearchChanged}
               InputProps={{
-                style: {
-                  background: '#171D2D',
-                  border: "1px solid",
-                  borderColor: '#779BF4',
-                  borderRadius: 12,
-                },
                 classes: {
                   root: classes.searchInput,
                   input: classes.searchInputInput,
@@ -331,54 +279,19 @@ export default function ssVotes() {
                 endAdornment: (
                   <InputAdornment position="end">
                     <div className={classes.searchInputIcon}>
-                      <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M10.5 20C15.7467 20 20 15.7467 20 10.5C20 5.25329 15.7467 1 10.5 1C5.25329 1 1 5.25329 1 10.5C1 15.7467 5.25329 20 10.5 20Z" stroke="#779BF4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 11C18 14.866 14.866 18 11 18C7.13401 18 4 14.866 4 11C4 7.13401 7.13401 4 11 4C14.866 4 18 7.13401 18 11Z" fill="#9A9FAF"/>
+                        <path d="M20 20L18 18" stroke="#9A9FAF" stroke-width="2" stroke-linecap="round"/>
                       </svg>
-                      <div style={{position: 'relative'}}>
-                          <svg style={{position: 'absolute', top: 8, right: 0,}} width="4" height="4" viewBox="0 0 4 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M3 3L1 1" stroke="#779BF4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                          </svg>
-                      </div>
                     </div>
                   </InputAdornment>
                 ),
               }}
               inputProps={{
-                style: {
-                  padding: 24,
-                  borderRadius: 0,
-                  border: "none",
-                  fontSize: 16,
-                  fontWeight: 400,
-                  lineHeight: "120%",
-                  color: '#E4E9F4',
-                },
+                className: classes.searchInputText,
               }}
             />
-          )}
-
-          <div className={classes.tokenSelect}>
-            {TokenSelect({
-              value: token,
-              options: vestNFTs,
-              symbol: veToken?.symbol,
-              handleChange,
-              placeholder: "Select veCONE NFT",
-            })}
           </div>
-
-          {/*{windowWidth <= 1360 && (
-            <IconButton
-              className={[
-                classes.searchButton,
-                classes[`searchButton--${appTheme}`],
-              ].join(" ")}
-              onClick={handleSearch}
-              aria-label="filter list"
-            >
-              <Search />
-            </IconButton>
-          )}*/}
         </div>
       </div>
 
