@@ -35,6 +35,7 @@ export const loadNfts = async (account, web3, tokenID) => {
         if (!tokenID || parseInt(tokenIndex) === parseInt(tokenIndex)) {
           const locked = await vestingContract.methods.locked(tokenIndex).call();
           const lockValue = formatBN(await vestingContract.methods.balanceOfNFT(tokenIndex).call());
+          const attachments = await vestingContract.methods.attachments(tokenIndex).call();
 
           return {
             id: tokenIndex,
@@ -45,6 +46,7 @@ export const loadNfts = async (account, web3, tokenID) => {
             // subgraphInfo: userNfts.filter(n => parseInt(n.id) === parseInt(tokenIndex))[0],
             veRatio: BigNumber(lockValue).div(totalPower).toString(),
             percentOfTotalPower: BigNumber(lockValue).div(totalPower).times(100).toString(),
+            attachments,
           };
         } else {
           return null;

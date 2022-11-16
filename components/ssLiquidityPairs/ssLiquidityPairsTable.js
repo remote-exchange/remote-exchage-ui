@@ -448,7 +448,7 @@ const useStyles = makeStyles({
   tableWrapper: {
     overflowY: 'initial',
     ["@media (min-width:1920px)"]: {
-      paddingLeft: 400,
+      // paddingLeft: 400,
     },
   },
   tableContWrapper: {
@@ -1284,8 +1284,8 @@ const EnhancedTableToolbar = (props) => {
                   onClick={handleClick}
                   aria-label="filter list">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M5 3C4.44772 3 4 3.44772 4 4V6.00001H20V4C20 3.44772 19.5523 3 19 3H5ZM19.7822 8.00001H4.21776C4.3321 8.22455 4.48907 8.42794 4.68299 8.59762L10.683 13.8476C11.437 14.5074 12.563 14.5074 13.317 13.8476L19.317 8.59762C19.5109 8.42794 19.6679 8.22455 19.7822 8.00001Z" fill="#131313"/>
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M14 17.7049L14 11H10V19.7049L14 17.7049Z" fill="#131313"/>
+                  <path fillRule="evenodd" clipRule="evenodd" d="M5 3C4.44772 3 4 3.44772 4 4V6.00001H20V4C20 3.44772 19.5523 3 19 3H5ZM19.7822 8.00001H4.21776C4.3321 8.22455 4.48907 8.42794 4.68299 8.59762L10.683 13.8476C11.437 14.5074 12.563 14.5074 13.317 13.8476L19.317 8.59762C19.5109 8.42794 19.6679 8.22455 19.7822 8.00001Z" fill="#131313"/>
+                  <path fillRule="evenodd" clipRule="evenodd" d="M14 17.7049L14 11H10V19.7049L14 17.7049Z" fill="#131313"/>
                 </svg>
 
 
@@ -1561,7 +1561,7 @@ const EnhancedTableToolbar = (props) => {
                 <div className={classes.searchInputIcon}>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M18 11C18 14.866 14.866 18 11 18C7.13401 18 4 14.866 4 11C4 7.13401 7.13401 4 11 4C14.866 4 18 7.13401 18 11Z" fill="#9A9FAF"/>
-                    <path d="M20 20L18 18" stroke="#9A9FAF" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M20 20L18 18" stroke="#9A9FAF" strokeWidth="2" strokeLinecap="round"/>
                   </svg>
                 </div>
               </InputAdornment>,

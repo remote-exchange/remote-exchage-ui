@@ -15,7 +15,7 @@
 }
 
 .displaySelectContainerCreate {
-  width: 510px;
+  /*width: 510px;*/
 }
 
 .displaySelectContainerWithdraw {
@@ -29,11 +29,11 @@
 }
 
 .displaySelectContainer:hover {
-  background: #1F2B49;
+  /*background: #1F2B49;*/
 }
 
 .displaySelectContainerMedium {
-  padding: 12px 20px 12px 0;
+  /*padding: 12px 20px 12px 0;*/
   cursor: pointer;
 }
 
@@ -44,15 +44,19 @@
 
 .displayDualIconContainer {
   position: relative;
-  height: 92px;
+  /*height: 92px;*/
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
-  padding: 18px 4px 16px 8px;
-  /*padding: 18px 4px 16px 16px;*/
-  transition: fill 0.16s ease;
-  fill: #9BC9E4;
+  padding: 18px 23px 16px 8px;
 }
+
+.displayDualIconContainerDoubled {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+
 
 @media (max-width: 860px) {
   .displayDualIconContainer {
@@ -479,9 +483,9 @@ p.labelSelectSecondary {
 }
 
 .displayAssetIconSecond {
-  width: 66px;
-  height: 66px;
-  border: 2px solid #9BC9E4;
+  width: 52px;
+  height: 52px;
+  /*border: 2px solid #9BC9E4;*/
   /*padding: 4px;*/
   background: #B9DFF5;
 }

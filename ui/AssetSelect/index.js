@@ -387,7 +387,7 @@ const AssetSelect = (
         }}>
         <div className={classes.assetSelectMenuItem}>
           <div
-            className={[classes.displayDualIconContainer, classes[`displayDualIconContainer--${appTheme}`], size === 'small' ? classes.displayDualIconContainerSmallest : ''].join(' ')}>
+            className={[typeIcon === 'double' ? classes.displayDualIconContainerDoubled : classes.displayDualIconContainer, classes[`displayDualIconContainer--${appTheme}`], size === 'small' ? classes.displayDualIconContainerSmallest : ''].join(' ')}>
 
             {typeIcon === 'single' &&
               <>
@@ -410,7 +410,7 @@ const AssetSelect = (
             {typeIcon === 'double' &&
               <div className={classes.assetSelectMenuItem}>
                 <div
-                  className={classes.displayDualIconContainer}>
+                  className={classes.displayDualIconContainerDoubled}>
                   <img
                     className={[classes.displayAssetIcon, classes.displayAssetIconSecond, classes[`displayAssetIconSecond--${appTheme}`]].join(' ')}
                     alt=""
@@ -442,7 +442,7 @@ const AssetSelect = (
                       </Typography>
                       {value ?
                           <Typography className={classes.labelSelectSecondary}>
-                              {value?.isStable ? 'Stable pool' : 'Volatile Pool'}
+                              {/*{value?.isStable ? 'Stable pool' : 'Volatile Pool'}*/}
                           </Typography>
                        :
                           <Typography className={classes.labelSelectSecondary}>
