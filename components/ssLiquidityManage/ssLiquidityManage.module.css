@@ -1275,7 +1275,6 @@ input[type=number].mediumInputAmount {
 
 .nftRow {
   flex-direction: column;
-  /*margin-top: 20px;*/
   border-radius: 12px;
   display: flex;
   justify-content: space-between;
@@ -1290,14 +1289,11 @@ input[type=number].mediumInputAmount {
   font-size: 14px;
   line-height: 20px;
   color: #F6F7F9;
-  /*padding: 10px 16px;*/
   min-height: 56px;
 }
 
 .nftItems {
   display: flex;
-  /*width: 375px;*/
-  /*background: rgba(177, 241, 227, 0.12);*/
   border: 1px solid #B1F1E3;
   border-radius: 12px;
   color: #EAE8E1;
@@ -1444,6 +1440,14 @@ input[type=number].mediumInputAmount {
   padding: 12px;
   justify-content: space-between;
 }
+
+.tokenSelectorDisabled {
+  display: flex;
+  width: 100%;
+  padding: 12px;
+  justify-content: space-between;
+}
+
 
 .selectorLeft {
   display: flex;
@@ -2067,7 +2071,7 @@ input[type=number].mediumInputAmount {
 }
 
 .boostCalculator {
-  padding-top: 20px;
+  /*padding-top: 20px;*/
 }
 
 @media (max-width:1919px) {

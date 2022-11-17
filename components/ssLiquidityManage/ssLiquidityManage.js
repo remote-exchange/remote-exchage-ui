@@ -18,7 +18,7 @@ import { formatCurrency } from "../../utils";
 import classes from "./ssLiquidityManage.module.css";
 import stores from "../../stores";
 import {ACTIONS, CONTRACTS, DEFAULT_ASSET_FROM, DEFAULT_ASSET_TO} from "../../stores/constants";
-import {FTM_SYMBOL, VE_TOKEN_NAME, WFTM_SYMBOL} from '../../stores/constants/contracts'
+import {FTM_SYMBOL, VE_TOKEN_NAME, VE_TOKEN_SYMBOL, WFTM_SYMBOL} from '../../stores/constants/contracts'
 import { useAppThemeContext } from "../../ui/AppThemeProvider";
 import { formatInputAmount } from "../../utils";
 import AssetSelect from "../../ui/AssetSelect";
@@ -175,9 +175,11 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
     setVeToken(veTok);
     setVestNFTs(nfts);
 
-    if (nfts.length > 0) {
-      if (token == null && nfts[0].attachments == '0') {
-        setToken(nfts[0]);
+    if (nfts.length > 0 && token == null) {
+      if (pair?.gauge?.veId) {
+        setToken(nfts.filter(n => n.id === pair?.gauge?.veId)[0])
+      } else {
+        setToken(nfts.filter(n => n.attachments == '0')[0]);
       }
     }
 
@@ -840,6 +842,13 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
         value.isStable
       );
       setPair(p);
+      if (vestNFTs.length > 0) {
+        if (p?.gauge?.veId) {
+          setToken(vestNFTs.filter(n => n.id === p?.gauge?.veId)[0])
+        } else {
+          setToken(vestNFTs.filter(n => n.attachments == '0')[0]);
+        }
+      }
     } else if (type === "amount1") {
       setAsset1(value);
       const p = await stores.stableSwapStore.getPair(
@@ -2037,9 +2046,22 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
                             <>
                               <div className={classes.nftRow} style={{width: '100%',}}>
                                 <div className={classes.nftTitle}>
-                                  Connect {VE_TOKEN_NAME} for Boosted APR:
+                                  {!pair?.gauge?.veId ? 'Connect' : 'Connected'} {VE_TOKEN_NAME} for Boosted APR:
                                 </div>
-                                <div className={classes.nftItems}>{renderTokenSelect()}</div>
+                                <div className={classes.nftItems}>
+                                  {!pair?.gauge?.veId ? renderTokenSelect() : (
+                                      <div className={classes.tokenSelectorDisabled}>
+                                        <div className={classes.selectorLeft}>#{token.id}</div>
+                                        <div className={classes.selectorRight}>
+                                          <Typography
+                                              className={classes.menuOptionSecText}
+                                          >
+                                            {formatCurrency(token.lockValue)} {VE_TOKEN_SYMBOL}
+                                          </Typography>
+                                        </div>
+                                      </div>
+                                  )}
+                                </div>
                               </div>
                               {isShowBoostCalculator && <div className={classes.boostCalculator}>
                                 <BoostCalculator pair={pair} nft={token} ve={veToken} isMobileView={windowWidth < 860} amount={amount0}/>

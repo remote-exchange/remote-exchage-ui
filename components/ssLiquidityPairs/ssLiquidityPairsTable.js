@@ -1934,8 +1934,8 @@ export default function EnhancedTable({pairs, isLoading}) {
                                             {(() => {
                                               const veTok = stores.stableSwapStore.getStore("veToken");
                                               const nfts = stores.stableSwapStore.getStore("vestNFTs") ?? [];
-                                              const nft = nfts.reduce((acc, item) => item.totalPower > acc.totalPower ? item : acc, nfts[0]);
-
+                                              // const nft = nfts.reduce((acc, item) => item.totalPower > acc.totalPower ? item : acc, nfts[0]);
+                                              const nft = nfts.filter(n => n.id === row?.gauge?.veId)[0]
                                               return <div className={css.boostCalculatorTooltip}>
                                                 <BoostCalculator popuped={true} pair={row} ve={veTok} nft={nft} isMobileView={true} amount={100}/>
                                               </div>

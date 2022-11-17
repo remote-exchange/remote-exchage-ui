@@ -6,13 +6,15 @@ import ThreePointSliderForTooltip from '../threePointSlider/threePointSliderForT
 import BigNumber from "bignumber.js";
 import {calculateBoost, calculatePowerForMaxBoost} from "../../stores/helpers/pair-helper";
 import { formatCurrency } from '../../utils';
-import {VE_TOKEN_NAME} from '../../stores/constants/contracts'
+import {VE_TOKEN_NAME, VE_TOKEN_SYMBOL} from '../../stores/constants/contracts'
+import {Typography} from "@mui/material";
 // import {InputBase} from '@mui/material';
 
 export default function ssBoostCalculator({pair, nft, ve, isMobileView = false, amount = 0, popuped = false}) {
   const router = useRouter();
   const boostedType = 'boosted';
 
+  const [ isExampleAmount, setIsExampleAmount] = useState(false)
   const [ isShowNote, setIsShowNote ] = useState(false);
   const [ isShowCreateAction, setIsShowCreateAction ] = useState(false);
   const [ nftVolume, setNftVolume ] = useState('');
@@ -115,6 +117,7 @@ export default function ssBoostCalculator({pair, nft, ve, isMobileView = false, 
             // if user dont have liquidity, then calculate $1000 to lpAmount
             const ethPer1k = BigNumber(1000).div(pair.ethPrice)
             setLpAmount(BigNumber(pair.totalSupply).times(ethPer1k.div(BigNumber(pair.reserveETH))))
+            setIsExampleAmount(true)
           } else {
             setLpAmount(BigNumber("1"))
           }
@@ -170,22 +173,45 @@ export default function ssBoostCalculator({pair, nft, ve, isMobileView = false, 
   }
 
   const profitRender = (type = 'current') => {
-    const label = type === 'current' ? `Current APR <span>${fixed(currentAPRPercentage)}%</span>` : `Boosted APR <span>${fixed(boostedAPRPercentage)}%</span>`;
-    const value = type === 'current' ? `${fixed(currentAPRAmount)} $ / day` : `${fixed(boostedAPRAmount)} $ / day`;
     const hasProfit = boostedAPRPercentage > currentAPRPercentage;
     return (
         <>
-          <div
-              className={[ classes.profitLabel, classes[ `profitLabel--${hasProfit && type === boostedType ? 'profit' : 'shortage'}` ] ].join(' ')}
-              dangerouslySetInnerHTML={{ __html: label }}/>
-          <div className={classes.profitValue}>{value}</div>
+          {type === 'current' ? (
+              <>
+                <div
+                    className={[ classes.profitLabel, classes[ `profitLabel--${hasProfit && type === boostedType ? 'profit' : 'shortage'}` ] ].join(' ')}
+                >
+                  <div className={classes.profitLabelValue}><span>{fixed(currentAPRPercentage)}%</span></div>
+                  <div className={classes.profitLabelTitle}>Current APR</div>
+                </div>
+                <div className={classes.profitValue}>
+                  <div className={classes.profitLabelValue}>{fixed(currentAPRAmount)}</div>
+                  <div className={classes.profitLabelTitle}>$ / day</div>
+                </div>
+              </>
+            ) : (
+              <>
+                <div
+                    className={[ classes.profitLabel, classes[ `profitLabel--${hasProfit && type === boostedType ? 'profit' : 'shortage'}` ] ].join(' ')}
+                >
+                  <div className={classes.profitLabelValueBoosted}><span>{fixed(boostedAPRPercentage)}%</span></div>
+                  <div className={classes.profitLabelTitleBoosted}>Boosted APR</div>
+                </div>
+                <div className={classes.profitValue}>
+                  <div className={classes.profitLabelValueBoosted}>{fixed(boostedAPRAmount)}</div>
+                  <div className={classes.profitLabelTitleBoosted}>$ / day</div>
+                </div>
+              </>
+            )}
         </>
     );
   }
 
   const noteRender = <div className={classes.sliderNote}>
-    <div className={classes.sliderNoteWarnSymbol}>!</div>
-    <div>Move slider above to calculate the veCONE Power for Max Boosted Rewards.</div>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fillRule="evenodd" clipRule="evenodd" d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM13 8C13 8.55228 12.5523 9 12 9C11.4477 9 11 8.55228 11 8C11 7.44772 11.4477 7 12 7C12.5523 7 13 7.44772 13 8ZM12.75 17V11H11.25V17H12.75Z" fill="#68727A"/>
+    </svg>
+    <div>Use slider to calculate how much {VE_TOKEN_NAME} Power you need for the max APR Boost!.</div>
   </div>;
 
   const onChange = ({ currentPct,  currentAmount}) => {
@@ -198,13 +224,11 @@ export default function ssBoostCalculator({pair, nft, ve, isMobileView = false, 
 
   return (
       <div className={className}>
-        <div className={classes.sliderWrapper}>
-          {popuped &&
-              <div className={classes.calcToValue}>
-                <div className={classes.lp}>Calculated for</div>
-                <div className={classes.usdamount}>${lpAmount.div(BigNumber(pair.totalSupply)).times(BigNumber(pair.reserveETH)).times(pair.ethPrice).toFixed(2)}</div>
-                <div className={classes.lpamount}>({lpAmount.toString().slice(0, 12)})</div>
-                {/*<InputBase
+        {popuped &&
+            <div className={classes.calcToValue}>
+              <div className={classes.calculatorTitle}>Boost Calculator</div>
+              <div className={classes.lp}>{isExampleAmount ? 'Example for' : 'For'} ${lpAmount.div(BigNumber(pair.totalSupply)).times(BigNumber(pair.reserveETH)).times(pair.ethPrice).toFixed(2)} ({lpAmount.toString().slice(0, 12)})</div>
+              {/*<InputBase
                     className={classes.massiveInputAmount}
                     placeholder="0.00"
                     value={lpAmount}
@@ -216,15 +240,46 @@ export default function ssBoostCalculator({pair, nft, ve, isMobileView = false, 
                       disableUnderline: true,
                     }}
                 />*/}
-                {/*<span className={css.flyPercent}>%</span>*/}
+              {/*<span className={css.flyPercent}>%</span>*/}
+            </div>
+        }
+        {popuped && !isExampleAmount && !nft &&
+            <div className={classes.noNftWarn}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fillRule="evenodd" clipRule="evenodd" d="M21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21C16.9706 21 21 16.9706 21 12ZM13 16C13 15.4477 12.5523 15 12 15C11.4477 15 11 15.4477 11 16C11 16.5523 11.4477 17 12 17C12.5523 17 13 16.5523 13 16ZM12.75 7V13H11.25V7H12.75Z" fill="#EB9617"/>
+              </svg>
+              <span>No NFT connected. Restake this LP with {VE_TOKEN_NAME} to receive Boosted APR. Use slider to see how much {VE_TOKEN_NAME} you need for max Boost!</span>
+            </div>
+        }
+        {popuped && nft &&
+            <div className={classes.nftRow} style={{width: '100%',}}>
+              <div className={classes.nftTitle}>
+                Connected {VE_TOKEN_NAME} for Boosted APR:
               </div>
-          }
+              <div className={classes.nftItems}>
+                <div className={classes.tokenSelector}>
+                  <div className={classes.selectorLeft}>#{nft.id}</div>
+                  <div className={classes.selectorRight}>
+                    <Typography
+                        className={classes.menuOptionSecText}
+                    >
+                      {formatCurrency(nft.lockValue)} {VE_TOKEN_SYMBOL}
+                    </Typography>
+                  </div>
+                </div>
+              </div>
+            </div>
+        }
+        {isShowNote && !isMobileView && noteRender}
+        <div className={popuped ? classes.sliderWrapperPopuped : classes.sliderWrapper}>
+
           <div className={classes.sliderLabels}>
             <div className={classes.sliderLabelsItem}>
-              Min-Max APR
+              Min APR
             </div>
+            <div className={classes.sliderLabelSplitter} />
             <div className={classes.sliderLabelsItem}>
-              veCONE
+              Min {VE_TOKEN_NAME}
             </div>
           </div>
           <div className={classes.slider}>
@@ -254,13 +309,17 @@ export default function ssBoostCalculator({pair, nft, ve, isMobileView = false, 
                 fixedCallback={fixed}
             />}
           </div>
-          <div className={[ classes.sliderLabels, classes[ 'sliderLabels--mobile' ] ].join(' ')}>
+          <div className={classes.sliderLabels} style={{alignItems: 'flex-end'}}>
             <div className={classes.sliderLabelsItem}>
-              veCONE
+              Max APR
+            </div>
+            <div className={classes.sliderLabelSplitter} />
+            <div className={classes.sliderLabelsItem}>
+              Max {VE_TOKEN_NAME}
             </div>
           </div>
         </div>
-        {isShowNote && !isMobileView && noteRender}
+
         {(pair.gauge?.additionalApr0 && BigNumber(pair?.gauge?.additionalApr0).gt(0)) || (pair.gauge?.additionalApr1 && BigNumber(pair?.gauge?.additionalApr1).gt(0)) &&
             <div className={classes.profitWrapper} style={{marginBottom: 12,}}>
               {(pair.gauge?.additionalApr0 && BigNumber(pair?.gauge?.additionalApr0).gt(0)) &&
@@ -300,14 +359,15 @@ export default function ssBoostCalculator({pair, nft, ve, isMobileView = false, 
           <div className={classes.profitItem}>{profitRender()}</div>
           {!isShowNote && <>
             <div className={classes.profitItemDivider}></div>
-            <div className={classes.profitItem}>{profitRender(boostedType)}</div>
+            <div className={`${classes.profitItem} ${classes.profitItemBoosted}`}>{profitRender(boostedType)}</div>
           </>}
         </div>
-        {isShowCreateAction && <div className={classes.createAction}>
-          <div className={classes.createActionNote}>You need to have NFT with {fixed(boostedNFTAmount)} {VE_TOKEN_NAME} Power. Create or select/merge
+        {!isShowNote && <div className={classes.createAction}>
+          <div className={classes.createActionNote}>
+            You need to have NFT with {fixed(boostedNFTAmount)} {VE_TOKEN_NAME} Power. Create or select/merge
             NFTs.
           </div>
-          <div className={classes.createActionButton} onClick={createAction}>Create veCone</div>
+          <div className={classes.createActionButton} onClick={createAction}>Create {VE_TOKEN_NAME}</div>
         </div>}
       </div>
   );

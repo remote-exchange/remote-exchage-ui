@@ -19,8 +19,8 @@ export default function ThreePointSlider({
                                            fixedCallback
                                          }) {
   const trackBackground = 'rgba(129, 145, 185, 0.28)';//#8191B9';
-  const trackUsed = appTheme === 'dark' ? '#779BF4' : '#A2E3A9';
-  const trackActive = appTheme === 'dark' ? '#C0E255' : '#EC9999';
+  const trackUsed = '#9A9FAF';
+  const trackActive = '#6575B1';
 
   const [ sliderValue, setSliderValue ] = useState(pointCurrent);
 
@@ -88,7 +88,7 @@ export default function ThreePointSlider({
       const trackColor = `linear-gradient(to right, ${trackUsed} ${countPct(pointUsed)}%, ${trackActive} ${countPct(pointUsed)}%, ${trackActive} ${countPct(value)}%, ${trackBackground} ${countPct(value)}%)`;
 
       const MuiSliderThumb = {
-        backgroundColor: '#C0E255'
+        backgroundColor: '#B1F1E3'
       }
 
       const MuiSliderTrack = {
@@ -112,11 +112,11 @@ export default function ThreePointSlider({
       return ({
         color: '#8191B9',
         height: 4,
-        padding: '15px 0',
+        padding: '23px 0',
         '& .MuiSlider-thumb': {
           borderRadius: 12,
-          height: 12,
-          width: 24,
+          height: 20,
+          width: 20,
           backgroundColor: MuiSliderThumb.backgroundColor,
           boxShadow: 'none',
           '&:focus, &:hover, &.Mui-active': {
@@ -129,29 +129,30 @@ export default function ThreePointSlider({
         '& .MuiSlider-valueLabel': {
           background: 'transparent',
           padding: 0,
-          top: '8px',
+          top: '13px',
           bottom: 0,
-
           '& .MuiSlider-valueLabelLabel': {
+            height: 96,
+            paddingTop: 2,
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'center',
+            justifyContent: 'space-between',
             alignItems: 'center',
             textTransform: 'uppercase',
             '& .item': {
-              color: '#779BF4',
-              fontSize: '14px',
-              lineHeight: '16px',
-              fontWeight: 400,
-              background: '#161c2c',
-              border: '1px solid #1F2B49',
+              color: '#B1F1E3',
+              fontSize: '12px',
+              lineHeight: '12px',
+              fontWeight: 500,
+              background: '#6575B1',
+              border: '1px solid #B1F1E3',
               borderRadius: '4px',
-              padding: '4px 12px',
+              padding: '8px',
               whiteSpace: 'nowrap',
               textAlign: 'center',
               width: 'fit-content',
               '&:first-of-type': {
-                marginBottom: '20px'
+                // marginBottom: '2px'
               },
               '@media (max-width: 860px)': {
                 fontSize: '12px',
@@ -181,7 +182,7 @@ export default function ThreePointSlider({
           textTransform: 'uppercase',
           fontSize: '12px',
           lineHeight: '12px',
-          top: '-8px',
+          top: '-12px',
           '&:nth-of-type(4)': {
             transform: 'translateX(0%)'
           },
@@ -200,7 +201,7 @@ export default function ThreePointSlider({
             background: '#060B17',
             padding: '0 2px',
             '&:first-of-type': {
-              marginBottom: '28px'
+              marginBottom: '52px'
             },
           },
           '@media (max-width: 860px)': {

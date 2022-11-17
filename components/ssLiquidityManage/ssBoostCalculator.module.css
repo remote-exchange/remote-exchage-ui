@@ -1,18 +1,38 @@
 .boostCalculator {
-  background: #060B17;
-  border-radius: 12px;
-  padding: 24px;
+  /*background: #060B17;*/
+  /*border-radius: 12px;*/
+  /*padding: 24px;*/
 }
 
 .sliderWrapper {
   display: flex;
-  margin-bottom: 12px;
+  margin-bottom: 20px;
+  background: #131313;
+  border: 1px solid rgba(104, 114, 122, 0.4);
+  border-radius: 12px;
+  padding: 12px;
+  gap: 14px;
+}
+
+.sliderWrapperPopuped {
+  display: flex;
+  margin-bottom: 20px;
+  background: #131313;
+  border: 1px solid rgba(104, 114, 122, 0.4);
+  border-radius: 12px;
+  padding: 12px;
+  gap: 14px;
+  flex-direction: row;
 }
 
 .sliderLabels {
   width: fit-content;
   white-space: nowrap;
-  margin-right: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 75px;
+  /*margin-right: 20px;*/
 }
 
 .sliderLabels--mobile {
@@ -20,27 +40,11 @@
 }
 
 .sliderLabelsItem {
+  font-weight: 500;
   font-size: 14px;
-  line-height: 16px;
-  color: #586586;
-  padding: 12px 0;
-}
-
-.sliderLabelsItem:first-of-type {
-  position: relative;
-  margin-bottom: 4px;
-}
-
-.sliderLabelsItem:first-of-type:after {
-  content: '';
-  display: block;
-  width: 100%;
-  height: 4px;
-  background: #1F2B49;
-  opacity: 0.5;
-  border-radius: 2px;
-  position: absolute;
-  bottom: -4px;
+  line-height: 20px;
+  color: #9A9FAF;
+  /*padding: 12px 0;*/
 }
 
 .profitWrapper {
@@ -49,18 +53,53 @@
 }
 
 .profitItem {
-  border: 1px solid #1d2640;
+  border: 1px solid #EAE8E1;
   display: flex;
   position: relative;
-  align-items: center;
+  /*align-items: center;*/
   border-radius: 12px;
   justify-content: space-between;
-  padding: 16px;
+  padding: 12px;
   width: 100%;
+  height: 88px;
+}
+
+.profitItemBoosted {
+  background: rgba(69, 155, 14, 0.12);
+  border: 1px solid #459B0E;
 }
 
 .profitLabel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   color: #8191B9;
+}
+
+.profitLabelValue {
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 32px;
+  color: #EAE8E1;
+}
+.profitLabelTitle {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #9A9FAF;
+}
+
+.profitLabelValueBoosted {
+  color: #459B0E;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 32px;
+}
+.profitLabelTitleBoosted {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #F6F7F9;
 }
 
 .profitLabel span {
@@ -72,19 +111,25 @@
 }
 
 .profitValue {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
   color: #E4E9F4;
 }
 
 .profitItemDivider {
-  min-width: 48px;
-  min-height: 58px;
+  width: 12px;
+  height: 1px;
+  background: #EAE8E1;
   display: flex;
-  align-items: center;
-  align-content: center;
-  flex-wrap: nowrap;
+  align-self: center;
+  /*align-items: center;*/
+  /*align-content: center;*/
+  /*flex-wrap: nowrap;*/
 }
 
-.profitItemDivider:before {
+/*.profitItemDivider:before {
   content: '';
   display: block;
   height: 0;
@@ -100,7 +145,7 @@
   border-bottom: 1.5px solid #1F2B49;
   border-right: 1.5px solid #1F2B49;
   transform: rotate(-45deg);
-}
+}*/
 
 .slider {
   width: 100%;
@@ -110,19 +155,21 @@
 }
 
 .sliderNote {
-  color: #E4E9F4;
+  color: #68727A;
   display: flex;
+  gap: 15px;
   position: relative;
   align-items: center;
-  border-radius: 12px;
   justify-content: flex-start;
   padding: 16px;
-  margin-bottom: 12px;
+  margin-bottom: 20px;
   width: 100%;
-  background: rgba(6, 11, 23, 0.5);
-  border: 1px solid #1F2B49;
-  font-size: 14px;
-  line-height: 16px;
+  background: rgba(104, 114, 122, 0.12);
+  border: 1px solid #68727A;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
 }
 
 .sliderNoteWarnSymbol {
@@ -150,23 +197,26 @@
 }
 
 .createActionNote {
-  background: rgba(23, 29, 45, 0.5);
-  padding: 12px 16px;
-  border: 1px solid #779BF4;
+  padding: 8px 12px;
+  border: 1px solid #B1F1E3;
   border-radius: 12px;
-  color: #E4E9F4;
+  color: #EAE8E1;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
   width: 100%;
 }
 
 .createActionButton {
-  min-width: 145px;
-  background: rgba(119, 155, 244, 0.15);
-  padding: 12px 16px;
-  border: 1px solid #779BF4;
+  /*min-width: 145px;*/
+  background: rgba(177, 241, 227, 0.12);
+  border: 2px solid #B1F1E3;
+  padding: 16px 32px;
   border-radius: 12px;
-  text-transform: uppercase;
-  color: #779BF4;
-  font-weight: 600;
+  color: #B1F1E3;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
   margin-left: 12px;
   white-space: nowrap;
   cursor: pointer;
@@ -174,10 +224,21 @@
   display: flex;
   align-content: center;
   align-items: center;
+  position: relative;
 }
 
 .createActionButton:hover {
-  background: rgba(119, 155, 244, 0.4);
+  /*background: rgba(119, 155, 244, 0.4);*/
+}
+
+.createActionButton:before {
+  content: "";
+  left: -12px;
+  position: absolute;
+  width: 12px;
+  height: 1px;
+  align-self: center;
+  background: #B1F1E3;
 }
 
 .boostCalculator--mobile {
@@ -218,7 +279,7 @@
 
 .boostCalculator--mobile .profitWrapper,
 .boostCalculator--mobile .createAction {
-  flex-direction: column;
+  /*flex-direction: column;*/
 }
 
 .boostCalculator--mobile .profitItem {
@@ -226,8 +287,9 @@
 }
 
 .boostCalculator--mobile .profitItemDivider {
-  min-height: 32px;
-  justify-content: center;
+  min-width: 12px;
+  /*height: 1px;*/
+  /*justify-content: center;*/
 }
 
 .boostCalculator--mobile .profitItemDivider:before {
@@ -255,7 +317,8 @@
 }
 
 .boostCalculator--mobile .createActionButton {
-  margin: 12px 0 0;
+  margin-left: 12px;
+  min-width: 277px;
   text-align: center;
   justify-content: center;
 }
@@ -270,9 +333,17 @@
   padding: 8px 0 0;
 }
 .calcToValue .lp {
-  color: #8191B9;
-  font-size: 14px;
-  line-height: 16px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  color: #9A9FAF;
+}
+
+.calcToValue .calculatorTitle {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+  color: #F6F7F9;
 }
 .lpamount {
   width: 110px;
@@ -307,4 +378,89 @@
 }
 .calcToValue .massiveInputAmount::placeholder {
   color: #8191B9 !important;
+}
+
+.sliderLabelSplitter {
+  width: 97px;
+  height: 1px;
+  background: #9A9FAF;
+  border-radius: 2px;
+}
+
+.noNftWarn {
+  display: flex;
+  padding: 16px;
+  gap: 12px;
+  min-height: 80px;
+  background: rgba(235, 150, 23, 0.12);
+  border: 1px solid #EB9617;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #EB9617;
+  align-items: center;
+}
+
+.noNftWarn svg {
+  min-width: 24px;
+}
+
+.nftRow {
+  flex-direction: column;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  background: #151718;
+  margin-bottom: 20px;
+}
+
+.nftTitle {
+  display: flex;
+  min-width: 380px;
+  align-items: center;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #F6F7F9;
+  /*min-height: 56px;*/
+  margin-bottom: 12px;
+}
+
+.nftItems {
+  display: flex;
+  border: 1px solid #B1F1E3;
+  border-radius: 12px;
+  color: #EAE8E1;
+}
+
+.tokenSelector {
+  display: flex;
+  width: 100%;
+  padding: 12px;
+  justify-content: space-between;
+}
+
+.selectorLeft {
+  display: flex;
+  color: #EAE8E1;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+}
+.selectorRight {
+  display: flex;
+  gap: 10px;
+  color: #9A9FAF;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.menuOptionSecText {
+  text-align: right;
+  color: #8191B9;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
 }

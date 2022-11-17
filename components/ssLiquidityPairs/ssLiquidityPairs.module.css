@@ -139,17 +139,17 @@
   background: #1f2b49 !important;
 }
 .tooltip_boost_wrapper {
-  border: 1px solid #779bf4 !important;
-  border-radius: 12px !important;
+  border: 1px solid #EB9617 !important;
+  border-radius: 20px !important;
   padding: 0 !important;
   margin: 0 !important;
-  max-width: 350px !important;
-  min-width: 350px !important;
+  max-width: 600px !important;
+  min-width: 600px !important;
 }
 
 .boostCalculatorTooltip {
-  background: #060B17;
-  border-radius: 12px !important;
+  background: #131313;
+  border-radius: 20px !important;
 }
 .calcToValue {
   display: flex;
