@@ -380,6 +380,9 @@ const useStyles = makeStyles((theme) => {
   return ({
     tokenSelect: {
       marginBottom: 24,
+      ["@media (max-width: 600px)"]: {
+        marginBottom: 20,
+      }
     },
     voteTooltip: {
       background: '#060B17',
@@ -664,11 +667,11 @@ const useStyles = makeStyles((theme) => {
     },
     sortSelect: {
       position: 'absolute',
-      top: 87,
+      top: 51,
       right: 40,
       ["@media (max-width:680px)"]: {
-        top: 68,
-        right: 32,
+        top: 66,
+        right: 31,
       },
     },
     accordionSummaryContent: {
@@ -694,15 +697,15 @@ const useStyles = makeStyles((theme) => {
     },
     cellHeadPaddings: {
       padding: '16px 20px',
-      ["@media (max-width:530px)"]: {
+      ["@media (max-width: 805px)"]: {
         // eslint-disable-line no-useless-computed-key
-        // padding: '8px 10px',
+        padding: '12px 12px',
       },
     },
   });
 });
 
-export default function EnhancedTable({gauges, setParentSliderValues, defaultVotes, veToken, token, showSearch, noTokenSelected, handleChangeNFT, vestNFTs}) {
+export default function EnhancedTable({gauges, filteredGauges, setParentSliderValues, defaultVotes, veToken, token, showSearch, noTokenSelected, handleChangeNFT, vestNFTs}) {
   const classes = useStyles();
   const [order, setOrder] = useState('desc');
   const [orderBy, setOrderBy] = useState('totalVotes');
@@ -711,6 +714,10 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
   const [page, setPage] = useState(0);
   const [tableHeight, setTableHeight] = useState(window.innerHeight/* - 50 - 64 - 30 - 60 - 54 - 20 - 30*/);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  // console.log('gauges', gauges);
+  // console.log('filteredGauges', filteredGauges);
+  // console.log('defaultVotes', defaultVotes);
 
   const options = [
     {id: 'balance--desc', label: 'My Stake: high to low'},
@@ -731,6 +738,8 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
   const [voteDialogOpen, setVoteDialogOpen] = useState(false);
 
   const {appTheme} = useAppThemeContext();
+
+  const [sliderLocalValue, setSliderLocalValue] = useState(null);
 
   useEffect(() => {
     setSliderValues(defaultVotes);
@@ -759,6 +768,13 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
     });
 
     setParentSliderValues(newSliderValues);
+  };
+
+  const onSliderLocalChange = (event, value, asset) => {
+    setSliderLocalValue({
+      asset,
+      value,
+    })
   };
 
   const handleChangeSort = ({target: {value}}) => {
@@ -876,6 +892,8 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
     }
   };
 
+  const resultGaudes = filteredGauges || gauges;
+
   // cssVoteModal
   return (
     <>
@@ -898,7 +916,7 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
               />
 
               <TableBody classes={{ root: classes.tableBody }}>
-                {stableSort(gauges, getComparator(order, orderBy, sliderValues))
+                {stableSort(resultGaudes, getComparator(order, orderBy, sliderValues))
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row, index) => {
                     if (!row) {
@@ -1082,6 +1100,7 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
                                 onClick={(e) => {
                                   if (e.target.classList.contains('MuiDialog-container')) {
                                     closeModal();
+                                    setSliderLocalValue(null);
                                   }
                                 }}
                                 // classes={{
@@ -1097,7 +1116,8 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
                                 <div className={cssVoteModal.voteTooltipHeader}>
                                   <span className={cssVoteModal.voteTooltipTitle}>Vote for the Pool</span>
                                   <span className={cssVoteModal.voteTooltipClose} onClick={() => {
-                                    setVoteTooltipOpen(false)
+                                    setVoteTooltipOpen(false);
+                                    setSliderLocalValue(null);
                                   }} />
                                 </div>
 
@@ -1230,9 +1250,9 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
                                     <CustomSlider
                                       appTheme={appTheme}
                                       valueLabelDisplay="on"
-                                      value={sliderValue}
+                                      value={sliderLocalValue?.value || sliderValue}
                                       onChange={(event, value) => {
-                                        onSliderChange(event, value, row);
+                                        onSliderLocalChange(event, value, row);
                                       }}
                                       min={-100}
                                       max={100}
@@ -1247,9 +1267,9 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
 
                                   <div className={cssVoteModal.voteTooltipVoteBlock}>
                                     <InputBase
-                                      value={sliderValue}
+                                      value={sliderLocalValue?.value || sliderValue}
                                       onChange={(event, value) => {
-                                        onSliderChange(event, event.target.value, row);
+                                        onSliderLocalChange(event, event.target.value, row);
                                       }}
                                       inputProps={{
                                         className: cssVoteModal.voteTooltipVoteBlockInput,
@@ -1261,9 +1281,21 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
                                     <div className={cssVoteModal.voteTooltipVoteBlockInputAddornment}>%</div>
                                   </div>
 
-                                  <div className={cssVoteModal.voteTooltipButton}>
+                                  <Button
+                                    className={[
+                                      cssVoteModal.voteTooltipButton,
+                                      sliderLocalValue === null ? cssVoteModal.voteTooltipButtonDisabled : "",
+                                      sliderValue === sliderLocalValue?.value ? cssVoteModal.voteTooltipButtonDisabled : "",
+                                    ].join(" ")}
+                                    onClick={() => {
+                                      onSliderChange(undefined, sliderLocalValue?.value, sliderLocalValue?.asset);
+                                      setVoteTooltipOpen(false);
+                                      setSliderLocalValue(null);
+                                    }}
+                                    disabled={sliderValue === sliderLocalValue?.value}
+                                  >
                                     Cast Vote
-                                  </div>
+                                  </Button>
                                 </div>
                               </div>
                               </Dialog>
@@ -1289,7 +1321,7 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
             labelRowsPerPage={window.innerWidth < 550 ? '' : 'Rows per page:'}
             rowsPerPageOptions={window.innerWidth < 435 ? [] : [5, 10, 25]}
             component="div"
-            count={gauges.length}
+            count={resultGaudes.length}
             rowsPerPage={rowsPerPage}
             page={page}
             ActionsComponent={TablePaginationActions}
@@ -1319,7 +1351,7 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
       {windowWidth < 806 && (
         <>
           <div style={{ overflow: 'auto' }}>
-            {stableSort(gauges, getComparator(order, orderBy, sliderValues))
+            {stableSort(resultGaudes, getComparator(order, orderBy, sliderValues))
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row, index) => {
                 if (!row) {
@@ -1342,21 +1374,28 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
                       onClose={closeModal}
                       onClick={(e) => {
                         if (e.target.classList.contains('MuiDialog-container')) {
-                          closeModal()
+                          closeModal();
+                          setSliderLocalValue(null);
                         }
                       }}
                       // fullWidth={false}
                       // fullScreen={false}
                       // BackdropProps={{style: {backgroundColor: 'transparent'}}}
-                      // classes={{
+                      classes={{
+                        paperScrollPaper: cssVoteModal.paperScrollPaper,
+                        paper: cssVoteModal.paper,
+                        scrollPaper: cssVoteModal.scrollPaper,
                       //   paper: classes.dialogPaper,
                       //   scrollPaper: classes.dialogBody,
-                      // }}
+                      }}
                     >
                       <div>
                         <div className={cssVoteModal.voteTooltipHeader}>
                           <span className={cssVoteModal.voteTooltipTitle}>Vote for the Pool</span>
-                          <span className={cssVoteModal.voteTooltipClose} onClick={closeModal} />
+                          <span className={cssVoteModal.voteTooltipClose} onClick={() => {
+                            closeModal();
+                            setSliderLocalValue(null);
+                          }} />
                         </div>
 
                         <div className={cssVoteModal.voteTooltipBody}>
@@ -1467,7 +1506,7 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
                               />
                             </div>
 
-                            <div style={{ marginLeft: 12 }}>
+                            <div className={cssVoteModal.inlinePairContent}>
                               <div className={css.vaultSourceTitle}>
                                 {formatSymbol(row?.symbol)}
                               </div>
@@ -1486,9 +1525,9 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
                             <CustomSlider
                               appTheme={appTheme}
                               valueLabelDisplay="on"
-                              value={sliderValue}
+                              value={sliderLocalValue?.value || sliderValue}
                               onChange={(event, value) => {
-                                onSliderChange(event, value, row);
+                                onSliderLocalChange(event, value, row);
                               }}
                               min={-100}
                               max={100}
@@ -1503,9 +1542,9 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
 
                         <div className={cssVoteModal.voteTooltipVoteBlock}>
                           <InputBase
-                            value={sliderValue}
+                            value={sliderLocalValue?.value || sliderValue}
                             onChange={(event, value) => {
-                              onSliderChange(event, event.target.value, row);
+                              onSliderLocalChange(event, event.target.value, row);
                             }}
                             inputProps={{
                               className: cssVoteModal.voteTooltipVoteBlockInput,
@@ -1517,9 +1556,21 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
                           <div className={cssVoteModal.voteTooltipVoteBlockInputAddornment}>%</div>
                         </div>
 
-                        <div className={cssVoteModal.voteTooltipButton}>
+                        <Button
+                          className={[
+                            cssVoteModal.voteTooltipButton,
+                            sliderLocalValue === null ? cssVoteModal.voteTooltipButtonDisabled : "",
+                            sliderValue === sliderLocalValue?.value ? cssVoteModal.voteTooltipButtonDisabled : "",
+                          ].join(" ")}
+                          onClick={() => {
+                            onSliderChange(undefined, sliderLocalValue?.value, sliderLocalValue?.asset);
+                            closeModal();
+                            setSliderLocalValue(null);
+                          }}
+                          disabled={sliderValue === sliderLocalValue?.value}
+                        >
                           Cast Vote
-                        </div>
+                        </Button>
                       </div>
 
                        {/* <Button
@@ -1583,7 +1634,7 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
                               />
                             </div>
 
-                            <div style={{ marginLeft: 12 }}>
+                            <div style={{ marginLeft: 8 }}>
                               <div className={css.vaultSourceTitle}>{row?.symbol}</div>
                               <div className={css.vaultSourceSubtitle}>
                                 {row?.isStable ? 'Stable Pool' : 'Volatile Pool'}
@@ -1597,16 +1648,16 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
                             style={{
                               display: "flex",
                               alignItems: "center",
-                              width: 69,
+                              minWidth: 69,
                               height: 36,
-                              padding: "8px 16px",
+                              padding: "8px 8px",
                               fontSize: 14,
                               lineHeight: 20,
                               fontWeight: 500,
                               borderRadius: 8,
-                              border: "1px solid #7DB857",
-                              background: "rgba(125, 184, 87, 0.12)",
-                              color: "#7DB857",
+                              border: sliderValue !== 0 ? "1px solid #B1F1E3" : "1px solid #7DB857",
+                              background: sliderValue !== 0 ? "rgba(177, 241, 227, 0.12)" : "rgba(125, 184, 87, 0.12)",
+                              color: sliderValue !== 0 ? "#B1F1E3" : "#7DB857",
                             }}
                             onClick={(event) => {
                               event.stopPropagation();
@@ -1615,7 +1666,24 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
                               openVoteDialog(row);
                             }}
                           >
-                            Vote
+                            <span>Vote</span>
+                            {sliderValue !== 0 && (
+                              <div
+                                style={{
+                                  marginLeft: 8,
+                                  paddingTop: 3,
+                                  fontFamily: 'PT Root UI',
+                                  fontSize: 10,
+                                  fontWeight: 500,
+                                  lineHeight: "12px",
+                                  color: sliderValue > 0
+                                    ? "#459B0E"
+                                    : sliderValue < 0 ? "#9B0E0E" : "#9A9FAF"
+                                  }}
+                                >
+                                  {`${formatCurrency(sliderValue)} %`}
+                                </div>
+                            )}
                           </Button>        
                         </div>
 
@@ -1755,10 +1823,26 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
             }
           </div>
 
+          {!gauges?.length ? (
+            <div style={{
+              margin: '15px 0',
+              fontFamily: 'PT Root UI',
+              fontSize: 20,
+              lineHeight: '28px',
+              fontWeight: 700,
+              textAlign: 'center',
+              color: '#EAE8E1',
+            }}>
+              No Pools to Vote for, please add it in Liquidity or wait for other users to add Liquidity pools.
+            </div>
+          ) : null}
+
+          {resultGaudes?.length ? (
           <TablePagination
             className={'g-flex-column__item-fixed'}
             style={{
               width: "100%",
+              marginBottom: 20,
               padding: "0 20px",
               borderRadius: 20,
               background: '#131313',
@@ -1767,7 +1851,7 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
             ActionsComponent={TablePaginationActions}
             rowsPerPageOptions={window.innerWidth < 435 ? [] : [5, 10, 25]}
             component="div"
-            count={gauges.length}
+            count={resultGaudes.length}
             rowsPerPage={rowsPerPage}
             page={page}
             labelRowsPerPage={window.innerWidth < 550 ? null : 'Rows per page:'}
@@ -1787,6 +1871,7 @@ export default function EnhancedTable({gauges, setParentSliderValues, defaultVot
               actions: css.actions,
             }}
           />
+          ) : null}
         </>
       )}
     </>

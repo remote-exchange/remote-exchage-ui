@@ -25,6 +25,7 @@ export default function ssVotes() {
   const forceUpdate = useCallback(() => updateState({}), []);
 
   const [gauges, setGauges] = useState([]);
+  const [filteredGauges, setFilteredGauges] = useState(null);
   const [voteLoading, setVoteLoading] = useState(false);
   const [votes, setVotes] = useState([]);
   const [veToken, setVeToken] = useState(null);
@@ -35,6 +36,18 @@ export default function ssVotes() {
   const [showSearch, setShowSearch] = useState(false);
 
   const { appTheme } = useAppThemeContext();
+
+  const setMyVotesGauges = () => {
+    let result = gauges.filter(item => {
+      let value = votes.find((el) => el.address === item?.address)?.value;
+
+      if (value < 0 || value > 0) {
+        return item;
+      }
+    });
+
+    setFilteredGauges(result);
+  }
 
   const ssUpdated = async () => {
     setVeToken(stores.stableSwapStore.getStore("veToken"));
@@ -253,6 +266,28 @@ export default function ssVotes() {
         </div>
 
         <div className={[classes.controls, "g-flex", "g-flex--align-baseline"].join(" ")}>
+          <div className={classes.filterWrapper}>
+            <button
+              onClick={() => setFilteredGauges(null)}
+              className={[
+                classes.filterButton,
+                filteredGauges ? classes.filterButtonDisabled : ""
+              ].join(" ")}
+            >
+              All Pools
+            </button>
+            <button
+              onClick={setMyVotesGauges}
+              className={[
+                classes.filterButton,
+                !filteredGauges ? classes.filterButtonDisabled : ""
+              ].join(" ")}
+            >
+              My Votes
+            </button>
+          </div>
+
+          <div className={classes.fields}>
           <div className={classes.select}>
             {TokenSelect({
               value: token,
@@ -292,6 +327,7 @@ export default function ssVotes() {
               }}
             />
           </div>
+          </div>
         </div>
       </div>
 
@@ -318,6 +354,7 @@ export default function ssVotes() {
 
           return false;
         })}
+        filteredGauges={filteredGauges}
         setParentSliderValues={setVotes}
         defaultVotes={votes}
         veToken={veToken}

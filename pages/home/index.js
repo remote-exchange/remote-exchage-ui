@@ -45,10 +45,17 @@ const HomePage = () => {
 
   return (
     <div className={classes.wrapper}>
+      <div className={classes.content}>
+      <img className={classes.imgLeft} src="/images/background/left.png" />
+      <img className={classes.imgRight} src="/images/background/right.png" />
+      <a href="" className={classes.tv}>
+        <img src="/images/background/tv.png" />
+      </a>
+
       <div className={classes.title}>Control your assets and earn boosted rewards in Remote’s decentralized ecosystem</div>
       <div className={classes.subtitle}>Remote provides a safe and decentralized ecosystem for yield farming on the Neon network.</div>
 
-      <button className={classes.button}>Launch App</button>
+      <button className={classes.button} onClick={() => router.push("/swap")}>Launch App</button>
 
       <div className={classes.socials}>
         <div className={classes.socialItem}>
@@ -144,6 +151,7 @@ const HomePage = () => {
             </div>
           </div>
         ))}
+      </div>
       </div>
     </div>
   )

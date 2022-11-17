@@ -15,12 +15,12 @@ button {
   text-transform: none !important;
 }
 
-@media (max-width: 530px) {
+/* @media (max-width: 530px) {
   input[type="date"]::-webkit-calendar-picker-indicator {
     top: 12px;
     left: -71px;
   }
-}
+} */
 
 .web3modal-modal-lightbox {
   z-index: 100 !important;
@@ -30,30 +30,46 @@ button {
   display: flex !important;
   flex-direction: column !important;
   flex-wrap: wrap;
-  width: 400px !important;
+  width: 520px !important;
   height: 372px !important;
   padding: 92px 40px 20px 40px !important;
   background: #EAE8E1 !important;
   border-radius: 20px !important;
 }
 
-@media (max-width: 991px) {
-  .web3modal-modal-card {
-    padding-top: 223px !important;
-  }
-}
-
-@media (max-width: 767px) {
-  .web3modal-modal-card {
-    padding: 144px 20px 20px !important;
-  }
-}
 
 @media (max-width: 575px) {
   .web3modal-modal-card {
-    padding: 120px 20px 20px !important;
+    position: fixed !important;
+    bottom: 0;
+    left: 0;
+    width: 100% !important;
+    height: 332px !important;
+    max-width: 100% !important;
+    min-width: auto !important;
+    margin: 0 !important;
+    padding: 64px 12px 0 !important;
+    border-radius: 12px 12px 0px 0px !important;
   }
 }
+
+/* @media (max-width: 991px) {
+  .web3modal-modal-card {
+    padding-top: 223px !important;
+  }
+} */
+
+/* @media (max-width: 767px) {
+  .web3modal-modal-card {
+    padding: 144px 20px 20px !important;
+  }
+} */
+
+/* @media (max-width: 575px) {
+  .web3modal-modal-card {
+    padding: 120px 20px 20px !important;
+  }
+} */
 
 .web3modal-modal-card::before {
   content: 'Connect Wallet';
@@ -68,6 +84,14 @@ button {
   color: #131313;
 }
 
+@media (max-width: 575px) {
+  .web3modal-modal-card::before {
+    padding: 12px;
+    font-size: 20px;
+    line-height: 28px;
+  }
+}
+
 .web3modal-modal-card::after {
   content: "";
   background-color: black;
@@ -75,35 +99,46 @@ button {
   position: absolute;
   top: 72px;
   left: 20px;
-  width: 360px;
+  width: 480px;
   height: 280px;
 }
 
-@media (max-width: 991px) {
-  .web3modal-modal-card::before {
-    max-width: 800px;
+@media (max-width: 575px) {
+  .web3modal-modal-card::after {
+    top: 52px;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: 280px;
+    border-radius: 12px 12px 0px 0px;
   }
 }
 
-@media (max-width: 767px) {
+/* @media (max-width: 991px) {
+  .web3modal-modal-card::before {
+    max-width: 800px;
+  }
+} */
+
+/* @media (max-width: 767px) {
   .web3modal-modal-card::before {
     max-width: 600px;
     font-size: 48px;
     line-height: 52px;
     padding: 20px;
   }
-}
+} */
 
-@media (max-width: 575px) {
+/* @media (max-width: 575px) {
   .web3modal-modal-card::before {
     max-width: 400px;
     font-size: 32px;
     line-height: 40px;
   }
-}
+} */
 
 .web3modal-provider-wrapper {
-  width: 320px !important;
+  width: 440px !important;
   height: 72px !important;
   margin-bottom: 12px !important;
   padding: 0 !important;
@@ -111,17 +146,24 @@ button {
   z-index: 1;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 575px) {
   .web3modal-provider-wrapper {
-    width: 100% !important;
+    width: 100% !important; 
+    height: 68px !important;
   }
 }
 
-@media (max-width: 767px) {
+/* @media (max-width: 991px) {
+  .web3modal-provider-wrapper {
+    width: 100% !important;
+  }
+} */
+
+/* @media (max-width: 767px) {
   .web3modal-provider-wrapper {
     margin-bottom: 16px !important;
   }
-}
+} */
 
 .web3modal-provider-wrapper:last-child {
   margin-bottom: 0 !important;
@@ -160,11 +202,18 @@ button {
   line-height: 32px !important;
 }
 
+@media (max-width: 575px) {
+  .web3modal-provider-name {
+    font-size: 20px !important;
+    line-height: 28px !important;
+  }
+}
+
 .web3modal-provider-icon {
   order: 1 !important;
   width: 32px !important;
   height: 32px !important;
-  margin-right: 25px !important;
+  margin-right: 15px !important;
 }
 
 ::-webkit-scrollbar {

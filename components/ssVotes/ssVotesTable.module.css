@@ -89,6 +89,13 @@
   color: #9A9FAF;
 }
 
+@media (max-width: 767px) {
+  .vaultSourceSubtitle {
+    font-size: 12px;
+    line-height: 12px;
+  }
+}
+
 .itemTitle {
   margin-bottom: 4px;
   font-family: 'PT Root UI';
