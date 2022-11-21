@@ -1084,41 +1084,59 @@ export default function EnhancedTable({ rewards, vestNFTs, tokenID }) {
                     </div>
                   );
                 })
-            : null}
+            : (
+              <div
+                style={{
+                  marginTop: 20,
+                  fontFamily: 'PT Root UI',
+                  fontWeight: 700,
+                  fontSize: 20,
+                  lineHeight: '28px',
+                  textAlign: 'center',
+                  color: '#EAE8E1',
+                }}
+              >
+                You do not have rewards yet
+              </div>
+            )}
           </div>
 
-          <TablePagination
-            className={"g-flex-column__item-fixed"}
-            style={{
-              width: "100%",
-              padding: "0 20px",
-              borderRadius: 20,
-              background: '#131313',
-              color: '#8191B9',
-            }}
-            ActionsComponent={TablePaginationActions}
-            rowsPerPageOptions={window.innerWidth < 435 ? [] : [5, 10, 25]}
-            component="div"
-            count={rewards.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            labelRowsPerPage={window.innerWidth < 550 ? null : "Rows per page:"}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-            classes={{
-              root: css.paginationRoot,
-              toolbar: css.paginationToolbar,
-              spacer: css.paginationSpacer,
-              selectLabel: css.selectLabel,
-              selectRoot: css.selectRoot,
-              select: css.select,
-              selectIcon: css.selectIcon,
-              input: css.input,
-              menuItem: css.menuItem,
-              displayedRows: css.displayedRows,
-              actions: css.actions,
-            }}
-          />
+          {Array.from(rewards).length > 0 ? (
+            <TablePagination
+              className={"g-flex-column__item-fixed"}
+              style={{
+                width: "100%",
+                padding: "0 20px",
+                borderRadius: 20,
+                background: '#131313',
+                color: '#8191B9',
+              }}
+              ActionsComponent={TablePaginationActions}
+              rowsPerPageOptions={window.innerWidth < 435 ? [] : [5, 10, 25]}
+              component="div"
+              count={rewards.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              labelRowsPerPage={window.innerWidth < 550 ? null : "Rows per page:"}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+              classes={{
+                root: css.paginationRoot,
+                toolbar: css.paginationToolbar,
+                spacer: css.paginationSpacer,
+                selectLabel: css.selectLabel,
+                selectRoot: css.selectRoot,
+                select: css.select,
+                selectIcon: css.selectIcon,
+                input: css.input,
+                menuItem: css.menuItem,
+                displayedRows: css.displayedRows,
+                actions: css.actions,
+              }}
+            />
+          ) : (
+            null
+          )}
         </>
       )}
     </>
