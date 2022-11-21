@@ -1,0 +1,346 @@
+.voteTooltip {
+  z-index: 10;
+
+  position: absolute;
+
+  top: 46px;
+  right: 14px;
+
+  width: 520px;
+
+  padding: 20px;
+
+  border-radius: 20px;
+
+  background: #eae8e1;
+}
+
+/* header */
+
+.voteTooltipHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 20px;
+  padding: 20px 20px 0;
+}
+
+@media (max-width: 600px) {
+  .voteTooltipHeader {
+    height: 52px;
+    margin-bottom: 0;
+    padding: 0 12px;
+  }
+}
+
+.voteTooltipTitle {
+  font-family: "PT Root UI";
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+
+  color: #131313;
+}
+
+@media (max-width: 600px) {
+  .voteTooltipTitle {
+    font-size: 20px;
+    line-height: 28px;
+  }
+}
+
+.voteTooltipClose {
+  position: relative;
+
+  width: 18px;
+  height: 18px;
+
+  border-radius: 50%;
+  background-color: #131313;
+
+  cursor: pointer !important;
+}
+
+.voteTooltipClose::before,
+.voteTooltipClose::after {
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 10px;
+  height: 2px;
+
+  background-color: #ccd2e3;
+}
+
+.voteTooltipClose::before {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.voteTooltipClose::after {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+/* body */
+
+.voteTooltipBody {
+  min-height: 200px;
+  margin: 0 20px 20px;
+  padding: 20px;
+  text-align: left;
+  border-radius: 20px;
+  background: #131313;
+}
+
+@media (max-width: 600px) {
+  .voteTooltipBody {
+    margin: 0;
+    padding: 12px;
+    border-radius: 12px 12px 0px 0px;
+  }
+}
+
+.inlinePair {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 12px;
+
+  border: 1px solid rgba(104, 114, 122, 0.4);
+  border-radius: 12px;
+  background: #131313;
+}
+
+@media (max-width: 600px) {
+  .inlinePair {
+    padding: 7px 8px;
+  }
+}
+
+.doubleImages {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .doubleImages img {
+    width: 36px;
+    height: 36px;
+  }
+
+  .doubleImages img + img {
+    margin-left: -12px;
+  }
+}
+
+.inlinePairContent {
+  margin-left: 12px;
+}
+
+@media (max-width: 600px) {
+  .inlinePairContent {
+    margin-left: 8px;
+  }
+
+  .inlinePairContent div:first-child {
+    font-size: 16px;
+    line-height: 16px;
+  }
+
+  .inlinePairContent div:last-child {
+    font-size: 12px;
+    line-height: 12px;
+  }
+}
+
+.voteTooltipSliderValues {
+  display: flex;
+  justify-content: space-between;
+
+  margin-bottom: 0px;
+
+  font-family: "PT Root UI";
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #9a9faf;
+}
+
+.voteTooltipSlider {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.yourVoteTitle {
+  margin-bottom: 12px;
+
+  font-family: "PT Root UI";
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+  text-align: left;
+
+  color: #f6f7f9;
+}
+
+@media (max-width: 600px) {
+  .yourVoteTitle {
+    margin-bottom: 8px;
+    font-size: 16px;
+    line-height: 16px;
+  }
+}
+
+.yourVoteText {
+  margin-bottom: 12px;
+
+  font-family: "PT Root UI";
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: left;
+
+  color: #9a9faf;
+}
+
+@media (max-width: 600px) {
+  .yourVoteText {
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+.voteTooltipVoteBlock {
+  position: relative;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 12px;
+
+  width: 100%;
+  height: 48px;
+
+  border: 1px solid #9a9faf;
+  border-radius: 12px;
+}
+
+@media (max-width: 600px) {
+  .voteTooltipVoteBlock {
+    height: 36px;
+    padding: 8px;
+    border-radius: 8px;
+  }
+}
+
+.voteTooltipVoteBlockTitle {
+  margin-left: 14px;
+
+  font-size: 16px;
+  font-weight: 500;
+
+  color: #e4e9f4;
+}
+
+.voteTooltipVoteBlockInput {
+  font-family: "PT Root UI" !important;
+  font-weight: 500 !important;
+  font-size: 16px !important;
+  line-height: 24px !important;
+
+  color: #eae8e1 !important;
+}
+
+.voteTooltipVoteBlockInputAddornment {
+  position: absolute;
+
+  right: 12px;
+
+  font-family: "PT Root UI";
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+
+  color: #9a9faf;
+}
+
+.voteTooltipButton {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+
+  margin-top: 20px !important;
+  padding: 0 16px !important;
+
+  width: 100% !important;
+  height: 64px !important;
+
+  font-family: "PT Root UI" !important;
+  font-weight: 700 !important;
+  font-size: 24px !important;
+  line-height: 32px !important;
+
+  border-radius: 12px !important;
+
+  background: #7DB857 !important;
+  color: #ffffff !important;
+
+  cursor: pointer;
+}
+
+.voteTooltipButtonDisabled {
+  background: #68727a !important;
+}
+
+@media (max-width: 767px) {
+  .voteTooltipButton {
+    height: 48px !important;
+    margin-top: 12px !important;
+    font-weight: 700 !important;
+    font-size: 16px !important;
+    line-height: 16px !important;
+  }
+}
+
+
+
+/*  */
+
+/* .paperScrollPaper {
+  max-height: none !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+} */
+
+@media (max-width: 600px) {
+  .paperScrollPaper {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+/* .scrollPaper {
+  overflow: auto;
+  display: block !important;
+} */
+
+@media (max-width: 600px) {
+  .paper {
+    position: fixed !important;
+    max-width: 100% !important;
+    bottom: 0;
+    left: 0;
+    width: 100% !important;
+    /* height: 432px; */
+    margin: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+}

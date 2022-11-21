@@ -1,3 +1,8 @@
+.dialogWrapper {
+  z-index: 10030 !important;
+  position: fixed !important;
+}
+
 .dialogContainer {
   display: flex;
   align-items: center;
@@ -8,22 +13,29 @@
   padding: 50px 0;
 }
 
-.dialogWrapper {
-  z-index: 10030 !important;
-  position: fixed !important;
-}
-
 @media (max-width: 991px) {
   .dialogContainer {
-    padding: 60px 0;
+    margin: 0 12px;
   }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 575px) {
+  .dialogContainer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    max-height: calc(100vh - 150px);
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+}
+
+/* @media (max-width: 450px) {
   .dialogContainer {
     margin: 0 15px;
   }
-}
+} */
 
 .paperBody {
   background: rgba(0, 0, 0, .1) !important;
@@ -39,7 +51,20 @@
   border-radius: 20px;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 767px) {
+  .warningContainer {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 575px) {
+  .warningContainer {
+    padding: 12px 0 0;
+    border-radius: 12px 12px 0px 0px;
+  }
+}
+
+/* @media (max-width: 991px) {
   .warningContainer {
     padding: 30px;
   }
@@ -49,7 +74,7 @@
   .warningContainer {
     padding: 20px;
   }
-}
+} */
 
 .header {
   display: flex;
@@ -57,18 +82,30 @@
   margin-bottom: 20px;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 767px) {
+  .header {
+    margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 575px) {
+  .header {
+    padding: 0 12px;
+  }
+}
+
+/* @media (max-width: 991px) {
   .header {
     margin-bottom: 30px !important;
   }
-}
+} */
 
 .warningIcon {
   width: 22px;
   height: 22px;
 }
 
-@media (max-width: 991px) {
+/* @media (max-width: 991px) {
   .warningIcon {
     width: 18px;
   }
@@ -84,28 +121,36 @@
   .warningIcon {
     width: 14px;
   }
-}
+} */
 
 .title1 {
+  min-height: 32px;
   font-size: 24px !important;
   font-weight: 700 !important;
   line-height: 32px !important;
   color: #131313 !important;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 767px) {
+  .title1 {
+    font-size: 20px !important;
+    line-height: 28px !important;
+  }
+}
+
+/* @media (max-width: 991px) {
   .title1 {
     margin-left: 15px !important;
     font-size: 20px !important;
   }
-}
+} */
 
-@media (max-width: 450px) {
+/* @media (max-width: 450px) {
   .title1 {
     font-size: 16px !important;
     margin-left: 10px !important;
   }
-}
+} */
 
 .title2 {
   margin-top: 0 !important;
@@ -117,27 +162,35 @@
   color: #EAE8E1 !important;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 767px) {
+  .title2 {
+    margin-bottom: 12px !important;
+    font-size: 20px !important;
+    line-height: 28px !important;
+  }
+}
+
+/* @media (max-width: 991px) {
   .title2 {
     margin-bottom: 15px !important;
     font-size: 40px !important;
     line-height: 50px !important;
   }
-}
+} */
 
-@media (max-width: 650px) {
+/* @media (max-width: 650px) {
   .title2 {
     margin-bottom: 15px !important;
     font-size: 24px !important;
     line-height: 30px !important;
   }
-}
+} */
 
-@media (max-width: 450px) {
+/* @media (max-width: 450px) {
   .title2 {
     font-size: 20px !important;
   }
-}
+} */
 
 .paragraph {
   margin-bottom: 20px !important;
@@ -147,17 +200,24 @@
   text-align: left !important;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 767px) {
   .paragraph {
-    margin-bottom: 30px !important;
+    font-size: 14px !important;
+    line-height: 20px !important;
   }
 }
 
-@media (max-width: 450px) {
+/* @media (max-width: 991px) {
+  .paragraph {
+    margin-bottom: 30px !important;
+  }
+} */
+
+/* @media (max-width: 450px) {
   .paragraph {
     font-size: 14px !important;
   }
-}
+} */
 
 .paragraph p {
   margin-top: 0 !important;
@@ -174,6 +234,13 @@ p.paragraph1 {
   color: #EAE8E1 !important;
 }
 
+@media (max-width: 767px) {
+  p.paragraph1 {
+    font-size: 14px !important;
+    line-height: 20px !important;
+  }
+}
+
 p.paragraph1 ~ p {
   font-size: 14px;
   line-height: 20px;
@@ -181,23 +248,29 @@ p.paragraph1 ~ p {
   color: #9A9FAF;
 }
 
+@media (max-width: 767px) {
+  p.paragraph1 ~ p {
+    font-size: 12px !important;
+    line-height: 16px !important;
+  }
+}
 
 .buttonsContainer {
   display: flex;
   flex-direction: column;
 }
 
-@media (max-width: 767px) {
+/* @media (max-width: 767px) {
   .buttonsContainer {
     flex-direction: column;
   }
-}
+} */
 
-@media (max-width: 991px) {
+/* @media (max-width: 991px) {
   .buttonsContainer {
     justify-content: flex-start;
   }
-}
+} */
 
 .primaryButton {
   display: flex;
@@ -211,13 +284,20 @@ p.paragraph1 ~ p {
   cursor: pointer;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 767px) {
+  .primaryButton {
+    height: 48px;
+    border-radius: 12px;
+  }
+}
+
+/* @media (max-width: 991px) {
   .primaryButton {
     width: 250px;
     height: 60px;
     margin-bottom: 20px;
   }
-}
+} */
 
 .secondaryButton {
   display: flex;
@@ -231,14 +311,21 @@ p.paragraph1 ~ p {
   margin-bottom: 20px;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 767px) {
+  .secondaryButton {
+    height: 48px;
+    border-radius: 12px;
+  }
+}
+
+/* @media (max-width: 991px) {
   .secondaryButton {
     width: 100%;
     max-width: 500px;
     height: 60px;
     margin-bottom: 20px;
   }
-}
+} */
 
 .buttonTextPrimary {
   font-size: 24px !important;
@@ -248,11 +335,18 @@ p.paragraph1 ~ p {
   color: #B1F1E3 !important;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 767px) {
+  .buttonTextPrimary {
+    font-size: 16px !important;
+    line-height: 16px !important;
+  }
+}
+
+/* @media (max-width: 991px) {
   .buttonTextPrimary {
     font-size: 16px !important;
   }
-}
+} */
 
 .buttonTextSecondary {
   font-size: 24px !important;
@@ -262,11 +356,18 @@ p.paragraph1 ~ p {
   color: #FFFFFF !important;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 767px) {
+  .buttonTextSecondary {
+    font-size: 16px !important;
+    line-height: 16px !important;
+  }
+}
+
+/* @media (max-width: 991px) {
   .buttonTextSecondary {
     font-size: 16px !important;
   }
-}
+} */
 
 .inner {
   background: #131313;
@@ -276,9 +377,29 @@ p.paragraph1 ~ p {
   padding: 20px;
 }
 
+@media (max-width: 767px) {
+  .inner {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 575px) {
+  .inner {
+    padding-bottom: 40px;
+    border-radius: 12px 12px 0px 0px;
+  }
+}
+
 .closeBtn {
   position: absolute;
   right: 20px;
   top: 27px;
   cursor: pointer;
+}
+
+@media (max-width: 767px) {
+  .closeBtn {
+    top: 15px;
+    right: 12px;
+  }
 }

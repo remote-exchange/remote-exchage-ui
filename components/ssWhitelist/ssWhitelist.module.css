@@ -155,6 +155,7 @@
 } */
 
 .select {
+  flex-shrink: 0;
   max-width: 288px;
   width: 100%;
 }

@@ -51,6 +51,10 @@
   padding: 32px 20px 0;
 }
 
+.mainHome {
+  padding: 70px 0 0;
+}
+
 .containerInner {
   width: 100%;
   margin: 0 auto;
@@ -66,10 +70,18 @@
   .main {
     padding: 48px 20px;
   }
+
+  .mainHome {
+    padding: 48px 0 0;
+  }
 }
 
 @media screen and (max-width: 680px) {
   .main {
     padding: 48px 12px;
+  }
+
+  .mainHome {
+    padding: 48px 0 0;
   }
 }

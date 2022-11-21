@@ -43,7 +43,7 @@ export default function ffWarning({close, title, subTitle, icon, description, bt
                 className={classes.paragraph}
                 align="center">
               {description
-                  ? description
+                  ? <p className={classes.paragraph1}>{description}</p>
                   : <>
                     <p className={classes.paragraph1}>
                       Use of the {DAPP_DOMAIN} website, services, dapp, or application is subject to the following Terms & Conditions and hereby confirm that by proceeding and interacting with the protocoL I am aware of these and accept them in full:

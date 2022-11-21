@@ -1,17 +1,321 @@
+/* table header */
+
+.headCell {
+  padding: 13px 12px 10px !important;
+  text-align: center !important;
+  border-bottom: 1px solid rgba(104, 114, 122, 0.4) !important;
+  border-right: 1px solid rgba(104, 114, 122, 0.4);
+  background: #131313 !important;
+  color: #9A9FAF;
+}
+
+.headCell:first-child {
+  text-align: left !important;
+}
+
+.headCell:last-child {
+  text-align: right !important;
+  border-right: none;
+}
+
+.headerText {
+  font-family: "PT Root UI";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 16px;
+
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+
+  color: #9a9faf;
+}
+
+.row:last-child .cell {
+  border-bottom: none !important;
+}
+
+.cell {
+  padding: 12px !important;
+  text-align: center !important;
+  border-bottom: 1px solid rgba(104, 114, 122, 0.4) !important;
+  border-right: 1px solid rgba(104, 114, 122, 0.4);
+  background: #131313 !important;
+  overflow: hidden;
+}
+
+.cell:first-child {
+  text-align: left !important;
+}
+
+.cell:last-child {
+  text-align: right !important;
+  border-right: none;
+}
+
+.cellContentInRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cellContentInRow .itemTitle {
+  margin-bottom: 0;
+}
+
+.cellContentInRow .itemTitle + .itemText {
+  margin-left: 8px;
+}
+
+.vaultSourceTitle {
+  margin-bottom: 4px;
+  font-family: 'PT Root UI';
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 16px;
+  white-space: nowrap;
+
+  color: #F6F7F9;
+}
+
+.vaultSourceSubtitle {
+  font-family: 'PT Root UI';
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+
+  color: #9A9FAF;
+}
+
+@media (max-width: 767px) {
+  .vaultSourceSubtitle {
+    font-size: 12px;
+    line-height: 12px;
+  }
+}
+
+.itemTitle {
+  margin-bottom: 4px;
+  font-family: 'PT Root UI';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #F6F7F9;
+}
+
+@media (max-width: 991px) {
+  .itemTitle {
+    font-size: 12px;
+    line-height: 12px;
+  }
+}
+
+.itemTitle:last-child {
+  margin-bottom: 0;
+}
+
+.itemText {
+  font-family: 'PT Root UI';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+
+  color: #9A9FAF;
+}
+
+@media (max-width: 991px) {
+  .itemText {
+    font-size: 12px;
+    line-height: 12px;
+  }
+}
+
+.action {
+  display: flex;
+  align-items: center;
+
+  min-width: 69px;
+  height: 36px;
+
+  padding: 8px 16px;
+
+  font-family: 'PT Root UI' !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  line-height: 20px !important;
+
+  border: 1px solid #7DB857 !important;
+  border-radius: 8px !important;
+
+  background: rgba(125, 184, 87, 0.12) !important;
+  color: #7DB857 !important;
+}
+
+.action:hover {
+  background: rgba(125, 184, 87, 0.4) !important;
+  border: 1px solid #7DB857 !important;
+}
+
+.action:active {
+  background: #7DB857 !important;
+  border: 1px solid #7DB857 !important;
+  color: #131313 !important;
+}
+
+/* table */
+
+.tableWrapper {
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 20px;
+  background: #131313;
+}
+
+.tableContainer {
+  height: auto;
+  background: #131313;
+  overflow: auto;
+}
+
+.tableContainer table {
+  min-width: 1500px;
+}
+
+.assetTableRow {
+  cursor: pointer !important;
+}
+
+.tableEmptyMessageMobile {
+  font-family: "PT Root UI";
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  text-align: center;
+
+  color: #E4E9F4;
+}
+
+.tableEmptyMessage {
+  padding: 30px 12px 16px;
+
+  font-family: "PT Root UI";
+  font-weight: 700;
+  font-size: 16;
+  line-height: 16px;
+
+  color: #9a9faf;
+}
+
+@media (max-width: 575px) {
+  .tableEmptyMessage {
+    padding: 16px;
+
+    font-size: 20px;
+    line-height: 28px;
+  }
+}
+
+.sortSelect {
+  margin-left: auto;
+}
+
+/* table moble */
+
+.mobileItem {
+  padding: 0 12px;
+}
+
+.mobileItemTable {
+  padding: 12px;
+  border: 1px solid rgba(104, 114, 122, 0.4);
+  border-radius: 16px;
+  background: #131313;
+}
+
+.accordionSummaryContent {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.mobileItemHiddenContentToggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 16px 12px 12px;
+  cursor: pointer;
+}
+
+.mobileItemHiddenContent {
+  display: none;
+}
+
+.mobileItemRow {
+  display: flex;
+}
+
+.mobileItemRow:last-child .mobileItemCell {
+  border-bottom: none;
+}
+
+.mobileItemCell {
+  width: 50%;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(104, 114, 122, 0.4);
+}
+
+.mobileItemCell:first-child {
+  display: flex;
+  align-items: center;
+
+  font-family: 'PT Root UI';
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+
+  border-right: 1px solid rgba(104, 114, 122, 0.4);
+
+  color: #9A9FAF;
+}
+
+.mobileItemCell:last-child {
+  display: flex;
+  justify-content: flex-end;
+}
+
 /* pagination */
 
-.paginationRoot {}
+.paginationRoot {
+}
 
-.paginationToolbar {}
+.paginationToolbar {
+  justify-content: flex-start !important;
+  padding-left: 0 !important;
+}
 
-.paginationSpacer {}
+.paginationSpacer {
+  display: none;
+}
 
 .selectLabel {
-  font-size: 14px !important;
+  font-family: 'PT Root UI';
+  font-size: 16px !important;
   font-weight: 500 !important;
-  line-height: 14px !important;
+  line-height: 24px !important;
 
-  color: #8191B9 !important;
+  color: #9A9FAF !important;
+}
+
+@media (max-width: 991px) {
+  .selectLabel {
+    display: none;
+  }
 }
 
 .selectLabel + div {
@@ -22,36 +326,70 @@
   display: flex;
   align-items: center;
 
-  padding-top: 12px !important;
+  padding-top: 6px !important;
+  padding-right: 33px !important;
   padding-left: 0px !important;
 
-  font-size: 14px !important;
-  font-weight: 400 !important;
-  line-height: 14px !important;
+  font-family: 'PT Root UI';
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  line-height: 24px !important;
+  text-decoration-line: underline !important;
 
-  color: #E4E9F4 !important;
+  color: #F6F7F9 !important;
+}
+
+@media (max-width: 991px) {
+  .select {
+    padding-right: 25px !important;
+    font-size: 12px !important;
+    line-height: 16px !important;
+  }
 }
 
 .selectIcon {
-  color: #779BF4 !important;
+  font-size: 37px !important;
+  color: #B1F1E3 !important;
 }
 
-.input {}
+@media (max-width: 991px) {
+  .selectIcon {
+    font-size: 25px !important;
+  }
+}
 
-.menuItem {}
+.input {
+}
+
+.menuItem {
+}
 
 .displayedRows {
-  font-size: 14px !important;
-  font-weight: 400 !important;
-  line-height: 16px !important;
+  margin-left: auto;
 
-  color: #8191B9 !important;
+  font-family: 'PT Root UI';
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  line-height: 24px !important;
+
+  color: #9A9FAF !important;
+}
+
+@media (max-width: 991px) {
+  .displayedRows {
+    font-size: 12px !important;
+    line-height: 16px !important;
+  }
+}
+
+.displayedRows + div {
+  margin-left: 12px !important;
 }
 
 .displayedRows + div button {
+  margin-left: 4px !important;
   border: none !important;
-  background-color: #1F2B49 !important;
-  color: #060b17 !important;
+  color: #353A42 !important;
 }
 
 .actions {}

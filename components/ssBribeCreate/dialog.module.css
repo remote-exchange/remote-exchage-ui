@@ -1,0 +1,420 @@
+.dialogContainer {
+  overflow: hidden !important;
+}
+
+@media (max-width: 600px) {
+  .dialogContainer {
+    width: 100% !important;
+    height: 416px;
+  }
+}
+
+.paperScrollPaper {
+  max-height: none !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+@media (max-width: 600px) {
+  .paperScrollPaper {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+.scrollPaper {
+  overflow: auto;
+  display: block !important;
+}
+
+@media (max-width: 600px) {
+  .paper {
+    position: fixed !important;
+    bottom: 0;
+    left: 0;
+    width: 100% !important;
+    height: 416px;
+    margin: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+}
+
+.dialogContent {
+  margin: 0 20px 20px;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: #131313;
+  overflow: hidden;
+}
+
+@media (max-width: 600px) {
+  .dialogContent {
+    height: 364px;
+    margin: 0;
+    padding: 12px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .dialogContentInner {
+    padding: 12px;
+    padding-bottom: 40px;
+  }
+}
+
+.dialogTitleWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+@media (max-width: 600px) {
+  .dialogTitleWrapper {
+    padding: 12px;
+  }
+}
+
+.dialogTitle {
+  font-family: "PT Root UI";
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+
+  color: #131313;
+}
+
+@media (max-width: 600px) {
+  .dialogTitle {
+    font-size: 20px;
+    line-height: 28px;
+  }
+}
+
+.dialogClose {
+  position: relative;
+
+  width: 18px;
+  height: 18px;
+
+  border-radius: 50%;
+  background-color: #131313;
+
+  cursor: pointer !important;
+}
+
+.dialogClose::before,
+.dialogClose::after {
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 10px;
+  height: 2px;
+
+  background-color: #ccd2e3;
+}
+
+.dialogClose::before {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.dialogClose::after {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+/* search */
+
+.searchInline {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .searchInline {
+    display: none;
+  }
+}
+
+.searchInput {
+  height: 48px;
+
+  padding-right: 12px !important;
+
+  border: 1px solid #9a9faf !important;
+  border-radius: 12px !important;
+}
+
+.searchInput input {
+  font-family: "PT Root UI" !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  padding-left: 12px !important;
+  color: #f6f7f9 !important;
+}
+
+.searchInput input::placeholder {
+  color: #9a9faf !important;
+}
+
+.searchInput > fieldset {
+  border: none;
+}
+
+.searchInputText {
+  padding: 24px !important;
+
+  font-weight: 500 !important;
+  font-size: 16px !important;
+  line-height: 120% !important;
+
+  border-radius: 0 !important;
+  border: none !important;
+
+  color: #9a9faf !important;
+}
+
+.searchInputIcon {
+  display: flex;
+  align-items: center;
+  height: 0.01em;
+  max-height: 2em;
+}
+
+@media (max-width: 767px) {
+  .searchInputIcon {
+    transform: scale(0.8);
+  }
+}
+
+.dialogOptions {
+  position: relative;
+  max-height: 664px;
+  min-height: 281px;
+  margin-top: 28px;
+  overflow: auto;
+}
+
+@media (max-height: 950px) {
+  .dialogOptions {
+    max-height: 336px;
+  }
+}
+
+@media (max-width: 600px) {
+  .dialogOptions {
+    margin-top: 0;
+    min-height: 340px;
+    max-height: 340px !important;
+  }
+}
+
+.assetSelectMenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  min-height: 76px !important;
+
+  margin-bottom: 8px !important;
+  padding: 11px 12px !important;
+
+  border: 1px solid rgba(104, 114, 122, 0.4) !important;
+  border-radius: 12px !important;
+
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .assetSelectMenu {
+    min-height: 48px !important;
+    margin-bottom: 4px !important;
+    padding: 7px 8px !important;
+  }
+}
+
+.assetSelectMenuCol:first-child {
+  display: flex;
+  align-items: center;
+}
+
+.assetSelectMenuCol:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-left: auto;
+}
+
+.displaySelectContainer {
+  cursor: pointer;
+}
+
+.displayDualIconContainer {
+  position: relative;
+  /* width: 84px; */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  transition: fill 0.16s ease;
+}
+
+.displayDualIconContainerManage {
+}
+
+.displayAssetIcon {
+  width: 52px;
+  height: 52px;
+  border-radius: 100px;
+}
+
+.displayAssetIconSec {
+  margin-left: -20px;
+}
+
+@media (max-width: 767px) {
+  .displayAssetIconSec {
+    margin-left: -12px;
+  }
+}
+
+@media (max-width: 767px) {
+  .assetOptionIcon {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+.assetSelectIconName {
+  margin-left: 12px;
+}
+
+.assetSymbolName {
+  font-family: "PT Root UI";
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+
+  color: #f6f7f9;
+}
+
+@media (max-width: 767px) {
+  .assetSymbolName {
+    margin-bottom: 4px;
+    font-size: 16px;
+    line-height: 16px;
+  }
+}
+
+.assetSymbolName2 {
+  font-family: "PT Root UI";
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+
+  color: #9a9faf;
+}
+
+@media (max-width: 767px) {
+  .assetSymbolName2 {
+    font-size: 12px;
+    line-height: 12px;
+  }
+}
+
+.assetSelectBalance {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.assetSelectBalanceTypo {
+  margin-bottom: 4px;
+
+  font-family: "PT Root UI";
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+
+  color: #f6f7f9;
+}
+
+@media (max-width: 767px) {
+  .assetSelectBalanceTypo {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+.assetSelectBalanceSubtitle1 {
+  font-family: "PT Root UI";
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+
+  color: #9a9faf;
+}
+
+@media (max-width: 767px) {
+  .assetSelectBalanceSubtitle1 {
+    font-size: 12px;
+    line-height: 12px;
+  }
+}
+
+.tabsWrapper {
+}
+
+.tabs {
+  display: inline-flex;
+  height: 46px;
+  padding: 2px;
+
+  font-family: "PT Root UI";
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+
+  border: 1px solid #131313;
+  border-radius: 12px;
+
+  color: #353a42;
+}
+
+@media (max-width: 767px) {
+  .tabs {
+    height: 32px;
+    padding: 1px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+.tab {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  padding: 0 43px;
+  cursor: pointer;
+}
+
+@media (max-width: 767px) {
+  .tab {
+    height: 28px;
+    padding: 0 32px;
+  }
+}
+
+.tabActive {
+  border-radius: 10px;
+  background: #131313;
+  color: #f6f7f9;
+}

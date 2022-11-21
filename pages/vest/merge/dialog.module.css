@@ -1,0 +1,267 @@
+.dialogContainer {
+  overflow: hidden !important;
+}
+
+@media (max-width: 600px) {
+  .dialogContainer {
+    width: 100% !important;
+    height: 416px;
+  }
+}
+
+.paperScrollPaper {
+  max-height: none !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+@media (max-width: 600px) {
+  .paperScrollPaper {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+.scrollPaper {
+  overflow: auto;
+  display: block !important;
+}
+
+@media (max-width: 600px) {
+  .paper {
+    position: fixed !important;
+    bottom: 0;
+    left: 0;
+    width: 100% !important;
+    height: 416px;
+    margin: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+}
+
+.dialogContent {
+  margin: 0 20px 20px;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: #131313;
+  overflow: hidden;
+}
+
+@media (max-width: 600px) {
+  .dialogContent {
+    height: 364px;
+    margin: 0;
+    padding: 12px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .dialogContentInner {
+    padding: 12px;
+    padding-bottom: 40px;
+  }
+}
+
+.dialogTitleWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+@media (max-width: 600px) {
+  .dialogTitleWrapper {
+    padding: 12px;
+  }
+}
+
+.dialogTitle {
+  font-family: "PT Root UI";
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+
+  color: #131313;
+}
+
+@media (max-width: 600px) {
+  .dialogTitle {
+    font-size: 20px;
+    line-height: 28px;
+  }
+}
+
+.dialogClose {
+  position: relative;
+
+  width: 18px;
+  height: 18px;
+
+  border-radius: 50%;
+  background-color: #131313;
+
+  cursor: pointer !important;
+}
+
+.dialogClose::before,
+.dialogClose::after {
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 10px;
+  height: 2px;
+
+  background-color: #ccd2e3;
+}
+
+.dialogClose::before {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.dialogClose::after {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+/* search */
+
+.searchInline {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .searchInline {
+    display: none;
+  }
+}
+
+.searchInput {
+  height: 48px;
+
+  padding-right: 12px !important;
+
+  border: 1px solid #9a9faf !important;
+  border-radius: 12px !important;
+}
+
+.searchInput input {
+  font-family: "PT Root UI" !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  padding-left: 12px !important;
+  color: #f6f7f9 !important;
+}
+
+.searchInput input::placeholder {
+  color: #9a9faf !important;
+}
+
+.searchInput > fieldset {
+  border: none;
+}
+
+.searchInputText {
+  padding: 24px !important;
+
+  font-weight: 500 !important;
+  font-size: 16px !important;
+  line-height: 120% !important;
+
+  border-radius: 0 !important;
+  border: none !important;
+
+  color: #9a9faf !important;
+}
+
+.searchInputIcon {
+  display: flex;
+  align-items: center;
+  height: 0.01em;
+  max-height: 2em;
+}
+
+@media (max-width: 767px) {
+  .searchInputIcon {
+    transform: scale(0.8);
+  }
+}
+
+.dialogOptions {
+  position: relative;
+  max-height: 460px;
+  min-height: 281px;
+  margin-top: 28px;
+  overflow: auto;
+}
+
+@media (max-height: 850px) {
+  .dialogOptions {
+    max-height: 281px;
+  }
+}
+
+@media (max-width: 600px) {
+  .dialogOptions {
+    margin-top: 0;
+    min-height: 204px;
+    max-height: 204px !important;
+  }
+}
+
+.descText {
+  margin: 20px auto 20px;
+
+  font-family: "PT Root UI";
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+
+  color: #9a9faf;
+}
+
+@media (max-width: 600px) {
+  .descText {
+    /* margin: auto auto 20px; */
+  }
+}
+
+.descButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 16px 32px;
+
+  width: 100%;
+  height: 48px;
+
+  font-family: "PT Root UI";
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 16px;
+
+  border-radius: 12px;
+
+  background: #7db857;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.descButton:hover {
+  background: #92cb6d;
+}
+
+.descButton:active {
+  background: #60a434;
+}

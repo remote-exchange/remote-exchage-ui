@@ -12,10 +12,12 @@ import {
   IconButton,
   InputBase, DialogTitle, DialogContent,
 } from '@mui/material';
-import { DeleteOutline, ArrowBackIosNew } from '@mui/icons-material';
+import { DeleteOutline, ArrowBackIosNew, Search } from '@mui/icons-material';
 import BigNumber from 'bignumber.js';
 import { formatCurrency } from '../../utils';
 import classes from './ssBribeCreate.module.css';
+import classesSelect from './select.module.css';
+import classesDialog from './dialog.module.css';
 import { formatSymbol, formatInputAmount } from '../../utils';
 import stores from '../../stores';
 import {
@@ -187,33 +189,26 @@ export default function ssBribeCreate() {
 
   const renderMassiveGaugeInput = (type, value, error, options, onChange) => {
     return (
-      <div className={[classes.textFieldTop, classes[`textFieldTop--${appTheme}`]].join(' ')}>
-        <Typography className={classes.inputTitleText} noWrap>
-          Bribe for LP
-        </Typography>
+      <div className={classes.textFieldTop}>
+        <div className={classes.inputTitleText}>Bribe for :</div>
 
-        <div className={`${classes.massiveInputContainer} ${error && classes.error}`}>
-          <div className={classes.massiveInputAssetSelect}>
+        <div className={classes.massiveInputContainer}>
+          {/* <div className={classes.massiveInputAssetSelect}> */}
             <AssetSelectPair type={type} value={value} assetOptions={options} onSelect={onChange} manageLocal={false}/>
-          </div>
-          <div className={classes.assetSelectIconName}>
-            <Typography
-              variant="h5"
-              className={classes.assetSymbolName}
-              style={{
-                color: appTheme === "dark" ? '#ffffff' : '#0A2C40',
-              }}>
+          {/* </div> */}
+          <div className={classes.assetSelectIconNameWrapper}>
+            <div className={classes.assetSymbolName}>
               {formatSymbol(gauge?.symbol)}
-            </Typography>
+            </div>
 
-            <Typography
+            {/* <Typography
               variant="subtitle1"
               className={classes.assetSymbolName2}
               style={{
                 color: appTheme === "dark" ? '#7C838A' : '#5688A5',
               }}>
               {gauge?.isStable ? "Stable Pool" : "Volatile Pool"}
-            </Typography>
+            </Typography> */}
           </div>
 
         </div>
@@ -222,33 +217,37 @@ export default function ssBribeCreate() {
   };
 
   const renderMassiveInput = (type, amountValue, amountError, amountChanged, assetValue, assetError, assetOptions, onAssetSelect) => {
-
     return (
-      <div className={[classes.textField, classes[`textField--${appTheme}`]].join(' ')}>
-        <Typography className={classes.inputTitleText} noWrap>
-          Bribe with
-        </Typography>
+      <>
+        <div className={classes.textField}>
+          <div className={classes.inputTitleText}>Bribe with :</div>
 
-        <Typography className={classes.inputBalanceText} noWrap >
-          <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M11.653 6.03324C11.373 6.30658 11.213 6.69991 11.253 7.11991C11.313 7.83991 11.973 8.36658 12.693 8.36658H13.9997V9.33325C13.9997 11.3333 12.6663 12.6666 10.6663 12.6666H4.66634C2.66634 12.6666 1.33301 11.3333 1.33301 9.33325V4.66659C1.33301 2.85325 2.42634 1.58658 4.12634 1.37325C4.29968 1.34658 4.47967 1.33325 4.66634 1.33325H10.6663C10.8397 1.33325 11.0063 1.33991 11.1663 1.36658C12.8863 1.56658 13.9997 2.83992 13.9997 4.66659V5.63326H12.613C12.2397 5.63326 11.8997 5.77991 11.653 6.03324Z" stroke="#8191B9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-          {(assetValue && assetValue.balance) ?
-            ' ' + formatCurrency(assetValue.balance) :
-            ''
-          }
-        </Typography>
+          <div className={classes.textFieldContainer}>
+            <AssetSelectManage
+              type={type}
+              value={assetValue}
+              assetOptions={assetOptions}
+              onSelect={onAssetSelect}
+              manageLocal={true}
+            />
 
-        <Typography className={classes.inputBalanceMax} onClick={() => {
-          setAmountMax(type);
-        }}>
-          MAX
-        </Typography>
+            <div className={classes.smallerText}>
+              {formatSymbol(assetValue?.symbol)}
+            </div>
+          </div>
+        </div>
 
-        <div className={`${classes.massiveInputContainerTransparent} ${(amountError || assetError) && classes.error}`}>
-          <div className={classes.massiveInputAssetSelectStandalone}>
-            <AssetSelectManage type={type} value={assetValue} assetOptions={assetOptions} onSelect={onAssetSelect}
-                               manageLocal={true}/>
+        <div className={classes.textField}>
+          <div className={classes.inputBalanceRow}>
+            <div className={classes.inputBalanceText}>
+              {(assetValue && assetValue.balance) ?
+                ' ' + formatCurrency(assetValue.balance) :
+                ''
+              }
+            </div>
+            <div className={classes.inputBalanceMax} onClick={() => { setAmountMax(type) }}>
+              MAX
+            </div>
           </div>
 
           <InputBase
@@ -260,20 +259,15 @@ export default function ssBribeCreate() {
             onChange={amountChanged}
             disabled={createLoading}
             inputProps={{
-              className: [classes.largeInput, classes[`largeInput--${appTheme}`]].join(" "),
+              className: classes.largeInput,
             }}
             
             InputProps={{
               disableUnderline: true,
             }}
           />
-
-          <Typography
-            className={[classes.smallerText, classes[`smallerText--${appTheme}`]].join(" ")}>
-            {formatSymbol(assetValue?.symbol)}
-          </Typography>
         </div>
-      </div>
+      </>
     );
   };
 
@@ -283,20 +277,14 @@ export default function ssBribeCreate() {
 
   const renderCreateInfo = () => {
     return (
-      <div className={classes.depositInfoContainer}>
-        <span className={classes.depositInfoContainerWarn}>!</span>
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 20C15.5228 20 20 15.5228 20 10C20 4.47715 15.5228 0 10 0C4.47715 0 0 4.47715 0 10C0 15.5228 4.47715 20 10 20Z" fill="#779BF4"/>
-        </svg>
-
-        <Typography className={[classes.depositInfoHeading, classes[`depositInfoHeading--${appTheme}`]].join(' ')}>You
-          are creating a bribe of <span
-            className={classes.highlight}>{formatCurrency(amount)} {formatSymbol(asset?.symbol)}</span> to incentivize
-          Vesters to vote
-          for the <span
-            className={classes.highlight}>{formatSymbol(gauge?.token0?.symbol)}/{formatSymbol(gauge?.token1?.symbol)} Pool</span></Typography>
+      <div className={[classes.warningContainer, classes.warningContainerSuccess].join(" ")}>
+        <img src="/images/ui/info-circle-green.svg" width="18px" className={classes.warningIcon} />
+        <p className={classes.warningText}>
+          You are creating a bribe of {formatCurrency(amount)} {formatSymbol(asset?.symbol)} to incentivize
+          Vesters to vote for the {formatSymbol(gauge?.token0?.symbol)}/{formatSymbol(gauge?.token1?.symbol)} Pool
+        </p>
       </div>
-    );
+    )
   };
 
   const {appTheme} = useAppThemeContext();
@@ -311,71 +299,57 @@ export default function ssBribeCreate() {
   }
 
   return (
-    <Paper
-      elevation={0}
-      className={[classes.container, classes[`container--${appTheme}`, 'g-flex-column']].join(' ')}>
-      <div
-        className={[classes.titleSection, classes[`titleSection--${appTheme}`]].join(' ')}
-      >
-        <BackButton
-            text="Back to Vote"
-            url="/vote"
-        />
+    <>
+      <div className={classes.tnavWrapper}>
+        <div className={classes.tnav}>
+          <span className={classes.tnavItem} onClick={onBack}>Vote</span>
+          <span className={classes.tnavItemActive}>Create Bribe</span>
+        </div>
       </div>
 
-      <div className={[classes[`top`], classes[`top--${appTheme}`]].join(' ')}>
-        Create Bribe
-      </div>
+      <div className={classes.formWrapper}>
+        <div className={classes.title}>
+          <span>Create Bribe</span>
+        </div>
 
-      <div className={[classes.reAddPadding, classes[`reAddPadding--${appTheme}`]].join(' ')}>
-        {renderMassiveGaugeInput('gauge', gauge, null, gaugeOptions, onGagugeSelect)}
-        <svg className={classes.bribeSvg} width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="4" y="4" width="56" height="56" rx="28" fill="#171D2D"/>
-          <path d="M29.5 33.75C29.5 34.72 30.25 35.5 31.17 35.5H33.05C33.85 35.5 34.5 34.82 34.5 33.97C34.5 33.06 34.1 32.73 33.51 32.52L30.5 31.47C29.91 31.26 29.51 30.94 29.51 30.02C29.51 29.18 30.16 28.49 30.96 28.49H32.84C33.76 28.49 34.51 29.27 34.51 30.24" stroke="#8191B9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M32 27.5V36.5" stroke="#8191B9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M42 32C42 37.52 37.52 42 32 42C26.48 42 22 37.52 22 32C22 26.48 26.48 22 32 22" stroke="#8191B9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M37 23V27H41" stroke="#8191B9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M42 22L37 27" stroke="#8191B9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          <rect x="4" y="4" width="56" height="56" rx="28" stroke="#060B17" strokeWidth="8"/>
-        </svg>
+        <div className={classes.mainBody}>
+          {renderMassiveGaugeInput('gauge', gauge, null, gaugeOptions, onGagugeSelect)}
 
-        <div style={{marginTop: 36}}>
           {renderMassiveInput('amount', amount, amountError, amountChanged, asset, null, assetOptions, onAssetSelect)}
         </div>
 
-        {amountError && <div
-          style={{marginTop: 20}}
-          className={[
-            classes.warningContainer,
-            classes[`warningContainer--${appTheme}`],
-            classes.warningContainerError].join(" ")}>
-          <div className={[
-            classes.warningDivider,
-            classes.warningDividerError,
-          ].join(" ")}>
+        <div className={classes.warningContainer}>
+          <img src="/images/ui/info-circle-gray.svg" width="18px" className={classes.warningIcon} />
+          <p className={classes.warningText}>Select a liquidity pool to bribe for and a bribe token with the amount.</p>
+        </div>
+
+        {amountError && (
+          <div className={[classes.warningContainer, classes.warningContainerError].join(" ")}>
+            <img src="/images/ui/info-circle-red.svg" width="18px" className={classes.warningIcon} />
+            <p className={classes.warningText}>{amountError}</p>
           </div>
-          <Typography
-            className={[classes.warningError, classes[`warningText--${appTheme}`]].join(" ")}
-            align="center">{amountError}</Typography>
-        </div>}
+        )}
+
         {renderCreateInfo()}
+
+        <div className={classes.controls}>
+          <Button
+            className={[
+              classes.button,
+              (createLoading || amount === '' || parseFloat(amount) === 0) ? classes.buttonDisabled : ""
+            ].join(" ")}
+            variant="contained"
+            size="large"
+            color="primary"
+            disabled={createLoading || amount === '' || parseFloat(amount) === 0}
+            onClick={onCreate}
+          >
+            <span>{actionButtonText}</span>
+            {createLoading && <CircularProgress size={10} className={classes.loadingCircle}/>}
+          </Button>
+        </div>
       </div>
-
-      <Button
-        className={[classes.buttonOverride, classes[`buttonOverride--${appTheme}`]].join(' ')}
-        fullWidth
-        variant="contained"
-        size="large"
-        color="primary"
-        disabled={createLoading || amount === '' || parseFloat(amount) === 0}
-        onClick={onCreate}>
-        <Typography className={classes.actionButtonText}>
-          {actionButtonText}
-        </Typography>
-
-        {createLoading && <CircularProgress size={10} className={classes.loadingCircle}/>}
-      </Button>
-    </Paper>
+    </>
   );
 }
 
@@ -485,69 +459,45 @@ function AssetSelectManage({type, value, assetOptions, onSelect, manageLocalAsse
       <MenuItem
         val={asset.address}
         key={asset.address + '_' + idx}
-        className={[classes.assetSelectMenu, classes[`assetSelectMenu--${appTheme}`]].join(' ')}
+        className={classesDialog.assetSelectMenu}
         onClick={() => {
           onLocalSelect(type, asset);
-        }}>
-        <div className={classes.assetSelectMenuItem}>
-          <div className={classes.displaySingleIconContainerSmall}>
+        }}
+      >
+        <div className={classesDialog.assetSelectMenuCol}>
+          <div className={classesDialog.displaySelectContainer}>
             <img
-              className={[classes.assetOptionIcon, classes[`assetOptionIcon--${appTheme}`]].join(' ')}
+              className={classesDialog.assetOptionIcon}
               alt=""
               src={asset ? `${asset.logoURI}` : ''}
-              height="60px"
+              height="52px"
               onError={(e) => {
                 e.target.onerror = null;
                 e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
               }}
             />
           </div>
-        </div>
-        <div className={classes.assetSelectIconName}>
-          <Typography
-            variant="h5"
-            className={classes.assetSymbolName}
-            style={{
-              fontWeight: 500,
-              fontSize: 24,
-              lineHeight: '32px',
-              color: '#E4E9F4',
-            }}>
-            {asset ? formatSymbol(asset.symbol) : ''}
-          </Typography>
+          <div className={classesDialog.assetSelectIconName}>
+            <div className={classesDialog.assetSymbolName}>
+              {asset ? formatSymbol(asset.symbol) : ''}
+            </div>
 
-          <Typography
-              variant="subtitle1"
-              className={classes.assetSymbolName2}
-          >
-            {asset ? asset.name : ''}
-          </Typography>
+            <div className={classesDialog.assetSymbolName2}>
+              {asset ? asset.name : ''}
+            </div>
+          </div>
         </div>
 
-        <div className={classes.assetSelectBalance}>
-          <Typography
-            variant="h5"
-            className={classes.assetSelectBalanceTypo}
-            style={{
-              // fontWeight: 500,
-              // fontSize: 24,
-              // lineHeight: '32px',
-              // color: '#E4E9F4',
-            }}>
-            {(asset && asset.balance) ? formatCurrency(asset.balance) : '0.00'}
-          </Typography>
+        <div className={classesDialog.assetSelectMenuCol}>
+          <div className={classesDialog.assetSelectBalance}>
+            <div className={classesDialog.assetSelectBalanceTypo}>
+              {(asset && asset.balance) ? formatCurrency(asset.balance) : '0.00'}
+            </div>
 
-          <Typography
-            variant="subtitle1"
-            className={classes.assetSelectBalanceSubtitle1}
-            style={{
-              fontWeight: 500,
-              fontSize: 16,
-              color: '#8191B9',
-              lineHeight: '24px',
-            }}>
-            {'Balance'}
-          </Typography>
+            <div className={classesDialog.assetSelectBalanceSubtitle1}>
+              Balance
+            </div>
+          </div>
         </div>
       </MenuItem>
     );
@@ -556,7 +506,7 @@ function AssetSelectManage({type, value, assetOptions, onSelect, manageLocalAsse
   const renderManageLocal = () => {
     return (
       <>
-        <div className={classes.searchInline}>
+        <div className={classesDialog.searchInline}>
           <TextField
             autoFocus
             variant="outlined"
@@ -565,57 +515,29 @@ function AssetSelectManage({type, value, assetOptions, onSelect, manageLocalAsse
             value={search}
             onChange={onSearchChanged}
             InputProps={{
-              style: {
-                background: '#171D2D',
-                border: '1px solid',
-                borderColor: '#779BF4',
-                borderRadius: 12,
-              },
               classes: {
-                root: classes.searchInput,
-                input: classes.searchInputInput,
+                root: classesDialog.searchInput,
+                inputAdornedEnd: classesDialog.searchInputText,
+                input: classesDialog.searchInputInput,
               },
               endAdornment: <InputAdornment position="end">
-                {/*Search icon*/}
-                <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M10.5 20C15.7467 20 20 15.7467 20 10.5C20 5.25329 15.7467 1 10.5 1C5.25329 1 1 5.25329 1 10.5C1 15.7467 5.25329 20 10.5 20Z" stroke="#779BF4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                <div style={{position: 'relative'}}>
-                  <svg style={{position: 'absolute', top: 8, right: 0,}} width="4" height="4" viewBox="0 0 4 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 3L1 1" stroke="#779BF4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <div className={classesDialog.searchInputIcon}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 11C18 14.866 14.866 18 11 18C7.13401 18 4 14.866 4 11C4 7.13401 7.13401 4 11 4C14.866 4 18 7.13401 18 11Z" fill="#9A9FAF"/>
+                    <path d="M20 20L18 18" stroke="#9A9FAF" stroke-width="2" stroke-linecap="round"/>
                   </svg>
                 </div>
               </InputAdornment>,
             }}
-            inputProps={{
-              style: {
-                padding: '24px',
-                borderRadius: 0,
-                border: 'none',
-                fontSize: '16px',
-                lineHeight: '120%',
-                color: '#E4E9F4',
-              },
-            }}
           />
         </div>
 
-        <div className={[classes.assetSearchResults, classes[`assetSearchResults--${appTheme}`]].join(' ')}>
-          {
-            filteredAssetOptions ? filteredAssetOptions.filter((option) => {
-              return option.local === true;
-            }).map((asset, idx) => {
-              return renderManageOption(type, asset, idx);
-            }) : []
-          }
-        </div>
-
-        <div className={classes.manageLocalContainer}>
-          <Button
-            onClick={toggleLocal}
-          >
-            Back to Assets
-          </Button>
+        <div className={classesDialog.dialogOptions}>
+          {filteredAssetOptions ? filteredAssetOptions.filter((option) => {
+            return option.local === true;
+          }).map((asset, idx) => {
+            return renderManageOption(type, asset, idx);
+          }) : []}
         </div>
       </>
     );
@@ -624,7 +546,7 @@ function AssetSelectManage({type, value, assetOptions, onSelect, manageLocalAsse
   const renderOptions = () => {
     return (
       <>
-        <div className={classes.searchInline}>
+        <div className={classesDialog.searchInline}>
           <TextField
             autoFocus
             variant="outlined"
@@ -634,18 +556,15 @@ function AssetSelectManage({type, value, assetOptions, onSelect, manageLocalAsse
             onChange={onSearchChanged}
             InputProps={{
               classes: {
-                root: [classes.searchInput, classes[`searchInput--${appTheme}`]].join(' '),
-                inputAdornedEnd: [classes.searchInputText, classes[`searchInputText--${appTheme}`]].join(' '),
-                input: classes.searchInputInput,
+                root: classesDialog.searchInput,
+                inputAdornedEnd: classesDialog.searchInputText,
+                input: classesDialog.searchInputInput,
               },
               endAdornment: <InputAdornment position="end">
-                {/*Search icon*/}
-                <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M10.5 20C15.7467 20 20 15.7467 20 10.5C20 5.25329 15.7467 1 10.5 1C5.25329 1 1 5.25329 1 10.5C1 15.7467 5.25329 20 10.5 20Z" stroke="#779BF4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                <div style={{position: 'relative'}}>
-                  <svg style={{position: 'absolute', top: 8, right: 0,}} width="4" height="4" viewBox="0 0 4 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 3L1 1" stroke="#779BF4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <div className={classesDialog.searchInputIcon}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 11C18 14.866 14.866 18 11 18C7.13401 18 4 14.866 4 11C4 7.13401 7.13401 4 11 4C14.866 4 18 7.13401 18 11Z" fill="#9A9FAF"/>
+                    <path d="M20 20L18 18" stroke="#9A9FAF" stroke-width="2" stroke-linecap="round"/>
                   </svg>
                 </div>
               </InputAdornment>,
@@ -653,62 +572,42 @@ function AssetSelectManage({type, value, assetOptions, onSelect, manageLocalAsse
           />
         </div>
 
-        <div style={{position: 'relative'}}>
-          {/*<Borders/>*/}
-          <div className={[classes.assetSearchResults, classes[`assetSearchResults--${appTheme}`]].join(' ')}>
-            {
-              filteredAssetOptions ? filteredAssetOptions.sort((a, b) => {
-                if (BigNumber(a.balance).lt(b.balance)) return 1;
-                if (BigNumber(a.balance).gt(b.balance)) return -1;
-                if (a.symbol.toLowerCase() < b.symbol.toLowerCase()) return -1;
-                if (a.symbol.toLowerCase() > b.symbol.toLowerCase()) return 1;
-                return 0;
-              }).map((asset, idx) => {
-                return renderAssetOption(type, asset, idx);
-              }) : []
-            }
-          </div>
-        </div>
-
-        <div className={classes.manageLocalContainer}>
-          <Button
-            className={[classes.manageLocalBtn, classes[`manageLocalBtn--${appTheme}`]].join(' ')}
-            onClick={toggleLocal}>
-            Manage local assets
-          </Button>
+        <div className={classesDialog.dialogOptions}>
+          {filteredAssetOptions ? filteredAssetOptions.sort((a, b) => {
+            if (BigNumber(a.balance).lt(b.balance)) return 1;
+            if (BigNumber(a.balance).gt(b.balance)) return -1;
+            if (a.symbol.toLowerCase() < b.symbol.toLowerCase()) return -1;
+            if (a.symbol.toLowerCase() > b.symbol.toLowerCase()) return 1;
+            return 0;
+            }).map((asset, idx) => {
+              return renderAssetOption(type, asset, idx);
+            }) : []
+          }
         </div>
       </>
     );
   };
 
   return (
-    <React.Fragment>
-      <div className={classes.displaySelectContainer} onClick={() => {
-        openSearch();
-      }}>
-        <div className={classes.assetSelectMenuItem}>
-          <div
-            className={[classes.displayDualIconContainer, classes.displayDualIconContainerManage].join(' ')}>
-            <img
-              className={classes.displayAssetIconSingle}
-              alt=""
-              src={value ? `${value.logoURI}` : ''}
-              height="100px"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
-              }}
-            />
-          </div>
-        </div>
+    <>
+      <div
+        className={[classesSelect.displayDualIconContainer, classesSelect.displayDualIconContainerManage].join(' ')}
+        onClick={() => { openSearch() }}
+      >
+        <img
+          className={classesSelect.displayAssetIcon}
+          alt=""
+          src={value ? `${value.logoURI}` : ''}
+          height="52px"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
+          }}
+        />
       </div>
 
       <Dialog
-          PaperProps={{style: {
-              borderRadius: 12,
-                  backgroundColor: 'transparent',
-              maxWidth: 800,
-          }}}
+        PaperProps={{ style: { width: "100%", maxWidth: 800, background: 'transpaarent', borderRadius: 20 } }}
         aria-labelledby="simple-dialog-title"
         open={open}
         onClick={(e) => {
@@ -716,61 +615,41 @@ function AssetSelectManage({type, value, assetOptions, onSelect, manageLocalAsse
             onClose();
           }
         }}
+        classes={{
+          paperScrollPaper: classesDialog.paperScrollPaper,
+          paper: classesDialog.paper,
+          scrollPaper: classesDialog.scrollPaper,
+        }}
       >
-        <div
-            className={classes.dialogContainer}
-            style={{
-          width: 782,
-          height: 710,
-          background: '#1F2B49',
-          borderRadius: 12,
-        }}>
-          <DialogTitle style={{
-            padding: 30,
-            paddingTop: 24,
-            paddingBottom: 0,
-            // fontWeight: 500,
-            // fontSize: 18,
-            // lineHeight: '140%',
-            // color: '#0A2C40',
-          }}>
-            <div style={{
-              display: 'flex',
-              alignItems: 'flex-start',
-              justifyContent: 'space-between',
-            }}>
-              <div
-                  className={classes.dialogTitle}
-                  style={{
-                display: 'flex',
-                alignItems: 'center',
-                // color: '#E4E9F4',
-                // fontSize: 60,
-                // fontWeight: 500,
-                // lineHeight: '72px',
-              }}>
-                {manageLocal && <ArrowBackIosNew onClick={toggleLocal} style={{
-                  marginRight: 10,
-                  width: 18,
-                  height: 18,
-                  cursor: 'pointer',
-                }}/>}
-                {'Select a Token'}
+        <div className={classesDialog.dialogContainer}>
+          <div className={classesDialog.dialogContainerInner}>
+            <div className={classesDialog.dialogTitleWrapper}>
+              <div className={classesDialog.tabs}>
+                <div
+                  className={[classesDialog.tab, manageLocal ? "" : classesDialog.tabActive].join(" ")}
+                  onClick={toggleLocal}
+                >
+                  Token List
+                </div>
+                <div
+                  className={[classesDialog.tab, manageLocal ? classesDialog.tabActive : ""].join(" ")}
+                  onClick={toggleLocal}
+                >
+                  Local Assets
+                </div>
               </div>
-              <svg className={classes.dialogClose} onClick={onClose} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M14.19 0H5.81C2.17 0 0 2.17 0 5.81V14.18C0 17.83 2.17 20 5.81 20H14.18C17.82 20 19.99 17.83 19.99 14.19V5.81C20 2.17 17.83 0 14.19 0ZM13.36 12.3C13.65 12.59 13.65 13.07 13.36 13.36C13.21 13.51 13.02 13.58 12.83 13.58C12.64 13.58 12.45 13.51 12.3 13.36L10 11.06L7.7 13.36C7.55 13.51 7.36 13.58 7.17 13.58C6.98 13.58 6.79 13.51 6.64 13.36C6.35 13.07 6.35 12.59 6.64 12.3L8.94 10L6.64 7.7C6.35 7.41 6.35 6.93 6.64 6.64C6.93 6.35 7.41 6.35 7.7 6.64L10 8.94L12.3 6.64C12.59 6.35 13.07 6.35 13.36 6.64C13.65 6.93 13.65 7.41 13.36 7.7L11.06 10L13.36 12.3Z" fill="#8191B9"/>
-              </svg>
+
+              <div className={classesDialog.dialogClose} onClick={onClose} />
             </div>
-          </DialogTitle>
-          <DialogContent style={{
-            padding: '20px 30px 30px',
-          }}>
-            {!manageLocal && renderOptions(manageLocalAssets)}
-            {manageLocalAssets && manageLocal && renderManageLocal()}
-          </DialogContent>
+
+            <div className={classesDialog.dialogContent}>
+              {!manageLocal && renderOptions(manageLocalAssets)}
+              {manageLocalAssets && manageLocal && renderManageLocal()}
+            </div>
+          </div>
         </div>
       </Dialog>
-    </React.Fragment>
+    </>
   );
 }
 
@@ -846,7 +725,7 @@ function AssetSelectPair({type, value, assetOptions, onSelect, manageLocalAssets
               className={[classes.assetOptionIcon, classes[`assetOptionIcon--${appTheme}`]].join(' ')}
               alt=""
               src={asset ? `${asset.logoURI}` : ''}
-              height="60px"
+              height="52px"
               onError={(e) => {
                 e.target.onerror = null;
                 e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
@@ -879,77 +758,58 @@ function AssetSelectPair({type, value, assetOptions, onSelect, manageLocalAssets
       <MenuItem
         val={asset.address}
         key={asset.address + '_' + idx}
-        className={[classes.assetSelectMenu, classes[`assetSelectMenu--${appTheme}`]].join(' ')}
+        className={classesDialog.assetSelectMenu}
         onClick={() => {
           onLocalSelect(type, asset);
-        }}>
-        <div className={classes.assetSelectMenuItem}>
-          <div className={classes.displayDualIconContainerSmall}>
-            <img
-              className={[classes.assetOptionIcon, classes[`assetOptionIcon--${appTheme}`]].join(' ')}
-              alt=""
-              src={asset ? `${asset?.token0?.logoURI}` : ''}
-              height="30px"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
-              }}
-            />
+        }}
+      >
+        <div className={classesDialog.assetSelectMenuCol}>
+          <div className={classesDialog.displaySelectContainer}>
+            <div className={classesDialog.displayDualIconContainer}>
+              <img
+                className={classesDialog.assetOptionIcon}
+                alt=""
+                src={asset ? `${asset?.token0?.logoURI}` : ''}
+                height="52px"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
+                }}
+              />
 
-            <img
-              className={[classes.assetOptionIcon, classes[`assetOptionIcon--${appTheme}`]].join(' ')}
-              alt=""
-              src={asset ? `${asset?.token1?.logoURI}` : ''}
-              height="30px"
-              style={{marginLeft: "-15px"}}
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
-              }}
-            />
+              <img
+                className={[classesDialog.assetOptionIcon, classesDialog.displayAssetIconSec].join(' ')}
+                alt=""
+                src={asset ? `${asset?.token1?.logoURI}` : ''}
+                height="52px"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
+                }}
+              />
+            </div>
+          </div>
+          <div className={classesDialog.assetSelectIconName}>
+            <div className={classesDialog.assetSymbolName}>
+              {asset ? formatSymbol(asset.symbol) : ''}
+            </div>
+
+            <div className={classesDialog.assetSymbolName2}>
+              {asset.isStable ? "Stable Pool" : "Volatile Pool"}
+            </div>
           </div>
         </div>
-        <div className={classes.assetSelectIconName}>
-          <Typography
-            variant="h5"
-            className={classes.assetSymbolName}
-            style={{
-              color: appTheme === "dark" ? '#ffffff' : '#0A2C40',
-            }}>
-            {asset ? formatSymbol(asset.symbol) : ''}
-          </Typography>
 
-          <Typography
-            variant="subtitle1"
-            className={classes.assetSymbolName2}
-            style={{
-              color: appTheme === "dark" ? '#7C838A' : '#5688A5',
-            }}>
-            {asset.isStable ? "Stable Pool" : "Volatile Pool"}
-          </Typography>
-        </div>
+        <div className={classesDialog.assetSelectMenuCol}>
+          <div className={classesDialog.assetSelectBalance}>
+            <div className={classesDialog.assetSelectBalanceTypo}>
+              {(asset && asset.balance) ? formatCurrency(asset.balance) : '0.00'}
+            </div>
 
-        <div className={classes.assetSelectBalance}>
-          <Typography
-            variant="h5"
-            className={classes.assetSelectBalanceTypo}
-            style={{
-              // fontWeight: 500,
-              // fontSize: 24,
-              // lineHeight: '32px',
-              // color: '#E4E9F4',
-            }}>
-            {(asset && asset.balance) ? formatCurrency(asset.balance) : '0.00'}
-          </Typography>
-
-          <Typography
-              variant="subtitle1"
-              className={classes.assetSelectBalanceSubtitle1}
-              style={{
-                color: '#8191B9',
-              }}>
-            {'Balance'}
-          </Typography>
+            <div className={classesDialog.assetSelectBalanceSubtitle1}>
+              Balance
+            </div>
+          </div>
         </div>
       </MenuItem>
     );
@@ -1027,9 +887,7 @@ function AssetSelectPair({type, value, assetOptions, onSelect, manageLocalAssets
   const renderOptions = (manageLocalAssets) => {
     return (
       <>
-        <div className={classes.searchInline}>
-          {/*<Borders/>*/}
-
+        <div className={classesDialog.searchInline}>
           <TextField
             autoFocus
             variant="outlined"
@@ -1039,103 +897,72 @@ function AssetSelectPair({type, value, assetOptions, onSelect, manageLocalAssets
             onChange={onSearchChanged}
             InputProps={{
               classes: {
-                root: [classes.searchInput, classes[`searchInput--${appTheme}`]].join(' '),
-                inputAdornedEnd: [classes.searchInputText, classes[`searchInputText--${appTheme}`]].join(' '),
-                input: classes.searchInputInput,
+                root: classesDialog.searchInput,
+                inputAdornedEnd: classesDialog.searchInputText,
+                input: classesDialog.searchInputInput,
               },
               endAdornment: <InputAdornment position="end">
-                  {/*Search icon*/}
-                  <svg width="19" height="19" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M10.5 20C15.7467 20 20 15.7467 20 10.5C20 5.25329 15.7467 1 10.5 1C5.25329 1 1 5.25329 1 10.5C1 15.7467 5.25329 20 10.5 20Z" stroke="#779BF4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <div className={classesDialog.searchInputIcon}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 11C18 14.866 14.866 18 11 18C7.13401 18 4 14.866 4 11C4 7.13401 7.13401 4 11 4C14.866 4 18 7.13401 18 11Z" fill="#9A9FAF"/>
+                    <path d="M20 20L18 18" stroke="#9A9FAF" stroke-width="2" stroke-linecap="round"/>
                   </svg>
-                  <div style={{position: 'relative'}}>
-                      <svg style={{position: 'absolute', top: 8, right: 0,}} width="4" height="4" viewBox="0 0 4 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M3 3L1 1" stroke="#779BF4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                  </div>
+                </div>
               </InputAdornment>,
             }}
           />
         </div>
 
-        <div style={{position: 'relative'}}>
-          {/*<Borders/>*/}
-
-          <div className={[classes.assetSearchResults, classes[`assetSearchResults--${appTheme}`]].join(' ')}>
-            {
-              filteredAssetOptions ? filteredAssetOptions.sort((a, b) => {
-                if (BigNumber(a.balance).lt(b.balance)) return 1;
-                if (BigNumber(a.balance).gt(b.balance)) return -1;
-                if (a.symbol.toLowerCase() < b.symbol.toLowerCase()) return -1;
-                if (a.symbol.toLowerCase() > b.symbol.toLowerCase()) return 1;
-                return 0;
-              }).map((asset, idx) => {
-                if (asset.gauge != null)
-                  return renderAssetOption(type, asset, idx);
-              }) : []
-            }
-          </div>
+        <div className={classesDialog.dialogOptions}>
+          {filteredAssetOptions ? filteredAssetOptions.sort((a, b) => {
+            if (BigNumber(a.balance).lt(b.balance)) return 1;
+            if (BigNumber(a.balance).gt(b.balance)) return -1;
+            if (a.symbol.toLowerCase() < b.symbol.toLowerCase()) return -1;
+            if (a.symbol.toLowerCase() > b.symbol.toLowerCase()) return 1;
+              return 0;
+          }).map((asset, idx) => {
+            if (asset.gauge != null)
+              return renderAssetOption(type, asset, idx);
+            }) : []
+          }
         </div>
-
-        {manageLocalAssets &&
-          <div className={classes.manageLocalContainer}>
-            <Button
-              onClick={toggleLocal}
-            >
-              Manage local assets
-            </Button>
-          </div>
-        }
       </>
     );
   };
 
   return (
-    <React.Fragment>
-      <div className={classes.displaySelectContainer} onClick={() => {
-        openSearch();
-      }}>
-        <div className={classes.assetSelectMenuItem}>
-          <div
-            className={[classes.displayDualIconContainer, classes.displayDualIconContainerSelect,].join(' ')}>
-            <img
-              className={[
-                classes.displayAssetIcon,
-                classes.assetOptionIcon,
-                classes[`assetOptionIcon--${appTheme}`],
-              ].join(" ")}
-              alt=""
-              src={value ? `${value?.token0?.logoURI}` : ''}
-              height="100px"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
-              }}
-            />
-            <img
-              className={[
-                classes.displayAssetIcon,
-                classes.displayAssetIconSec,
-                classes.assetOptionIcon,
-                classes[`assetOptionIcon--${appTheme}`]].join(" ")}
-              alt=""
-              src={value ? `${value?.token1?.logoURI}` : ''}
-              height="100px"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
-              }}
-            />
-          </div>
-        </div>
+    <>
+      <div
+        className={[classesSelect.displayDualIconContainer, classesSelect.displayDualIconContainerSelect].join(' ')}
+        onClick={() => { openSearch() }}
+      >
+        <img
+          className={classesSelect.displayAssetIcon}
+          alt=""
+          src={value ? `${value?.token0?.logoURI}` : ''}
+          height="52px"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
+          }}
+        />
+        <img
+          className={[
+            classesSelect.displayAssetIcon,
+            classesSelect.displayAssetIconSec,
+          ].join(" ")}
+          alt=""
+          src={value ? `${value?.token1?.logoURI}` : ''}
+          height="52px"
+          onError={(e) => {
+          e.target.onerror = null;
+            e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
+          }}
+        />
       </div>
 
       <Dialog
-          PaperProps={{style: {
-                  borderRadius: 12,
-                  backgroundColor: 'transparent',
-              maxWidth: 800,
-              }}}
+        PaperProps={{ style: { width: "100%", maxWidth: 800, background: 'transpaarent', borderRadius: 20 } }}
         aria-labelledby="simple-dialog-title"
         open={open}
         onClick={(e) => {
@@ -1143,34 +970,16 @@ function AssetSelectPair({type, value, assetOptions, onSelect, manageLocalAssets
             onClose();
           }
         }}
+        classes={{
+          paperScrollPaper: classesDialog.paperScrollPaper,
+          paper: classesDialog.paper,
+          scrollPaper: classesDialog.scrollPaper,
+        }}
       >
-        <div
-          className={classes.dialogContainer}
-          style={{
-            // width: 782,
-            // height: 750,
-            background: '#1F2B49',
-            borderRadius: 12,
-          }}>
-          <DialogTitle
-            className={classes.dialogTitle}
-            style={{
-              padding: 30,
-              paddingTop: 24,
-              paddingBottom: 0,
-            }}>
-            <div style={{
-              display: 'flex',
-              alignItems: 'flex-start',
-              justifyContent: 'space-between',
-            }}>
-              <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    paddingBottom: 8,
-                  }}
-              >
+        <div className={classesDialog.dialogContainer}>
+          <div className={classesDialog.dialogContainerInner}>
+            <div className={classesDialog.dialogTitleWrapper}>
+              <div className={classesDialog.dialogTitle}>
                 {manageLocal && <ArrowBackIosNew onClick={toggleLocal} style={{
                   marginRight: 10,
                   width: 18,
@@ -1179,18 +988,22 @@ function AssetSelectPair({type, value, assetOptions, onSelect, manageLocalAssets
                 }}/>}
                 {manageLocalAssets && manageLocal ? 'Manage local assets' : 'Select LP'}
               </div>
-              <svg className={classes.dialogClose} onClick={onClose} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M14.19 0H5.81C2.17 0 0 2.17 0 5.81V14.18C0 17.83 2.17 20 5.81 20H14.18C17.82 20 19.99 17.83 19.99 14.19V5.81C20 2.17 17.83 0 14.19 0ZM13.36 12.3C13.65 12.59 13.65 13.07 13.36 13.36C13.21 13.51 13.02 13.58 12.83 13.58C12.64 13.58 12.45 13.51 12.3 13.36L10 11.06L7.7 13.36C7.55 13.51 7.36 13.58 7.17 13.58C6.98 13.58 6.79 13.51 6.64 13.36C6.35 13.07 6.35 12.59 6.64 12.3L8.94 10L6.64 7.7C6.35 7.41 6.35 6.93 6.64 6.64C6.93 6.35 7.41 6.35 7.7 6.64L10 8.94L12.3 6.64C12.59 6.35 13.07 6.35 13.36 6.64C13.65 6.93 13.65 7.41 13.36 7.7L11.06 10L13.36 12.3Z" fill="#8191B9"/>
-              </svg>
+              <div className={classesDialog.dialogClose} onClick={onClose} />
             </div>
-          </DialogTitle>
 
-          <DialogContent className={classes.dialogContent}>
-            {!manageLocal && renderOptions(manageLocalAssets)}
-            {manageLocalAssets && manageLocal && renderManageLocal()}
-          </DialogContent>
+            {manageLocalAssets &&
+              <div className={classes.manageLocalContainer}>
+                <Button onClick={toggleLocal}>Manage local assets</Button>
+              </div>
+            }
+
+            <div className={classesDialog.dialogContent}>
+              {!manageLocal && renderOptions(manageLocalAssets)}
+              {manageLocalAssets && manageLocal && renderManageLocal()}
+            </div>
+          </div>
         </div>
       </Dialog>
-    </React.Fragment>
+    </>
   );
 }

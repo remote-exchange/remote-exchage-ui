@@ -542,15 +542,15 @@
   cursor: pointer;
 }
 
-.selectItem:last-child {
+/* .selectItem:last-child {
   margin-bottom: 0;
-}
+} */
 
-@media (max-width: 479px) {
+@media (max-width: 600px) {
   .selectItem {
     min-height: 48px;
     margin-bottom: 4px;
-    padding: 8px;
+    padding: 7px 8px;
   }
 }
 
@@ -578,7 +578,7 @@
   color: #E4E9F4;
 }
 
-@media (max-width: 479px) {
+@media (max-width: 600px) {
   .selectItemTitle {
     font-size: 16px;
     line-height: 16px;
@@ -603,7 +603,7 @@
   color: #8191B9;
 }
 
-@media (max-width: 479px) {
+@media (max-width: 600px) {
   .selectItemValue {
     font-size: 12px;
     line-height: 12px;
@@ -626,7 +626,7 @@
   align-items: center;
 }
 
-@media (max-width: 479px) {
+@media (max-width: 600px) {
   .searchInline {
     display: none;
   }
@@ -676,6 +676,19 @@
   color: #9A9FAF !important;
 }
 
+.searchInputIcon {
+  display: flex;
+  align-items: center;
+  height: 0.01em;
+  max-height: 2em;
+}
+
+@media (max-width: 767px) {
+  .searchInputIcon {
+    transform: scale(0.8);
+  }
+}
+
 .descText {
   margin: 20px auto 20px;
 
@@ -687,7 +700,7 @@
   color: #9A9FAF;
 }
 
-@media (max-width: 479px) {
+@media (max-width: 600px) {
   .descText {
     margin: auto auto 20px;
   }
