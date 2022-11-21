@@ -62,14 +62,8 @@ export const TokenOptions = (props) => {
             </div>
             <div className={classes.realDialog}>
                 <DialogTitle
-                    className={classes.dialogTitle}
-                    style={{
-                        padding: 20,
-                        fontWeight: 700,
-                        fontSize: 24,
-                        lineHeight: '32px',
-                        color: '#131313',
-                    }}>
+                    classes={{root: classes.dialogTitle,}}
+                >
                     <div style={{
                         display: 'flex',
                         alignItems: 'center',
@@ -80,14 +74,7 @@ export const TokenOptions = (props) => {
                         </div>
 
                         <div
-                            style={{
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                width: 20,
-                                height: 20,
-                                cursor: 'pointer',
-                            }}
+                            className={classes.dialogClose}
                             onClick={handleClosePopover}
                         >
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -98,8 +85,10 @@ export const TokenOptions = (props) => {
                 </DialogTitle>
 
                 <DialogContent
-                    // className={classes.dialogContent}
-                    style={{ padding: '4px 20px 20px' }}>
+                    classes={{
+                        root: classes.dialogContent,
+                    }}
+                >
                     <div className={classes.dialogInner}>
                         <div className={classes.dialogTokenRow}>
                             <img

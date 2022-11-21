@@ -78,7 +78,7 @@ input[type=number].massiveInputAmount {
   width: calc(49% - 8px);
 }
 
-@media (max-width: 580px) {
+/*@media (max-width: 580px) {
   .inputColumn:last-child {
     width: calc(55% - 6px);
   }
@@ -86,7 +86,7 @@ input[type=number].massiveInputAmount {
   .inputColumn:first-child {
     width: calc(45% - 6px);
   }
-}
+}*/
 
 .swapIconContainerOuter {
   z-index: 1;
@@ -107,13 +107,13 @@ input[type=number].massiveInputAmount {
   cursor: pointer;
 }
 
-@media (max-width: 580px) {
+/*@media (max-width: 580px) {
   .max {
     position: absolute;
     bottom: 0;
     right: 0;
   }
-}
+}*/
 
 .massiveInputContainer {
   /* display: flex;
@@ -147,10 +147,10 @@ input[type=number].massiveInputAmount {
 }
 
 .massiveInputAmount:hover {
-  background: #1F2B49;
+  /*background: #1F2B49;*/
 }
 
-@media (max-width: 860px) {
+/*@media (max-width: 860px) {
   .massiveInputAmount {
     height: 80px;
   }
@@ -167,7 +167,7 @@ input[type=number].massiveInputAmount {
   .massiveInputAmount {
     height: 45px;
   }
-}
+}*/
 
 .massiveInputAmountError {
   outline: 1px solid #E93131;
@@ -186,7 +186,7 @@ input[type=number].massiveInputAmount {
   /* top: 12px; */
 }
 
-.inputTitleText span {
+.inputTitleTextData {
   margin-left: auto;
   font-size: 14px;
   font-weight: 500;
@@ -194,13 +194,13 @@ input[type=number].massiveInputAmount {
   color: #9A9FAF;
 }
 
-@media (max-width: 580px) {
+/*@media (max-width: 580px) {
   .inputTitleText span {
     position: absolute;
     bottom: 0;
     left: 0;
   }
-}
+}*/
 
 .inputBalanceText {
   cursor: pointer;
@@ -229,13 +229,13 @@ p.inputTitleText {
   color: #F6F7F9 !important;
 }
 
-@media (max-width: 500px) {
+/*@media (max-width: 500px) {
   .inputBalanceSlippage {
     margin: 0 11px !important;
     margin-right: 10px !important;
     font-size: 14px !important;
   }
-}
+}*/
 
 .inputBalanceSlippageHelp {
   display: flex;
@@ -324,12 +324,12 @@ p.inputTitleText {
   line-height: 32px;
 }
 
-@media (max-width: 500px) {
+/*@media (max-width: 500px) {
   .inputBalanceSlippageText {
     width: 85px;
     padding: 12px !important;
   }
-}
+}*/
 
 /*.inputBalanceSlippageText::after {
   position: absolute;
@@ -369,7 +369,7 @@ p.inputTitleText {
   /*border: 1px solid #779BF4;*/
 }
 
-@media (max-width: 600px) {
+/*@media (max-width: 600px) {
   .slippage {
     margin-top: 0;
   }
@@ -381,7 +381,7 @@ p.inputTitleText {
     height: 50px;
     border-radius: 13px;
   }
-}
+}*/
 
 .questionIcon {
   margin-left: 10px;
@@ -398,11 +398,11 @@ p.inputTitleText {
   /*background: #060B17;*/
 }
 
-@media (max-width: 860px) {
+/*@media (max-width: 860px) {
   .textField {
     padding: 16px;
   }
-}
+}*/
 
 .largeInput {
   padding: 0 !important;
@@ -415,7 +415,7 @@ p.inputTitleText {
   -webkit-text-fill-color: #F6F7F9 !important;
 }
 
-@media (max-width: 860px) {
+/*@media (max-width: 860px) {
   .largeInput {
     font-size: 26px !important;
   }
@@ -431,7 +431,7 @@ p.inputTitleText {
   .largeInput {
     font-size: 16px !important;
   }
-}
+}*/
 
 .largeInput::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -458,14 +458,14 @@ p.inputTitleText {
   max-width: 100%;
 }
 
-@media (max-width: 860px) {
+/*@media (max-width: 860px) {
   .swapIconContainer {
     width: 65px;
     height: 65px;
     margin-top: -15px;
     margin-bottom: -15px;
   }
-}
+}*/
 
 @media (max-width: 580px) {
   .swapIconContainer {
@@ -679,6 +679,7 @@ p.inputTitleText {
   justify-content: center;
   align-items: center;
   border-radius: 16px;
+  min-width: 163px;
   width: 100%;
   height: 63px;
   color: #FFFFFF !important;
@@ -1061,7 +1062,7 @@ p.inputTitleText {
 }
 
 .warningContainer {
-  /* margin-bottom: 20px; */
+   margin-bottom: 20px;
 }
 
 .quoteLoader {
@@ -1161,7 +1162,7 @@ p.inputTitleText {
   display: flex;
 }
 
-@media (max-width: 630px) {
+@media (max-width: 1024px) {
   .controls {
     flex-direction: column;
   }
@@ -1302,4 +1303,295 @@ p.inputTitleText {
   width: 100%;
   height: 100%;
   padding: 20px;
+}
+
+.spacer {
+  margin-bottom: 20px;
+}
+
+.warningSvg {
+  margin-right: 15px;
+}
+
+.controlsRow {
+  display: flex;
+}
+
+@media (max-width: 1024px) {
+  .swapInputs {
+    padding: 12px;
+  }
+
+  .swapInputsHeader {
+    margin-bottom: 12px;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    line-height: 32px !important;
+  }
+
+  .settings {
+    display: flex;
+    align-self: center;
+  }
+
+  .inputsBlock {
+    border-radius: 16px;
+    padding: 12px;
+  }
+
+  .inputRow {
+    flex-direction: column;
+    /*justify-content: space-between;*/
+  }
+
+  .inputColumn {
+    padding: 8px;
+  }
+
+  .inputColumn:first-child {
+    position: relative;
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  .inputColumn:first-child:after {
+    content: "";
+    width: 1px;
+    height: 8px;
+    background: rgba(104, 114, 122, 0.4);
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+  }
+
+  .inputColumn:last-child {
+    width: 100%;
+  }
+
+  .inputTitleTextText {
+    color: #F6F7F9;
+  }
+
+  .massiveInputTitle {
+    margin-bottom: 12px;
+  }
+
+  .largeInput {
+    font-size: 32px !important;
+  }
+
+  .massiveInputAmount {
+    height: auto;
+    padding: 0;
+  }
+
+  .swapIconContainerOuter {
+    z-index: 1;
+    padding: 0;
+  }
+
+  .swapAssetsRow {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .swapIconContainer {
+    width: 40px;
+    height: 48px;
+    margin: 0 8px 0 0;
+  }
+
+  .swapAssetsPriceText {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .inputTitleTextData {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  p.inputBalanceText,
+  p.inputTitleText {
+    align-items: center;
+  }
+
+  .spacer {
+    margin-bottom: 12px;
+  }
+
+  .warningContainer {
+    margin-bottom: 12px;
+    padding: 8px 11px !important;
+  }
+
+  .warningSvg {
+    margin-right: 10px;
+  }
+
+  .routeBlock {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: auto;
+    align-items: center;
+    margin: 12px 0 0;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 16px;
+  }
+
+  .actionButtonText,
+  .actionButtonText--disabled {
+    font-weight: 700 !important;
+    font-size: 16px !important;
+    line-height: 16px !important;
+    min-width: 104px;
+    /*width: 104px;*/
+    height: 48px;
+  }
+
+  .buttonPrefix {
+    width: 12px;
+    height: 12px;
+    left: -6px;
+    top: 18px;
+    z-index: 1;
+  }
+
+  .buttonPostfix {
+    width: 12px;
+    height: 12px;
+    left: 98px;
+    top: 18px;
+  }
+
+  .controlsInfo {
+    height: 48px;
+    /*font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;*/
+    margin-left: 8px;
+  }
+
+  .priceImpactTitle {
+    display: block;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .priceImpactValue {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+  }
+}
+
+.dialogTitle {
+  padding: 20px !important;
+  font-weight: 700 !important;
+  font-size: 24px !important;
+  line-height: 32px !important;
+  color: #131313;
+}
+
+.dialogContent {
+  padding: 4px 20px 20px;
+}
+
+.dialogClose {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.dialogButtonSecondary {
+  margin-top: 20px;
+  display: flex;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  height: 64px;
+  background: rgba(177, 241, 227, 0.12);
+  border: 2px solid #B1F1E3;
+  border-radius: 12px;
+  color: #B1F1E3;
+  cursor: pointer;
+}
+
+@media (max-width: 540px) {
+  .dialogTitle {
+    padding: 12px !important;
+    font-weight: 700 !important;
+    font-size: 20px !important;
+    line-height: 28px !important;
+  }
+
+  .dialogContent {
+    padding: 0 !important;
+  }
+
+  .dialogClose {
+    display: none;
+  }
+
+  .inner {
+    border-radius: 20px 20px 0 0;
+    padding: 20px 20px 40px;
+  }
+
+  .paperBody {
+    margin: auto auto 0 auto !important;
+    background: transparent !important;
+  }
+
+  .dialogButtonSecondary {
+    height: 48px;
+    padding: 16px 32px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 16px;
+  }
+
+  .slippageValueButton {
+    padding: 8px;
+    height: 36px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    border-radius: 8px !important;
+  }
+
+  .slippageValueButtonActive {
+    padding: 8px;
+    height: 36px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    border-radius: 8px !important;
+  }
+
+  .inputBalanceSlippageText {
+    height: 36px !important;
+    padding: 8px !important;
+    border-radius: 8px !important;
+  }
+
+  .settingsSaveButton {
+    height: 48px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 16px;
+  }
 }

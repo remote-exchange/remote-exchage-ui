@@ -692,14 +692,15 @@ function Setup() {
               </div>
               <div className={classes.realDialog}>
                   <DialogTitle
-                      className={classes.dialogTitle}
-                      style={{
+                      classes={{root: classes.dialogTitle,}}
+                      /*style={{
                           padding: 20,
                           fontWeight: 700,
                           fontSize: 24,
                           lineHeight: '32px',
                           color: '#131313',
-                      }}>
+                      }}*/
+                  >
                       <div style={{
                           display: 'flex',
                           alignItems: 'center',
@@ -709,14 +710,15 @@ function Setup() {
                               Routing
                           </div>
                           <div
-                              style={{
+                              className={classes.dialogClose}
+                              /*style={{
                                   display: 'flex',
                                   justifyContent: 'center',
                                   alignItems: 'center',
                                   width: 20,
                                   height: 20,
                                   cursor: 'pointer',
-                              }}
+                              }}*/
                               onClick={handleClose}
                           >
                               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -727,8 +729,10 @@ function Setup() {
                   </DialogTitle>
 
                   <DialogContent
-                      // className={classes.dialogContent}
-                      style={{ padding: '4px 20px 20px' }}>
+                      classes={{
+                          root: classes.dialogContent,
+                      }}
+                  >
                       <div className={classes.inner}>
                           <div>
                               <div
@@ -878,6 +882,9 @@ function Setup() {
                                   </div>
                               </div>
                           </div>
+                          <div className={classes.dialogButtonSecondary} onClick={handleClose}>
+                              Back to Transaction
+                          </div>
                       </div>
                   </DialogContent>
               </div>
@@ -943,14 +950,8 @@ function Setup() {
             </div>
             <div className={classes.realDialog}>
                 <DialogTitle
-                    className={classes.dialogTitle}
-                    style={{
-                        padding: 20,
-                        fontWeight: 700,
-                        fontSize: 24,
-                        lineHeight: '32px',
-                        color: '#131313',
-                    }}>
+                    classes={{root: classes.dialogTitle,}}
+                >
                     <div style={{
                         display: 'flex',
                         alignItems: 'center',
@@ -961,14 +962,7 @@ function Setup() {
                         </div>
 
                         <div
-                            style={{
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                width: 20,
-                                height: 20,
-                                cursor: 'pointer',
-                            }}
+                            className={classes.dialogClose}
                             onClick={handleClose}
                         >
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -979,8 +973,10 @@ function Setup() {
                 </DialogTitle>
 
                 <DialogContent
-                    // className={classes.dialogContent}
-                    style={{ padding: '4px 20px 20px' }}>
+                    classes={{
+                        root: classes.dialogContent,
+                    }}
+                >
                     <div className={classes.inner}>
                         <div className={classes.slippage}>
                             <div
@@ -1090,9 +1086,9 @@ function Setup() {
             <div className={classes.inputColumn}>
               <div className={classes.massiveInputTitle}>
                 <Typography className={classes.inputTitleText} noWrap>
-                  {type === "From" ? "From :" : "To :"}
+                  <span className={classes.inputTitleTextText}>{type === "From" ? "From :" : "To :"}</span>
 
-                  <span>{priceCompareText}</span>
+                  <span className={classes.inputTitleTextData}>{priceCompareText}</span>
                 </Typography>
               </div>
 
@@ -1311,18 +1307,17 @@ function Setup() {
         ${fromAssetValue?.symbol}`
               )}
           </div>
-        <div style={{ marginBottom: 20}} />
+        <div className={classes.spacer} />
 
 
           {(!fromAmountValue || Number(fromAmountValue) <= 0) &&
               <div
-                  style={{ marginBottom: 20 }}
                   className={[
                       classes.warningContainer,
                       // classes.warningContainerError,
                   ].join(" ")}
               >
-                  <svg style={{marginRight: 15}} width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg className={classes.warningSvg} width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path fillRule="evenodd" clipRule="evenodd" d="M18 9C18 13.9706 13.9706 18 9 18C4.02944 18 0 13.9706 0 9C0 4.02944 4.02944 0 9 0C13.9706 0 18 4.02944 18 9ZM10 5C10 5.55228 9.55229 6 9 6C8.44771 6 8 5.55228 8 5C8 4.44772 8.44771 4 9 4C9.55229 4 10 4.44772 10 5ZM9.75 14V8H8.25V14H9.75Z" fill="#68727A"/>
                   </svg>
                   Select coins/tokens you want to swap and enter amounts.
@@ -1429,58 +1424,59 @@ function Setup() {
             </div>
         )}
 
-        <div className={classes.controls}>
-
-          <div className={classes.controlsBtn}>
-              <div className={classes.buttonPrefix}></div>
-            <BtnSwap
-                onClick={(fromAssetValue?.symbol == CONTRACTS.FTM_SYMBOL && toAssetValue?.symbol == CONTRACTS.WFTM_SYMBOL)
-                    ? onWrap
-                    : (fromAssetValue?.symbol == CONTRACTS.WFTM_SYMBOL && toAssetValue?.symbol == CONTRACTS.FTM_SYMBOL)
-                        ? onUnwrap
-                        : onSwap}
-                className={classes.btnSwap}
-                labelClassName={[
-                  !fromAmountValue ||
-                  fromAmountValue > Number(fromAssetValue?.balance) ||
-                  Number(fromAmountValue) <= 0
-                      ? classes["actionButtonText--disabled"]
-                      : classes.actionButtonText,
-                  quote
-                      ? BigNumber(quote.priceImpact).gt(5)
-                          ? classes.actionButtonTextError
-                          : classes.actionButtonTextErrorWarning
-                      : "",
-                ].join(" ")}
-                isDisabled={
-                  !fromAmountValue ||
-                  fromAmountValue > Number(fromAssetValue.balance) ||
-                  Number(fromAmountValue) <= 0
-                }
-                loading={loading}
-                label={
-                    loading && fromAssetValue?.symbol == CONTRACTS.FTM_SYMBOL && toAssetValue?.symbol == CONTRACTS.WFTM_SYMBOL
-                        ? "Wrap" //"Wrapping"
-                        : loading && fromAssetValue?.symbol == CONTRACTS.WFTM_SYMBOL && toAssetValue?.symbol == CONTRACTS.FTM_SYMBOL
-                            ? "Unwrap" // "Unwrapping"
-                            : loading &&
-                            !(
-                                (fromAssetValue?.symbol == CONTRACTS.FTM_SYMBOL ||
-                                    fromAssetValue?.symbol == CONTRACTS.WFTM_SYMBOL) &&
-                                (toAssetValue?.symbol == CONTRACTS.WFTM_SYMBOL ||
-                                    toAssetValue?.symbol == CONTRACTS.FTM_SYMBOL)
-                            )
-                                ? "Swap" // "Swapping"
-                                : (fromAssetValue?.symbol == CONTRACTS.FTM_SYMBOL && toAssetValue?.symbol == CONTRACTS.WFTM_SYMBOL)
-                                    ? "Wrap"
-                                    : (fromAssetValue?.symbol == CONTRACTS.WFTM_SYMBOL && toAssetValue?.symbol == CONTRACTS.FTM_SYMBOL)
-                                        ? "Unwrap"
-                                        : "Swap"
-                }
-            ></BtnSwap>
-              <div className={classes.buttonPostfix}></div>
-          </div>
-            {!hidequote ? renderSwapInformation() : null}
+          <div className={classes.controls}>
+              <div className={classes.controlsRow}>
+                  <div className={classes.controlsBtn}>
+                      <div className={classes.buttonPrefix}></div>
+                      <BtnSwap
+                          onClick={(fromAssetValue?.symbol == CONTRACTS.FTM_SYMBOL && toAssetValue?.symbol == CONTRACTS.WFTM_SYMBOL)
+                              ? onWrap
+                              : (fromAssetValue?.symbol == CONTRACTS.WFTM_SYMBOL && toAssetValue?.symbol == CONTRACTS.FTM_SYMBOL)
+                                  ? onUnwrap
+                                  : onSwap}
+                          className={classes.btnSwap}
+                          labelClassName={[
+                              !fromAmountValue ||
+                              fromAmountValue > Number(fromAssetValue?.balance) ||
+                              Number(fromAmountValue) <= 0
+                                  ? classes["actionButtonText--disabled"]
+                                  : classes.actionButtonText,
+                              quote
+                                  ? BigNumber(quote.priceImpact).gt(5)
+                                      ? classes.actionButtonTextError
+                                      : classes.actionButtonTextErrorWarning
+                                  : "",
+                          ].join(" ")}
+                          isDisabled={
+                              !fromAmountValue ||
+                              fromAmountValue > Number(fromAssetValue.balance) ||
+                              Number(fromAmountValue) <= 0
+                          }
+                          loading={loading}
+                          label={
+                              loading && fromAssetValue?.symbol == CONTRACTS.FTM_SYMBOL && toAssetValue?.symbol == CONTRACTS.WFTM_SYMBOL
+                                  ? "Wrap" //"Wrapping"
+                                  : loading && fromAssetValue?.symbol == CONTRACTS.WFTM_SYMBOL && toAssetValue?.symbol == CONTRACTS.FTM_SYMBOL
+                                      ? "Unwrap" // "Unwrapping"
+                                      : loading &&
+                                      !(
+                                          (fromAssetValue?.symbol == CONTRACTS.FTM_SYMBOL ||
+                                              fromAssetValue?.symbol == CONTRACTS.WFTM_SYMBOL) &&
+                                          (toAssetValue?.symbol == CONTRACTS.WFTM_SYMBOL ||
+                                              toAssetValue?.symbol == CONTRACTS.FTM_SYMBOL)
+                                      )
+                                          ? "Swap" // "Swapping"
+                                          : (fromAssetValue?.symbol == CONTRACTS.FTM_SYMBOL && toAssetValue?.symbol == CONTRACTS.WFTM_SYMBOL)
+                                              ? "Wrap"
+                                              : (fromAssetValue?.symbol == CONTRACTS.WFTM_SYMBOL && toAssetValue?.symbol == CONTRACTS.FTM_SYMBOL)
+                                                  ? "Unwrap"
+                                                  : "Swap"
+                          }
+                      ></BtnSwap>
+                      <div className={classes.buttonPostfix}></div>
+                  </div>
+                  {!hidequote ? renderSwapInformation() : null}
+              </div>
 
             {!hidequote && !quoteError && !quoteLoading && quote &&
                 <div className={classes.routeBlock} onClick={() => { setRoutingOpened(true)}}>

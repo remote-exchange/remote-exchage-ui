@@ -116,10 +116,6 @@ export default function Transaction({ transaction }) {
           classes.transactionInfo,
           classes[`transactionInfo--${transaction.status}`],
         ].join(" ")}
-        style={{
-          display: "flex",
-          padding: 12,
-        }}
       >
         <div
           style={{

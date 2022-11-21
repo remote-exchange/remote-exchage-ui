@@ -92,7 +92,7 @@ const BtnSwap = (props) => {
         <div
           className={['g-flex', 'g-flex--align-center', 'g-flex--justify-center'].join(' ')}
           onClick={onClick}
-          style={{ minWidth: 163, height: 64 }}
+          // style={{ minWidth: 163, height: 64 }}
         >
           <div
             className={labelClassName}

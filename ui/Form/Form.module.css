@@ -68,6 +68,12 @@
   background: var(--background-dark);
 }
 
+@media (max-width: 1024px) {
+  .form {
+    width: 336px;
+  }
+}
+
 .form--dark {
   /* background: var(--background-dark); */
   /* border-color: var(--border-dark); */

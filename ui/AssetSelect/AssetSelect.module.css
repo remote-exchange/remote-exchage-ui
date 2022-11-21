@@ -57,25 +57,31 @@
 }
 
 
+@media (max-width: 1024px) {
+  .displayDualIconContainer {
+    padding: 0;
+    height: auto;
+  }
+}
 
 @media (max-width: 860px) {
   .displayDualIconContainer {
-    height: 80px;
-    padding: 16px 4px;
+    /*height: 80px;*/
+    /*padding: 16px 4px;*/
   }
 }
 
 @media (max-width: 650px) {
   .displayDualIconContainer {
-    height: 70px;
-    padding: 14px;
+    /*height: 70px;*/
+    /*padding: 14px;*/
   }
 }
 
 @media (max-width: 580px) {
   .displayDualIconContainer {
-    height: 44px;
-    padding: 12px 4px;
+    /*height: 44px;*/
+    /*padding: 12px 4px;*/
   }
 }
 
@@ -145,14 +151,14 @@ p.labelSelectSecondary {
   font-weight: 500;
 }
 
-@media (max-width: 860px) {
+/*@media (max-width: 860px) {
   p.labelSelect {
     margin: 0 15px;
     font-size: 22px;
   }
-}
+}*/
 
-@media (max-width: 650px) {
+/*@media (max-width: 650px) {
   p.labelSelect {
     margin: 0 10px;
     font-size: 20px;
@@ -164,7 +170,7 @@ p.labelSelectSecondary {
     margin: 0 5px;
     font-size: 16px;
   }
-}
+}*/
 
 .dotsSelectMenu {
   position: relative;
@@ -185,7 +191,7 @@ p.labelSelectSecondary {
   border-radius: 30px;
 }
 
-@media (max-width: 860px) {
+/*@media (max-width: 860px) {
   .displayAssetIcon {
     width: 45px;
     height: 45px;
@@ -204,7 +210,7 @@ p.labelSelectSecondary {
     width: 18px;
     height: 18px;
   }
-}
+}*/
 
 .displayAssetIconSmall {
   width: 20px;
@@ -340,11 +346,11 @@ p.labelSelectSecondary {
   border: 1px solid #9A9FAF !important;
 }
 
-@media (max-width: 600px) {
+/*@media (max-width: 600px) {
   .searchInput {
     height: 48px;
   }
-}
+}*/
 
 .searchInput input {
   padding-left: 12px !important;
@@ -356,12 +362,12 @@ p.labelSelectSecondary {
   /*color: white !important;*/
 }
 
-@media (max-width: 600px) {
+/*@media (max-width: 600px) {
   .searchInput input {
     padding-left: 14px !important;
     font-size: 14px;
   }
-}
+}*/
 
 .searchInput:hover {
   /*background: #B9DFF5 !important;*/
@@ -405,12 +411,12 @@ p.labelSelectSecondary {
   margin-top: 28px;
 }
 
-@media (max-width: 600px) {
+/*@media (max-width: 600px) {
   .dialogOptions {
     margin-top: 16px;
     margin-bottom: 24px !important;
   }
-}
+}*/
 
 .assetSearchResults {
   width: 100%;
@@ -476,11 +482,15 @@ p.labelSelectSecondary {
   border-radius: 20px !important;
 }
 
-@media (max-width: 600px) {
+.dialogContentCommon {
+  padding: 0 20px 20px !important;
+}
+
+/*@media (max-width: 600px) {
   .dialogContent {
     padding: 16px 16px 16px !important;
   }
-}
+}*/
 
 .displayAssetIconSecond {
   width: 52px;
@@ -511,11 +521,11 @@ p.labelSelectSecondary {
     padding: 0;
   }
 
-  p.labelSelect {
+/*  p.labelSelect {
     font-size: 16px;
     font-weight: 500;
     margin-left: 8px;
-  }
+  }*/
 
   p.labelSelectDouble {
     font-size: 14px;
@@ -529,19 +539,19 @@ p.labelSelectSecondary {
     font-weight: 500;
   }
 
-  @media (max-width: 600px) {
+  /*@media (max-width: 600px) {
     .dialogTitle {
       padding: 20px 16px 0 !important;
       font-size: 20px !important;
       line-height: 100% !important;
     }
-  }
+  }*/
 
-  @media (max-width: 600px) {
+  /*@media (max-width: 600px) {
     .dialogContainer {
       height: 500px !important;
     }
-  }
+  }*/
 
   .popover {
     border-radius: 12px !important;
@@ -701,6 +711,23 @@ p.labelSelectSecondary {
   border-radius: 20px !important;
 }
 
+.dialogTitle {
+  padding: 20px !important;
+  font-weight: 700 !important;
+  font-size: 24px !important;
+  line-height: 32px !important;
+  color: #131313;
+}
+
+.dialogClose {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
 .dialogInner {
   background: #131313;
   border-radius: 20px;
@@ -742,4 +769,106 @@ p.labelSelectSecondary {
 }
 .dialogTokenRow img {
   margin-right: 12px;
+}
+
+@media (max-width: 1024px) {
+  p.labelSelect {
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 32px;
+  }
+
+  .displayAssetIcon {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (max-width: 540px) {
+  .dialogTitle {
+    padding: 12px !important;
+    font-weight: 700 !important;
+    font-size: 20px !important;
+    line-height: 28px !important;
+  }
+
+  .paper {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+
+  .dialogContent {
+    padding: 12px 12px 12px !important;
+    margin: 0 !important;
+    border-radius: 16px !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+
+  .dialogContentCommon {
+    padding: 0 !important;
+  }
+
+  .dialogClose {
+    display: none;
+  }
+
+  .inner {
+    border-radius: 20px 20px 0 0;
+    padding: 20px 20px 40px;
+  }
+
+  .paperBody {
+    margin: auto auto 0 auto !important;
+    background: transparent !important;
+  }
+
+  .dialogTokenRow {
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 32px;
+  }
+
+  .tokenPopover_button_secondary {
+    height: 48px;
+    padding: 16px 32px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 16px;
+  }
+
+  .tokenPopover_button {
+    height: 48px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 16px;
+  }
+
+  .paperScrollPaper {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: auto 0 0 0 !important;
+  }
+
+  .tabs {
+    border-radius: 6px;
+  }
+
+  .tab {
+    border-radius: 6px;
+    width: 128px;
+    height: 28px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .searchInput {
+    height: 36px;
+  }
+
+  .dialogOptions {
+    margin-top: 12px;
+  }
 }
