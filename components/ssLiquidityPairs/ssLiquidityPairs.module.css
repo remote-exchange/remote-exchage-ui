@@ -18,6 +18,8 @@
 }
 
 .paginationToolbar {
+  padding-left: 0 !important;
+  padding-right: 18px !important;
 }
 
 .paginationSpacer {
@@ -34,8 +36,12 @@
 
 .selectLabel + div {
   margin-right: 16px !important;
+  margin-left: 12px !important;
   /*flex: 1;*/
-
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #F6F7F9;
 }
 /*.selectLabel + div > div {
   justify-content: flex-start;
@@ -46,12 +52,15 @@
   width: 100px;
 }*/
 
+.selectRoot {
+
+}
 .select {
   display: flex;
   align-items: center;
 
   padding-top: 12px !important;
-  padding-left: 0px !important;
+  padding-left: 0 !important;
 
   font-size: 14px !important;
   font-weight: 400 !important;
@@ -228,6 +237,27 @@
   border-radius: 20px !important;
 }
 
+.dialogTitle {
+  padding: 20px;
+  fontWeight: 700;
+  fontSize: 24px;
+  lineHeight: 32px;
+  color: #131313;
+}
+
+.dialogClose {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.dialogContent {
+  padding: 4px 20px 20px;
+}
+
 .dialogInner {
   background: #131313;
   border-radius: 20px;
@@ -250,3 +280,39 @@
   cursor: pointer;
   margin-top: 12px;
 }
+
+@media (max-width: 580px) {
+  .paperBody {
+    margin: auto auto 0 auto !important;
+    background: transparent !important;
+  }
+
+  .dialogTitle {
+    padding: 12px !important;
+    font-weight: 700 !important;
+    font-size: 20px !important;
+    line-height: 28px !important;
+  }
+
+  .dialogClose {
+    display: none;
+  }
+
+  .dialogContent {
+    padding: 0 !important;
+  }
+
+  .dialogInner {
+    border-radius: 20px 20px 0 0;
+    padding: 20px 20px 40px;
+  }
+
+  .apply {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 16px;
+    height: 48px;
+  }
+}
+
+

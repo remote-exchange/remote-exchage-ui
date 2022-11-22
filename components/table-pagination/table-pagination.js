@@ -49,8 +49,8 @@ function TablePaginationActions(props) {
           color: appTheme === 'dark' ? '#5F7285' : '#86B9D6',
         }}>
         {theme.direction === 'rtl'
-          ? <KeyboardDoubleArrowRight style={{transform: windowWidth > 660 ? 'none' : 'scale(0.7)'}}/>
-          : <KeyboardDoubleArrowLeft style={{transform: windowWidth > 660 ? 'none' : 'scale(0.7)'}}/>}
+          ? <KeyboardDoubleArrowRight style={{transform: windowWidth > 660 ? 'none' : 'scale(1)'}}/>
+          : <KeyboardDoubleArrowLeft style={{transform: windowWidth > 660 ? 'none' : 'scale(1)'}}/>}
       </IconButton>
 
       <IconButton
@@ -66,8 +66,8 @@ function TablePaginationActions(props) {
           color: appTheme === 'dark' ? '#5F7285' : '#86B9D6',
         }}>
         {theme.direction === 'rtl'
-          ? <KeyboardArrowRight style={{transform: windowWidth > 660 ? 'none' : 'scale(0.7)'}}/>
-          : <KeyboardArrowLeft style={{transform: windowWidth > 660 ? 'none' : 'scale(0.7)'}}/>}
+          ? <KeyboardArrowRight style={{transform: windowWidth > 660 ? 'none' : 'scale(1)'}}/>
+          : <KeyboardArrowLeft style={{transform: windowWidth > 660 ? 'none' : 'scale(1)'}}/>}
       </IconButton>
 
       <IconButton
@@ -83,8 +83,8 @@ function TablePaginationActions(props) {
           color: appTheme === 'dark' ? '#5F7285' : '#86B9D6',
         }}>
         {theme.direction === 'rtl'
-          ? <KeyboardArrowLeft style={{transform: windowWidth > 660 ? 'none' : 'scale(0.7)'}}/>
-          : <KeyboardArrowRight style={{transform: windowWidth > 660 ? 'none' : 'scale(0.7)'}}/>}
+          ? <KeyboardArrowLeft style={{transform: windowWidth > 660 ? 'none' : 'scale(1)'}}/>
+          : <KeyboardArrowRight style={{transform: windowWidth > 660 ? 'none' : 'scale(1)'}}/>}
       </IconButton>
 
       <IconButton
@@ -100,8 +100,8 @@ function TablePaginationActions(props) {
           color: appTheme === 'dark' ? '#5F7285' : '#86B9D6',
         }}>
         {theme.direction === 'rtl'
-          ? <KeyboardDoubleArrowLeft style={{transform: windowWidth > 660 ? 'none' : 'scale(0.7)'}}/>
-          : <KeyboardDoubleArrowRight style={{transform: windowWidth > 660 ? 'none' : 'scale(0.7)'}}/>}
+          ? <KeyboardDoubleArrowLeft style={{transform: windowWidth > 660 ? 'none' : 'scale(1)'}}/>
+          : <KeyboardDoubleArrowRight style={{transform: windowWidth > 660 ? 'none' : 'scale(1)'}}/>}
       </IconButton>
     </Box>
   );

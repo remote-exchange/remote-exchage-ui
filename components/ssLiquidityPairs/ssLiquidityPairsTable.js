@@ -231,6 +231,7 @@ const headCells = [
     numeric: true,
     disablePadding: false,
     label: 'APR %',
+    isHideInDetails: true,
   },
   {
     id: 'poolBalance',
@@ -274,6 +275,7 @@ const StickyTableCell = styled(TableCell)(({theme, appTheme}) => ({
   // zIndex: 5,
   whiteSpace: 'nowrap',
   padding: '12px 24px 12px',
+  background: '#131313',
 }));
 
 const StyledTableCell = styled(TableCell)(({theme, appTheme}) => ({
@@ -332,6 +334,7 @@ function EnhancedTableHead(props) {
                     padding={'normal'}
                     sortDirection={orderBy === headCell.id ? order : false}
                     style={{
+                      zIndex: 5,
                       background: '#131313',
                       borderBottom: '1px solid rgba(104, 114, 122, 0.4)',
                     }}>
@@ -486,6 +489,9 @@ const useStyles = makeStyles({
     width: '100%',
     height: 64,
     position: 'relative',
+    ["@media (max-width:805px)"]: {
+      height: 'auto',
+    },
     ["@media (min-width:1200px)"]: {
       flexDirection: 'row',
       justifyContent: 'space-between',
@@ -506,8 +512,10 @@ const useStyles = makeStyles({
     // letterSpacing: '0.04em',
     textShadow: '2px 2px 0px #6575B1',
     textTransform: 'uppercase',
-    ["@media (min-width:806px)"]: {
-      // fontSize: 60,
+    ["@media (max-width:806px)"]: {
+      fontSize: 24,
+      lineHeight: '32px',
+      textShadow: '1px 1px 0px #6575B1',
     },
 
   },
@@ -522,12 +530,16 @@ const useStyles = makeStyles({
     borderRadius: 20,
     padding: 20,
     marginTop: 20,
+    ["@media (max-width:806px)"]: {
+      padding: 12,
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      height: 164,
+      // flexWrap: 'wrap',
+    },
     // flexDirection: 'column',
     // position: 'absolute',
-    /*["@media (min-width:806px)"]: {
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-    },
+    /*,
     ["@media (min-width:1333px)"]: {
       // flexDirection: 'row',
       flexWrap: 'unset',
@@ -732,8 +744,8 @@ const useStyles = makeStyles({
       width: '100%',
     },
     ["@media (max-width:805px)"]: {
-      height: 48,
-      marginTop: 2,
+      height: 36,
+      // marginTop: 2,
       paddingRight: 16,
     },
   },
@@ -763,45 +775,15 @@ const useStyles = makeStyles({
     },
   },
   myDeposits: {
-    // background: '#171D2D',
     display: 'flex',
     alignItems: 'center',
-    // height: 72,
     border: '1px solid #B1F1E3',
-    // paddingLeft: 28,
     borderRadius: 12,
-    // marginTop: 20,
     marginRight: 22,
     padding: 2,
-    // fontSize: '18px !important',
-    ["@media (min-width:806px)"]: {
-      // width: 377,
-    },
-    ["@media (min-width:1333px)"]: {
-      // width: 377,
-      // position: 'absolute',
-      // right: 0,
-    },
-    ["@media (min-width:1483px)"]: {
-      // width: 377,
-      // position: 'absolute',
-      // right: 0,
-    },
-    ["@media (min-width:1920px)"]: {
-      // marginTop: 0,
-      // width: '100%',
-      // position: 'relative',
-    },
-    ["@media (max-width:660px)"]: {
-      // eslint-disable-line no-useless-computed-key
-      // padding: '9px 0',
-      // paddingLeft: 20,
-    },
-    ["@media (max-width:540px)"]: {
-      // eslint-disable-line no-useless-computed-key
-      // fontSize: '12px !important',
-      // paddingLeft: 10,
-      // marginLeft: 10,
+    ["@media (max-width:806px)"]: {
+      margin: 0,
+      borderRadius: 8,
     },
   },
   myDepositsBtn: {
@@ -814,6 +796,11 @@ const useStyles = makeStyles({
     justifyContent: 'center',
     alignItems: 'center',
     cursor: 'pointer',
+    ["@media (max-width:806px)"]: {
+      width: '50%',
+      height: 28,
+
+    },
   },
   myDepositsBtnActive: {
     color: '#131313',
@@ -827,6 +814,11 @@ const useStyles = makeStyles({
     justifyContent: 'center',
     alignItems: 'center',
     cursor: 'pointer',
+    ["@media (max-width:806px)"]: {
+      width: '50%',
+      height: 28,
+      borderRadius: 6,
+    },
   },
   myDepositsText: {
     fontWeight: 600,
@@ -834,7 +826,7 @@ const useStyles = makeStyles({
     lineHeight: '24px',
     color: '#E4E9F4',
     paddingLeft: 10,
-    ["@media (max-width:530px)"]: {
+    ["@media (max-width:806px)"]: {
       // eslint-disable-line no-useless-computed-key
       display: 'flex',
       flexDirection: 'column',
@@ -847,8 +839,10 @@ const useStyles = makeStyles({
     // marginBottom: 30,
     padding: 20,
     minHeight: 'auto',
-    ["@media (max-width:660px)"]: {
+    ["@media (max-width:806px)"]: {
       paddingBottom: 10,
+      boxShadow: '4px 4px 0px #6575B1',
+      borderradius: 16,
     },
   },
   filterButton: {
@@ -866,8 +860,9 @@ const useStyles = makeStyles({
       // top: 10,
     },
     ["@media (max-width:805px)"]: {
-      // top: 3,
-      // right: -10,
+      width: 24,
+      height: 24,
+      marginRight: 36,
     },
     // background: 'rgba(119, 155, 244, 0.15)',
     '&:hover': {
@@ -970,10 +965,12 @@ const useStyles = makeStyles({
     '&:hover > p': {
       // background: '#c4ff00',
     },
-    ["@media (min-width:806px)"]: {
-      // width: 248,
-      // height: 72,
-      // marginTop: 20,
+    ["@media (max-width:806px)"]: {
+      position: 'absolute',
+      height: 48,
+      top: 109,
+      left: 11,
+      width: 'calc(100% - 22px)',
     },
     ["@media (min-width:1333px)"]: {
       // width: 248,
@@ -1003,21 +1000,10 @@ const useStyles = makeStyles({
     // transition: 'all ease 300ms',
     fontSize: 24,
     fontWeight: 700,
-    ["@media (min-width:806px)"]: {
-      // fontWeight: 600,
-      // fontSize: 18,
-    },
-    ["@media (min-width:1333px)"]: {
-      // fontWeight: 600,
-      // fontSize: 18,
-    },
-    ["@media (min-width:1483px)"]: {
-      // fontWeight: 600,
-      // fontSize: 18,
-    },
-    ["@media (min-width:1920px)"]: {
-      // fontWeight: 600,
-      // fontSize: 32,
+    ["@media (max-width:806px)"]: {
+      lineHeight: '16px',
+      fontWeight: 700,
+      fontSize: 16,
     },
   },
   withdrawButton: {
@@ -1066,6 +1052,9 @@ const useStyles = makeStyles({
   },
   table: {
     tableLayout: 'auto',
+    ["@media (max-width:1333px)"]: {
+      marginBottom: 20,
+    },
   },
   accordionSummaryContent: {
     margin: 0,
@@ -1076,22 +1065,28 @@ const useStyles = makeStyles({
     right: 60,
     top: 14,
     width: 48,
+    ["@media (max-width:805px)"]: {
+      right: 0,
+      width: 24,
+      top: 4,
+    },
   },
   sortSelectPosition: {
     right: -60,
   },
   cellPaddings: {
-    padding: '11px 20px',
-    ["@media (max-width:530px)"]: {
+    padding: '8px 0',
+    /*["@media (max-width:530px)"]: {
       // eslint-disable-line no-useless-computed-key
       padding: 10,
-    },
+    },*/
   },
   cellHeadPaddings: {
-    padding: '5px 20px',
+    padding: '8px 0',
+    minHeight: 58,
     ["@media (max-width:530px)"]: {
       // eslint-disable-line no-useless-computed-key
-      padding: '5px 10px',
+      // padding: '5px 10px',
     },
   },
   popoverPaper: {
@@ -1364,15 +1359,7 @@ const EnhancedTableToolbar = (props) => {
               </svg>
             </div>
             <div className={css.realDialog}>
-              <DialogTitle
-                  className={css.dialogTitle}
-                  style={{
-                    padding: 20,
-                    fontWeight: 700,
-                    fontSize: 24,
-                    lineHeight: '32px',
-                    color: '#131313',
-                  }}>
+              <DialogTitle className={css.dialogTitle}>
                 <div style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -1383,14 +1370,7 @@ const EnhancedTableToolbar = (props) => {
                   </div>
 
                   <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        width: 20,
-                        height: 20,
-                        cursor: 'pointer',
-                      }}
+                      className={css.dialogClose}
                       onClick={handleClosePopover}
                   >
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1400,11 +1380,8 @@ const EnhancedTableToolbar = (props) => {
                 </div>
               </DialogTitle>
 
-              <DialogContent
-                  // className={classes.dialogContent}
-                  style={{ padding: '4px 20px 20px' }}>
+              <DialogContent classes={{root: css.dialogContent,}}>
                 <div className={css.dialogInner}>
-
                   <div
                       className={[classes.filterItem, classes[`filterItem--${appTheme}`], 'g-flex', 'g-flex--align-center', 'g-flex--space-between'].join(' ')}>
                     <Typography className={[classes.filterLabel, classes[`filterLabel--${appTheme}`]].join(' ')}>
@@ -1809,7 +1786,7 @@ export default function EnhancedTable({pairs, isLoading}) {
                             style={{
                               // background: '#171D2D',
                               borderBottom: `1px solid rgba(104, 114, 122, 0.4)`,
-                              borderRight: windowWidth < 1333 ? '1px solid #D3F85A' : 'none',
+                              borderRight: /*windowWidth < 1333 ? '1px solid #D3F85A' : */'none',
                             }}
                             className={classes.cell}>
                             <div className={classes.inline}>
@@ -2567,9 +2544,9 @@ export default function EnhancedTable({pairs, isLoading}) {
                   style={{
                     margin: 0,
                     marginBottom: 20,
-                    background: '#171D2D',
-                    border: `1px solid #060B17`,
-                    borderRadius: 12,
+                    background: '#131313',
+                    // border: `1px solid #060B17`,
+                    borderRadius: 16,
                   }}
                   disableGutters={true}
                   expanded={expanded === labelId}
@@ -2587,113 +2564,80 @@ export default function EnhancedTable({pairs, isLoading}) {
                     <div className={['g-flex-column', 'g-flex-column__item'].join(' ')}>
                       <div
                         style={{
-                          padding: '16px 20px',
+                          padding: '12px',
                         }}
-                        className={['g-flex', 'g-flex--align-center'].join(' ')}>
-                        <div className={classes.doubleImages}>
-                          <div
-                            className={[classes.imgLogoContainer, classes[`imgLogoContainer--${appTheme}`]].join(' ')}>
-                            <img
-                              className={classes.imgLogo}
-                              src={(row && row.token0 && row.token0.logoURI) ? row.token0.logoURI : ``}
-                              width="36"
-                              height="36"
-                              alt=""
-                              onError={(e) => {
-                                e.target.onerror = null;
-                                e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
-                              }}
-                            />
-                          </div>
+                        className={['g-flex', 'g-flex--align-center', 'g-flex--space-between'].join(' ')}>
+                        <div className={['g-flex',].join(' ')}>
+                          <div className={classes.doubleImages}>
+                            <div
+                                className={[classes.imgLogoContainer, classes[`imgLogoContainer--${appTheme}`]].join(' ')}>
+                              <img
+                                  className={classes.imgLogo}
+                                  src={(row && row.token0 && row.token0.logoURI) ? row.token0.logoURI : ``}
+                                  width="36"
+                                  height="36"
+                                  alt=""
+                                  onError={(e) => {
+                                    e.target.onerror = null;
+                                    e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
+                                  }}
+                              />
+                            </div>
 
-                          <div
-                            className={[classes.imgLogoContainer, classes.imgLogoContainer2, classes[`imgLogoContainer--${appTheme}`]].join(' ')}>
-                            <img
-                              className={classes.imgLogo}
-                              src={(row && row.token1 && row.token1.logoURI) ? row.token1.logoURI : ``}
-                              width="36"
-                              height="36"
-                              alt=""
-                              onError={(e) => {
-                                e.target.onerror = null;
-                                e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
-                              }}
-                            />
+                            <div
+                                className={[classes.imgLogoContainer, classes.imgLogoContainer2, classes[`imgLogoContainer--${appTheme}`]].join(' ')}>
+                              <img
+                                  className={classes.imgLogo}
+                                  src={(row && row.token1 && row.token1.logoURI) ? row.token1.logoURI : ``}
+                                  width="36"
+                                  height="36"
+                                  alt=""
+                                  onError={(e) => {
+                                    e.target.onerror = null;
+                                    e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
+                                  }}
+                              />
+                            </div>
+                          </div>
+                          <div>
+                            <Typography
+                                className={classes.textSpaced}
+                                style={{
+                                  marginBottom: 2,
+                                  fontWeight: 500,
+                                  fontSize: 16,
+                                  lineHeight: '20px',
+                                  color: '#F6F7F9',
+                                }}
+                                noWrap>
+                              {formatSymbol(row?.symbol)}
+                            </Typography>
+                            <Typography
+                                className={classes.textSpaced}
+                                style={{
+                                  fontWeight: 500,
+                                  fontSize: 12,
+                                  lineHeight: '12px',
+                                  color: '#9A9FAF',
+                                }}
+                                noWrap>
+                              {row?.isStable ? 'Stable Pool' : 'Volatile Pool'}
+                            </Typography>
                           </div>
                         </div>
-
-                        <div>
-                          <Typography
-                            className={classes.textSpaced}
-                            style={{
-                              marginBottom: 4,
-                              fontWeight: 500,
-                              fontSize: 16,
-                              lineHeight: '120%',
-                              color: '#E4E9F4',
-                            }}
-                            noWrap>
-                            {formatSymbol(row?.symbol)}
-                          </Typography>
-                          <Typography
-                            className={classes.textSpaced}
-                            style={{
-                              fontWeight: 400,
-                              fontSize: 14,
-                              lineHeight: '120%',
-                              color: '#8191B9',
-                            }}
-                            noWrap>
-                            {row?.isStable ? 'Stable Pool' : 'Volatile Pool'}
-                          </Typography>
-                        </div>
-                      </div>
-
-                      <div
-                        style={{
-                          borderTop: `1px solid #060B17`,
-                          borderBottom: `1px solid #060B17`,
-                        }}
-                        className={['g-flex', 'g-flex--align-center'].join(' ')}>
-                        <div
-                          style={{
-                            width: '50%',
-                            borderRight: `1px solid #060B17`,
-                          }}>
-                          <Typography
-                            className={classes.cellHeadPaddings}
-                            style={{
-                              paddingTop: 8,
-                              paddingBottom: 8,
-                              background: '#060B17',
-                              fontWeight: 500,
-                              fontSize: 14,
-                              lineHeight: '16px',
-                              borderBottom: '1px solid #060B17',
-                              color: '#8191B9',
-                            }}
-                            noWrap>
-                            Action
-                          </Typography>
-
-                          <div
-                            className={classes.cellPaddings}
-                            style={{
-                              display: 'flex',
-                              alignItems: 'center',
-                              height: 72,
-                            }}>
-                            <Button
+                        <div className={['g-flex','g-flex--justify-end'].join(' ')}>
+                          <Button
                               variant="outlined"
                               color="primary"
                               style={{
-                                padding: '10px 18px',
-                                border: `1px solid #D3F85A`,
-                                borderRadius: 12,
-                                fontWeight: 600,
+                                padding: '8px 16px',
+                                background: 'rgba(125, 184, 87, 0.12)',
+                                border: `1px solid #7DB857`,
+                                borderRadius: 8,
+                                fontWeight: 500,
                                 fontSize: 14,
-                                lineHeight: '16px',
-                                color: '#D3F85A',
+                                lineHeight: '20px',
+                                color: '#7DB857',
                               }}
                               onClick={(event) => {
                                 event.stopPropagation();
@@ -2701,218 +2645,336 @@ export default function EnhancedTable({pairs, isLoading}) {
 
                                 onView(row);
                               }}>
-                              {BigNumber(row?.balance).gt(0) || BigNumber(row?.gauge?.balance).gt(0) ? 'EDIT' : 'ADD'}
-                            </Button>
-                          </div>
+                            {BigNumber(row?.balance).gt(0) || BigNumber(row?.gauge?.balance).gt(0) ? 'EDIT' : 'ADD'}
+                          </Button>
                         </div>
+                      </div>
 
-                        <div style={{ width: '50%' }}>
-                          <Typography
-                            className={classes.cellHeadPaddings}
-                            style={{
-                              paddingTop: 8,
-                              paddingBottom: 8,
-                              background: '#060B17',
-                              fontWeight: 500,
-                              fontSize: 14,
-                              lineHeight: '16px',
-                              borderBottom: '1px solid #060B17',
-                              color: '#8191B9',
-                              textAlign: 'right',
-                            }}
-                            noWrap>
-                            TVL / APR
-                            <Tooltip
-                                title='APR is based on current prices of tokens, token boosted APR, your veCONE amount, the % of TVL using veCONE and gauge TVL.'
-                                componentsProps={{
-                                  tooltip: {
-                                    style: {
-                                      padding: 24,
-                                      fontSize: 16,
-                                      fontWeight: 400,
-                                      lineHeight: '24px',
-
-                                      border: '1px solid #779BF4',
-                                      borderRadius: 12,
-
-                                      background: '#1F2B49',
-                                      color: '#E4E9F4',
-                                    }},
-                                }}
-                                style={{display: 'inline-flex', marginLeft: 12,}}
-                            >
-                              <span className={classes.tooltipCircle}>
-                                <svg width="10" height="10" viewBox="0 0 5 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M2.23914 0.95C2.91914 0.95 3.46247 1.13667 3.86914 1.51C4.28247 1.88333 4.48914 2.39333 4.48914 3.04C4.48914 3.71333 4.27581 4.22 3.84914 4.56C3.42247 4.9 2.85581 5.07 2.14914 5.07L2.10914 5.86H1.11914L1.06914 4.29H1.39914C2.04581 4.29 2.53914 4.20333 2.87914 4.03C3.22581 3.85667 3.39914 3.52667 3.39914 3.04C3.39914 2.68667 3.29581 2.41 3.08914 2.21C2.88914 2.01 2.60914 1.91 2.24914 1.91C1.88914 1.91 1.60581 2.00667 1.39914 2.2C1.19247 2.39333 1.08914 2.66333 1.08914 3.01H0.0191407C0.0191407 2.61 0.109141 2.25333 0.289141 1.94C0.469141 1.62667 0.725807 1.38333 1.05914 1.21C1.39914 1.03667 1.79247 0.95 2.23914 0.95ZM1.59914 8.07C1.39247 8.07 1.21914 8 1.07914 7.86C0.939141 7.72 0.869141 7.54667 0.869141 7.34C0.869141 7.13333 0.939141 6.96 1.07914 6.82C1.21914 6.68 1.39247 6.61 1.59914 6.61C1.79914 6.61 1.96914 6.68 2.10914 6.82C2.24914 6.96 2.31914 7.13333 2.31914 7.34C2.31914 7.54667 2.24914 7.72 2.10914 7.86C1.96914 8 1.79914 8.07 1.59914 8.07Z" fill="#586586"/>
-                                </svg>
-                              </span>
-                            </Tooltip>
-                          </Typography>
-
-                          <div
-                            className={classes.cellPaddings}
-                            style={{
-                              display: 'flex',
-                              justifyContent: 'flex-end',
-                              height: 72,
-                            }}>
-                            <div style={{ display: 'flex', alignItems: 'center' }}>
-                              <div
+                      <div style={{
+                            margin: '12px 12px 0 12px',
+                            padding: 12,
+                            border: '1px solid rgba(104, 114, 122, 0.4)',
+                            borderRadius: 16,
+                          }}>
+                        <div style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          borderBottom: '1px solid rgba(104, 114, 122, 0.4)',
+                        }}>
+                          <div style={{
+                            padding: '8px 0',
+                            color: '#9A9FAF',
+                            fontSize: 12,
+                            fontWeight: 500,
+                            lineHeight: '16px',
+                            width: 100,
+                            borderRight: '1px solid rgba(104, 114, 122, 0.4)',
+                          }}>TVL</div>
+                          <div style={{
+                            display: 'flex',
+                            justifyContent: 'right',
+                            alignItems: 'center',
+                          }}>
+                            <Typography
+                                className={classes.textSpaced}
                                 style={{
-                                  display: 'flex',
-                                  flexDirection: 'column',
-                                  alignItems: 'flex-end',
-                                }}
-                              >
-                                <Typography
-                                  className={classes.textSpaced}
-                                  style={{
-                                    marginBottom: 4,
-                                    fontWeight: 500,
-                                    fontSize: 14,
-                                    lineHeight: '120%',
-                                    color: appTheme === 'dark' ? '#ffffff' : '#0A2C40',
-                                    whiteSpace: 'nowrap',
-                                  }}>
-                                  {BigNumber(row?.tvl).gt(0) ? BigNumber(row?.tvl).toFixed(2) : '-'}
-                                </Typography>
-
-                                <Typography
-                                  className={classes.textSpaced}
-                                  style={{
-                                    fontWeight: 500,
-                                    fontSize: 14,
-                                    lineHeight: '120%',
-                                    color: appTheme === 'dark' ? '#ffffff' : '#0A2C40',
-                                    whiteSpace: 'nowrap',
-                                  }}>
-                                  {BigNumber(row?.gauge?.apr).gt(0) ? `${
-                                      formatCurrency(BigNumber.sum(BigNumber(row?.gauge?.derivedAPR).div(100).times(40),
-                                          BigNumber(row?.gauge?.additionalApr0),
-                                          BigNumber(row?.gauge?.additionalApr1)
-                                      ),0)
-                                  }-${
-                                      formatCurrency(BigNumber.sum(BigNumber(row?.gauge?.derivedAPR),
-                                          BigNumber(row?.gauge?.additionalApr0),
-                                          BigNumber(row?.gauge?.additionalApr1)
-                                      ),0)
-                                  }%` : '-'}
-                                </Typography>
-                              </div>
-
-                              <div
+                                  fontWeight: 500,
+                                  fontSize: 12,
+                                  lineHeight: '12px',
+                                  color: '#F6F7F9',
+                                  whiteSpace: 'nowrap',
+                                }}>
+                              {BigNumber(row?.tvl).gt(0) ? formatCurrency(BigNumber(row?.tvl)): '-'}
+                            </Typography>
+                            <div
                                 style={{
                                   display: 'flex',
                                   flexDirection: 'column',
                                   alignItems: 'flex-end',
                                   paddingLeft: 10,
                                 }}
-                              >
-                                <Typography
+                            >
+                              <Typography
                                   className={`${classes.textSpaced} ${classes.symbol}`}
                                   style={{
-                                    marginBottom: 4,
-                                    fontWeight: 400,
-                                    fontSize: 14,
-                                    lineHeight: '120%',
+                                    fontWeight: 500,
+                                    fontSize: 12,
+                                    lineHeight: '12px',
                                     minWidth: 15,
-                                    color: appTheme === 'dark' ? '#7C838A' : '#5688A5',
+                                    color: '#9A9FAF',
                                   }}>
-                                  $
-                                </Typography>
-
-                                <Typography
-                                  className={`${classes.textSpaced} ${classes.symbol}`}
-                                  style={{
-                                    fontWeight: 400,
-                                    fontSize: 14,
-                                    lineHeight: '120%',
-                                    minWidth: 15,
-                                    color: appTheme === 'dark' ? '#7C838A' : '#5688A5',
-                                  }}>
-                                  %
-                                </Typography>
-                              </div>
-
-                              <Tooltip
+                                $
+                              </Typography>
+                            </div>
+                          </div>
+                        </div>
+                        <div style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                        }}>
+                          <div style={{
+                            padding: '8px 0',
+                            color: '#9A9FAF',
+                            fontSize: 12,
+                            fontWeight: 500,
+                            lineHeight: '16px',
+                            width: 100,
+                            borderRight: '1px solid rgba(104, 114, 122, 0.4)',
+                          }}>APR %</div>
+                          <div style={{
+                            display: 'flex',
+                            justifyContent: 'right',
+                            padding: '8px 0',
+                          }}>
+                            <Tooltip
                                 title={
                                   <React.Fragment>
                                     {[1].map(() => {
-                                          const veTok = stores.stableSwapStore.getStore("veToken");
-                                          const nfts = stores.stableSwapStore.getStore("vestNFTs") ?? [];
-                                          const nft = nfts.reduce((acc, item) => item.totalPower > acc.totalPower ? item : acc, nfts[0]);
+                                      const veTok = stores.stableSwapStore.getStore("veToken");
+                                      const nfts = stores.stableSwapStore.getStore("vestNFTs") ?? [];
+                                      const nft = nfts.reduce((acc, item) => item.totalPower > acc.totalPower ? item : acc, nfts[0]);
 
-                                          return <div className={css.boostCalculatorTooltip}>
-                                            <BoostCalculator popuped={true} pair={row} ve={veTok} nft={nft}
-                                                             isMobileView={true} amount={100}/>
-                                          </div>
-                                        })
+                                      return <div className={css.boostCalculatorTooltip}>
+                                        <BoostCalculator popuped={true} pair={row} ve={veTok} nft={nft}
+                                                         isMobileView={true} amount={100}/>
+                                      </div>
+                                    })
                                     }
                                   </React.Fragment>
                                 }
                                 classes={{
                                   tooltip: css.tooltip_boost_wrapper
                                 }}
-                              >
-                                <img src={
-                                  (row?.gauge?.boost && BigNumber(row?.gauge?.boost).gt(0) && BigNumber(row?.gauge?.balance).gt(0))
-                                      ? "/images/boost_fired.svg"
-                                      : (BigNumber(row?.balance).gt(0))
-                                          ? "/images/boost-empty.svg"
-                                          : "/images/icon-info.svg"
-                                }
-                                     width="16px" style={{ marginLeft: 5 }} />
-                              </Tooltip>
+                            >
+                              <img src={
+                                (row?.gauge?.boost && BigNumber(row?.gauge?.boost).gt(0) && BigNumber(row?.gauge?.balance).gt(0))
+                                    ? "/images/boost_fired.svg"
+                                    : (BigNumber(row?.balance).gt(0))
+                                        ? "/images/boost-empty.svg"
+                                        : "/images/icon-info.svg"
+                              }
+                                   width="22px" style={{ marginRight: 10 }} alt="boost" />
+                            </Tooltip>
+                            <div
+                                className={classes.inlineEnd}
+                                style={{
+                                  display: 'flex',
+                                  flexDirection: 'column',
+                                  alignItems: 'flex-end',
+                                }}
+                            >
+                              <Typography
+                                  className={classes.textSpaced}
+                                  style={{
+                                    marginBottom: 4,
+                                    fontWeight: 500,
+                                    fontSize: 12,
+                                    lineHeight: '12px',
+                                    color: '#F6F7F9',
+                                    whiteSpace: 'nowrap',
+                                  }}>
+                                {BigNumber(row?.gauge?.apr).gt(0) ? `${
+                                    formatCurrency(BigNumber.sum(BigNumber(row?.gauge?.derivedAPR).div(100).times(40),
+                                        BigNumber(row?.gauge?.additionalApr0),
+                                        BigNumber(row?.gauge?.additionalApr1)
+                                    ),3)
+                                }%` : '-'}
+                              </Typography>
+                              <Typography
+                                  className={classes.textSpaced}
+                                  style={{
+                                    fontWeight: 500,
+                                    fontSize: 12,
+                                    lineHeight: '12px',
+                                    color: '#F6F7F9',
+                                    whiteSpace: 'nowrap',
+                                  }}>
+                                {BigNumber(row?.gauge?.apr).gt(0) ? `${
+                                    formatCurrency(BigNumber.sum(BigNumber(row?.gauge?.derivedAPR),
+                                        BigNumber(row?.gauge?.additionalApr0),
+                                        BigNumber(row?.gauge?.additionalApr1)
+                                    ),3)
+                                }%` : '-'}
+                              </Typography>
+                            </div>
+                            <div
+                                className={classes.inlineEnd}
+                                style={{
+                                  display: 'flex',
+                                  flexDirection: 'column',
+                                  alignItems: 'flex-end',
+                                }}
+                            >
+                              <Typography
+                                  className={`${classes.textSpaced} ${classes.symbol}`}
+                                  style={{
+                                    marginBottom: 4,
+                                    fontWeight: 500,
+                                    fontSize: 12,
+                                    lineHeight: '12px',
+                                    color: '#9A9FAF',
+                                    textAlign: 'right',
+                                  }}>
+                                min
+                              </Typography>
+                              <Typography
+                                  className={`${classes.textSpaced} ${classes.symbol}`}
+                                  style={{
+                                    fontWeight: 500,
+                                    fontSize: 12,
+                                    lineHeight: '12px',
+                                    color: '#9A9FAF',
+                                    textAlign: 'right',
+                                  }}>
+                                max
+                              </Typography>
                             </div>
                           </div>
                         </div>
+
+                        {(expanded === labelId) && (
+                            <div>
+                              {headCells.map((headCell) => (
+                                  <React.Fragment key={headCell.id + '_'}>
+                                    {!headCell.isHideInDetails &&
+                                        <div
+                                            style={{
+                                              borderBottom: headCell.id === 'stakedAmount' ? 'none' : '1px solid rgba(104, 114, 122, 0.4)',
+                                              borderTop: headCell.id !== 'poolBalance' ? 'none' : '1px solid rgba(104, 114, 122, 0.4)',
+                                            }}
+                                            className={['g-flex', 'g-flex--align-center', 'g-flex--space-between'].join(' ')}>
+                                          <Typography
+                                              className={classes.cellHeadPaddings}
+                                              style={{
+                                                borderRight: '1px solid rgba(104, 114, 122, 0.4)',
+                                                width: '100px',
+                                                height: '100%',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                fontWeight: 500,
+                                                fontSize: 12,
+                                                lineHeight: '16px',
+                                                color: '#9A9FAF',
+                                              }}
+                                              noWrap>
+                                            {headCell.label}
+                                          </Typography>
+
+                                          <div
+                                              className={classes.cellPaddings}
+                                              style={{
+                                                width: '50%',
+                                                display: 'flex',
+                                                justifyContent: 'flex-end',
+                                              }}>
+                                            <div
+                                                className={classes.inlineEnd}
+                                                style={{
+                                                  display: 'flex',
+                                                  flexDirection: 'column',
+                                                  alignItems: 'flex-end',
+                                                }}>
+                                              <Typography
+                                                  className={classes.textSpaced}
+                                                  style={{
+                                                    marginBottom: 4,
+                                                    fontWeight: 500,
+                                                    fontSize: 12,
+                                                    lineHeight: '12px',
+                                                    color: '#F6F7F9',
+                                                    whiteSpace: 'nowrap',
+                                                  }}>
+                                                {headCell.id === 'poolAmount' && formatCurrency(row.reserve0)}
+                                                {headCell.id === 'poolBalance' && formatCurrency(BigNumber(row.balance).div(row.totalSupply).times(row.reserve0))}
+                                                {headCell.id === 'stakedBalance' && row?.gauge?.address && formatCurrency(BigNumber(row.gauge.balance).div(row.gauge.totalSupply).times(row.gauge.reserve0))}
+                                                {headCell.id === 'stakedBalance' && !row?.gauge?.address && 'No gauge'}
+                                                {headCell.id === 'stakedAmount' && row?.gauge?.address && formatCurrency(row.gauge.reserve0)}
+                                                {headCell.id === 'stakedAmount' && !row?.gauge?.address && 'No gauge'}
+                                              </Typography>
+
+                                              <Typography
+                                                  className={classes.textSpaced}
+                                                  style={{
+                                                    fontWeight: 500,
+                                                    fontSize: 12,
+                                                    lineHeight: '12px',
+                                                    color: '#F6F7F9',
+                                                    whiteSpace: 'nowrap',
+                                                  }}>
+                                                {headCell.id === 'poolAmount' && formatCurrency(row.reserve1)}
+                                                {headCell.id === 'poolBalance' && formatCurrency(BigNumber(row.balance).div(row.totalSupply).times(row.reserve1))}
+                                                {headCell.id === 'stakedBalance' && row?.gauge?.address && formatCurrency(BigNumber(row.gauge.balance).div(row.gauge.totalSupply).times(row.gauge.reserve1))}
+                                                {headCell.id === 'stakedBalance' && !row?.gauge?.address && 'No gauge'}
+                                                {headCell.id === 'stakedAmount' && row?.gauge?.address && formatCurrency(row.gauge.reserve1)}
+                                                {headCell.id === 'stakedAmount' && !row?.gauge?.address && 'No gauge'}
+                                              </Typography>
+                                            </div>
+
+                                            <div
+                                                className={classes.inlineEnd}
+                                                style={{
+                                                  display: 'flex',
+                                                  flexDirection: 'column',
+                                                  alignItems: 'flex-end',
+                                                  paddingLeft: 10,
+                                                }}>
+                                              <Typography
+                                                  className={`${classes.textSpaced} ${classes.symbol}`}
+                                                  style={{
+                                                    marginBottom: 4,
+                                                    fontWeight: 500,
+                                                    fontSize: 12,
+                                                    lineHeight: '12px',
+                                                    color: '#9A9FAF',
+                                                    textAlign: 'right',
+                                                  }}>
+                                                {formatSymbol(row.token0.symbol)}
+                                              </Typography>
+
+                                              <Typography
+                                                  className={`${classes.textSpaced} ${classes.symbol}`}
+                                                  style={{
+                                                    fontWeight: 500,
+                                                    fontSize: 12,
+                                                    lineHeight: '12px',
+                                                    color: '#9A9FAF',
+                                                    textAlign: 'right',
+                                                  }}>
+                                                {formatSymbol(row.token1.symbol)}
+                                              </Typography>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    }
+                                  </React.Fragment>
+                              ))}
+                            </div>
+                        )}
                       </div>
 
+
+
                       <div
-                        style={{ padding: '10px 20px', background: '#060B17' }}
+                          onClick={(e) => {
+                            console.log('test')
+                            handleChangeAccordion(e, labelId)
+                          }}
+                        style={{ padding: '10px 20px', }}
                         className={[classes.cellHeadPaddings, 'g-flex', 'g-flex--align-center', 'g-flex--space-between'].join(' ')}>
                         <Typography
                           style={{
-                            fontWeight: 500,
-                            fontSize: 14,
+                            fontWeight: 700,
+                            fontSize: 16,
                             lineHeight: '16px',
-                            color: '#779BF4',
+                            color: '#EAE8E1',
                           }}
                           noWrap>
-                          {expanded !== labelId ? 'Show' : 'Hide'} details
+                          {expanded !== labelId ? 'Show' : 'Hide'} more details
                         </Typography>
 
-                        {expanded !== labelId &&
-                          <div
-                            style={{
-                              display: 'flex',
-                              justifyContent: 'center',
-                              alignItems: 'center',
-                              width: 25,
-                              height: 25,
-                              borderRadius: '50%',
-                              backgroundColor: '#779BF4'
-                            }}
-                          >
-                            <ExpandMore style={{ color: '#060B17' }} />
-                          </div>
-                        }
-
-                        {expanded === labelId &&
-                          <div
-                            style={{
-                              display: 'flex',
-                              justifyContent: 'center',
-                              alignItems: 'center',
-                              width: 25,
-                              height: 25,
-                              borderRadius: '50%',
-                              backgroundColor: '#779BF4'
-                            }}
-                         >
-                          <ExpandLess style={{ color: '#060B17' }} />
-                          </div>
-                        }
+                        <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path fillRule="evenodd" clipRule="evenodd" d="M0.979238 5.27094C2.36454 3.19808 5.26851 0 9.99995 0C14.7314 0 17.6354 3.19808 19.0207 5.27094C19.4855 5.96655 19.718 6.31435 19.6968 6.95691C19.6757 7.59948 19.4088 7.94688 18.8752 8.64168C17.2861 10.7107 14.1129 14 9.99995 14C5.88699 14 2.71384 10.7107 1.12471 8.64168C0.591062 7.94688 0.324239 7.59948 0.303083 6.95691C0.281927 6.31435 0.514364 5.96655 0.979238 5.27094ZM9.99995 11C12.2091 11 13.9999 9.20914 13.9999 7C13.9999 4.79086 12.2091 3 9.99995 3C7.79081 3 5.99995 4.79086 5.99995 7C5.99995 9.20914 7.79081 11 9.99995 11Z" fill="#7DB857"/>
+                        </svg>
                       </div>
                     </div>
                   </AccordionSummary>
@@ -2921,120 +2983,7 @@ export default function EnhancedTable({pairs, isLoading}) {
                     style={{
                       padding: 0,
                     }}>
-                    {headCells.map((headCell) => (
-                      <React.Fragment key={headCell.id + '_'}>
-                        {!headCell.isHideInDetails &&
-                          <div
-                            style={{
-                              height: 72,
-                              borderTop: '1px solid #060B17',
-                            }}
-                            className={['g-flex', 'g-flex--align-center'].join(' ')}>
-                            <Typography
-                              className={classes.cellHeadPaddings}
-                              style={{
-                                width: '50%',
-                                height: '100%',
-                                display: 'flex',
-                                alignItems: 'center',
-                                fontWeight: 500,
-                                fontSize: 14,
-                                lineHeight: '16px',
-                                color: '#E4E9F4',
-                                borderRight: '1px solid #060B17',
-                              }}
-                              noWrap>
-                              {headCell.label}
-                            </Typography>
 
-                            <div
-                              className={classes.cellPaddings}
-                              style={{
-                                width: '50%',
-                                display: 'flex',
-                                justifyContent: 'flex-end',
-                              }}>
-                              <div
-                                className={classes.inlineEnd}
-                                style={{
-                                  display: 'flex',
-                                  flexDirection: 'column',
-                                  alignItems: 'flex-end',
-                                }}>
-                                <Typography
-                                  className={classes.textSpaced}
-                                  style={{
-                                    marginBottom: 4,
-                                    fontWeight: 500,
-                                    fontSize: 14,
-                                    lineHeight: '16px',
-                                    color: '#E4E9F4',
-                                    whiteSpace: 'nowrap',
-                                  }}>
-                                  {headCell.id === 'poolAmount' && formatCurrency(row.reserve0)}
-                                  {headCell.id === 'poolBalance' && formatCurrency(BigNumber(row.balance).div(row.totalSupply).times(row.reserve0))}
-                                  {headCell.id === 'stakedBalance' && row?.gauge?.address && formatCurrency(BigNumber(row.gauge.balance).div(row.gauge.totalSupply).times(row.gauge.reserve0))}
-                                  {headCell.id === 'stakedBalance' && !row?.gauge?.address && 'No gauge'}
-                                  {headCell.id === 'stakedAmount' && row?.gauge?.address && formatCurrency(row.gauge.reserve0)}
-                                  {headCell.id === 'stakedAmount' && !row?.gauge?.address && 'No gauge'}
-                                </Typography>
-
-                                <Typography
-                                  className={classes.textSpaced}
-                                  style={{
-                                    fontWeight: 500,
-                                    fontSize: 14,
-                                    lineHeight: '16px',
-                                    color: '#E4E9F4',
-                                    whiteSpace: 'nowrap',
-                                  }}>
-                                  {headCell.id === 'poolAmount' && formatCurrency(row.reserve1)}
-                                  {headCell.id === 'poolBalance' && formatCurrency(BigNumber(row.balance).div(row.totalSupply).times(row.reserve1))}
-                                  {headCell.id === 'stakedBalance' && row?.gauge?.address && formatCurrency(BigNumber(row.gauge.balance).div(row.gauge.totalSupply).times(row.gauge.reserve1))}
-                                  {headCell.id === 'stakedBalance' && !row?.gauge?.address && 'No gauge'}
-                                  {headCell.id === 'stakedAmount' && row?.gauge?.address && formatCurrency(row.gauge.reserve1)}
-                                  {headCell.id === 'stakedAmount' && !row?.gauge?.address && 'No gauge'}
-                                </Typography>
-                              </div>
-
-                              <div
-                                className={classes.inlineEnd}
-                                style={{
-                                  display: 'flex',
-                                  flexDirection: 'column',
-                                  alignItems: 'flex-end',
-                                  paddingLeft: 10,
-                                }}>
-                                <Typography
-                                  className={`${classes.textSpaced} ${classes.symbol}`}
-                                  style={{
-                                    marginBottom: 4,
-                                    fontWeight: 400,
-                                    fontSize: 14,
-                                    lineHeight: '16px',
-                                    color: '#8191B9',
-                                    textAlign: 'right',
-                                  }}>
-                                  {formatSymbol(row.token0.symbol)}
-                                </Typography>
-
-                                <Typography
-                                  className={`${classes.textSpaced} ${classes.symbol}`}
-                                  style={{
-                                    fontWeight: 400,
-                                    fontSize: 14,
-                                    lineHeight: '16px',
-                                    color: '#8191B9',
-                                    textAlign: 'right',
-                                  }}>
-                                  {formatSymbol(row.token1.symbol)}
-                                </Typography>
-                              </div>
-                            </div>
-                          </div>
-                        }
-                      </React.Fragment>
-                    ))}
                   </AccordionDetails>
                 </Accordion>
               );
@@ -3064,10 +3013,10 @@ export default function EnhancedTable({pairs, isLoading}) {
                   style={{
                     width: '100%',
                     // marginTop: 20,
-                    padding: '0 30px',
-                    background: '#060B17',
-                    borderTop: '1px solid #d3f85a',
-                    // borderRadius: 12,
+                    padding: '0',
+                    background: '#131313',
+                    // borderTop: '1px solid #d3f85a',
+                    borderRadius: 16,
                     color: '#8191B9',
                   }}
                   component="div"
