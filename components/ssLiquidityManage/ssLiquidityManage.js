@@ -5,12 +5,9 @@ import {
   Typography,
   Button,
   TextField,
-  InputAdornment,
   CircularProgress,
   Tooltip,
-  MenuItem,
   InputBase,
-  Select,
   Dialog, DialogTitle, DialogContent, Slide,
 } from "@mui/material";
 import BigNumber from "bignumber.js";
@@ -22,9 +19,9 @@ import {FTM_SYMBOL, VE_TOKEN_NAME, VE_TOKEN_SYMBOL, WFTM_SYMBOL} from '../../sto
 import { useAppThemeContext } from "../../ui/AppThemeProvider";
 import { formatInputAmount } from "../../utils";
 import AssetSelect from "../../ui/AssetSelect";
-// import Loader from "../../ui/Loader";
 import Hint from "../hint/hint";
 import BoostCalculator from './ssBoostCalculator';
+import moment from "moment/moment";
 
 const Transition = React.forwardRef((props, ref) => (
     <Slide direction="up" {...props} ref={ref} />
@@ -97,14 +94,6 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
   window.addEventListener("resize", () => {
     setWindowWidth(window.innerWidth);
   });
-
-  const handleClickPopover = (event) => {
-    setHintAnchor(event.currentTarget)
-  };
-
-  const handleClosePopover = () => {
-    setHintAnchor(null)
-  };
 
   const handleStablePoolClickPopover = (event) => {
     setStablePoolHntAnchor(event.currentTarget)
@@ -996,9 +985,9 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
                   classes.mediumInput,
                 ].join(" "),
               }}
-              InputProps={{
+              /*InputProps={{
                 disableUnderline: true,
-              }}
+              }}*/
             />
             <Typography color="textSecondary" className={classes.smallestText}>
               {symbol}
@@ -1285,7 +1274,7 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
                       className={classes.massiveInputAmountUnstake}
                       placeholder="0.00"
                       error={amount1Error}
-                      helperText={amount1Error}
+                      // helperText={amount1Error}
                       value={withdrawAmount}
                       onChange={() => withdrawAmountChanged(withdrawAsset)}
                       disabled={
@@ -1303,10 +1292,10 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
                           classes[`largeInput--${appTheme}`],
                         ].join(" "),
                       }}
-                      InputProps={{
+                      /*InputProps={{
                         // startAdornment: "%",
                         disableUnderline: true,
-                      }}
+                      }}*/
                   />
                 </div>
               </div>
@@ -1350,65 +1339,20 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
     );
   };
 
-  const renderToggleIcon = (action) => {
-    return (
-      <>
-        {withdrawAction !== action && (
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0.5 10C0.5 4.7533 4.7533 0.5 10 0.5C15.2467 0.5 19.5 4.7533 19.5 10C19.5 15.2467 15.2467 19.5 10 19.5C4.7533 19.5 0.5 15.2467 0.5 10Z"
-              fill="#171D2D"
-              stroke="#779BF4"
-            />
-          </svg>
-        )}
-
-        {withdrawAction === action && (
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0.5 10C0.5 4.7533 4.7533 0.5 10 0.5C15.2467 0.5 19.5 4.7533 19.5 10C19.5 15.2467 15.2467 19.5 10 19.5C4.7533 19.5 0.5 15.2467 0.5 10Z"
-              fill="#171D2D"
-              stroke="#779BF4"
-            />
-            <path
-              d="M5 10C5 7.23858 7.23858 5 10 5C12.7614 5 15 7.23858 15 10C15 12.7614 12.7614 15 10 15C7.23858 15 5 12.7614 5 10Z"
-              fill="#779BF4"
-              style={{ transform: 'scale(1.2)', transformOrigin: 'center' }}
-            />
-          </svg>
-        )}
-      </>
-    );
-  };
-
   const renderWithdrawInformation = () => {
     return (
       <div className={classes.withdrawInfoContainer}>
         <div className={classes.myLiqCont}>
           <div className={classes.myLiq}>
             <div className={classes.myLiqBal}>
-              <div>My Pool</div>
-              <div>
+              <div className={classes.myLiqBalTitle}>My Pool</div>
+              <div className={classes.myLiqBalValue}>
                 {withdrawAsset?.balance ?? '0.0'}
               </div>
             </div>
             <div className={classes.myLiqBal}>
-              <div>
-                My Stake
-              </div>
-              <div>{withdrawAsset?.gauge?.balance ?? '0.00'}</div>
+              <div className={classes.myLiqBalTitle}>My Stake</div>
+              <div className={classes.myLiqBalValue}>{withdrawAsset?.gauge?.balance ?? '0.00'}</div>
             </div>
           </div>
         </div>
@@ -1454,9 +1398,6 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
           />
         </div>
         <div
-            style={{
-              // marginRight: 20,
-            }}
             className={[
               classes.toggleOption,
               `${stable && classes.active}`,
@@ -1502,25 +1443,6 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
 
   const closeSelect = () => {
     setOpenSelectToken(false);
-  };
-
-  const selectArrow = () => {
-    return (
-      // <ClickAwayListener onClickAway={closeSelect}>
-        <div
-          // onClick={openSelect}
-          className={[
-            classes.slippageIconContainer,
-            openSelectToken ? classes["selectTokenIconContainer--active"] : "",
-            classes[`slippageIconContainer--${appTheme}`],
-          ].join(" ")}
-        >
-          <svg width="18" height="9" viewBox="0 0 18 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M16.9201 0.950012L10.4001 7.47001C9.63008 8.24001 8.37008 8.24001 7.60008 7.47001L1.08008 0.950012" stroke="#D3F85A" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </div>
-      // </ClickAwayListener>
-    );
   };
 
   const renderTokenSelect = () => {
@@ -1572,15 +1494,7 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
               </svg>
             </div>
             <div className={classes.realDialog}>
-              <DialogTitle
-                  className={classes.dialogTitle}
-                  style={{
-                    padding: 20,
-                    fontWeight: 700,
-                    fontSize: 24,
-                    lineHeight: '32px',
-                    color: '#131313',
-                  }}>
+              <DialogTitle className={classes.dialogTitle}>
                 <div style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -1591,14 +1505,7 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
                   </div>
 
                   <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        width: 20,
-                        height: 20,
-                        cursor: 'pointer',
-                      }}
+                      className={classes.dialogClose}
                       onClick={closeSelect}
                   >
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1609,8 +1516,10 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
               </DialogTitle>
 
               <DialogContent
-                  // className={classes.dialogContent}
-                  style={{ padding: '4px 20px 20px' }}>
+                  classes={{
+                    root: classes.dialogContent,
+                  }}
+              >
                 <div className={classes.inner}>
                   {vestNFTs && (
                       <div className={classes.nfts}>
@@ -1629,7 +1538,7 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
                               >
                                 <div className={classes.nftLeft}>
                                   <span className={classes.nftword}>{option.id}</span>
-                                  <span className={classes.nftExpires}>Expires: </span>
+                                  <span className={classes.nftExpires}>Expires: {moment.unix(option.lockEnds).format("YYYY/MM/DD")}</span>
                                 </div>
                                 <div className={classes.nftRight}>
                                   <span className={classes.nftValue}>{formatCurrency(option.lockValue)} </span>
@@ -1742,15 +1651,7 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
             </svg>
           </div>
           <div className={classes.realDialog}>
-            <DialogTitle
-                className={classes.dialogTitle}
-                style={{
-                  padding: 20,
-                  fontWeight: 700,
-                  fontSize: 24,
-                  lineHeight: '32px',
-                  color: '#131313',
-                }}>
+            <DialogTitle className={classes.dialogTitle}>
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -1761,14 +1662,7 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
                 </div>
 
                 <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      width: 20,
-                      height: 20,
-                      cursor: 'pointer',
-                    }}
+                    className={classes.dialogClose}
                     onClick={handleClose}
                 >
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1779,8 +1673,10 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
             </DialogTitle>
 
             <DialogContent
-                // className={classes.dialogContent}
-                style={{ padding: '4px 20px 20px' }}>
+                classes={{
+                  root: classes.dialogContent,
+                }}
+            >
               <div className={classes.inner}>
                 <div className={classes.slippage}>
                   <div
@@ -1942,19 +1838,24 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
                   </div>
               )}
 
-              <div className={classes.settings} onClick={() => { setSettingsOpened(!settingsOpened) }}>
-                <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fillRule="evenodd" clipRule="evenodd" d="M9.99997 0.484375C9.34253 0.484375 8.77058 0.905954 7.62667 1.74911L5.90576 3.01757C5.72555 3.1504 5.63545 3.21681 5.53871 3.27266C5.44198 3.32851 5.33941 3.37334 5.13427 3.46299L3.1753 4.31911C1.87315 4.88819 1.22208 5.17272 0.893356 5.74208C0.564637 6.31144 0.643758 7.01756 0.802 8.42979L1.04006 10.5544C1.06499 10.7768 1.07745 10.8881 1.07745 10.9998C1.07745 11.1115 1.06499 11.2227 1.04006 11.4452L0.802 13.5698C0.643758 14.982 0.564637 15.6881 0.893357 16.2575C1.22208 16.8269 1.87315 17.1114 3.1753 17.6805L5.13427 18.5366C5.33941 18.6262 5.44198 18.6711 5.53871 18.7269C5.63545 18.7828 5.72555 18.8492 5.90576 18.982L7.62667 20.2505C8.77058 21.0936 9.34253 21.5152 9.99997 21.5152C10.6574 21.5152 11.2294 21.0936 12.3733 20.2505L12.3733 20.2505L14.0942 18.982C14.2744 18.8492 14.3645 18.7828 14.4612 18.7269C14.558 18.6711 14.6605 18.6262 14.8657 18.5366L16.8246 17.6805C18.1268 17.1114 18.7779 16.8269 19.1066 16.2575C19.4353 15.6881 19.3562 14.982 19.1979 13.5698L18.9599 11.4452L18.9599 11.4452C18.935 11.2227 18.9225 11.1115 18.9225 10.9998C18.9225 10.8881 18.9349 10.7769 18.9599 10.5544L18.9599 10.5544L19.1979 8.42979C19.3562 7.01756 19.4353 6.31144 19.1066 5.74208C18.7779 5.17272 18.1268 4.88819 16.8246 4.31911L14.8657 3.46299L14.8657 3.46298C14.6605 3.37334 14.558 3.32851 14.4612 3.27266C14.3645 3.21681 14.2744 3.1504 14.0942 3.01757L12.3733 1.74911C11.2294 0.905954 10.6574 0.484375 9.99997 0.484375ZM9.99997 14.9998C12.2091 14.9998 14 13.2089 14 10.9998C14 8.79065 12.2091 6.99979 9.99997 6.99979C7.79083 6.99979 5.99997 8.79065 5.99997 10.9998C5.99997 13.2089 7.79083 14.9998 9.99997 14.9998Z" fill="#131313"/>
-                </svg>
-              </div>
 
-              {renderSettings(
-                  settingsOpened,
-                  slippage,
-                  slippageError,
-                  onSlippageChanged,
-                  () => { setSettingsOpened(false) }
-              )}
+
+                    {((createLP && activeTab === "deposit") || (activeTab === "withdraw" && withdrawAction === 'remove')) &&
+                        <div className={classes.settings} onClick={() => { setSettingsOpened(!settingsOpened) }}>
+                          <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fillRule="evenodd" clipRule="evenodd" d="M9.99997 0.484375C9.34253 0.484375 8.77058 0.905954 7.62667 1.74911L5.90576 3.01757C5.72555 3.1504 5.63545 3.21681 5.53871 3.27266C5.44198 3.32851 5.33941 3.37334 5.13427 3.46299L3.1753 4.31911C1.87315 4.88819 1.22208 5.17272 0.893356 5.74208C0.564637 6.31144 0.643758 7.01756 0.802 8.42979L1.04006 10.5544C1.06499 10.7768 1.07745 10.8881 1.07745 10.9998C1.07745 11.1115 1.06499 11.2227 1.04006 11.4452L0.802 13.5698C0.643758 14.982 0.564637 15.6881 0.893357 16.2575C1.22208 16.8269 1.87315 17.1114 3.1753 17.6805L5.13427 18.5366C5.33941 18.6262 5.44198 18.6711 5.53871 18.7269C5.63545 18.7828 5.72555 18.8492 5.90576 18.982L7.62667 20.2505C8.77058 21.0936 9.34253 21.5152 9.99997 21.5152C10.6574 21.5152 11.2294 21.0936 12.3733 20.2505L12.3733 20.2505L14.0942 18.982C14.2744 18.8492 14.3645 18.7828 14.4612 18.7269C14.558 18.6711 14.6605 18.6262 14.8657 18.5366L16.8246 17.6805C18.1268 17.1114 18.7779 16.8269 19.1066 16.2575C19.4353 15.6881 19.3562 14.982 19.1979 13.5698L18.9599 11.4452L18.9599 11.4452C18.935 11.2227 18.9225 11.1115 18.9225 10.9998C18.9225 10.8881 18.9349 10.7769 18.9599 10.5544L18.9599 10.5544L19.1979 8.42979C19.3562 7.01756 19.4353 6.31144 19.1066 5.74208C18.7779 5.17272 18.1268 4.88819 16.8246 4.31911L14.8657 3.46299L14.8657 3.46298C14.6605 3.37334 14.558 3.32851 14.4612 3.27266C14.3645 3.21681 14.2744 3.1504 14.0942 3.01757L12.3733 1.74911C11.2294 0.905954 10.6574 0.484375 9.99997 0.484375ZM9.99997 14.9998C12.2091 14.9998 14 13.2089 14 10.9998C14 8.79065 12.2091 6.99979 9.99997 6.99979C7.79083 6.99979 5.99997 8.79065 5.99997 10.9998C5.99997 13.2089 7.79083 14.9998 9.99997 14.9998Z" fill="#131313"/>
+                          </svg>
+                        </div>
+                    }
+
+                    {renderSettings(
+                        settingsOpened,
+                        slippage,
+                        slippageError,
+                        onSlippageChanged,
+                        () => { setSettingsOpened(false) }
+                    )}
+
             </div>
 
             <div
@@ -2077,23 +1978,17 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
                       <div className={classes.myLiqCont}>
                         <div className={classes.myLiq}>
                           <div className={classes.myLiqBal}>
-                            <div>My Pool</div>
-                            <div>
+                            <div className={classes.myLiqBalTitle}>My Pool</div>
+                            <div className={classes.myLiqBalValue}>
                               {pair?.balance ?? '0.0'}
                             </div>
                           </div>
                           <div className={classes.myLiqBal}>
-                            <div>
-                              My Stake
-                            </div>
-                            <div>{pair?.gauge?.balance ?? '0.00'}</div>
+                            <div className={classes.myLiqBalTitle}>My Stake</div>
+                            <div className={classes.myLiqBalValue}>{pair?.gauge?.balance ?? '0.00'}</div>
                           </div>
                         </div>
                       </div>
-
-
-
-                      {/*{renderDepositInformation()}*/}
 
                       <div className={classes.controls}>
                         {needAddToWhiteList !== "" && (
@@ -2126,7 +2021,7 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
                                     <path fillRule="evenodd" clipRule="evenodd" d="M18 9C18 13.9706 13.9706 18 9 18C4.02944 18 0 13.9706 0 9C0 4.02944 4.02944 0 9 0C13.9706 0 18 4.02944 18 9ZM10 5C10 5.55228 9.55229 6 9 6C8.44771 6 8 5.55228 8 5C8 4.44772 8.44771 4 9 4C9.55229 4 10 4.44772 10 5ZM9.75 14V8H8.25V14H9.75Z" fill="#68727A"/>
                                   </svg>
 
-                                  <div style={{marginLeft: 16,}}>
+                                  <div>
                                     {amount0Error && <>{amount0Error}</>}
 
                                     {!amount0Error && amount1Error && <>{amount1Error}</>}
@@ -2208,7 +2103,7 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
 
                               ].join(" ")}
                           >
-                            <svg style={{marginRight: 12,}} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path fillRule="evenodd" clipRule="evenodd" d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM13 8C13 8.55228 12.5523 9 12 9C11.4477 9 11 8.55228 11 8C11 7.44772 11.4477 7 12 7C12.5523 7 13 7.44772 13 8ZM12.75 17V11H11.25V17H12.75Z" fill="#68727A"/>
                             </svg>
                             <div>
@@ -2401,7 +2296,7 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
 
                             ].join(" ")}
                         >
-                          <svg style={{marginRight: 12,}} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fillRule="evenodd" clipRule="evenodd" d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM13 8C13 8.55228 12.5523 9 12 9C11.4477 9 11 8.55228 11 8C11 7.44772 11.4477 7 12 7C12.5523 7 13 7.44772 13 8ZM12.75 17V11H11.25V17H12.75Z" fill="#68727A"/>
                           </svg>
                           <div>
@@ -2418,7 +2313,7 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
 
                             ].join(" ")}
                         >
-                          <svg style={{marginRight: 12,}} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path fillRule="evenodd" clipRule="evenodd" d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM13 8C13 8.55228 12.5523 9 12 9C11.4477 9 11 8.55228 11 8C11 7.44772 11.4477 7 12 7C12.5523 7 13 7.44772 13 8ZM12.75 17V11H11.25V17H12.75Z" fill="#68727A"/>
                           </svg>
                           <div>

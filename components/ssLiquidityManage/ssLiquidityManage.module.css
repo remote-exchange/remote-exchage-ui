@@ -13,10 +13,12 @@
   color: #E4E9F4;
   margin-bottom: 25px;
 }
+
 .noNFTlinks {
   display: flex;
   gap: 12px;
 }
+
 .noNFTlinkButton {
   background: rgba(119, 155, 244, 0.15);
   border: 1px solid #779BF4;
@@ -61,12 +63,14 @@
   border-radius: 12px;
   padding: 0 16px;
 }
+
 .lockedNFTID {
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   color: #E4E9F4;
 }
+
 .lockedNFTVe {
   font-weight: 400;
   font-size: 16px;
@@ -108,20 +112,13 @@
   height: 56px;
   padding: 16px;
   background: rgba(6, 11, 23, 0.5);
-  /* weak */
-
   border: 1px solid #1F2B49;
   border-radius: 12px;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  /* identical to box height, or 150% */
-
   display: flex;
   align-items: center;
-
-  /* light */
-
   color: #8191B9;
   margin-top: 20px;
   margin-left: 16px;
@@ -250,7 +247,7 @@ input[type=number].mediumInputAmount {
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: 0px;
+  top: 0;
   right: 0;
   cursor: help !important;
 }
@@ -285,13 +282,13 @@ input[type=number].mediumInputAmount {
 
 @keyframes gradient {
   0% {
-    background-position: 0% 50%;
+    background-position: 0 50%;
   }
   50% {
     background-position: 100% 50%;
   }
   100% {
-    background-position: 0% 50%;
+    background-position: 0 50%;
   }
 }
 
@@ -409,12 +406,6 @@ input[type=number].mediumInputAmount {
 
 .reAddPadding {
   position: relative;
-  /*padding: 18px 0 0 0;*/
-  /*background: #DBE6EC !important;*/
-}
-
-.reAddPadding--dark {
-  /*background: #151718 !important;*/
 }
 
 .loadingCircle {
@@ -490,7 +481,6 @@ input[type=number].mediumInputAmount {
   display: flex;
   padding: 12px 20px;
   background: transparent;
-  /*border: 1px solid #86b9d6;*/
   cursor: pointer;
 }
 
@@ -501,13 +491,10 @@ input[type=number].mediumInputAmount {
 
 .selectTokenIconContainer--active {
   background: #0b5e8e;
-  /*border: 1px solid #0b5e8e;*/
-  /*transform: rotate(180deg);*/
 }
 
 .slippageIconContainer--dark {
   background: transparent;
-  /*border: 1px solid #5F7285;*/
 }
 
 .slippageIconContainer--dark.slippageIconContainer--active {
@@ -555,8 +542,6 @@ input[type=number].mediumInputAmount {
 }
 
 .textField {
-  /*margin-top: 2px;*/
-  /*margin-bottom: 2px;*/
   position: relative;
   background-color: #131314;
 }
@@ -570,22 +555,7 @@ input[type=number].mediumInputAmount {
   border-radius: 12px;
 }
 
-.textField--amount0-dark {
-  /*padding: 16px 16px 22px 22px;*/
-  /*border-radius: 12px;*/
-  /*height: 172px;*/
-  /*background-image: url("/images/ui/swap-coin-top--dark.svg");*/
-}
-
-.textField--amount1-dark {
-  /*margin-top: 72px;*/
-  /*padding: 16px 16px 22px 22px;*/
-  /*border-radius: 12px;*/
-}
-
 .textField--withdraw-dark {
-   /*height: 136px;*/
-   /*background-image: url("/images/ui/withdraw-tokens--dark.svg");*/
   border-radius: 12px;
   padding: 20px;
 }
@@ -610,19 +580,20 @@ input[type=number].mediumInputAmount {
   height: 18px;
   margin-right: 10px;
   cursor: pointer;
-  /*margin-left: 24px;*/
 }
 
 .inputTitleText {
   display: flex;
-  /*margin: 0 0 4px 6px !important;*/
   position: absolute;
   top: 20px;
   left: 20px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #F6F7F9;
 }
 
-.inputBalanceText,
-.inputTitleText {
+.inputBalanceText {
   font-style: normal !important;
   font-weight: 500 !important;
   font-size: 14px !important;
@@ -663,7 +634,6 @@ input[type=number].mediumInputAmount {
   padding: 20px;
   gap: 40px;
   width: 100%;
-  margin-bottom: 12px;
 }
 
 .largeInput {
@@ -675,12 +645,6 @@ input[type=number].mediumInputAmount {
   outline: none !important;
   color: #F6F7F9 !important;
 }
-
-/*.largeInput--dark {
-  color: #C6CDD2 !important;
-  -webkit-text-fill-color: #C6CDD2 !important;
-  background-color: gray;
-}*/
 
 .tokenText {
   position: absolute !important;
@@ -744,14 +708,11 @@ input[type=number].mediumInputAmount {
 
 .swapIconContainer,
 .swapIconContainerWithdraw {
-  /*position: absolute;*/
   width: 40px;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  /*margin-left: 320px;*/
-  /*margin-top: -20px;*/
   z-index: 11;
 }
 
@@ -762,14 +723,8 @@ input[type=number].mediumInputAmount {
 }
 
 .swapIconContainer {
-  /*position: absolute;*/
   width: 70px;
   height: 32px;
-  /*background: #DBE6EC;*/
-  /*border: 1px solid #86B9D6;*/
-  /*border-radius: 100px;*/
-  /*margin-top: -18px;*/
-  /*margin-left: 20px;*/
   cursor: pointer;
 }
 
@@ -781,16 +736,9 @@ input[type=number].mediumInputAmount {
   /*background: #86B9D6;*/
 }
 
-/*.swapIconContainer--dark {*/
-  /*background: #151718;*/
-/*}*/
-
 .swapIconContainerInside {
-  /*width: 40px;*/
   height: 32px;
   border-radius: 100px;
-  /*background: #B9DFF5;*/
-  /*transition: all 0.32s ease;*/
 }
 
 .swapIconContainerIcon {
@@ -961,18 +909,10 @@ input[type=number].mediumInputAmount {
 .massiveInputAmount {
   display: flex;
   flex-grow: 1;
-  /*background-color: #181d2d;*/
-
-  /*margin-top: 2px;*/
-
 }
 
 .massiveInputAmountUnstake {
-  /*position: absolute !important;*/
-  /*left: 20px;*/
-  /*top: 22px;*/
   border: none !important;
-  /*margin-right: 20px !important;*/
 }
 
 .massiveInputAddress {
@@ -1013,17 +953,10 @@ input[type=number].mediumInputAmount {
   display: flex;
   align-items: center;
   width: 100%;
-  /*height: 75px;*/
-  /*background: #B9DFF5;*/
 }
 
 .mediumInputContainer--withdrawAmount0 {
   margin-right: 20px;
-}
-
-.mediumInputContainer--dark {
-  /*background: #181d2d;*/
-  /*border-radius: 12px;*/
 }
 
 .mediumInputAssetSelect {
@@ -1045,7 +978,6 @@ input[type=number].mediumInputAmount {
 .mediumdisplayDualIconContainer {
   width: 40px;
   height: 40px;
-  /*margin-left: 20px;*/
   position: relative;
 }
 
@@ -1056,11 +988,9 @@ input[type=number].mediumInputAmount {
 }
 
 .mediumdisplayAssetIcon {
-  /*border: 1px solid #9BC9E4;*/
   border-radius: 50px;
   width: 40px;
   height: 40px;
-  /*padding: 2px;*/
 }
 
 .mediumInputAmountContainer {
@@ -1084,11 +1014,6 @@ input[type=number].mediumInputAmount {
   outline: none !important;
   color: #9A9FAF !important;
   -webkit-text-fill-color: #9A9FAF !important;
-}
-
-.mediumInput--dark {
-  /*color: #C6CDD2 !important;*/
-  /*-webkit-text-fill-color: #C6CDD2 !important;*/
 }
 
 .receiveAssets {
@@ -1300,17 +1225,20 @@ input[type=number].mediumInputAmount {
 }
 
 
-@media (max-width: 860px) {
+@media (max-width: 987px) {
   .massiveInputAssetSelect {
-    margin-bottom: 0;
-    height: 54px;
+    height: 48px;
+    padding: 0;
+  }
+  .massiveInputAssetSelect > div {
+    width: 100%;
   }
   .massiveInputAssetSelect > div, .massiveInputAssetSelect > div > div, .massiveInputAssetSelect > div > div > div {
-    height: 54px;
+    height: 48px;
   }
 
   .massiveInputAssetSelect > div > div > div {
-    padding: 12px 4px;
+    padding: 12px 8px;
   }
 
   .massiveInputAssetSelect > div > div > div > div > div {
@@ -1319,6 +1247,11 @@ input[type=number].mediumInputAmount {
 
   .nftItems {
     width: 100%;
+  }
+
+  .massiveInputAmountWrapperLong {
+    height: 76px;
+    padding: 32px 12px 0 12px;
   }
 }
 
@@ -1359,22 +1292,15 @@ input[type=number].mediumInputAmount {
 }
 
 .toggleOption {
-
   height: 40px;
-  /*padding: 14px;*/
   display: flex;
   align-items: center;
   justify-content: center;
-  /*flex-basis: auto;*/
   flex-grow: 1;
   flex-shrink: 1;
   width: 1%;
   color: #FFFFFF;
-  /*background: #171D2D;*/
-  /*border: 1px solid #1F2B49;*/
-  /*transition: all ease 300ms;*/
   cursor: pointer;
-  /*border-radius: 14px;*/
 }
 
 .toggleOption:hover {
@@ -1390,25 +1316,7 @@ input[type=number].mediumInputAmount {
   margin-right: 10px;
 }
 
-/* .toggleOption:hover {
-  background: #394178 !important;
-} */
-
-/* .toggleOption.active {
-  color: #7E99B0;
-} */
-
-.toggleOption--dark {
-  /* border: 1px solid transparent; */
-  /* background: #1a1c2c; */
-}
-
-/* .toggleOption--dark.active {
-  border: 1px solid #5F7285;
-} */
-
 .toggleOptionText {
-  /*width: 100%;*/
   text-align: center;
   font-weight: 500 !important;
   font-size: 16px !important;
@@ -1417,21 +1325,9 @@ input[type=number].mediumInputAmount {
   margin-right: 10px !important;
 }
 
-/* .toggleOption .toggleOptionText {
-  color: #0B5E8E;
-} */
-
-/* .toggleOption--dark .toggleOptionText {
-  color: #FFFFFF;
-} */
-
 .toggleOption.active .toggleOptionText {
   color: #131313 !important;
 }
-
-/* .toggleOption--dark.active .toggleOptionText {
-  color: #4CADE6;
-} */
 
 .tokenSelector {
   cursor: pointer;
@@ -1447,7 +1343,6 @@ input[type=number].mediumInputAmount {
   padding: 12px;
   justify-content: space-between;
 }
-
 
 .selectorLeft {
   display: flex;
@@ -1523,7 +1418,6 @@ input[type=number].mediumInputAmount {
   background: #060B17;
 }
 
-
 .list > li,
 .list--dark > li {
   padding: 0 !important;
@@ -1535,13 +1429,7 @@ input[type=number].mediumInputAmount {
 .list--dark > li > .menuOption {
   width: 100%;
   padding: 10px 16px !important;
-  /*border: 1px solid #0B5E8E !important;*/
 }
-
-@media (max-width: 860px) {
-
-}
-
 
 .list > li:not(:last-of-type) > .menuOption,
 .list--dark > li:not(:last-of-type) > .menuOption {
@@ -1663,7 +1551,6 @@ input[type=number].mediumInputAmount {
   border: 1px solid #5F7285;
 }
 
-
 .smallInputContainer {
   display: flex;
   flex-wrap: wrap;
@@ -1681,7 +1568,7 @@ input[type=number].mediumInputAmount {
   display: flex;
   align-items: center;
   position: absolute;
-  top: 0px;
+  top: 0;
 }
 
 .inputBalanceSlippage {
@@ -1704,6 +1591,7 @@ input[type=number].mediumInputAmount {
   font-size: 16px;
   line-height: 24px;
   min-height: 56px;
+  gap: 16px;
 }
 
 .disclaimerContainerDefault {
@@ -1747,11 +1635,6 @@ input[type=number].mediumInputAmount {
   color: #E4E9F4;
 }
 
-.disclaimerContainerWarning {
-  /*border: 1px solid #F2D056;*/
-  /*color: #E4E9F4;*/
-}
-
 .buttonOverride {
   background: #7DB857 !important;
   border-radius: 16px !important;
@@ -1790,12 +1673,6 @@ input[type=number].mediumInputAmount {
   right: -12px;
 }
 
-/*.buttonOverride--dark {
-  background: #D3F85A !important;
-  border-radius: 12px !important;
-  color: #060B17 !important;
-}*/
-
 .buttonOverride--dark:not(:disabled):hover {
   /*background: #c5ff00 !important;*/
 }
@@ -1812,11 +1689,10 @@ input[type=number].mediumInputAmount {
 }
 
 .liqWrapper {
-  /*background-color: #131314;*/
   border: 1px solid rgba(104, 114, 122, 0.4);
   border-radius: 16px;
   padding: 20px 20px 6px 20px;
-  /*margin-top: 12px;*/
+  margin-top: 12px;
   width: 100%;
 }
 
@@ -1834,7 +1710,6 @@ input[type=number].mediumInputAmount {
 .liqHeader {
   position: relative;
   height: 40px;
-  /*padding-left: 24px;*/
   font-weight: 500;
   font-size: 14px;
   line-height: 120%;
@@ -1842,7 +1717,6 @@ input[type=number].mediumInputAmount {
 }
 
 .liqHeaderWithdraw {
-  /*padding-left: 42px;*/
   align-items: flex-start !important;
 }
 
@@ -1866,15 +1740,10 @@ input[type=number].mediumInputAmount {
 
 .liqBody {
   position: relative;
-  /*height: 78px;*/
-  /*margin: 0 0 12px 20px;*/
-  /*padding-left: 20px;*/
   border-top: none;
 }
 
 .liqBodyIn {
-  /*background: #171D2D;*/
-  /*margin: 0 20px 0 40px;*/
   border-radius: 12px;
 }
 
@@ -2019,7 +1888,6 @@ input[type=number].mediumInputAmount {
   flex-wrap: wrap;
   width: 100%;
   color: #E4E9F4;
-  /*border-bottom: 1px solid #8191B9;*/
   margin-top: 20px;
   gap: 20px;
 }
@@ -2070,9 +1938,7 @@ input[type=number].mediumInputAmount {
   width: 28px;
 }
 
-.boostCalculator {
-  /*padding-top: 20px;*/
-}
+.boostCalculator {}
 
 @media (max-width:1919px) {
   .bigscreenSidebar {
@@ -2116,9 +1982,9 @@ input[type=number].mediumInputAmount {
   .backIcon {
     margin-right: 2px;
   }
+
   .container {
     position: relative;
-    /*margin-top: 60px;*/
   }
 
   .titleSection {
@@ -2137,7 +2003,7 @@ input[type=number].mediumInputAmount {
     height: 72px;
     justify-content: center;
     position: absolute;
-    top: 0px;
+    top: 0;
     left: 95px;
   }
 
@@ -2151,571 +2017,6 @@ input[type=number].mediumInputAmount {
 
   .bigscreenSidebar {
     display: none;
-  }
-}
-
-@media (max-width: 860px) {
-  .titleSection {
-    top: -68px;
-    display: flex;
-    width: 48px;
-    height: 48px;
-  }
-
-  .titleSectionInline {
-    top: 0;
-    display: flex;
-    width: 48px;
-    height: 48px;
-  }
-
-  .toggleButtons {
-    margin-left: 60px;
-    width: calc(100% - 60px);
-    height: 48px;
-    margin-bottom: 20px;
-  }
-
-  .topLeftButton,
-  .bottomLeftButton {
-    height: 100%;
-    min-height: 40px;
-    font-size: 12px;
-  }
-
-  .nftTitle {
-    min-width: 100%;
-  }
-  .refreshWarnBlock {
-    display: none;
-  }
-  .displayAssetIcon {
-    width: 20px;
-    height: 20px;
-  }
-
-  .massiveInputAssetSelectSingle {
-    min-width: 140px;
-    margin-bottom: 0;
-  }
-
-  .massiveInputAssetSelectSingle > div > div > div {
-    height: 54px;
-  }
-
-  .massiveInputAssetSelectSingle > div > div > div > div:before {
-    width: 4px;
-    height: 4px;
-  }
-  .massiveInputAssetSelectSingle > div > div > div > div:after {
-    width: 4px;
-    height: 4px;
-  }
-  .massiveInputAssetSelectSingle > div > div > div > div {
-    width: 4px;
-    height: 4px;
-  }
-  .massiveInputAssetSelectSingle > div > div > div > img {
-    width: 20px;
-    height: 20px;
-  }
-
-  .liqBodyIn {
-    margin: 0 20px 0 36px;
-  }
-
-  .liqHeaderWithdraw {
-    left: -148px;
-    width: 270px;
-  }
-
-  .mediumdisplayDualIconContainerTitle {
-    font-size: 12px;
-  }
-
-  .liqTokens {
-    width: 64%;
-  }
-
-  .nftRow {
-    flex-direction: column;
-  }
-  .flyPercent {
-    position: absolute;
-    right: 26px;
-    font-size: 20px;
-    color: #8191B9 !important;
-    top: 52px;
-  }
-
-  .flyPercentWithdraw {
-    top: 12px;
-    right: 4px;
-    font-size: 20px;
-  }
-
-  .inputBalanceTextContainerForPair {
-    left: 97px;
-    top: 14px;
-    width: 229px;
-  }
-
-  .myLiqCont {
-    padding: 0;
-  }
-  .myLiqSpacer {
-    display: none;
-  }
-  .myLiqSplit {
-    display: none;
-  }
-  .myLiqBal {
-    /*width: 100%;*/
-    flex: 1 1 100%;
-  }
-
-  .depositSwitcherLabelCont {
-    width: 100%;
-    margin-top: 4px;
-    position: relative !important;
-  }
-
-  .container,
-  .container3,
-  .reAddPadding3 {
-    width: 360px;
-  }
-
-  .controls {
-    flex-direction: column;
-  }
-
-  .controlItem {
-    width: 100%;
-  }
-
-  .controlItem:first-child {
-    margin-right: 0;
-    margin-bottom: 20px;
-  }
-
-  .top {
-    width: calc(100% + 2px);
-  }
-
-  .textField {
-    width: 100%;
-  }
-
-  .textField--amount0-dark,
-  .textField--withdraw-dark {
-    width: 350px;
-    padding: 16px;
-    border-radius: 14px;
-  }
-
-  .textField--amount1-dark {
-    margin-top: -16px;
-    width: 350px;
-    padding: 16px;
-    border-radius: 14px;
-  }
-
-  .textField--To-dark {
-    margin-top: -50px;
-  }
-
-  .inputBalanceText,
-  .inputTitleText {
-    font-size: 12px !important;
-  }
-
-  .inputBalanceTextContainer {
-    position: absolute;
-    left: 99px;
-    top: 14px;
-    width: 231px;
-  }
-
-  .swapIconContainer,
-  .swapIconContainerWithdraw {
-    position: static;
-    background-repeat: no-repeat;
-    /*margin-left: -206px;*/
-    margin-top: -16px;
-  }
-
-  .swapIconContainerWithdraw {
-    position: absolute;
-    /*margin-left: 150px;*/
-    margin-top: -20px;
-    padding-left: 10px;
-  }
-
-  .swapIconContainer {
-    width: 62px;
-    height: 62px;
-    position: relative;
-  }
-
-  .swapIconContainerInside {
-    width: 46px;
-    height: 46px;
-  }
-
-  .swapIconContainer svg {
-    transform: scale(0.83);
-  }
-
-  .mediumInputContainer {
-    width: 100%;
-    height: 54px;
-  }
-
-  .mediumdisplayDualIconContainer {
-    margin-left: 10px;
-  }
-
-  .mediumInputContainer--withdrawAmount0 {
-    margin-right: 20px;
-  }
-
-  .mediumInputContainer--withdrawAmount0,
-  .mediumInputContainer--withdrawAmount1 {
-    /*border-right: 1px solid #86B9D6;*/
-  }
-
-  .mediumInputContainer--dark.mediumInputContainer--withdrawAmount0,
-  .mediumInputContainer--dark.mediumInputContainer--withdrawAmount1 {
-    /*border-right: 1px solid #5F7285;*/
-  }
-
-  .swapInputs {
-    align-items: center;
-  }
-
-  .inputBalanceText {
-    left: 90px;
-    padding-top:0;
-  }
-
-  .displayDualIconContainer {
-    width: 60px;
-    height: 60px;
-  }
-
-  .displayAssetIcon {
-    width: 40px;
-    height: 40px;
-  }
-
-  .largeInput {
-    font-size: 18px !important;
-  }
-
-  .massiveInputAmount,
-  .massiveInputAmountDate {
-    height: 54px;
-  }
-
-
-  .smallerText,
-  .smallerTextDate {
-    font-size: 12px !important;
-    top: 74px;
-    left: 100px;
-  }
-
-  .warningWarning,
-  .depositInfoHeading,
-  .priceInfo > .text {
-    font-size: 12px !important;
-  }
-
-  .priceInfos {
-    background-image: none !important;
-    border: 1px solid #86B9D6;
-  }
-
-  .priceInfos--dark {
-    border: 1px solid #5F7285;
-  }
-
-  .priceInfo {
-    padding: 10px;
-  }
-
-  .priceInfo:not(:last-child) {
-    border-right: 1px solid #86B9D6;
-  }
-
-  .priceInfos--dark .priceInfo:not(:last-of-type) {
-    border-right: 1px solid #5F7285;
-  }
-
-  .routeLinesLeft,
-  .routeLinesRight {
-    width: 35%;
-  }
-
-  .routeArrow--dark {
-    background: var(--background-dark) url("/images/ui/swap-route-arrow--dark.svg");
-  }
-
-  .routeArrow {
-    position: absolute;
-  }
-
-  .slippage {
-    bottom: -45px;
-    left: 20px;
-  }
-
-  .displayAssetIconWithdraw {
-    padding: 2px;
-    border-width: 1px;
-  }
-
-  .dialogContainer {
-    width: 100% !important;
-  }
-
-  .dialogTitle {
-    padding: 20px 20px 0 !important;
-  }
-
-  .displayDualIconContainerSmall,
-  .assetOptionIcon {
-    width: 40px;
-    height: 40px;
-  }
-
-  .dialogContent {
-    padding: 20px !important;
-  }
-
-  .assetSelectBalance {
-    margin-left: 10px;
-  }
-
-  .assetSymbolName,
-  .assetSelectBalanceText {
-    font-size: 14px !important;
-  }
-
-  .assetSymbolName2,
-  .assetSelectBalanceText2 {
-    font-size: 12px !important;
-  }
-
-  .assetSearchResults {
-    min-width: auto;
-  }
-
-  .vestPeriodLabel {
-    padding: 9px 8px;
-    white-space: nowrap;
-  }
-
-  .vestInfo {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .vestInfoText {
-    width: 100%;
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-  }
-
-  .vestInfoTextSec {
-    flex-direction: row;
-  }
-
-  .vestInfoTextTop--dark {
-    border-right: none;
-    border-bottom: 1px solid #5F7285;
-  }
-
-  .amount {
-    font-size: 14px !important;
-  }
-
-  .toggleOptionText {
-    /*font-size: 12px !important;*/
-  }
-
-  .togglesWithdraw > div{
-    flex-wrap: wrap;
-  }
-
-  .toggleOption {
-    width: 100%;
-  }
-
-  .toggleOption:first-child {
-    margin-bottom: 10px;
-    margin-right: 0 !important;
-  }
-
-  .tokenSelectInput {
-    padding: 4.5px 0 4.5px 5px !important;
-  }
-
-  .popoverPaper {
-    width: 300px !important;
-    padding: 20px !important;
-  }
-
-  .inputsContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /*padding: 0 20px;*/
-  }
-
-  .amountsContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .inputTitleText {
-    left: 10px;
-    margin: 0 0 8px 0 !important;
-  }
-
-  .disclaimerDivider {
-    width: 100%;
-    top: 0;
-  }
-
-  .multiApprovalButton {
-    width: 320px !important;
-    height: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-left: 0 !important;
-    background: transparent url("/images/ui/btn-simple-disabled.svg") !important;
-  }
-
-  .multiApprovalButton--dark {
-    width: 320px !important;
-    height: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-left: 0 !important;
-    background: transparent url("/images/ui/btn-simple-disabled--dark.svg") !important;
-  }
-
-  .buttonOverride {
-    /*width: 100%;*/
-    min-height: 68px;
-  }
-
-  .tokenText {
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 140%;
-    left: 94px;
-    top: 52px;
-  }
-
-  .tokenTextLabel {
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 120%;
-    left: 94px;
-    top: 77px;
-  }
-
-  .priceInfo > .title {
-    font-size: 14px !important;
-  }
-
-  .liqBodyIconContainer {
-    width: 36px;
-    height: 36px;
-    padding: 2px;
-  }
-
-  .liqBodyIcon {
-    width: 30px;
-    height: 30px;
-  }
-
-  .tokenTextHeader {
-    font-size: 12px;
-  }
-
-  .liqBodyLabel,
-  .liqHeaderLabel {
-    padding-left: 5px;
-    width: 100%;
-  }
-
-  .liqHeader {
-    padding-left: 20px;
-    font-size: 12px;
-  }
-
-  .liqBody {
-    height: 54px;
-  }
-
-  .massiveInputAmountUnstake {
-    left: 10px;
-    top: 14px;
-  }
-
-  .tokenTextSecond {
-    left: 86px;
-    top: 52px;
-    font-size: 14px;
-    width: 100%;
-  }
-
-  .labelSelectSecondary {
-    font-size: 14px !important;
-    line-height: 16px !important;
-  }
-
-  .depositHeader {
-    font-weight: 500;
-    font-size: 40px;
-    line-height: 48px;
-  }
-
-  .depositHeaderInline {
-    margin-left: 62px;
-    font-weight: 500;
-    font-size: 40px;
-    line-height: 48px;
-  }
-
-  .depositSwitcherLabel {
-    font-size: 12px;
-  }
-
-  .slippageCont {
-    width: 100%;
-    height: 48px;
-  }
-
-  .slippageRoot {
-    height: 46px;
-    width: 200px !important;
-  }
-
-  .toggles {
-    width: 100%;
-    margin-top: 20px;
-    padding-left: 0;
-    display: flex;
-    flex-wrap: wrap;
   }
 }
 
@@ -2769,7 +2070,6 @@ input[type=number].mediumInputAmount {
   display: flex;
   flex-direction: column;
   width: 438px;
-  height: 256px;
   padding: 20px;
   background: #EAE8E1;
   box-shadow: 8px 8px 0 #6575B1;
@@ -2829,7 +2129,6 @@ input[type=number].mediumInputAmount {
   line-height: 24px;
 }
 
-
 .emptyBlock {
   width: 438px;
 }
@@ -2847,6 +2146,15 @@ input[type=number].mediumInputAmount {
 .topScrollPaper {
   align-items: flex-start !important;
   justify-content: flex-start !important;
+}
+
+.dialogClose {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }
 
 .paperBody {
@@ -3022,18 +2330,21 @@ input[type=number].mediumInputAmount {
   line-height: 28px;
   color: #F6F7F9;
 }
+
 .nftExpires {
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
   color: #9A9FAF;
 }
+
 .nftValue {
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
   color: #F6F7F9;
 }
+
 .nftSymbol {
   font-weight: 500;
   font-size: 16px;
@@ -3106,4 +2417,831 @@ input[type=number].mediumInputAmount {
   display: flex;
   flex-direction: column;
   gap: 26px;
+}
+
+
+@media (max-width: 1919px) {
+  .mainContent {
+    flex-direction: column;
+  }
+
+  .leftBlock {
+    align-items: center;
+    gap: 0;
+  }
+
+  .manageBlock {
+    width: 932px;
+    margin-bottom: 28px;
+  }
+
+  .manageBtn {
+    width: 50%;
+  }
+  .manageBtnActive {
+    width: 50%;
+  }
+
+  .subnav {
+    position: absolute;
+  }
+
+  .withdrawWarn {
+    margin-bottom: 28px;
+    width: 932px;
+  }
+}
+
+@media (max-width: 1369px) {
+  .subnav {
+    position: relative;
+    margin-bottom: 28px;
+  }
+}
+
+@media (max-width: 987px) {
+  .withdrawWarn {
+    margin-bottom: 20px;
+    padding: 8px;
+    gap: 10px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    width: 100%;
+  }
+
+  .titleSection {
+    top: -68px;
+    display: flex;
+    width: 48px;
+    height: 48px;
+  }
+
+  .titleSectionInline {
+    top: 0;
+    display: flex;
+    width: 48px;
+    height: 48px;
+  }
+
+  .toggleButtons {
+    margin-left: 60px;
+    width: calc(100% - 60px);
+    height: 48px;
+    margin-bottom: 20px;
+  }
+
+  .topLeftButton,
+  .bottomLeftButton {
+    height: 100%;
+    min-height: 40px;
+    font-size: 12px;
+  }
+
+  .nftTitle {
+    min-width: 100%;
+    min-height: auto;
+    margin-bottom: 4px;
+  }
+  .refreshWarnBlock {
+    display: none;
+  }
+  .displayAssetIcon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .massiveInputAssetSelectSingle {
+    width: 100%;
+    height: 76px;
+    margin-bottom: 8px;
+    padding: 36px 8px 8px 8px;
+  }
+
+  .massiveInputAssetSelectSingle > div > div > div {
+    height: 32px;
+  }
+
+  .massiveInputAssetSelectSingle > div > div > div > div:before {
+    width: 4px;
+    height: 4px;
+  }
+  .massiveInputAssetSelectSingle > div > div > div > div:after {
+    width: 4px;
+    height: 4px;
+  }
+  .massiveInputAssetSelectSingle > div > div > div > div {
+    /*width: 4px;*/
+    /*height: 4px;*/
+  }
+  .massiveInputAssetSelectSingle > div > div > div > img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .massiveInputAssetSelectSingle > div > div > div > p {
+    margin-left: 8px !important;
+  }
+
+  .liqBodyIn {}
+
+  .liqHeaderWithdraw {}
+
+  .mediumdisplayDualIconContainerTitle {
+    font-size: 12px;
+  }
+
+  .liqTokens {
+    width: 64%;
+  }
+
+  .nftRow {
+    flex-direction: column;
+  }
+  .flyPercent {
+    position: absolute;
+    right: 16px;
+    font-size: 20px;
+    color: #8191B9 !important;
+    top: 85px;
+  }
+
+  .flyPercentWithdraw {
+    top: -8px;
+    right: 4px;
+    font-size: 20px;
+  }
+
+  .inputBalanceTextContainerForPair {
+    left: 10px;
+    top: 64px;
+    width: 100%;
+    padding-right: 20px;
+  }
+
+  .myLiqCont {
+    padding: 0;
+  }
+  .myLiqSpacer {
+    display: none;
+  }
+  .myLiqSplit {
+    display: none;
+  }
+  .myLiqBal {
+    flex-direction: column;
+    padding: 8px;
+    gap: 4px;
+  }
+
+  .depositSwitcherLabelCont {
+    width: 100%;
+    margin-top: 4px;
+    position: relative !important;
+  }
+
+  .container {
+    padding: 12px !important;
+  }
+
+  .container,
+  .container3,
+  .reAddPadding3 {
+    width: 100%;
+  }
+
+  .controls {
+    flex-direction: column;
+  }
+
+  .controlItem {
+    width: 100%;
+  }
+
+  .controlItem:first-child {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .top {
+    width: calc(100% + 2px);
+  }
+
+  .textField {
+    width: 100%;
+  }
+
+  .textField--amount0-dark,
+  .textField--withdraw-dark {
+    width: 100%;
+    /*padding: 12px;*/
+    border-radius: 14px;
+  }
+
+  .textField--amount1-dark {
+    width: 100%;
+    padding: 0;
+    border-radius: 14px;
+  }
+
+  .textField--To-dark {
+    margin-top: -50px;
+  }
+
+  .inputBalanceText,
+  .inputTitleText {
+    font-weight: 500 !important;
+    font-size: 12px !important;
+    line-height: 16px !important;
+  }
+
+  .inputBalanceTextContainer {
+    position: absolute;
+    left: 8px;
+    top: 92px;
+    width: 100%;
+    padding-right: 18px;
+  }
+
+  .swapIconContainer,
+  .swapIconContainerWithdraw {
+    position: static;
+    background-repeat: no-repeat;
+  }
+
+  .swapIconContainerWithdraw {
+    position: absolute;
+    margin-top: -20px;
+    padding-left: 10px;
+  }
+
+  .swapIconContainer {
+    margin-right: 8px;
+    width: 48px;
+    height: 48px;
+    position: relative;
+  }
+
+  .swapIconContainerInside {
+    width: 46px;
+    height: 46px;
+  }
+
+  .swapIconContainer svg {
+    transform: scale(0.83);
+  }
+
+  .mediumInputContainer {
+    width: 100%;
+    height: 54px;
+  }
+
+  .mediumdisplayDualIconContainer {
+    margin-left: 10px;
+  }
+
+  .mediumInputContainer--withdrawAmount0 {
+    margin-right: 20px;
+  }
+
+  .mediumInputContainer--withdrawAmount0,
+  .mediumInputContainer--withdrawAmount1 {}
+
+  .mediumInputContainer--dark.mediumInputContainer--withdrawAmount0,
+  .mediumInputContainer--dark.mediumInputContainer--withdrawAmount1 {}
+
+  .swapInputs {
+    align-items: center;
+  }
+
+  .inputBalanceText {
+    left: 90px;
+    padding-top:0;
+  }
+
+  .displayDualIconContainer {
+    width: 60px;
+    height: 60px;
+  }
+
+  .displayAssetIcon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .largeInput {
+    font-size: 18px !important;
+  }
+
+  .massiveInputAmount,
+  .massiveInputAmountDate {
+    height: 32px;
+  }
+
+
+  .smallerText,
+  .smallerTextDate {
+    font-size: 12px !important;
+    top: 74px;
+    left: 100px;
+  }
+
+  .warningWarning,
+  .depositInfoHeading,
+  .priceInfo > .text {
+    font-size: 12px !important;
+  }
+
+  .priceInfos {
+    background-image: none !important;
+    border: 1px solid #86B9D6;
+  }
+
+  .priceInfos--dark {
+    border: 1px solid #5F7285;
+  }
+
+  .priceInfo {
+    padding: 10px;
+  }
+
+  .priceInfo:not(:last-child) {
+    border-right: 1px solid #86B9D6;
+  }
+
+  .priceInfos--dark .priceInfo:not(:last-of-type) {
+    border-right: 1px solid #5F7285;
+  }
+
+  .routeLinesLeft,
+  .routeLinesRight {
+    width: 35%;
+  }
+
+  .routeArrow--dark {
+    background: var(--background-dark) url("/images/ui/swap-route-arrow--dark.svg");
+  }
+
+  .routeArrow {
+    position: absolute;
+  }
+
+  .slippage {
+    bottom: -45px;
+    left: 20px;
+  }
+
+  .displayAssetIconWithdraw {
+    padding: 2px;
+    border-width: 1px;
+  }
+
+  .dialogContainer {
+    width: 100% !important;
+  }
+
+  .dialogTitle {
+    padding: 20px 20px 0 !important;
+  }
+
+  .displayDualIconContainerSmall,
+  .assetOptionIcon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .dialogContent {
+    padding: 20px !important;
+  }
+
+  .assetSelectBalance {
+    margin-left: 10px;
+  }
+
+  .assetSymbolName,
+  .assetSelectBalanceText {
+    font-size: 14px !important;
+  }
+
+  .assetSymbolName2,
+  .assetSelectBalanceText2 {
+    font-size: 12px !important;
+  }
+
+  .assetSearchResults {
+    min-width: auto;
+  }
+
+  .vestPeriodLabel {
+    padding: 9px 8px;
+    white-space: nowrap;
+  }
+
+  .vestInfo {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .vestInfoText {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .vestInfoTextSec {
+    flex-direction: row;
+  }
+
+  .vestInfoTextTop--dark {
+    border-right: none;
+    border-bottom: 1px solid #5F7285;
+  }
+
+  .amount {
+    font-size: 14px !important;
+  }
+
+  .toggleOptionText {
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    line-height: 20px !important;
+  }
+
+  .togglesWithdraw > div{
+    flex-wrap: wrap;
+  }
+
+  .toggleOption {
+    height: 28px;
+  }
+
+  .toggleOption:first-child {
+    margin-right: 0 !important;
+  }
+
+  .tokenSelectInput {
+    padding: 4.5px 0 4.5px 5px !important;
+  }
+
+  .popoverPaper {
+    width: 300px !important;
+    padding: 20px !important;
+  }
+
+  .inputsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+  }
+
+  .amountsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .inputTitleText {
+    top: 8px;
+    left: 8px;
+    margin: 0 0 8px 0 !important;
+  }
+
+  .disclaimerDivider {
+    width: 100%;
+    top: 0;
+  }
+
+  .multiApprovalButton {
+    width: 320px !important;
+    height: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: 0 !important;
+    background: transparent url("/images/ui/btn-simple-disabled.svg") !important;
+  }
+
+  .multiApprovalButton--dark {
+    width: 320px !important;
+    height: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: 0 !important;
+    background: transparent url("/images/ui/btn-simple-disabled--dark.svg") !important;
+  }
+
+  .buttonOverride {
+    width: 100% !important;
+    height: 48px !important;
+    margin-top: 12px !important;
+    font-weight: 700 !important;
+    font-size: 16px !important;
+    line-height: 16px !important;
+  }
+
+  .tokenText {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 140%;
+    left: 94px;
+    top: 52px;
+  }
+
+  .tokenTextLabel {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 120%;
+    left: 94px;
+    top: 77px;
+  }
+
+  .priceInfo > .title {
+    font-size: 14px !important;
+  }
+
+  .liqBodyIconContainer {
+    width: 36px;
+    height: 36px;
+    padding: 2px;
+  }
+
+  .liqBodyIcon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .tokenTextHeader {
+    font-size: 12px;
+  }
+
+  .liqBodyLabel,
+  .liqHeaderLabel {
+    padding-left: 5px;
+    width: 100%;
+  }
+
+  .liqHeader {
+    font-size: 12px;
+  }
+
+  .liqBody {
+    height: 54px;
+  }
+
+  .massiveInputAmountUnstake {}
+
+  .tokenTextSecond {
+    left: 86px;
+    top: 52px;
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .labelSelectSecondary {
+    font-size: 14px !important;
+    line-height: 16px !important;
+  }
+
+  .depositHeader {
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 48px;
+  }
+
+  .depositHeaderInline {
+    margin-left: 62px;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 48px;
+  }
+
+  .depositSwitcherLabel {
+    font-size: 12px;
+  }
+
+  .slippageCont {
+    width: 100%;
+    height: 48px;
+  }
+
+  .slippageRoot {
+    height: 46px;
+    width: 200px !important;
+  }
+
+  .toggles {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .manageBlock {
+    width: 100%;
+    margin-bottom: 28px;
+    padding: 12px;
+  }
+
+  .blockInner {
+    width: 100%;
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .massiveInputContainer {
+    flex-direction: column;
+  }
+
+  .massiveInputAmountWrapper {
+    width: 100%;
+    height: 76px;
+    margin: 0;
+    padding: 36px 8px 8px 8px;
+  }
+
+  .tokenPrice {
+    right: 8px;
+    text-align: right;
+    top: 8px;
+    font-weight: 500 !important;
+    font-size: 12px !important;
+    line-height: 16px !important;
+    color: #9A9FAF !important;
+  }
+
+  .swapAssetsBlock {
+    width: 100%;
+    height: 48px;
+    align-items: center;
+  }
+
+  .swapAssetText {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .walletText {
+    font-weight: 500 !important;
+    font-size: 12px !important;
+    line-height: 16px !important;
+  }
+
+  .myLiq {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .myLiqBalTitle {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color: #68727A;
+  }
+
+  .myLiqBalValue {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color: #353A42;
+  }
+
+  .disclaimerContainer {
+    margin-top: 12px;
+    min-height: 36px;
+    padding: 8px;
+    gap: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .blockTitle {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32px;
+    text-shadow: 1px 1px 0 #6575B1;
+    margin-bottom: 12px;
+  }
+
+  .myLiqSplitBottom {
+    position: absolute;
+    bottom: -13px;
+    left: 50%;
+    height: 12px !important;
+    width: 1px !important;
+  }
+
+  .liqWrapper {
+    height: 76px;
+    padding: 8px;
+  }
+}
+
+
+@media (max-width: 540px) {
+  .dialogClose {
+    display: none;
+  }
+
+  .dialogContent {
+    padding: 0 !important;
+  }
+  .dialogTitle {
+    padding: 12px !important;
+    font-weight: 700 !important;
+    font-size: 20px !important;
+    line-height: 28px !important;
+  }
+
+  .inner {
+    border-radius: 20px 20px 0 0;
+    padding: 20px 20px 40px;
+  }
+
+  .paperBody {
+    margin: auto auto 0 auto !important;
+    background: transparent !important;
+  }
+
+  .slippageValueButton {
+    padding: 8px;
+    height: 36px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    border-radius: 8px !important;
+  }
+
+  .slippageValueButtonActive {
+    padding: 8px;
+    height: 36px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    border-radius: 8px !important;
+  }
+
+  .inputBalanceSlippageText {
+    height: 36px !important;
+    padding: 8px !important;
+    border-radius: 8px !important;
+  }
+
+  .settingsSaveButton {
+    height: 48px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 16px;
+  }
+
+  .inputBalanceSlippage {
+    padding-left: 0;
+  }
+
+  .menuOption {
+    height: 48px;
+    padding: 8px !important;
+  }
+
+  .nftLeft {
+    padding: 0;
+    height: 32px;
+    justify-content: space-around;
+  }
+  .nftRight {
+    padding: 0;
+  }
+
+  .nftword {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 16px;
+  }
+
+  .nftExpires {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 12px;
+  }
+  .nftValue {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+  }
+  .nftSymbol {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .nftChoose {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+  }
 }
