@@ -11,7 +11,7 @@ import Configure from "./configure";
 
 import stores from "../stores/index.js";
 
-import { ACTIONS } from "../stores/constants";
+import {ACTIONS, DAPP_NAME} from "../stores/constants";
 import "../styles/global.css";
 import "../styles/variables.css";
 import "../styles/grid.css";
@@ -93,7 +93,7 @@ export default function MyApp({ Component, pageProps }) {
     <ThemeProvider theme={theme}>
       <React.Fragment>
         <Head>
-          <title>Cone</title>
+          <title>{DAPP_NAME}</title>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Head>
         <AppThemeProvider value={{ appTheme, setAppTheme }}>

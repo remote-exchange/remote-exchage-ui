@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Vesting from '../../../components/ssVest';
 import stores from '../../../stores';
-import { ACTIONS } from '../../../stores/constants';
+import {ACTIONS, DAPP_NAME} from '../../../stores/constants';
 import { NotConnect } from "../../../components/notConnect/index";
 
 function Vest() {
@@ -31,7 +31,7 @@ function Vest() {
   return (
     <NotConnect
       title="Vest"
-      description="Swap between Cone supported stable and volatile assets."
+      description={`Swap between ${DAPP_NAME} supported stable and volatile assets.`}
       buttonText="LAUNCH APP"
     >
       <Vesting />

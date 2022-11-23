@@ -4,7 +4,7 @@ import CoinbaseWalletSDK from '@coinbase/wallet-sdk'
 import WalletConnectProvider from '@walletconnect/web3-provider'
 import stores from '../../stores'
 import Web3 from 'web3'
-import {ACTIONS} from '../../stores/constants'
+import {ACTIONS, DAPP_NAME} from '../../stores/constants'
 import {ethers} from 'ethers'
 
 const {CONNECTION_CONNECTED,} = ACTIONS;
@@ -26,7 +26,7 @@ async function connect() {
       walletlink: {
         package: CoinbaseWalletSDK,
         options: {
-          appName: 'Cone app',
+          appName: `${DAPP_NAME} app`,
           infuraId: `${process.env.NEXT_PUBLIC_INFURA_KEY}`,
           rpc: {
             56: `https://bsc-dataseed.binance.org/`,

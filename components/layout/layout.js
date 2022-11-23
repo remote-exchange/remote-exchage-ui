@@ -3,7 +3,7 @@ import classes from "./layout.module.css";
 import Header from "../header";
 import SnackbarController from "../snackbar";
 import { useAppThemeContext } from '../../ui/AppThemeProvider';
-
+import {DAPP_NAME, NETWORK_NAME} from "../../stores/constants"
 
 export default function Layout({
   children,
@@ -32,8 +32,8 @@ export default function Layout({
           as="font"
           crossOrigin=""
         />*/}
-        <meta name="description" content="Cone allows low cost, near 0 slippage trades on uncorrelated or tightly correlated assets built on Fantom." />
-        <meta name="og:title" content="Cone" />
+        <meta name="description" content={`${DAPP_NAME} allows low cost, near 0 slippage trades on uncorrelated or tightly correlated assets built on ${NETWORK_NAME}.`} />
+        <meta name="og:title" content={DAPP_NAME} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <div
