@@ -26,12 +26,12 @@ const renderAssetOption = (item, callbackClick) => {
   return (
     <div className={classes.selectItem} key={item.id} onClick={() => callbackClick(item)}>
       <div className={classes.selectItemCol}>
-        <div className={classes.selectItemTitle}>NFT #{item.id}</div>
-        <div className={classes.selectItemValue}>{Number(item.lockAmount).toFixed(2)} CONE</div>
+        <div className={classes.selectItemTitle}>{item.id}</div>
+        <div className={classes.selectItemValue}>Expires: {moment.unix(item.lockEnds).format("YYYY-MM-DD")}</div>
       </div>
       <div className={classes.selectItemCol}>
-        <div className={classes.selectItemTitle}>{moment.unix(item.lockEnds).format("YYYY-MM-DD")}</div>
-        <div className={classes.selectItemValue}>Expiry date</div>
+        <div className={classes.selectItemTitle}>{Number(item.lockAmount).toFixed(2)}</div>
+        <div className={classes.selectItemValue}>veREMOTE</div>
       </div>
     </div>
   );
