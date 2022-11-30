@@ -6,8 +6,8 @@ function Vote() {
   return (
     <NotConnect
       title="Vote"
-      description="Use your veCONE to vote for your selected liquidity pair's rewards distribution or create a bribe to encourage others to do the same."
-      buttonText="LAUNCH APP"
+      description="Use your veREMOTE to vote for your selected liquidity pair's rewards distribution or create a bribe to encourage others to do the same."
+      buttonText="Launch App"
     >
       <Gauges />
     </NotConnect>

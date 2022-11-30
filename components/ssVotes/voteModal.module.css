@@ -344,3 +344,15 @@
     border-bottom-right-radius: 0 !important;
   }
 }
+
+.tvAntenna {
+  content: '';
+  position: absolute;
+  bottom: calc(100% - 1px);
+  left: 50%;
+  width: 55px;
+  height: 28px;
+  background-image: url("/images/TV.svg");
+  background-repeat: no-repeat;
+  transform: translateX(-50%);
+}

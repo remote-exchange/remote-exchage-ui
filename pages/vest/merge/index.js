@@ -193,7 +193,7 @@ const merge = () => {
 
         <Dialog
           open={open}
-          PaperProps={{ style: { width: "100%", maxWidth: 800, background: 'transpaarent', borderRadius: 20 } }}
+          PaperProps={{ style: { width: "100%", maxWidth: 800, background: 'transpaarent', borderRadius: 20, overflowY: "visible" } }}
           onClick={(e) => {
             if (e.target.classList.contains('MuiDialog-container')) {
               closeModal();
@@ -205,6 +205,7 @@ const merge = () => {
             scrollPaper: classesDialog.scrollPaper,
           }}
         >
+          <div className={classesDialog.tvAntenna} />
           <div className={classesDialog.dialogContainer}>
             <div className={classesDialog.dialogContainerInner}>
               <div className={classesDialog.dialogTitleWrapper}>
@@ -267,7 +268,7 @@ const merge = () => {
 
         <Dialog
           open={open}
-          PaperProps={{ style: { width: "100%", maxWidth: 800, background: 'transpaarent', borderRadius: 20 } }}
+          PaperProps={{ style: { width: "100%", maxWidth: 800, background: 'transpaarent', borderRadius: 20, overflowY: "visible" } }}
           onClick={(e) => {
             if (e.target.classList.contains('MuiDialog-container')) {
               closeModal();
@@ -279,6 +280,7 @@ const merge = () => {
             scrollPaper: classesDialog.scrollPaper,
           }}
         >
+          <div className={classesDialog.tvAntenna} />
           <div className={classesDialog.dialogContainer}>
             <div className={classesDialog.dialogContainerInner}>
               <div className={classesDialog.dialogTitleWrapper}>

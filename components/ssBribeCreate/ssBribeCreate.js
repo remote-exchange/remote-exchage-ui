@@ -607,7 +607,7 @@ function AssetSelectManage({type, value, assetOptions, onSelect, manageLocalAsse
       </div>
 
       <Dialog
-        PaperProps={{ style: { width: "100%", maxWidth: 800, background: 'transpaarent', borderRadius: 20 } }}
+        PaperProps={{ style: { width: "100%", maxWidth: 800, background: 'transpaarent', borderRadius: 20, overflowY: "visible" } }}
         aria-labelledby="simple-dialog-title"
         open={open}
         onClick={(e) => {
@@ -621,6 +621,7 @@ function AssetSelectManage({type, value, assetOptions, onSelect, manageLocalAsse
           scrollPaper: classesDialog.scrollPaper,
         }}
       >
+        <div className={classesDialog.tvAntenna} />
         <div className={classesDialog.dialogContainer}>
           <div className={classesDialog.dialogContainerInner}>
             <div className={classesDialog.dialogTitleWrapper}>
@@ -962,7 +963,7 @@ function AssetSelectPair({type, value, assetOptions, onSelect, manageLocalAssets
       </div>
 
       <Dialog
-        PaperProps={{ style: { width: "100%", maxWidth: 800, background: 'transpaarent', borderRadius: 20 } }}
+        PaperProps={{ style: { width: "100%", maxWidth: 800, background: 'transpaarent', borderRadius: 20, overflowY: "visible" } }}
         aria-labelledby="simple-dialog-title"
         open={open}
         onClick={(e) => {
@@ -976,6 +977,7 @@ function AssetSelectPair({type, value, assetOptions, onSelect, manageLocalAssets
           scrollPaper: classesDialog.scrollPaper,
         }}
       >
+        <div className={classesDialog.tvAntenna} />
         <div className={classesDialog.dialogContainer}>
           <div className={classesDialog.dialogContainerInner}>
             <div className={classesDialog.dialogTitleWrapper}>
