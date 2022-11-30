@@ -161,6 +161,7 @@
 }
 
 .assetSelectIconNameWrapper {
+  flex-grow: 1;
   margin-left: 12px;
 }
 
@@ -171,12 +172,27 @@
 }
 
 .assetSymbolName {
+  position: relative;
+
+  padding-right: 15px;
+
   font-family: "PT Root UI";
   font-weight: 400;
   font-size: 48px;
   line-height: 52px;
 
   color: #f6f7f9;
+}
+
+.assetSymbolName::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 0;
+  border-top: 6px solid #9A9FAF;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  transform: translateY(-50%);
 }
 
 @media (max-width: 767px) {
@@ -271,6 +287,23 @@
     font-size: 28px;
     line-height: 32px;
   }
+}
+
+.smallerTextArrow {
+  flex-grow: 1;
+  position: relative;
+  padding-right: 15px;
+}
+
+.smallerTextArrow::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 0;
+  border-top: 6px solid #9A9FAF;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  transform: translateY(-50%);
 }
 
 .massiveInputAmount {}

@@ -193,24 +193,12 @@ export default function ssBribeCreate() {
         <div className={classes.inputTitleText}>Bribe for :</div>
 
         <div className={classes.massiveInputContainer}>
-          {/* <div className={classes.massiveInputAssetSelect}> */}
-            <AssetSelectPair type={type} value={value} assetOptions={options} onSelect={onChange} manageLocal={false}/>
-          {/* </div> */}
-          <div className={classes.assetSelectIconNameWrapper}>
+          <AssetSelectPair type={type} value={value} assetOptions={options} onSelect={onChange} manageLocal={false} gauge={gauge} />
+          {/* <div className={classes.assetSelectIconNameWrapper}>
             <div className={classes.assetSymbolName}>
               {formatSymbol(gauge?.symbol)}
             </div>
-
-            {/* <Typography
-              variant="subtitle1"
-              className={classes.assetSymbolName2}
-              style={{
-                color: appTheme === "dark" ? '#7C838A' : '#5688A5',
-              }}>
-              {gauge?.isStable ? "Stable Pool" : "Volatile Pool"}
-            </Typography> */}
-          </div>
-
+          </div> */}
         </div>
       </div>
     );
@@ -229,11 +217,8 @@ export default function ssBribeCreate() {
               assetOptions={assetOptions}
               onSelect={onAssetSelect}
               manageLocal={true}
+              assetValue={assetValue}
             />
-
-            <div className={classes.smallerText}>
-              {formatSymbol(assetValue?.symbol)}
-            </div>
           </div>
         </div>
 
@@ -353,7 +338,7 @@ export default function ssBribeCreate() {
   );
 }
 
-function AssetSelectManage({type, value, assetOptions, onSelect, manageLocalAssets}) {
+function AssetSelectManage({type, value, assetOptions, onSelect, manageLocalAssets, assetValue}) {
   const {appTheme} = useAppThemeContext();
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState('');
@@ -593,6 +578,7 @@ function AssetSelectManage({type, value, assetOptions, onSelect, manageLocalAsse
       <div
         className={[classesSelect.displayDualIconContainer, classesSelect.displayDualIconContainerManage].join(' ')}
         onClick={() => { openSearch() }}
+        style={{ cursor: 'pointer' }}
       >
         <img
           className={classesSelect.displayAssetIcon}
@@ -604,6 +590,10 @@ function AssetSelectManage({type, value, assetOptions, onSelect, manageLocalAsse
             e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
           }}
         />
+      </div>
+
+      <div className={[classes.smallerText, classes.smallerTextArrow].join(" ")} style={{ cursor: 'pointer', pointerEvents: 'auto' }} onClick={() => { openSearch() }}>
+        {formatSymbol(assetValue?.symbol)}
       </div>
 
       <Dialog
@@ -654,7 +644,7 @@ function AssetSelectManage({type, value, assetOptions, onSelect, manageLocalAsse
   );
 }
 
-function AssetSelectPair({type, value, assetOptions, onSelect, manageLocalAssets}) {
+function AssetSelectPair({type, value, assetOptions, onSelect, manageLocalAssets, gauge}) {
   const {appTheme} = useAppThemeContext();
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState('');
@@ -936,6 +926,7 @@ function AssetSelectPair({type, value, assetOptions, onSelect, manageLocalAssets
       <div
         className={[classesSelect.displayDualIconContainer, classesSelect.displayDualIconContainerSelect].join(' ')}
         onClick={() => { openSearch() }}
+        style={{ cursor: 'pointer' }}
       >
         <img
           className={classesSelect.displayAssetIcon}
@@ -960,6 +951,10 @@ function AssetSelectPair({type, value, assetOptions, onSelect, manageLocalAssets
             e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
           }}
         />
+      </div>
+
+      <div className={classes.assetSelectIconNameWrapper} onClick={() => { openSearch() }} style={{ cursor: 'pointer' }}>
+        <div className={classes.assetSymbolName}>{formatSymbol(gauge?.symbol)}</div>
       </div>
 
       <Dialog
