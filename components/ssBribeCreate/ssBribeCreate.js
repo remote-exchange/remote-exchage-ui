@@ -226,7 +226,7 @@ export default function ssBribeCreate() {
           <div className={classes.inputBalanceRow}>
             <div className={classes.inputBalanceText}>
               {(assetValue && assetValue.balance) ?
-                ' ' + formatCurrency(assetValue.balance) :
+                'Balance: ' + formatCurrency(assetValue.balance) :
                 ''
               }
             </div>
