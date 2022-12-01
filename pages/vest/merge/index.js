@@ -26,12 +26,12 @@ const renderAssetOption = (item, callbackClick) => {
   return (
     <div className={classes.selectItem} key={item.id} onClick={() => callbackClick(item)}>
       <div className={classes.selectItemCol}>
-        <div className={classes.selectItemTitle}>NFT #{item.id}</div>
-        <div className={classes.selectItemValue}>{Number(item.lockAmount).toFixed(2)} CONE</div>
+        <div className={classes.selectItemTitle}>{item.id}</div>
+        <div className={classes.selectItemValue}>Expires: {moment.unix(item.lockEnds).format("YYYY-MM-DD")}</div>
       </div>
       <div className={classes.selectItemCol}>
-        <div className={classes.selectItemTitle}>{moment.unix(item.lockEnds).format("YYYY-MM-DD")}</div>
-        <div className={classes.selectItemValue}>Expiry date</div>
+        <div className={classes.selectItemTitle}>{Number(item.lockAmount).toFixed(2)}</div>
+        <div className={classes.selectItemValue}>veREMOTE</div>
       </div>
     </div>
   );
@@ -193,7 +193,7 @@ const merge = () => {
 
         <Dialog
           open={open}
-          PaperProps={{ style: { width: "100%", maxWidth: 800, background: 'transpaarent', borderRadius: 20 } }}
+          PaperProps={{ style: { width: "100%", maxWidth: 800, background: 'transpaarent', borderRadius: 20, overflowY: "visible" } }}
           onClick={(e) => {
             if (e.target.classList.contains('MuiDialog-container')) {
               closeModal();
@@ -205,6 +205,7 @@ const merge = () => {
             scrollPaper: classesDialog.scrollPaper,
           }}
         >
+          <div className={classesDialog.tvAntenna} />
           <div className={classesDialog.dialogContainer}>
             <div className={classesDialog.dialogContainerInner}>
               <div className={classesDialog.dialogTitleWrapper}>
@@ -267,7 +268,7 @@ const merge = () => {
 
         <Dialog
           open={open}
-          PaperProps={{ style: { width: "100%", maxWidth: 800, background: 'transpaarent', borderRadius: 20 } }}
+          PaperProps={{ style: { width: "100%", maxWidth: 800, background: 'transpaarent', borderRadius: 20, overflowY: "visible" } }}
           onClick={(e) => {
             if (e.target.classList.contains('MuiDialog-container')) {
               closeModal();
@@ -279,6 +280,7 @@ const merge = () => {
             scrollPaper: classesDialog.scrollPaper,
           }}
         >
+          <div className={classesDialog.tvAntenna} />
           <div className={classesDialog.dialogContainer}>
             <div className={classesDialog.dialogContainerInner}>
               <div className={classesDialog.dialogTitleWrapper}>

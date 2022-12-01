@@ -639,8 +639,8 @@
 
   margin-left: 10px;
 
-  padding-left: 9px;
-  padding-right: 9px;
+  padding-left: 13px;
+  padding-right: 11px;
 
   /*background: rgba(23, 29, 45, 0.5);*/
 
@@ -688,4 +688,26 @@
 }
 .statButton:active > svg > path, .statButton:active > span > svg > path {
   fill: #F6F7F9 !important;
+}
+
+
+.tooltip {
+  padding: 0 !important;
+  margin-top: 4px !important;
+  background: transparent !important;
+}
+
+.tooltipContent {
+  width: 99px;
+  height: 36px;
+  background-image: url("/images/analytics.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  transform: translateX(-45px);
+}
+
+@media (max-width: 650px) {
+  .tooltipContent {
+    transform: none;
+  }
 }

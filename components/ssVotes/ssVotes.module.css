@@ -413,6 +413,11 @@
 
   padding: 0 8px;
 
+  font-family: 'PT Root UI';
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+
   border: none;
   border-radius: 10px;
 
@@ -424,6 +429,8 @@
   .filterButton {
     width: 50%;
     height: 28px;
+    font-size: 14px;
+    line-height: 20px;
     border-radius: 6px;
   }
 }

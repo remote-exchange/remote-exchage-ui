@@ -1,5 +1,6 @@
 .dialogContainer {
   overflow: hidden !important;
+  overflow-y: visible !important;
 }
 
 @media (max-width: 600px) {
@@ -11,6 +12,7 @@
 
 .paperScrollPaper {
   max-height: none !important;
+  margin-top: 50px !important;
   margin-left: auto !important;
   margin-right: auto !important;
 }
@@ -34,6 +36,7 @@
     left: 0;
     width: 100% !important;
     height: 416px;
+    max-height: calc(100vh - 50px) !important;
     margin: 0 !important;
     border-bottom-left-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
@@ -50,7 +53,7 @@
 
 @media (max-width: 600px) {
   .dialogContent {
-    height: 364px;
+    height: 360px;
     margin: 0;
     padding: 12px;
     border-bottom-left-radius: 0;
@@ -69,6 +72,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 56px;
   padding: 20px;
 }
 
@@ -417,4 +421,16 @@
   border-radius: 10px;
   background: #131313;
   color: #f6f7f9;
+}
+
+.tvAntenna {
+  content: '';
+  position: absolute;
+  bottom: calc(100% - 1px);
+  left: 50%;
+  width: 55px;
+  height: 28px;
+  background-image: url("/images/TV.svg");
+  background-repeat: no-repeat;
+  transform: translateX(-50%);
 }
