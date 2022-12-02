@@ -226,6 +226,7 @@ function Setup() {
   );
 
   const onAssetSelect = (type, value) => {
+    setQuote(null);
       let from, to;
     if (type === "From") {
       if (value.address === toAssetValue.address) {
