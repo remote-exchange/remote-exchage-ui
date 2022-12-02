@@ -1,8 +1,8 @@
-import DEFAULT_TOKEN_LIST from './../constants/tokenlists/pancakeswap-extended.json'
+import DEFAULT_TOKEN_LIST from './../constants/tokenlists/goerli.json'
 import {
   BASE_ASSETS_WHITELIST,
   BLACK_LIST_TOKENS,
-  CONE_ADDRESS,
+  REMOTE_ADDRESS,
   CONTRACTS,
   QUERIES,
   RENAME_ASSETS,
@@ -116,7 +116,7 @@ export const getBaseAssets = async () => {
         baseAsset.logoURI = tokenInfo.logoURI;
       }
 
-      if (baseAsset.address.toLowerCase() === CONE_ADDRESS.toLowerCase()) {
+      if (baseAsset.address.toLowerCase() === REMOTE_ADDRESS.toLowerCase()) {
         baseAsset.logoURI = 'https://icons.llama.fi/cone.png'
       }
 
