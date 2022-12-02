@@ -1096,7 +1096,7 @@ export default function EnhancedTable({gauges, filteredGauges, setParentSliderVa
 
                               <Dialog
                                 open={voteTooltipOpen == row.address}
-                                PaperProps={{ style: { width: "100%", maxWidth: 520, background: 'transpaarent', borderRadius: 20 } }}
+                                PaperProps={{ style: { width: "100%", maxWidth: 520, background: 'transpaarent', borderRadius: 20, overflowY: 'visible' } }}
                                 onClick={(e) => {
                                   if (e.target.classList.contains('MuiDialog-container')) {
                                     closeModal();
@@ -1109,7 +1109,9 @@ export default function EnhancedTable({gauges, filteredGauges, setParentSliderVa
                                   // scrollPaper: classesDialog.scrollPaper,
                                 // }}
                               >
+                                <div className={cssVoteModal.tvAntenna} />
                               <div
+                                style={{ overflowY: 'auto' }}
                                 // className={cssVoteModal.voteTooltip}
                                 // style={{display: voteTooltipOpen == row.address ? 'block' : 'none'}}
                               >
@@ -1370,7 +1372,7 @@ export default function EnhancedTable({gauges, filteredGauges, setParentSliderVa
                   <>
                     <Dialog
                       open={voteDialogOpen === row.address}
-                      PaperProps={{ style: { width: "100%", maxWidth: 520, background: 'transpaarent', borderRadius: 20 } }}
+                      PaperProps={{ style: { width: "100%", maxWidth: 520, background: 'transpaarent', borderRadius: 20, overflowY: "visible" } }}
                       onClose={closeModal}
                       onClick={(e) => {
                         if (e.target.classList.contains('MuiDialog-container')) {
@@ -1389,7 +1391,8 @@ export default function EnhancedTable({gauges, filteredGauges, setParentSliderVa
                       //   scrollPaper: classes.dialogBody,
                       }}
                     >
-                      <div>
+                      <div className={cssVoteModal.tvAntenna} />
+                      <div style={{ overflowY: "auto" }}>
                         <div className={cssVoteModal.voteTooltipHeader}>
                           <span className={cssVoteModal.voteTooltipTitle}>Vote for the Pool</span>
                           <span className={cssVoteModal.voteTooltipClose} onClick={() => {
