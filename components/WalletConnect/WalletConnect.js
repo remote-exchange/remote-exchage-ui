@@ -29,9 +29,9 @@ async function connect() {
           appName: `${DAPP_NAME} app`,
           infuraId: `${process.env.NEXT_PUBLIC_INFURA_KEY}`,
           rpc: {
-            56: `https://bsc-dataseed.binance.org/`,
+            5: `https://rpc.ankr.com/eth_goerli`,
           },
-          supportedChainIds: [56],
+          supportedChainIds: [5],
         },
       },
       walletconnect: {
@@ -39,9 +39,9 @@ async function connect() {
         options: {
           infuraId: `${process.env.NEXT_PUBLIC_INFURA_KEY}`,
           rpc: {
-            56: `https://bsc-dataseed.binance.org/`,
+            5: `https://rpc.ankr.com/eth_goerli`,
           },
-          supportedChainIds: [56],
+          supportedChainIds: [5],
         },
       },
     },
