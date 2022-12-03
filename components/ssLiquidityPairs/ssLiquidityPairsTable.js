@@ -920,6 +920,7 @@ const useStyles = makeStyles({
     fontSize: '20px',
     lineHeight: '28px',
     fontWeight: 700,
+    letterSpacing: 0,
     color: '#F6F7F9',
   },
   filterListTitle: {
@@ -1359,8 +1360,8 @@ const EnhancedTableToolbar = (props) => {
               </svg>
             </div>
             <div className={css.realDialog}>
-              <DialogTitle className={css.dialogTitle}>
-                <div style={{
+              <DialogTitle style={{ padding: 0 }}>
+                <div className={css.dialogTitle} style={{
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
@@ -1385,7 +1386,7 @@ const EnhancedTableToolbar = (props) => {
                   <div
                       className={[classes.filterItem, classes[`filterItem--${appTheme}`], 'g-flex', 'g-flex--align-center', 'g-flex--space-between'].join(' ')}>
                     <Typography className={[classes.filterLabel, classes[`filterLabel--${appTheme}`]].join(' ')}>
-                      Active gauges
+                      Active Gauges
                     </Typography>
 
                     <SwitchCustom
@@ -1398,7 +1399,7 @@ const EnhancedTableToolbar = (props) => {
                   <div
                       className={[classes.filterItem, classes[`filterItem--${appTheme}`], 'g-flex', 'g-flex--align-center', 'g-flex--space-between'].join(' ')}>
                     <Typography className={[classes.filterLabel, classes[`filterLabel--${appTheme}`]].join(' ')}>
-                      Stable pools
+                      Stable Pools
                     </Typography>
 
                     <SwitchCustom
@@ -1411,7 +1412,7 @@ const EnhancedTableToolbar = (props) => {
                   <div
                       className={[classes.filterItem, classes[`filterItem--${appTheme}`], 'g-flex', 'g-flex--align-center', 'g-flex--space-between'].join(' ')}>
                     <Typography className={[classes.filterLabel, classes[`filterLabel--${appTheme}`]].join(' ')}>
-                      Volatile pools
+                      Volatile Pools
                     </Typography>
 
                     <SwitchCustom
