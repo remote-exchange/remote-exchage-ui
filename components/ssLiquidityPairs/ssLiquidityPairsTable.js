@@ -558,9 +558,9 @@ const useStyles = makeStyles({
     width: '100%',
   },
   assetTableRow: {
-    '&:hover': {
-      background: 'rgba(104, 114, 122, 0.12)',
-    },
+    // '&:hover': {
+    //   background: 'rgba(104, 114, 122, 0.12)',
+    // },
     '&:last-child > td': {
       borderBottom: 'none !important',
     },
