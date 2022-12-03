@@ -1727,9 +1727,23 @@ export default function EnhancedTable({pairs, isLoading}) {
       }
       {windowWidth > 806 &&
         <>
-          <div
-            className={classes.tableContWrapper}
-          >
+
+          {filteredPairs.length === 0 && isLoading && (
+            <div className={css.tvLoading}>
+              <img src="/images/tv-loading.png" className={css.tvImage} />
+              <p className={css.tvText}>Loading your Deposit from the blockchain, please wait</p>
+            </div>
+          )}
+          {!isLoading && filteredPairs.length === 0 && (
+            <div className={css.tvNotData}>
+              <img src="/images/tv-sad.png" className={css.tvImage} />
+              <p className={css.tvText}>You do not have any Deposits. Click “Add Liquidity” to create your first Deposit.</p>
+            </div>
+          )}
+
+          {filteredPairs.length !== 0 && (
+            <>
+          <div className={classes.tableContWrapper}>
             <TableContainer
               className={'g-flex-column__item'}
               style={{
@@ -1750,25 +1764,6 @@ export default function EnhancedTable({pairs, isLoading}) {
                   orderBy={orderBy}
                   onRequestSort={handleRequestSort}
                 />
-                {filteredPairs.length === 0 && !isLoading && (
-                  <TableBody>
-                    <tr>
-                      <td colSpan="8">
-                        <TableBodyPlaceholder message="You have not added any liquidity yet"/>
-                      </td>
-                    </tr>
-                  </TableBody>
-                )}
-
-                {filteredPairs.length === 0 && isLoading && (
-                  <TableBody>
-                    <tr>
-                      <td colSpan="8">
-                        <TableBodyPlaceholder message="Loading your Deposit from the blockchain, please wait"/>
-                      </td>
-                    </tr>
-                  </TableBody>
-                )}
 
                 <TableBody>
                   {stableSort(filteredPairs, getComparator(order, orderBy))
@@ -2151,26 +2146,6 @@ export default function EnhancedTable({pairs, isLoading}) {
                                   </Typography>
                                 </div>
                               </div>
-
-                              {/* {!(row && row.gauge && row.gauge.balance && row.gauge.totalSupply) &&
-                                  <div
-                                    className={classes.inlineEnd}
-                                    style={{
-                                      display: 'flex',
-                                      flexDirection: 'column',
-                                      alignItems: 'flex-end',
-                                      paddingLeft: 10,
-                                    }}>
-                                    <Skeleton
-                                      variant="rect"
-                                      width={120}
-                                      height={16}
-                                      style={{
-                                        marginTop: '1px',
-                                        marginBottom: '1px',
-                                      }}/>
-                                  </div>
-                                } */}
                             </TableCell>
                           }
 
@@ -2483,6 +2458,7 @@ export default function EnhancedTable({pairs, isLoading}) {
                       );
                     })}
                 </TableBody>
+                
               </Table>
             </TableContainer>
           </div>
@@ -2522,10 +2498,28 @@ export default function EnhancedTable({pairs, isLoading}) {
                 actions: css.actions,
               }}
           />
+          </>
+          )}
         </>
       }
 
       {windowWidth <= 800 &&
+        <>
+          {filteredPairs.length === 0 && isLoading && (
+           <div className={css.tvLoading}>
+              <img src="/images/tv-loading.png" className={css.tvImage} />
+              <p className={css.tvText}>Loading your Deposit from the blockchain, please wait</p>
+            </div>
+          )}
+          {!isLoading && filteredPairs.length === 0 && (
+            <div className={css.tvNotData}>
+              <img src="/images/tv-sad.png" className={css.tvImage} />
+              <p className={css.tvText}>You do not have any Deposits. Click “Add Liquidity” to create your first Deposit.</p>
+            </div>
+          )}
+
+
+          {filteredPairs.length > 0 &&
         <div
           style={{
             overflowY: windowWidth > 400 ? 'auto' : 'visible',
@@ -2991,24 +2985,6 @@ export default function EnhancedTable({pairs, isLoading}) {
             })
           }
 
-          {filteredPairs.length === 0 && !isLoading && (
-              <div className={classes.mobmsg}>
-                You have not added any liquidity yet
-              </div>
-          )}
-
-          {filteredPairs.length === 0 && isLoading && (
-              <div className={classes.mobmsg}>
-                <svg style={{marginRight: 16,}} width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M10 0C10.2652 0 10.5196 0.105357 10.7071 0.292893C10.8946 0.48043 11 0.734784 11 1V4C11 4.26522 10.8946 4.51957 10.7071 4.70711C10.5196 4.89464 10.2652 5 10 5C9.73478 5 9.48043 4.89464 9.29289 4.70711C9.10536 4.51957 9 4.26522 9 4V1C9 0.734784 9.10536 0.48043 9.29289 0.292893C9.48043 0.105357 9.73478 0 10 0ZM10 15C10.2652 15 10.5196 15.1054 10.7071 15.2929C10.8946 15.4804 11 15.7348 11 16V19C11 19.2652 10.8946 19.5196 10.7071 19.7071C10.5196 19.8946 10.2652 20 10 20C9.73478 20 9.48043 19.8946 9.29289 19.7071C9.10536 19.5196 9 19.2652 9 19V16C9 15.7348 9.10536 15.4804 9.29289 15.2929C9.48043 15.1054 9.73478 15 10 15ZM20 10C20 10.2652 19.8946 10.5196 19.7071 10.7071C19.5196 10.8946 19.2652 11 19 11H16C15.7348 11 15.4804 10.8946 15.2929 10.7071C15.1054 10.5196 15 10.2652 15 10C15 9.73478 15.1054 9.48043 15.2929 9.29289C15.4804 9.10536 15.7348 9 16 9H19C19.2652 9 19.5196 9.10536 19.7071 9.29289C19.8946 9.48043 20 9.73478 20 10ZM5 10C5 10.2652 4.89464 10.5196 4.70711 10.7071C4.51957 10.8946 4.26522 11 4 11H1C0.734784 11 0.48043 10.8946 0.292893 10.7071C0.105357 10.5196 0 10.2652 0 10C0 9.73478 0.105357 9.48043 0.292893 9.29289C0.48043 9.10536 0.734784 9 1 9H4C4.26522 9 4.51957 9.10536 4.70711 9.29289C4.89464 9.48043 5 9.73478 5 10ZM17.071 17.071C16.8835 17.2585 16.6292 17.3638 16.364 17.3638C16.0988 17.3638 15.8445 17.2585 15.657 17.071L13.536 14.95C13.3538 14.7614 13.253 14.5088 13.2553 14.2466C13.2576 13.9844 13.3628 13.7336 13.5482 13.5482C13.7336 13.3628 13.9844 13.2576 14.2466 13.2553C14.5088 13.253 14.7614 13.3538 14.95 13.536L17.071 15.656C17.164 15.7489 17.2377 15.8592 17.2881 15.9806C17.3384 16.102 17.3643 16.2321 17.3643 16.3635C17.3643 16.4949 17.3384 16.625 17.2881 16.7464C17.2377 16.8678 17.164 16.9781 17.071 17.071ZM6.464 6.464C6.27647 6.65147 6.02216 6.75679 5.757 6.75679C5.49184 6.75679 5.23753 6.65147 5.05 6.464L2.93 4.344C2.74236 4.15649 2.63689 3.90212 2.6368 3.63685C2.6367 3.37158 2.74199 3.11714 2.9295 2.9295C3.11701 2.74186 3.37138 2.63639 3.63665 2.6363C3.90192 2.6362 4.15636 2.74149 4.344 2.929L6.464 5.05C6.65147 5.23753 6.75679 5.49184 6.75679 5.757C6.75679 6.02216 6.65147 6.27647 6.464 6.464ZM2.93 17.071C2.74253 16.8835 2.63721 16.6292 2.63721 16.364C2.63721 16.0988 2.74253 15.8445 2.93 15.657L5.051 13.536C5.14325 13.4405 5.25359 13.3643 5.3756 13.3119C5.4976 13.2595 5.62882 13.2319 5.7616 13.2307C5.89438 13.2296 6.02606 13.2549 6.14895 13.3052C6.27185 13.3555 6.3835 13.4297 6.4774 13.5236C6.57129 13.6175 6.64554 13.7291 6.69582 13.852C6.7461 13.9749 6.7714 14.1066 6.77025 14.2394C6.7691 14.3722 6.74151 14.5034 6.6891 14.6254C6.63669 14.7474 6.56051 14.8578 6.465 14.95L4.345 17.071C4.25213 17.164 4.14184 17.2377 4.02044 17.2881C3.89904 17.3384 3.76892 17.3643 3.6375 17.3643C3.50608 17.3643 3.37596 17.3384 3.25456 17.2881C3.13316 17.2377 3.02287 17.164 2.93 17.071ZM13.536 6.464C13.3485 6.27647 13.2432 6.02216 13.2432 5.757C13.2432 5.49184 13.3485 5.23753 13.536 5.05L15.656 2.929C15.8435 2.74136 16.0979 2.63589 16.3631 2.6358C16.6284 2.6357 16.8829 2.74099 17.0705 2.9285C17.2581 3.11601 17.3636 3.37038 17.3637 3.63565C17.3638 3.90092 17.2585 4.15536 17.071 4.343L14.95 6.464C14.7625 6.65147 14.5082 6.75679 14.243 6.75679C13.9778 6.75679 13.7235 6.65147 13.536 6.464Z" fill="#E4E9F4"/>
-                </svg>
-                <div>
-                  Loading your Deposit from the blockchain, please wait
-                </div>
-              </div>
-          )}
-
-          {filteredPairs.length > 0 &&
               <TablePagination
                   className={'g-flex-column__item-fixed'}
                   style={{
@@ -3043,8 +3019,10 @@ export default function EnhancedTable({pairs, isLoading}) {
                     actions: css.actions,
                   }}
               />
-          }
+          
         </div>
+      }
+      </>
       }
     </div>
   );

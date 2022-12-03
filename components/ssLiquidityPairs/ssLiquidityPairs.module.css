@@ -18,7 +18,7 @@
 }
 
 .paginationToolbar {
-  padding-left: 0 !important;
+  padding-left: 18px !important;
   padding-right: 18px !important;
 }
 
@@ -315,4 +315,56 @@
   }
 }
 
+.tvLoading,
+.tvNotData {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 80px;
+}
 
+@media (max-width: 767px) {
+  .tvLoading,
+  .tvNotData {
+    margin-top: 40px;
+  }
+}
+
+.tvLoading img {
+  width: 306px;
+}
+
+@media (max-width: 767px) {
+  .tvLoading img {
+    width: 100%;
+    max-width: 204px;
+  }
+}
+
+.tvNotData img {
+  width: 499px;
+}
+
+@media (max-width: 767px) {
+  .tvNotData img {
+    width: 333px;
+    max-width: 100%;
+  } 
+}
+
+.tvImage {
+  margin-bottom: 20px;
+}
+
+.tvText {
+  max-width: 512px;
+
+  font-family: 'PT Root UI';
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+  text-align: center;
+
+  color: #EAE8E1;
+}
