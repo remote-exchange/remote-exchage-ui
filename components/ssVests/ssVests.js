@@ -16,6 +16,7 @@ export default function ssVests() {
   const [vestNFTs, setVestNFTs] = useState([]);
   const [govToken, setGovToken] = useState(null);
   const [veToken, setVeToken] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const ssUpdated = async () => {
@@ -34,10 +35,12 @@ export default function ssVests() {
   useEffect(() => {
     const vestNFTsReturned = (nfts) => {
       setVestNFTs(nfts);
+      setLoading(false);
       forceUpdate();
     };
 
     window.setTimeout(() => {
+      setLoading(true);
       stores.dispatcher.dispatch({type: ACTIONS.GET_VEST_NFTS, content: {}});
     }, 1);
 
@@ -48,6 +51,6 @@ export default function ssVests() {
   }, []);
 
   return (
-    <VestsTable vestNFTs={vestNFTs} govToken={govToken} veToken={veToken}/>
+    <VestsTable vestNFTs={vestNFTs} govToken={govToken} veToken={veToken} loading={loading} />
   );
 }
