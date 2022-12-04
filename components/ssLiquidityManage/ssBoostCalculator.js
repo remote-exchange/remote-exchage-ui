@@ -25,7 +25,7 @@ export default function ssBoostCalculator({pair, nft, ve, isMobileView = false, 
   const [ boostedAPRAmount, setBoostedAPRAmount ] = useState(0);
   const [ usedAPRPercentage, setUsedAPRPercentage ] = useState(0);
   const [ aprLimits, setAprLimits ] = useState({ min: 0, max: 100 }); // Percentage only
-  const [ veConeLimits, setVeConeLimits ] = useState({ min: 0, max: 1000 });
+  const [ veRemoteLimits, setVeRemoteLimits ] = useState({ min: 0, max: 1000 });
 
   const [lpAmount, setLpAmount] = useState(BigNumber(0))
 
@@ -39,7 +39,7 @@ export default function ssBoostCalculator({pair, nft, ve, isMobileView = false, 
       // const userGaugeBalance = +pair.gauge.balance + parseFloat((amount ? amount * pair.gauge.balance / 100 : 0).toString());
       const userGaugeBalance = lpAmount;
 
-      // lock value it is veCONE power, if no NFT equals zero
+      // lock value it is veREMOTE power, if no NFT equals zero
       const lockValue = BigNumber(nft?.lockValue ?? 0);
       const veRatio = lockValue.div(ve.totalPower);
 
@@ -143,12 +143,12 @@ export default function ssBoostCalculator({pair, nft, ve, isMobileView = false, 
       setCurrentAPRPercentage(sliderConfig.personalAPR); // Set default value of APR% (show in Calculator and Default place of thumb of slider)
       setCurrentAPRAmount(sliderConfig.earnPerDay); // APR amount per day (show in Calculator)
       setBoostedAPRPercentage(sliderConfig.personalAPR); // Default value for boosted APR%.
-      setUsedAPRPercentage(sliderConfig.personalAPR); // Value of user's used veCone % (Slider will start from this position)
+      setUsedAPRPercentage(sliderConfig.personalAPR); // Value of user's used veRemote % (Slider will start from this position)
       // console.log('setUsedAPRPercentage', sliderConfig.personalAPR)
 
       setAprLimits({min: sliderConfig.minApr, max: sliderConfig.maxApr}); // Limits for slider, min & max APR%
-      setVeConeLimits({min: 0, max: sliderConfig.maxPower}); // Limits for slider, veCone min & max. It should be linear dependency with APR%
-      // console.log('setVeConeLimits', {min: 0, max: sliderConfig.maxPower})
+      setVeRemoteLimits({min: 0, max: sliderConfig.maxPower}); // Limits for slider, veRemote min & max. It should be linear dependency with APR%
+      // console.log('setVeRemoteLimits', {min: 0, max: sliderConfig.maxPower})
     }
   }, [ pair, lpAmount, nft ]);
 
@@ -289,8 +289,8 @@ export default function ssBoostCalculator({pair, nft, ve, isMobileView = false, 
                 pointUsed={usedAPRPercentage}
                 pointMinPct={aprLimits.min}
                 pointMaxPct={aprLimits.max}
-                pointMinValue={veConeLimits.min}
-                pointMaxValue={veConeLimits.max}
+                pointMinValue={veRemoteLimits.min}
+                pointMaxValue={veRemoteLimits.max}
                 step={1}
                 disabled={false}
                 onChange={onChange}
@@ -301,8 +301,8 @@ export default function ssBoostCalculator({pair, nft, ve, isMobileView = false, 
                 pointUsed={usedAPRPercentage}
                 pointMinPct={aprLimits.min}
                 pointMaxPct={aprLimits.max}
-                pointMinValue={veConeLimits.min}
-                pointMaxValue={veConeLimits.max}
+                pointMinValue={veRemoteLimits.min}
+                pointMaxValue={veRemoteLimits.max}
                 step={1}
                 disabled={false}
                 onChange={onChange}

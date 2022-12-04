@@ -1,16 +1,16 @@
 import abis from "../abis";
-import {CONE_ADDRESS, WBNB_ADDRESS} from "./constants";
+import {REMOTE_ADDRESS, WBNB_ADDRESS} from "./constants";
 
 export const GOV_TOKEN_ADDRESS = '0xA60205802E1B5C6EC1CAFA3cAcd49dFeECe05AC9'
-export const GOV_TOKEN_NAME = 'Cone'
-export const GOV_TOKEN_SYMBOL = 'CONE'
+export const GOV_TOKEN_NAME = 'Remote'
+export const GOV_TOKEN_SYMBOL = 'REMOTE'
 export const GOV_TOKEN_DECIMALS = 18
 export const GOV_TOKEN_LOGO = '/logo.svg'
 export const GOV_TOKEN_ABI = abis.tokenABI
 
 export const VE_TOKEN_ADDRESS = '0xd0C1378c177E961D96c06b0E8F6E7841476C81Ef'
-export const VE_TOKEN_NAME = 'veCONE'
-export const VE_TOKEN_SYMBOL = 'veCONE'
+export const VE_TOKEN_NAME = 'veREMOTE'
+export const VE_TOKEN_SYMBOL = 'veREMOTE'
 export const VE_TOKEN_DECIMALS = 18
 export const VE_TOKEN_LOGO = '/logo.svg'
 export const VE_TOKEN_ABI = abis.veTokenABI

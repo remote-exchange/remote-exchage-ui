@@ -27,7 +27,7 @@ export const QUERIES = queries
 
 export const MAX_UINT256 = new BigNumber(2).pow(256).minus(1).toFixed(0)
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
-export const CONE_ADDRESS = '0xA60205802E1B5C6EC1CAFA3cAcd49dFeECe05AC9'.toLowerCase();
+export const REMOTE_ADDRESS = '0xA60205802E1B5C6EC1CAFA3cAcd49dFeECe05AC9'.toLowerCase();
 export const WBNB_ADDRESS = '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c'.toLowerCase();
 export const NETWORK_TOKEN_NAME = CONTRACTS.FTM_SYMBOL;
 
@@ -110,11 +110,11 @@ export const BASE_ASSETS_WHITELIST = [
     logoURI: "https://tokens.pancakeswap.finance/images/0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56.png"
   },
   {
-    id: CONE_ADDRESS,
-    address: CONE_ADDRESS,
+    id: REMOTE_ADDRESS,
+    address: REMOTE_ADDRESS,
     chainId: "56",
-    symbol: "CONE",
-    logoURI: "https://icons.llama.fi/cone.png"
+    symbol: "REMOTE",
+    logoURI: "https://icons.llama.fi/remote.png"
   },
 ];
 
@@ -122,7 +122,7 @@ const ROUTE_ASSETS_SYMBOLS = [
   "USDC",
   "WBNB",
   "BUSD",
-  "CONE",
+  "REMOTE",
   "USD+",
   // "USDT",
   // "MAI",
