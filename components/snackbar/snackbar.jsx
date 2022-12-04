@@ -6,12 +6,6 @@ import classes from './snackbar.module.css';
 import { useAppThemeContext } from '../../ui/AppThemeProvider';
 import { Close } from '@mui/icons-material';
 
-const iconStyle = {
-  fontSize: '30px',
-  marginRight: '20px',
-  verticalAlign: 'middle',
-};
-
 function CloseIcon(props) {
   const {color} = props;
   return (
@@ -187,21 +181,13 @@ export default function MySnackbar(props) {
     <>
       {open &&
         <div className={classes.transaction}>
-          {/* <div className={[classes.transactionTopBg, classes[`transactionTopBg--${type}`]].join(' ')}>
-          </div> */}
-
           <div
             className={[classes.transactionInfo, classes[`transactionInfo--${type}`], classes[`transactionInfo--${appTheme}`]].join(' ')}
-            style={{
-              display: 'flex',
-              // padding: 26,
-            }}>
-            <div
+            style={{ display: 'flex' }}>
+            {/* <div
               style={{
                 width: 20,
                 marginTop: 8,
-                // paddingRight: 10,
-                // borderRight: `1px solid ${appTheme === 'dark' ? '#5F7285' : '#86B9D6'}`,
               }}>
               <div
                 style={{
@@ -212,29 +198,18 @@ export default function MySnackbar(props) {
                   width: 20,
                   height: 20,
                   marginRight: 18,
-                  // background: appTheme === 'dark' ? '#2D3741' : '#CFE5F2',
-                  // borderRadius: '100px',
                 }}>
                 {icon}
               </div>
-            </div>
+            </div> */}
 
-            <div
-              style={{
-                width: '100%',
-                paddingLeft: 10,
-              }}>
+            <div style={{ width: '100%' }}>
               <div
-                style={{
-                  width: '100%',
-                  marginBottom: 16,
-                  // borderBottom: `1px solid ${appTheme === 'dark' ? '#5F7285' : '#86B9D6'}`,
-                  // paddingBottom: 10,
-                }}
-                className={['g-flex', 'g-flex--align-center', 'g-flex--space-between'].join(' ')}>
+                style={{ width: '100%' }}
+                className={[classes.titleWrapper, 'g-flex', 'g-flex--align-center', 'g-flex--space-between'].join(' ')}>
                 <Typography
                   className={[classes.transactionDescriptionTitle, classes[`transactionDescriptionTitle--${type}`]].join(' ')}>
-                  General page error
+                  Page error
                 </Typography>
 
                 <IconButton onClick={handleClose}>
@@ -245,25 +220,26 @@ export default function MySnackbar(props) {
                       alignItems: 'center',
                       width: 20,
                       height: 20,
-                      backgroundColor: '#586586',
-                      borderRadius: 5,
+                      backgroundColor: '#CCD2E3',
+                      borderRadius: '50%',
                     }}
                   >
                     <Close
                       style={{
                         cursor: 'pointer',
-                        color: '#1e2c48',
+                        color: '#9B0E0E',
                         fontSize: 14,
                       }}
+                      className={classes[`transactionClose--${type}`]}
                     />
                   </div>
                 </IconButton>
               </div>
 
-              <Typography
-                className={[classes.transactionDescription, classes[`transactionDescription--${appTheme}`]].join(' ')}>
-                {message}
-              </Typography>
+              <div className={[classes.transactionDescription, classes[`transactionDescription--${appTheme}`]].join(' ')}>
+                <div>{message}</div>
+                <img src="/images/tv-error.png" className={classes.tvError} />
+              </div>
             </div>
           </div>
         </div>
