@@ -48,7 +48,13 @@
 
 .main {
   position: relative;
-  padding: 32px 20px 0;
+  padding: 80px 20px 0;
+}
+
+@media (max-width: 767px) {
+  .main {
+    padding: 40px 20px 0;
+  }
 }
 
 .mainHome {
@@ -68,7 +74,7 @@
 
 @media screen and (max-width: 680px) {
   .main {
-    padding: 48px 20px;
+    padding: 40px 20px;
   }
 
   .mainHome {
@@ -78,7 +84,7 @@
 
 @media screen and (max-width: 680px) {
   .main {
-    padding: 48px 12px;
+    padding: 40px 12px;
   }
 
   .mainHome {

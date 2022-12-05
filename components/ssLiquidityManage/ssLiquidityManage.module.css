@@ -646,6 +646,11 @@ input[type=number].mediumInputAmount {
   color: #F6F7F9 !important;
 }
 
+.largeInput:disabled {
+  color: #F6F7F9 !important;
+  -webkit-text-fill-color: #F6F7F9 !important;
+}
+
 .tokenText {
   position: absolute !important;
   left: 151px;

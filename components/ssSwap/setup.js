@@ -642,7 +642,7 @@ function Setup() {
                 classes.warningContainerError
               ].join(" ")}
           >
-            <img src="/images/ui/info-circle-red.svg" width="24px" style={{ marginRight: 8 }} />
+            <img src="/images/ui/info-circle-red.svg" width="18px" style={{ marginRight: 8 }} />
             <Typography
                 className={classes.warningError}
                 align="center"
@@ -1102,7 +1102,7 @@ function Setup() {
               </div>
             </div>
 
-            <div className={classes.inputColumn}>
+            <div className={[classes.inputColumn, type === "From" && fromAmountValue > Number(fromAssetValue?.balance) ? classes.inputColumnError : ''].join(" ")}>
               <div className={classes.massiveInputTitle}>
                 <div
                     className={[
@@ -1142,7 +1142,7 @@ function Setup() {
               <InputBase
                   className={[
                     classes.massiveInputAmount,
-                    type === "From" && fromAmountValue > Number(fromAssetValue?.balance) ? classes.massiveInputAmountError : ''
+                    // type === "From" && fromAmountValue > Number(fromAssetValue?.balance) ? classes.massiveInputAmountError : ''
                   ].join(" ")}
                   placeholder="0.00"
                   error={amountError}
@@ -1387,7 +1387,7 @@ function Setup() {
                       " "
                   )}
               >
-                <img src="/images/ui/info-circle-red.svg" width="24px" />
+                <img src="/images/ui/info-circle-red.svg" width="18px" />
               </div>
               <Typography className={classes.quoteError}>{quoteError}</Typography>
             </div>
@@ -1404,7 +1404,7 @@ function Setup() {
                       classes.warningContainerError
                   ].join(" ")}
               >
-                  <img src="/images/ui/info-circle-red.svg" width="24px" style={{ marginRight: 8 }} />
+                  <img src="/images/ui/info-circle-red.svg" width="18px" style={{ marginRight: 8 }} />
                   <Typography
                       className={classes.warningError}
                       align="center"
