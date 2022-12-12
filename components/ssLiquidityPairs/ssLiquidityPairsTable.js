@@ -1598,6 +1598,16 @@ export default function EnhancedTable({pairs, isLoading}) {
   const [sortDirection, setSortDirection] = useState('asc');
   const [lpAmount, setLpAmount] = useState(null);
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleTooltipClose = () => {
+    setOpen(false);
+  };
+
+  const handleTooltipOpen = () => {
+    setOpen(true);
+  };
+
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
 
@@ -1697,6 +1707,9 @@ export default function EnhancedTable({pairs, isLoading}) {
       if (!isNaN(value)) setLpAmount(value);
     }
   }
+
+  const veTok = stores.stableSwapStore.getStore("veToken");
+  const nfts = stores.stableSwapStore.getStore("vestNFTs") ?? [];
 
   return (
     <div
@@ -1900,35 +1913,37 @@ export default function EnhancedTable({pairs, isLoading}) {
                                   justifyContent: 'flex-end',
                                 }}>
                               {BigNumber(row?.gauge?.apr).gt(0) &&
-                                  <div style={{ display: 'flex' }}>
-                                    <Tooltip
-                                        title={
-                                          <>
-                                            {(() => {
-                                              const veTok = stores.stableSwapStore.getStore("veToken");
-                                              const nfts = stores.stableSwapStore.getStore("vestNFTs") ?? [];
-                                              // const nft = nfts.reduce((acc, item) => item.totalPower > acc.totalPower ? item : acc, nfts[0]);
-                                              const nft = nfts.filter(n => n.id === row?.gauge?.veId)[0]
-                                              return <div className={css.boostCalculatorTooltip}>
-                                                <BoostCalculator popuped={true} pair={row} ve={veTok} nft={nft} isMobileView={true} amount={100}/>
-                                              </div>
-                                            })()}
-                                          </>
+                                <div style={{ display: 'flex' }}>
+                                   <Dialog
+                                      PaperProps={{
+                                        style: {
+                                          width: "100%",
+                                          maxWidth: 600,
+                                          background: 'transpaarent',
+                                          borderRadius: 20,
+                                          overflowY: "visible"
                                         }
-                                        classes={{
-                                          tooltip: /*row?.gauge?.boost && BigNumber(row?.gauge?.boost).gt(0) ? */css.tooltip_boost_wrapper/* : css.tooltip_wrapper*/
-                                        }}
-                                        // leaveDelay={500}
+                                      }}
+                                      open={open}
+                                      onClose={handleTooltipClose}
+                                      onClick={(e) => {
+                                        if (e.target.classList.contains('MuiDialog-container')) {
+                                          handleTooltipClose()
+                                        }
+                                      }}
                                     >
-                                      <img src={
-                                        (row?.gauge?.boost && BigNumber(row?.gauge?.boost).gt(0) && BigNumber(row?.gauge?.balance).gt(0))
-                                            ? "/images/boost_fired.svg"
-                                            : (BigNumber(row?.balance).gt(0))
-                                                ? "/images/boost-empty.svg"
-                                                : "/images/boost-info.svg"
+                                      <div className={css.boostCalculatorTooltip}>
+                                        <BoostCalculator popuped={true} pair={row} ve={veTok} nft={nfts.filter(n => n.id === row?.gauge?.veId)[0]} isMobileView={true} amount={100} />
+                                      </div>
+                                    </Dialog>
+                                    <img onClick={() => {handleTooltipOpen()}} src={
+                                      (row?.gauge?.boost && BigNumber(row?.gauge?.boost).gt(0) && BigNumber(row?.gauge?.balance).gt(0))
+                                        ? "/images/boost_fired.svg"
+                                        : (BigNumber(row?.balance).gt(0))
+                                          ? "/images/boost-empty.svg"
+                                          : "/images/boost-info.svg"
                                       }
-                                      />
-                                    </Tooltip>
+                                    />
                                     <div
                                         className={classes.inlineEnd}
                                         style={{
@@ -2721,7 +2736,45 @@ export default function EnhancedTable({pairs, isLoading}) {
                             justifyContent: 'right',
                             padding: '8px 0',
                           }}>
-                            <Tooltip
+                            <Dialog
+                              PaperProps={{
+                                style: {
+                                  width: "100%",
+                                  maxWidth: 600,
+                                  background: 'transpaarent',
+                                  borderRadius: 20,
+                                  overflowY: "visible"
+                                }
+                              }}
+                              open={open}
+                              onClose={handleTooltipClose}
+                              onClick={(e) => {
+                                if (e.target.classList.contains('MuiDialog-container')) {
+                                  handleTooltipClose()
+                                }
+                              }}
+                            >
+                              <div className={css.boostCalculatorTooltip}>
+                                <BoostCalculator popuped={true} pair={row} ve={veTok} nft={nfts.reduce((acc, item) => item.totalPower > acc.totalPower ? item : acc, nfts[0])} isMobileView={true} amount={100} />
+                              </div>
+                            </Dialog>
+                            <img
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleTooltipOpen()
+                              }}
+                              src={(row?.gauge?.boost && BigNumber(row?.gauge?.boost).gt(0) && BigNumber(row?.gauge?.balance).gt(0))
+                                ? "/images/boost_fired.svg"
+                                : (BigNumber(row?.balance).gt(0))
+                                  ? "/images/boost-empty.svg"
+                                  : "/images/icon-info.svg"
+                              }
+                              width="22px"
+                              style={{ marginRight: 10 }}
+                              alt="boost"
+                            />
+
+                            {/* <Tooltip
                                 title={
                                   <React.Fragment>
                                     {[1].map(() => {
@@ -2749,7 +2802,7 @@ export default function EnhancedTable({pairs, isLoading}) {
                                         : "/images/icon-info.svg"
                               }
                                    width="22px" style={{ marginRight: 10 }} alt="boost" />
-                            </Tooltip>
+                            </Tooltip> */}
                             <div
                                 className={classes.inlineEnd}
                                 style={{
