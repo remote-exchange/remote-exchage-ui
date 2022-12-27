@@ -1764,6 +1764,7 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
   };
 
   // const editLPDesign = !!router.query.address
+  console.log("pair", pair); 
 
   return (
       <div className="g-flex g-flex-column">
