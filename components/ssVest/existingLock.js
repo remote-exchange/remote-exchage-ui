@@ -51,9 +51,9 @@ export default function existingLock({ nft, govToken, veToken }) {
   const updateLockAmount = (amount) => {
     if (amount === "") {
       let tmpNFT = {
-        lockAmount: nft.lockAmount,
-        lockValue: nft.lockValue,
-        lockEnds: nft.lockEnds,
+        lockAmount: futureNFT?.lockAmount || nft.lockAmount,
+        lockValue: futureNFT?.lockValue || nft.lockValue,
+        lockEnds: futureNFT?.lockEnds || nft.lockEnds,
       };
 
       setFutureNFT(tmpNFT);
@@ -61,9 +61,9 @@ export default function existingLock({ nft, govToken, veToken }) {
     }
 
     let tmpNFT = {
-      lockAmount: nft.lockAmount,
-      lockValue: nft.lockValue,
-      lockEnds: nft.lockEnds,
+      lockAmount: futureNFT?.lockAmount || nft.lockAmount,
+      lockValue: futureNFT?.lockValue || nft.lockValue,
+      lockEnds: futureNFT?.lockEnds || nft.lockEnds,
     };
 
     const now = moment();
@@ -81,9 +81,9 @@ export default function existingLock({ nft, govToken, veToken }) {
 
   const updateLockDuration = (val) => {
     let tmpNFT = {
-      lockAmount: nft.lockAmount,
-      lockValue: nft.lockValue,
-      lockEnds: nft.lockEnds,
+      lockAmount: futureNFT?.lockAmount || nft.lockAmount,
+      lockValue: futureNFT?.lockValue || nft.lockValue,
+      lockEnds: futureNFT?.lockEnds || nft.lockEnds,
     };
 
     const now = moment();
@@ -308,7 +308,8 @@ export default function existingLock({ nft, govToken, veToken }) {
     );
   }
 
-  const isButtonDisabled = lockLoading || (futureNFT && futureNFT.lockEnds <= nft.lockEnds);
+  const isButtonAmountDisabled = lockLoading || (!amount || amount == '0');
+  const isButtonDurationDisabled = lockLoading || (!futureNFT || (futureNFT && futureNFT.lockEnds <= nft.lockEnds));
 
   return (
     <>
@@ -385,12 +386,12 @@ export default function existingLock({ nft, govToken, veToken }) {
             <Button
               className={[
                 classesLock.button,
-                isButtonDisabled ? classesLock.buttonDisabled : "",
+                isButtonAmountDisabled ? classesLock.buttonDisabled : "",
               ]}
               variant="contained"
               size="large"
               color="primary"
-              disabled={isButtonDisabled}
+              disabled={isButtonAmountDisabled}
               onClick={onLockAmount}
             >
               <span>
@@ -405,12 +406,12 @@ export default function existingLock({ nft, govToken, veToken }) {
             <Button
               className={[
                 classesLock.button,
-                isButtonDisabled ? classesLock.buttonDisabled : "",
+                isButtonDurationDisabled ? classesLock.buttonDisabled : "",
               ]}
               variant="contained"
               size="large"
               color="primary"
-              disabled={isButtonDisabled}
+              disabled={isButtonDurationDisabled}
               onClick={onLock}
             >
               <span>{lockLoading ? `Increasing Duration` : `Increase Duration`}</span>
