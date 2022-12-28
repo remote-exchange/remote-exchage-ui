@@ -132,33 +132,34 @@ export default function ThreePointSlider({
           top: '13px',
           bottom: 0,
           '& .MuiSlider-valueLabelLabel': {
-            height: 96,
-            paddingTop: 2,
+            height: 80,
+            marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
             alignItems: 'center',
             textTransform: 'uppercase',
+            '@media (max-width: 860px)': {
+              marginTop: 12,
+            },
             '& .item': {
-              color: '#B1F1E3',
-              fontSize: '12px',
-              lineHeight: '12px',
+              fontFamily: 'PT Root UI',
+              fontSize: '14px',
+              lineHeight: '14px',
               fontWeight: 500,
-              background: '#6575B1',
-              border: '1px solid #B1F1E3',
-              borderRadius: '4px',
-              padding: '8px',
+              // padding: '8px',
+              color: '#B1F1E3',
               whiteSpace: 'nowrap',
               textAlign: 'center',
               width: 'fit-content',
               '&:first-of-type': {
                 // marginBottom: '2px'
               },
-              '@media (max-width: 860px)': {
-                fontSize: '12px',
-                lineHeight: '12px',
-                padding: '4px 8px',
-              },
+              // '@media (max-width: 860px)': {
+              //   fontSize: '12px',
+              //   lineHeight: '12px',
+              //   padding: '4px 8px',
+              // },
             },
           },
           '&:before': {
@@ -198,8 +199,11 @@ export default function ThreePointSlider({
             textAlign: 'center'
           },
           '& .item': {
-            background: '#060B17',
-            padding: '0 2px',
+            fontFamily: 'PT Root UI',
+            fontSize: 14,
+            fontWeight: 500,
+            lineHeight: '14px',
+            color: '#68727A',
             '&:first-of-type': {
               marginBottom: '52px'
             },

@@ -697,7 +697,7 @@ const useStyles = makeStyles((theme) => {
     },
     cellHeadPaddings: {
       padding: '16px 20px',
-      ["@media (max-width: 805px)"]: {
+      ["@media (max-width: 860px)"]: {
         // eslint-disable-line no-useless-computed-key
         padding: '12px 12px',
       },
