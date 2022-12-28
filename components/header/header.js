@@ -139,6 +139,7 @@ function Header(props) {
   // };
 
   const disconnectWallet = () => {
+    handleClick();
     stores.accountStore.getStore("web3modal").clearCachedProvider();
     deactivate();
     setAccount(null);
