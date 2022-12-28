@@ -746,8 +746,8 @@ function Setup() {
                                           ].join(" ")}
                                           alt=""
                                           src={fromAssetValue ? `${fromAssetValue.logoURI}` : ""}
-                                          width="30px"
-                                          height="30px"
+                                          width="32px"
+                                          height="32px"
                                           onError={(e) => {
                                               e.target.onerror = null;
                                               e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
@@ -764,6 +764,7 @@ function Setup() {
                                               ].join(" ")}
                                           >
                                               <div className={classes.routeLinesLeftArrow} />
+                                              <div className={classes.routeLinesLeftArrow} />
                                           </div>
                                       )}
 
@@ -775,6 +776,7 @@ function Setup() {
                                                       classes[`routeLinesLeft--${appTheme}`],
                                                   ].join(" ")}
                                               >
+                                                  <div className={classes.routeLinesLeftPart1Arrow} />
                                                   <div className={classes.routeLinesLeftPart1Arrow} />
                                               </div>
                                               <div
@@ -792,6 +794,7 @@ function Setup() {
                                                   ].join(" ")}
                                               >
                                                   <div className={classes.routeLinesLeftPart2Arrow} />
+                                                  <div className={classes.routeLinesLeftPart2Arrow} />
                                               </div>
 
                                               <div className={classes.routeIconWrap}>
@@ -806,7 +809,7 @@ function Setup() {
                                                               ? `${quote.output.routeAsset.logoURI}`
                                                               : ""
                                                       }
-                                                      height="40px"
+                                                      height="32px"
                                                       onError={(e) => {
                                                           e.target.onerror = null;
                                                           e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;
@@ -820,6 +823,7 @@ function Setup() {
                                                       classes[`routeLinesLeft--${appTheme}`],
                                                   ].join(" ")}
                                               >
+                                                  <div className={classes.routeLinesRightPart1Arrow} />
                                                   <div className={classes.routeLinesRightPart1Arrow} />
                                               </div>
                                               <div
@@ -836,6 +840,7 @@ function Setup() {
                                                       classes[`routeLinesLeft--${appTheme}`],
                                                   ].join(" ")}
                                               >
+                                                  <div className={classes.routeLinesRightPart2Arrow} />
                                                   <div className={classes.routeLinesRightPart2Arrow} />
                                               </div>
                                           </>
@@ -860,6 +865,7 @@ function Setup() {
                                               ].join(" ")}
                                           >
                                               <div className={classes.routeLinesRightArrow} />
+                                              <div className={classes.routeLinesRightArrow} />
                                           </div>
                                       )}
                                   </div>
@@ -872,8 +878,8 @@ function Setup() {
                                           ].join(" ")}
                                           alt=""
                                           src={toAssetValue ? `${toAssetValue.logoURI}` : ""}
-                                          width="30px"
-                                          height="30px"
+                                          width="32px"
+                                          height="32px"
                                           onError={(e) => {
                                               e.target.onerror = null;
                                               e.target.src = `/tokens/unknown-logo--${appTheme}.svg`;

@@ -762,10 +762,13 @@ p.inputTitleText {
 }
 
 .routeArrow {
+  font-family: 'PT Root UI';
   font-weight: 500;
-  font-size: 14px;
+  font-size: 12px;
+  line-height: 12px;
+  text-transform: lowercase;
 
-  color: #779BF4;
+  color: #9A9FAF;
 }
 
 @media (max-width: 580px) {
@@ -787,36 +790,51 @@ p.inputTitleText {
   color: #779BF4;
 }
 
-@media (max-width: 580px) {
+/* @media (max-width: 580px) {
   .routeLinesLeftText,
   .routeLinesRightText {
     font-size: 12px;
   }
-}
+} */
 
 .routeLinesLeftText {
+  font-family: 'PT Root UI';
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 12px;
+  text-transform: lowercase;
+
   left: calc(25%);
   transform: translateX(-25%) translateY(-50%);
+
+  color: #9A9FAF;
 }
 
 .routeLinesRightText {
+  font-family: 'PT Root UI';
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 12px;
+  text-transform: lowercase;
+
   left: auto;
   right: calc(25%);
   transform: translateX(25%) translateY(-50%);
+  color: #9A9FAF;
 }
 
-@media (max-width: 580px) {
+/* @media (max-width: 580px) {
   .routeLinesRightText {
     transform: translateX(25%) translateX(3px) translateY(-50%);
   }
-}
+} */
 
 .routeLinesLeft,
 .routeLinesRight {
   position: relative;
   width: 50%;
-  margin: 0 7px;
-  border: 1px dashed #779BF4;
+  margin: 0;
+  border: 1px solid #353A42;
 }
 
 .routeLinesLeftPart1,
@@ -825,28 +843,61 @@ p.inputTitleText {
 .routeLinesRightPart2 {
   position: absolute;
   top: 50%;
-  width: calc(25% - 100px);
-  border: 1px dashed #779BF4;
+  width: calc(25% - 65px);
+  border: 1px solid #353A42;
   transform: translateY(-50%);
 }
 
+@media (max-width: 580px) {
+  .routeLinesLeftPart1,
+  .routeLinesLeftPart2,
+  .routeLinesRightPart1,
+  .routeLinesRightPart2 {
+    width: calc(25% - 57px);
+  }
+}
+
 .routeLinesLeftPart1 {
-  left: 60px;
-}
-
-.routeLinesLeftPart2 {
-  right: calc(50% + 30px);
-}
-
-.routeLinesRightPart1 {
-  left: calc(50% + 30px);
-}
-
-.routeLinesRightPart2 {
-  right: 60px;
+  left: 40px;
 }
 
 @media (max-width: 580px) {
+  .routeLinesLeftPart1 {
+    left: 32px;
+  } 
+}
+
+.routeLinesLeftPart2 {
+  right: calc(50% + 20px);
+}
+
+@media (max-width: 580px) {
+  .routeLinesLeftPart2 {
+    right: calc(50% + 15px);
+  }
+}
+
+.routeLinesRightPart1 {
+  left: calc(50% + 20px);
+}
+
+@media (max-width: 580px) {
+  .routeLinesRightPart1 {
+    left: calc(50% + 15px);
+  }
+}
+
+.routeLinesRightPart2 {
+  right: 40px;
+}
+
+@media (max-width: 580px) {
+  .routeLinesRightPart2 {
+    right: 32px;
+  }
+}
+
+/* @media (max-width: 580px) {
   .routeLinesLeftPart1,
   .routeLinesLeftPart2,
   .routeLinesRightPart1,
@@ -870,7 +921,7 @@ p.inputTitleText {
     width: calc(25% - 75px);
     right: 45px;
   }
-}
+} */
 
 .routeLinesLeftPart1Arrow,
 .routeLinesLeftPart2Arrow,
@@ -880,38 +931,51 @@ p.inputTitleText {
 
   top: 50%;
 
-  width: 15px;
-  height: 15px;
+  width: 7px;
+  height: 7px;
 
-  border-bottom: 1.5px solid #779BF4;
-  border-right: 1.5px solid #779BF4;
+  border-bottom: 1.5px solid #353A42;
+  border-right: 1.5px solid #353A42;
 
-  transform: translateY(-50%) rotate(-45deg);
+  transform: translateY(-50%) translateX(2px) rotate(-45deg);
 }
 
-@media (max-width: 580px) {
-  .routeLinesLeftPart1Arrow,
-  .routeLinesLeftPart2Arrow,
-  .routeLinesRightPart1Arrow,
-  .routeLinesRightPart2Arrow {
-    width: 9px;
-    height: 9px;
-  }
+.routeLinesLeftPart1Arrow + .routeLinesLeftPart1Arrow,
+.routeLinesLeftPart2Arrow + .routeLinesLeftPart2Arrow,
+.routeLinesRightPart1Arrow + .routeLinesRightPart1Arrow,
+.routeLinesRightPart2Arrow + .routeLinesRightPart2Arrow {
+  position: absolute;
+
+  top: 50%;
+
+  width: 7px;
+  height: 7px;
+
+  border-bottom: 1.5px solid #353A42;
+  border-right: 1.5px solid #353A42;
+  transform: translateY(-50%) translateX(-2px) rotate(-45deg);
 }
 
 .routeLinesLeftPart1Arrow {
   left: 100%;
 }
 .routeLinesLeftPart2Arrow {
-  left: -25px;
+  left: -15px;
 }
+
+@media (max-width: 580px) {
+  .routeLinesLeftPart2Arrow {
+    left: -12px;
+  }
+}
+
 .routeLinesRightPart1Arrow {
   left: 100%;
 }
 .routeLinesRightPart2Arrow {
-  left: -25px;
+  left: -15px;
 }
-
+/* 
 @media (max-width: 580px) {
   .routeLinesLeftPart1Arrow {
     left: 100%;
@@ -925,24 +989,14 @@ p.inputTitleText {
   .routeLinesRightPart2Arrow {
     left: -16px;
   }
-}
+} */
 
 .routeLinesLeft {
-  margin-right: 40px;
+  margin-right: 20px;
 }
 
 .routeLinesRight {
-  margin-left: 40px;
-}
-
-@media (max-width: 580px) {
-  .routeLinesLeft {
-    margin-right: 25px;
-  }
-
-  .routeLinesRight {
-    margin-left: 25px;
-  }
+  margin-left: 20px;
 }
 
 .routeLinesLeftArrow,
@@ -951,39 +1005,44 @@ p.inputTitleText {
 
   top: 50%;
 
-  width: 15px;
-  height: 15px;
+  width: 7px;
+  height: 7px;
 
-  border-bottom: 1.5px solid #779BF4;
-  border-right: 1.5px solid #779BF4;
+  border-bottom: 1.5px solid #353A42;
+  border-right: 1.5px solid #353A42;
 }
 
-@media (max-width: 580px) {
-  .routeLinesLeftArrow,
-  .routeLinesRightArrow {
-    width: 9px;
-    height: 9px;
-  }
+.routeLinesLeftArrow + .routeLinesLeftArrow,
+.routeLinesRightArrow + .routeLinesRightArrow {
+  position: absolute;
+
+  top: 50%;
+
+  width: 7px;
+  height: 7px;
+
+  border-bottom: 1.5px solid #353A42;
+  border-right: 1.5px solid #353A42;
+
+  transform: translateX(-1px);
 }
 
 .routeLinesLeftArrow {
-  right: -25px;
-  transform: translateY(-50%) rotate(-45deg);
+  right: -12px;
+  transform: translateY(-50%) translateX(2px) rotate(-45deg);
+}
+
+.routeLinesLeftArrow + .routeLinesLeftArrow {
+  transform: translateY(-50%) translateX(-2px) rotate(-45deg);
 }
 
 .routeLinesRightArrow {
-  left: -35px;
-  transform: translateY(-50%) rotate(-45deg);
+  left: -18px;
+  transform: translateY(-50%) translateX(2px) rotate(-45deg);
 }
 
-@media (max-width: 580px) {
-  .routeLinesLeftArrow {
-    right: -18px;
-  }
-  
-  .routeLinesRightArrow {
-    left: -21px;
-  }
+.routeLinesRightArrow + .routeLinesRightArrow {
+  transform: translateY(-50%) translateX(-2px) rotate(-45deg);
 }
 
 .routeIconWrap {
@@ -991,24 +1050,24 @@ p.inputTitleText {
   justify-content: center;
   align-items: center;
 
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
 
   border-radius: 50%;
-  border: 1px solid #779BF4;
+  border: 1px solid #353A42;
 
-  background: rgba(6, 11, 23, 0.25);
+  /* background: rgba(6, 11, 23, 0.25); */
 }
 
 @media (max-width: 580px) {
   .routeIconWrap {
-    width: 38px;
-    height: 38px;
+    width: 32px;
+    height: 32px;
   }
 
   .routeIconWrap img {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
   }
 }
 
