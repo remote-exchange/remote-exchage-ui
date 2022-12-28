@@ -906,6 +906,7 @@ input[type=number].mediumInputAmount {
   padding: 80px 20px 0 20px;
   /*width: 420px;*/
   height: 152px;
+  margin-top: 12px;
   border: 1px solid rgba(104, 114, 122, 0.4) !important;
   border-radius: 16px;
   /*margin-left: 20px;*/
