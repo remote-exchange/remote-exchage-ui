@@ -693,8 +693,8 @@ export default function EnhancedTable({vestNFTs, govToken, veToken, loading}) {
                               >
                                 {(BigNumber(row.lockEnds).lt(moment().unix()) &&
                                   BigNumber(row.lockEnds).gt(0))
-                                    ? 'WITHDRAW'
-                                    : 'EDIT'
+                                    ? 'Withdraw'
+                                    : 'Edit'
                                 }
                                 {/* Manage */}
                               </Button>
