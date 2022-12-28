@@ -161,7 +161,7 @@ export default function existingLock({ nft, govToken, veToken }) {
         break;
       default:
     }
-    const newDate = moment().add(days, "days").format("YYYY-MM-DD");
+    const newDate = moment(+nft.lockEnds * 1000).add(days, "days").format("YYYY-MM-DD");
 
     setSelectedDate(newDate);
     updateLockDuration(newDate);
