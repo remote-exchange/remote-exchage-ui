@@ -482,6 +482,18 @@ async function fetchGaugeBalancesForPairs(
     pairsWithGauges[i].gauge.balance = formatBN(gaugeBalances[i]);
   }
 
+  // clear data
+  for (let i = 0; i < pairsWithGauges.length; i++) {
+    const pair = pairsWithGauges[i];
+
+    if (pair.gaude) {
+      delete pair.gaude['veId'];
+      delete pair.gaude['personalAPR'];
+      delete pair.gaude['aprWithoutBoost'];
+      delete pair.gaude['boost'];
+    }
+  }
+
   const gaugesWithBalances = pairsWithGauges.filter(pair => !BigNumber(pair.gauge.balance).isZero());
 
   const gaugeVeIds = await multicallRequest(
@@ -497,8 +509,6 @@ async function fetchGaugeBalancesForPairs(
     if (pair.gauge.veId !== '0') {
       const gaugePosition = userInfo?.gaugePositions?.filter(g => g.gauge.id.toLowerCase() === pair.gauge.id.toLowerCase())[0]
       if (!!gaugePosition) {
-
-
         const nft = nfts?.filter(nft => parseInt(nft.id) === parseInt(pair.gauge.veId))[0];
 
         const {personalAPR, aprWithoutBoost} = calculateBoost(pair, nft.veRatio, BigNumber(pair.gauge.balance));

@@ -1702,15 +1702,14 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
                           componentsProps={{
                             tooltip: {
                               style: {
-                                padding: '12px 24px',
+                                padding: 12,
                                 fontFamily: 'PT Root UI',
-                                fontSize: 16,
-                                fontWeight: 400,
-                                lineHeight: '24px',
-                                border: '1px solid #779BF4',
+                                fontSize: 14,
+                                fontWeight: 500,
+                                lineHeight: '20px',
                                 borderRadius: 12,
-                                background: '#1F2B49',
-                                color: '#E4E9F4',
+                                background: '#EAE8E1',
+                                color: '#131313',
                               }
                             },
                           }}
@@ -1765,6 +1764,7 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
   };
 
   // const editLPDesign = !!router.query.address
+  console.log("pair", pair); 
 
   return (
       <div className="g-flex g-flex-column">
