@@ -493,7 +493,7 @@ const EnhancedTableToolbar = (props) => {
   );
 };
 
-export default function EnhancedTable({vestNFTs, govToken, veToken}) {
+export default function EnhancedTable({vestNFTs, govToken, veToken, loading}) {
   const classes = useStyles();
   const router = useRouter();
 
@@ -550,14 +550,6 @@ export default function EnhancedTable({vestNFTs, govToken, veToken}) {
   };
 
   const isEmptyTable = vestNFTs.length === 0
-  const emptyMessage = <div className={css.tableEmptyMessage}>
-    You have not created any Lock yet
-  </div>
-
-
-  const emptyMessageMobile = <div className={css.tableEmptyMessageMobile}>
-    You have not created any Lock yet
-  </div>
 
   return (
     <div>
@@ -569,6 +561,21 @@ export default function EnhancedTable({vestNFTs, govToken, veToken}) {
 
       {windowWidth > 660 &&
         <div>
+          {isEmptyTable && loading && (
+            <div className={css.tvLoading}>
+              <img src="/images/tv-loading.png" className={css.tvImage} />
+              <p className={css.tvText}>Loading your Lock from the blockchain, please wait</p>
+            </div>
+          )}
+          {!loading && isEmptyTable && (
+            <div className={css.tvNotData}>
+              <img src="/images/tv-sad.png" className={css.tvImage} />
+              <p className={css.tvText}>You have not created any Lock yet</p>
+            </div>
+          )}
+
+          {isEmptyTable ? null : (
+          <>
           <div className={css.tableWrapper}>
             <TableContainer
               className={['g-flex-column__item', css.tableContainer].join(" ")}
@@ -588,7 +595,7 @@ export default function EnhancedTable({vestNFTs, govToken, veToken}) {
                   onRequestSort={handleRequestSort}
                 />
 
-                {isEmptyTable ? null : (
+                {/* {isEmptyTable ? null : ( */}
                   <TableBody>
                     {stableSort(vestNFTs, getComparator(order, orderBy))
                       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -696,9 +703,9 @@ export default function EnhancedTable({vestNFTs, govToken, veToken}) {
                         );
                       })}
                   </TableBody>
-                )}
+                {/* )} */}
               </Table>
-              {isEmptyTable && emptyMessage}
+              {/* {isEmptyTable && emptyMessage} */}
             </TableContainer>
           </div>
 
@@ -734,13 +741,30 @@ export default function EnhancedTable({vestNFTs, govToken, veToken}) {
               actions: css.actions,
             }}
           />
+          </>
+          )}
         </div>
       }
 
       {windowWidth <= 660 && (
         <>
-          {isEmptyTable && emptyMessageMobile}
+          {/* {isEmptyTable && emptyMessageMobile} */}
 
+          {isEmptyTable && loading && (
+            <div className={css.tvLoading}>
+              <img src="/images/tv-loading.png" className={css.tvImage} />
+              <p className={css.tvText}>Loading your Lock from the blockchain, please wait</p>
+            </div>
+          )}
+          {!loading && isEmptyTable && (
+            <div className={css.tvNotData}>
+              <img src="/images/tv-sad.png" className={css.tvImage} />
+              <p className={css.tvText}>You have not created any Lock yet</p>
+            </div>
+          )}
+
+         {!isEmptyTable && (
+          <>
           <div style={{ overflow: 'auto' }}>
             {stableSort(vestNFTs, getComparator(order, orderBy))
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -878,7 +902,7 @@ export default function EnhancedTable({vestNFTs, govToken, veToken}) {
             }
           </div>
 
-          {!isEmptyTable && (
+          
             <TablePagination
               className={['g-flex-column__item-fixed', css.pagination].join(" ")}
               style={{
@@ -911,6 +935,7 @@ export default function EnhancedTable({vestNFTs, govToken, veToken}) {
                 actions: css.actions,
               }}
             />
+            </>
           )}
         </>
       )}

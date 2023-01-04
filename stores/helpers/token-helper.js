@@ -1,4 +1,4 @@
-import DEFAULT_TOKEN_LIST from './../constants/tokenlists/pancakeswap-extended.json'
+import DEFAULT_TOKEN_LIST from './../constants/tokenlists/goerli.json'
 import {
   BASE_ASSETS_WHITELIST,
   BLACK_LIST_TOKENS,

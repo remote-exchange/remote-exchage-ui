@@ -21,10 +21,10 @@ export const createVest = async (
   dispatcher,
   gasPrice,
   govToken,
-  callback
+  callback,
 ) => {
   try {
-    const {amount, unlockTime} = payload.content;
+    const {amount, unlockTime, ref} = payload.content;
 
     // ADD TRNASCTIONS TO TRANSACTION QUEUE DISPLAY
     let allowanceTXID = getTXUUID();
@@ -98,7 +98,7 @@ export const createVest = async (
       web3,
       veTokenContract,
       "createLock",
-      [sendAmount, unlockTime + ""],
+      [sendAmount, unlockTime + "", !!ref ? ref : BigNumber(0)],
       account,
       gasPrice,
       null,
