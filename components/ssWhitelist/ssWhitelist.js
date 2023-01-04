@@ -235,7 +235,7 @@ export default function ssWhitelist() {
                     <>
                       {/* {!token.isWhitelisted &&
                         <Hint
-                          hintText={'Cannot proceed with whitelisting due to insufficient veCONE.'}
+                          hintText={'Cannot proceed with whitelisting due to insufficient veREMOTE.'}
                           open={openActionHint}
                           anchor={actionHintAnchor}
                           handleClick={handleClickActionPopover}
@@ -368,7 +368,7 @@ export default function ssWhitelist() {
                 <>
                   {/* {!token.isWhitelisted &&
                     <Hint
-                      hintText={'Cannot proceed with whitelisting due to insufficient veCONE.'}
+                      hintText={'Cannot proceed with whitelisting due to insufficient veREMOTE.'}
                       open={openActionHint}
                       anchor={actionHintAnchor}
                       handleClick={handleClickActionPopover}

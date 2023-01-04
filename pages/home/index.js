@@ -7,7 +7,7 @@ const socialLinks = {
   twitter: "https://twitter.com/Coneswap",
   discord: "https://discord.gg/pet7xkwac7",
   telegram: "https://t.me/+h-bgLOoWJS9iNDg9",
-  gitbook: "https://docs.cone.exchange/",
+  gitbook: "https://docs.remote.exchange/",
   medium: "https://medium.com/@ConeSwap",
 };
 
@@ -162,7 +162,7 @@ const HomePage = () => {
         <div className={classes.column}>
           <p className={classes.title}>Low fees ve(3,3) DEX</p>
           <p className={classes.subtitle}>
-            Cone Swap offers users quick, seamless and cheap transactions while
+            Remote Swap offers users quick, seamless and cheap transactions while
             utilizing strategies to maximize their yield.
           </p>
           <div
@@ -281,18 +281,18 @@ const HomePage = () => {
       <div className={classes.row}>
         <div className={classes.column}>
           <div className={classes.text}>
-            <p>Cone officially launched in aug 2022 with a collective goal of fair and balanced access to DeFi.</p>
-            <p>Cone is a decentralized exchange on the BSC network with low fees, near 0 slippage on correlated assets and a strong focus on secondary markets for tokenized locks as NFT's (veToken = lpNFTs).</p>
+            <p>Remote officially launched in aug 2022 with a collective goal of fair and balanced access to DeFi.</p>
+            <p>Remote is a decentralized exchange on the BSC network with low fees, near 0 slippage on correlated assets and a strong focus on secondary markets for tokenized locks as NFT's (veToken = lpNFTs).</p>
           </div>
         </div>
         <div className={classes.column}>
           <div className={classes.text}>
             <p>One segment of the cryptocurrency landscape that has shown incredible potential is the swapping of stablecoins and volatile assets.</p>
-            <p>Cone Swap offers users quick, seamless and cheap transactions while utilizing strategies to maximize their yield.</p>
+            <p>Remote Swap offers users quick, seamless and cheap transactions while utilizing strategies to maximize their yield.</p>
           </div>
         </div>
       </div>
-      <a href="https://docs.cone.exchange/cone-swap/" className={classes.infoButton}>
+      <a href="https://docs.remote.exchange/remote-swap/" className={classes.infoButton}>
         <span>LEARN MORE</span>
         <img src="/images/ui/explorer.svg" />
       </a>
@@ -311,7 +311,7 @@ const HomePage = () => {
   //                     Enter the era of crypto
   //                 </div>
   //                 <div className={classes.layoutPromoSubTitle}>
-  //                     Cone
+  //                     Remote
   //                 </div>
   //                 <div className={classes.layoutPromoDescription}>
   //                     <div className={classes.layoutPromoDescriptionItem}>
@@ -332,11 +332,11 @@ const HomePage = () => {
   //             </div>
   //             <div className={classes.layoutDescription} ref={layoutRef}>
   //                 <div className={classes.layoutDescriptionText}>
-  //                     <p>Cone officially launched in April 2022 with a collective goal of <b>fair and balanced access to DeFi</b>.</p>
-  //                     <p>Cone is a decentralized exchange that has launched on the Polygon network with low fees, near 0 slippage on correlated assets and a strong focus on secondary markets for tokenized locks as NFT’s (veToken = lpNFTs).</p>
+  //                     <p>Remote officially launched in April 2022 with a collective goal of <b>fair and balanced access to DeFi</b>.</p>
+  //                     <p>Remote is a decentralized exchange that has launched on the Polygon network with low fees, near 0 slippage on correlated assets and a strong focus on secondary markets for tokenized locks as NFT’s (veToken = lpNFTs).</p>
   //                 </div>
   //                 <div className={classes.layoutDescriptionSmallText}>
-  //                     <p>One segment of the cryptocurrency landscape that has shown incredible potential is the swapping of stablecoins and volatile assets. Cone Swap offers users quick, seamless and cheap transactions while utilizing strategies to maximize their yield.</p>
+  //                     <p>One segment of the cryptocurrency landscape that has shown incredible potential is the swapping of stablecoins and volatile assets. Remote Swap offers users quick, seamless and cheap transactions while utilizing strategies to maximize their yield.</p>
   //                 </div>
   //             </div>
   //         </div>

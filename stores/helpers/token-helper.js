@@ -117,7 +117,7 @@ export const getBaseAssets = async () => {
       }
 
       if (baseAsset.address.toLowerCase() === REMOTE_ADDRESS.toLowerCase()) {
-        baseAsset.logoURI = 'https://icons.llama.fi/cone.png'
+        baseAsset.logoURI = 'https://icons.llama.fi/remote.png'
       }
 
       if (RENAME_ASSETS[baseAsset.name]) {

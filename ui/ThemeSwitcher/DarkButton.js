@@ -16,7 +16,7 @@ const DarkButton = (props) => {
   const toggleTheme = useCallback(() => {
     setAppTheme("dark");
 
-    localStorage.setItem('cone.finance-dark-mode', 'dark');
+    localStorage.setItem('remote.finance-dark-mode', 'dark');
   }, [appTheme, setAppTheme]);
 
   return (

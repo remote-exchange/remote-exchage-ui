@@ -79,16 +79,16 @@ function TokenSelect(props) {
       {(!options || !options.length) &&
         <div className={classes.noNFT}>
           <div className={classes.noNFTtext}>
-            You receive NFT by creating a Lock of your CONE for some time, the more CONE you lock and for
+            You receive NFT by creating a Lock of your REMOTE for some time, the more REMOTE you lock and for
             the longest time, the more Voting Power your NFT will have.
           </div>
           <div className={classes.noNFTlinks}>
                         <span className={classes.noNFTlinkButton} onClick={() => {
                           router.push("/swap")
-                        }}>BUY CONE</span>
+                        }}>BUY REMOTE</span>
             <span className={classes.noNFTlinkButton} onClick={() => {
               router.push("/vest")
-            }}>LOCK CONE FOR NFT</span>
+            }}>LOCK REMOTE FOR NFT</span>
           </div>
         </div>
       }

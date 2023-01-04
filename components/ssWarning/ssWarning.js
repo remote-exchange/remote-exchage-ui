@@ -4,7 +4,7 @@ import {DAPP_NAME, DAPP_DOMAIN} from "../../stores/constants"
 
 export default function ffWarning({close, title, subTitle, icon, description, btnLabel1, btnLabel2, action2, closePopup}) {
   const navigateToMedium = () => {
-    window.open("https://docs.cone.exchange/cone-swap/", "_blank");
+    window.open("https://docs.remote.exchange/remote-swap/", "_blank");
   };
 
   return (

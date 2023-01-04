@@ -59,11 +59,45 @@ export const BASE_ASSETS_WHITELIST = [
     logoURI: "https://tokens.pancakeswap.finance/images/0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3.png"
   },
   {
+    id: "0x3f56e0c36d275367b8c502090edf38289b3dea0d",
+    address: "0x3f56e0c36d275367b8c502090edf38289b3dea0d",
+    chainId: "56",
+    symbol: "MAI",
+    logoURI: "https://assets.coingecko.com/coins/images/15264/small/mimatic-red.png"
+  },
+  {
+    id: "0x55d398326f99059ff775485246999027b3197955",
+    address: "0x55d398326f99059ff775485246999027b3197955",
+    chainId: "56",
+    symbol: "USDT",
+    logoURI: "https://tokens.pancakeswap.finance/images/0x55d398326f99059fF775485246999027B3197955.png"
+  },
+  {
+    id: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+    address: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+    chainId: "56",
+    symbol: "WBNB",
+    logoURI: "https://tokens.pancakeswap.finance/images/0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c.png"
+  },
+  {
+    id: "0x90c97f71e18723b0cf0dfa30ee176ab653e89f40",
+    address: "0x90c97f71e18723b0cf0dfa30ee176ab653e89f40",
+    chainId: "56",
+    symbol: "FRAX",
+  },
+  {
+    id: "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+    address: "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+    chainId: "56",
+    symbol: "BUSD",
+    logoURI: "https://tokens.pancakeswap.finance/images/0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56.png"
+  },
+  {
     id: REMOTE_ADDRESS,
     address: REMOTE_ADDRESS,
     chainId: "5",
     symbol: CONTRACTS.GOV_TOKEN_SYMBOL,
-    logoURI: "https://icons.llama.fi/cone.png"
+    logoURI: "https://icons.llama.fi/remote.png"
   },
 ];
 

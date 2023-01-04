@@ -464,13 +464,13 @@ const EnhancedTableToolbar = (props) => {
         <div className={[css.controls, 'g-flex', 'g-flex--align-baseline'].join(' ')}>
           <div className={css.toolbarInfoContainer}>
             <div className={css.toolbarInfo}>
-              Lock NF to get voting power, staking rewards, and Boost on your LP rewards.
+              Lock REMOTE to get voting power, staking rewards, and Boost on your LP rewards.
             </div>
           </div>
 
           <div className={css.aprButton}>
             <span>{parseInt(props.veToken?.veDistApr)}%</span>
-            <span>veNF Rewards APR</span>
+            <span>veREMOTE Rewards APR</span>
           </div>
 
           <div
