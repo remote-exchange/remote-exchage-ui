@@ -129,6 +129,31 @@
   }
 }
 
+.networkMobile {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  margin-left: auto;
+  margin-right: 8px;
+  border: 1px solid rgba(104, 114, 122, 0.12);
+  border-radius: 50%;
+}
+
+@media (max-width: 575px) {
+  .networkMobile {
+    display: flex;
+  }
+}
+
+@media (max-width: 575px) {
+  .networkMobile {
+    width: 32px;
+    height: 32px;
+  }
+}
+
 .walletPointContainer {
   margin: 0 5px;
 }
@@ -348,6 +373,12 @@
 @media (max-width: 650px) {
   .accountButtonContainer {
     margin-left: 8px;
+  }
+}
+
+@media (max-width: 575px) {
+  .accountButtonContainer {
+    order: -1;
   }
 }
 
@@ -773,6 +804,29 @@
   }
 }
 
+@media (max-width: 575px) {
+  .statButton {
+    justify-content: center;
+    align-items: center;
+
+    width: 60px;
+    height: 32px;
+
+    padding: 0;
+
+    border: 1px solid #9A9FAF;
+    border-radius: 100px;
+  }
+
+  .statButton svg {
+    width: 14px;
+  }
+
+  .statButton > span {
+    margin-left: 5px !important;
+  }
+}
+
 .statButtonMobileWrapper {
   display: none;
   margin: 12px 0;
@@ -781,6 +835,13 @@
 @media (max-width: 650px) {
   .statButtonMobileWrapper {
     display: inline-flex !important;
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 575px) {
+  .statButtonMobileWrapper {
+    /* margin-left: auto !important; */
   }
 }
 

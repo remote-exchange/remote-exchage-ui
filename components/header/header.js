@@ -233,6 +233,9 @@ function Header(props) {
         </div>
 
         <Navigation>
+          <div className={classes.networkMobile}>
+            <img src="/images/ui/network.png" />
+          </div>
           <div className={classes.statButtonMobileWrapper}>
             {StatButton()}
           </div>
