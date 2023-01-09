@@ -3,7 +3,8 @@
   flex-direction: row;
   align-items: center;
   margin-right: auto;
-  margin-left: 250px;
+  margin-left: auto;
+  /* margin-left: 250px; */
   border: none !important;
   background: transparent;
 }

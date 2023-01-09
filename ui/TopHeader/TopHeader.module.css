@@ -23,3 +23,10 @@
     padding-bottom: 0;
   }
 }
+
+@media (max-width: 575px) {
+  .top-header {
+    height: 44px;
+    border-bottom: 4px solid #6575B1;
+  }
+}

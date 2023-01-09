@@ -33,6 +33,12 @@
   }
 }
 
+@media (max-width: 575px) {
+  .headerContainer {
+    height: 44px;
+  }
+}
+
 .hidden {
   display: none !important;
 }
@@ -69,11 +75,13 @@
 
 .logoContainer {
   margin-left: 30px;
+  margin-right: 300px;
 }
 
 @media (max-width: 1500px) {
   .logoContainer {
     margin-left: 12px;
+    margin-right: 0;
   }
 }
 
@@ -219,10 +227,23 @@
   }
 }
 
+@media (max-width: 575px) {
+  .notificationsButton {
+    width: 28px;
+    height: 28px;
+  }
+}
+
 .notificationsButton svg {
   font-size: 10px;
   color: #779BF4;
   fill: #779BF4;
+}
+
+@media (max-width: 575px) {
+  .notificationsButton svg {
+    width: 15px;
+  }
 }
 
 .notificationsButton:hover {
@@ -314,6 +335,12 @@
   }
 }
 
+@media (max-width: 575px) {
+  .accountButton {
+    height: 28px;
+  }
+}
+
 .accountButton:hover, .accountButton:hover > .accountButtonAddress  {
   background: rgba(125, 184, 87, 0.12) !important;
 }
@@ -344,6 +371,13 @@
   }
 }
 
+@media (max-width: 575px) {
+  .accountButtonAddress {
+    height: 100%;
+    padding: 6px 8px !important;
+  }
+}
+
 .headBalanceTxt {
   height: 38px;
   margin-left: -22px !important;
@@ -354,6 +388,15 @@
   line-height: 20px !important;
   font-weight: 500 !important;
   color: #9A9FAF !important;
+}
+
+
+@media (max-width: 575px) {
+  .headBalanceTxt {
+    height: 100%;
+    font-size: 12px !important;
+    line-height: 12px !important;
+  }
 }
 
 @media (max-width: 650px) {
@@ -458,6 +501,14 @@
   background-size: 100%;
 }
 
+@media (max-width: 575px) {
+  .accountIcon {
+    width: 16px;
+    height: 16px;
+    margin-right: 4px !important;
+  }
+}
+
 .headBtnTxt {
   font-style: normal !important;
   font-weight: 500 !important;
@@ -480,6 +531,17 @@
 @media (max-width: 650px) {
   .headBtnTxtMobile {
     display: inline;
+  }
+}
+
+@media (max-width: 575px) {
+  .headBtnTxtMobile {
+    display: inline-flex;
+    padding-bottom: 5px;
+    font-family: 'PT Root UI';
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 12px;
   }
 }
 
