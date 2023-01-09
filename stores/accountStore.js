@@ -101,11 +101,11 @@ class Store {
 
   getGasPrices = async () => {
     const gasPrices = await this._getGasPrices();
-    let gasSpeed = localStorage.getItem('cone.finance-gas-speed');
+    let gasSpeed = localStorage.getItem('remote.finance-gas-speed');
 
     if (!gasSpeed) {
       gasSpeed = 'fast';
-      localStorage.getItem('cone.finance-gas-speed', 'fast');
+      localStorage.getItem('remote.finance-gas-speed', 'fast');
     }
 
     this.setStore({gasPrices: gasPrices, gasSpeed: gasSpeed});
@@ -131,6 +131,15 @@ class Store {
     try {
       const web3 = await this.getWeb3Provider();
       const gasPrice = await web3.eth.getGasPrice();
+      const chainId = await web3.eth.getChainId();
+      // console.log('gasprice web3',gasPrice)
+      // console.log('gasprice',web3.utils.fromWei(gasPrice), "gwei")
+
+      // manual set gas price for goerli
+      if (chainId === 5) {
+        return web3.utils.fromWei('1600000000', "gwei");
+      }
+
       return web3.utils.fromWei(gasPrice, "gwei");
     } catch (e) {
       console.log(e);

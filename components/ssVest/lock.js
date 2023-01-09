@@ -39,6 +39,9 @@ export default function ssLock({govToken, veToken}) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const [feeHintAnchor, setFeeHintAnchor] = React.useState(null);
+
+  const [ref, setRef] = useState('');
+
   const openFeeHint = Boolean(feeHintAnchor);
   const handleClickFeePopover = (event) => {
     setFeeHintAnchor(event.currentTarget);
@@ -137,7 +140,7 @@ export default function ssLock({govToken, veToken}) {
       const expiry = moment(selectedDate).add(1, 'days');
       const secondsToExpire = expiry.diff(now, 'seconds');
 
-      stores.dispatcher.dispatch({type: ACTIONS.CREATE_VEST, content: {amount, unlockTime: secondsToExpire}});
+      stores.dispatcher.dispatch({type: ACTIONS.CREATE_VEST, content: {amount, unlockTime: secondsToExpire, ref,}});
     }
   };
 
@@ -334,8 +337,8 @@ export default function ssLock({govToken, veToken}) {
             placeholder="Referral code"
             // error={amountError}
             // helperText={amountError}
-            // value={amountValue}
-            // onChange={amountChanged}
+            value={ref}
+            onChange={e => {setRef(e.target.value)}}
             // disabled={lockLoading}
             inputProps={{
               className: classesLock.referalInput,

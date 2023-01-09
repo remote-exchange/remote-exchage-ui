@@ -175,8 +175,8 @@ export function WithdrawLock({ nft, govToken, veToken }) {
             className={classesLock.warningIcon}
           />
           <p className={classesLock.warningText}>
-            veCONE NFT #1234 has expired, to continue receiving boosted rewards
-            you must unstake the expired veCONE NFT from your LP and stake one
+            veREMOTE NFT #1234 has expired, to continue receiving boosted rewards
+            you must unstake the expired veREMOTE NFT from your LP and stake one
             that is currently locked.
           </p>
         </div>

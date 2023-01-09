@@ -16,7 +16,7 @@ const Logo = (props) => {
     <>
       <img className={classes.logoIconImg} src="/images/ui/logo-icon.svg" height="40" />
       <img className={classes.logoImg} src="/images/ui/logo.png" height="40" />
-      {/*<span className={classes.logoText}>CONE</span>*/}
+      {/*<span className={classes.logoText}>REMOTE</span>*/}
       {/* {windowWidth > 770 &&
         <svg
           width={width}

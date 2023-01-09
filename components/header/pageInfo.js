@@ -31,7 +31,7 @@ export const PageInfo = () => {
     const isDark = appTheme === 'dark'
     return (
         <a
-            href="https://docs.cone.exchange"
+            href="https://docs.remote.exchange"
             target="_blank"
             className={[classes.headerPageInfo].join(' ')}
         >

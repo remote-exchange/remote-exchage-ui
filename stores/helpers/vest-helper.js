@@ -21,10 +21,10 @@ export const createVest = async (
   dispatcher,
   gasPrice,
   govToken,
-  callback
+  callback,
 ) => {
   try {
-    const {amount, unlockTime} = payload.content;
+    const {amount, unlockTime, ref} = payload.content;
 
     // ADD TRNASCTIONS TO TRANSACTION QUEUE DISPLAY
     let allowanceTXID = getTXUUID();
@@ -98,7 +98,7 @@ export const createVest = async (
       web3,
       veTokenContract,
       "createLock",
-      [sendAmount, unlockTime + ""],
+      [sendAmount, unlockTime + "", !!ref ? ref : BigNumber(0)],
       account,
       gasPrice,
       null,
@@ -499,7 +499,7 @@ export const merge = async (
     let notifications = [];
     notifications.push({
       uuid: allowanceTXID,
-      description: `Checking Allowance for veCONE to Merge`,
+      description: `Checking Allowance for veREMOTE to Merge`,
       status: "WAITING",
     });
 
@@ -533,19 +533,19 @@ export const merge = async (
     if (!isApproved) {
       emitter.emit(ACTIONS.TX_STATUS, {
         uuid: allowanceTXID,
-        description: `Allow the veCONE For Merge`,
+        description: `Allow the veREMOTE For Merge`,
       });
     } else {
       emitter.emit(ACTIONS.TX_STATUS, {
         uuid: allowanceTXID,
-        description: `Allowance on veCONE sufficient`,
+        description: `Allowance on veREMOTE sufficient`,
         status: "DONE",
       });
     }
     if (bribesLength !== 0) {
       emitter.emit(ACTIONS.TX_STATUS, {
         uuid: voteResetTXID,
-        description: `Reset the veCONE Votes`,
+        description: `Reset the veREMOTE Votes`,
       });
     } else {
       emitter.emit(ACTIONS.TX_STATUS, {

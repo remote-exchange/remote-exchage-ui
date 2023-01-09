@@ -36,7 +36,7 @@ export default function MyApp({ Component, pageProps }) {
   const changeTheme = (dark) => {
     setAppTheme(dark ? "dark" : "light");
 
-    localStorage.setItem("cone.finance-dark-mode", dark ? "dark" : "light");
+    localStorage.setItem("remote.finance-dark-mode", dark ? "dark" : "light");
   };
 
   const accountConfigureReturned = () => {
@@ -49,7 +49,7 @@ export default function MyApp({ Component, pageProps }) {
 
   useEffect(function () {
     const localStorageDarkMode = window.localStorage.getItem(
-      "cone.finance-dark-mode"
+      "remote.finance-dark-mode"
     );
     changeTheme(localStorageDarkMode ? localStorageDarkMode === "dark" : true);
   }, []);

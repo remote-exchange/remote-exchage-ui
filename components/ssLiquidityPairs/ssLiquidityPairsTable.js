@@ -191,7 +191,7 @@ const headCells = [
     label: <div style={{display: 'flex',}}>
       <span>TVL</span>
       {/*<Tooltip
-          title='APR is based on current prices of tokens, token boosted APR, your veCONE amount, the % of TVL using veCONE and gauge TVL.'
+          title='APR is based on current prices of tokens, token boosted APR, your veREMOTE amount, the % of TVL using veREMOTE and gauge TVL.'
           componentsProps={{
             tooltip: {
               style: {

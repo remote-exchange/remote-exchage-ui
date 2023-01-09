@@ -1150,7 +1150,7 @@ export default function EnhancedTable({gauges, filteredGauges, setParentSliderVa
                                           if (selected === null) {
                                             return (
                                               <div className={cssTokenSelect.placeholder}>
-                                                Select veCONE NFT
+                                                Select veREMOTE NFT
                                               </div>
                                             );
                                           }
@@ -1164,7 +1164,7 @@ export default function EnhancedTable({gauges, filteredGauges, setParentSliderVa
                                       {(!vestNFTs || !vestNFTs.length) &&
                                         <div className={cssTokenSelect.noNFT}>
                                           <div className={cssTokenSelect.noNFTtext}>
-                                          You receive NFT by creating a Lock of your CONE for some time, the more CONE you lock and for
+                                          You receive NFT by creating a Lock of your REMOTE for some time, the more REMOTE you lock and for
                                           the longest time, the more Voting Power your NFT will have.
                                           </div>
                                           <div className={cssTokenSelect.noNFTlinks}>
@@ -1174,14 +1174,14 @@ export default function EnhancedTable({gauges, filteredGauges, setParentSliderVa
                                                 router.push("/swap")
                                               }}
                                             >
-                                              BUY CONE
+                                              BUY REMOTE
                                             </span>
                                             <span
                                               className={cssTokenSelect.noNFTlinkButton}
                                               onClick={() => {
                                                 router.push("/vest")
                                               }}>
-                                                LOCK CONE FOR NFT
+                                                LOCK REMOTE FOR NFT
                                             </span>
                                           </div>
                                         </div>
@@ -1428,7 +1428,7 @@ export default function EnhancedTable({gauges, filteredGauges, setParentSliderVa
                                   if (selected === null) {
                                     return (
                                       <div className={cssTokenSelect.placeholder}>
-                                        Select veCONE NFT
+                                        Select veREMOTE NFT
                                       </div>
                                     );
                                   }
@@ -1442,7 +1442,7 @@ export default function EnhancedTable({gauges, filteredGauges, setParentSliderVa
                               {(!vestNFTs || !vestNFTs.length) &&
                                 <div className={cssTokenSelect.noNFT}>
                                   <div className={cssTokenSelect.noNFTtext}>
-                                    You receive NFT by creating a Lock of your CONE for some time, the more CONE you lock and for
+                                    You receive NFT by creating a Lock of your REMOTE for some time, the more REMOTE you lock and for
                                     the longest time, the more Voting Power your NFT will have.
                                   </div>
                                   <div className={cssTokenSelect.noNFTlinks}>
@@ -1452,7 +1452,7 @@ export default function EnhancedTable({gauges, filteredGauges, setParentSliderVa
                                         router.push("/swap")
                                       }}
                                     >
-                                      BUY CONE
+                                      BUY REMOTE
                                     </span>
                                     <span
                                       className={cssTokenSelect.noNFTlinkButton}
@@ -1460,7 +1460,7 @@ export default function EnhancedTable({gauges, filteredGauges, setParentSliderVa
                                         router.push("/vest")
                                       }}
                                     >
-                                      LOCK CONE FOR NFT
+                                      LOCK REMOTE FOR NFT
                                     </span>
                                   </div>
                                 </div>
