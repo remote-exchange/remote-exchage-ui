@@ -246,6 +246,8 @@
 
   background: #7db857;
   color: #ffffff;
+
+  cursor: pointer;
 }
 
 @media (max-width: 860px) {
