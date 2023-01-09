@@ -11,6 +11,15 @@
   padding: 20px;
 }
 
+@media (max-width: 575px) {
+  .notConnectedContent {
+    width: 100%;
+    padding: 12px;
+    border-radius: 16px;
+    box-shadow: 4px 4px 0px #6575B1 !important;
+  }
+}
+
 @media (max-width: 1500px) {
   .notConnectedContent {
     /*margin: 0;*/
@@ -37,6 +46,14 @@
   }
 }
 
+@media (max-width: 575px) {
+  .contentFloatText {
+    margin-bottom: 12px !important;
+    font-size: 24px !important;
+    line-height: 32px !important;
+  }
+}
+
 .title {
   margin-top: 0;
   margin-bottom: 20px;
@@ -48,6 +65,15 @@
   letter-spacing: 0;
   color: #F6F7F9;
   padding: 20px;
+}
+
+@media (max-width: 575px) {
+  .title {
+    margin-bottom: 12px;
+    padding: 12px;
+    font-size: 16px;
+    line-height: 24px;
+  }
 }
 
 .buttonConnect {
@@ -64,6 +90,12 @@
   cursor: pointer;
 }
 
+@media (max-width: 575px) {
+  .buttonConnect {
+    height: 48px;
+  }
+}
+
 .buttonPrefix {
   position: absolute;
   width: 24px;
@@ -78,7 +110,7 @@
   position: absolute;
   width: 24px;
   height: 24px;
-  left: 468px;
+  right: -12px;
   top: calc(50% - 24px/2);
   background: #EAE8E1;
   border-radius: 100px;
@@ -100,9 +132,16 @@
   white-space: pre-line;
 }
 
+@media (max-width: 575px) {
+  .buttonEnterLabel {
+    font-size: 16px !important;
+    line-height: 16px !important;
+  }
+}
+
 .notConnectWrapper {
   height: calc(100vh - 150px);
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 @media (max-width: 880px) {
