@@ -171,7 +171,7 @@ const HomePage = () => {
           >
             <BtnEnterApp
               labelClassName={classes.buttonEnterLabel}
-              label={"Launch app"}
+              label={"Launch App"}
             />
           </div>
         </div>

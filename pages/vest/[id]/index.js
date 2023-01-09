@@ -32,7 +32,7 @@ function Vest() {
     <NotConnect
       title="Vest"
       description={`Swap between ${DAPP_NAME} supported stable and volatile assets.`}
-      buttonText="LAUNCH APP"
+      buttonText="Launch App"
     >
       <Vesting />
     </NotConnect>

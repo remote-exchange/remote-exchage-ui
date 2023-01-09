@@ -7,7 +7,7 @@ function Vesting() {
     <NotConnect
       title="Vest"
       description="Lock your REMOTE to earn rewards and governance rights. Each locked position is created and represented as an NFT, meaning you can hold multiple locked positions."
-      buttonText="LAUNCH APP"
+      buttonText="Launch App"
     >
       <VestsNFTs />
     </NotConnect>

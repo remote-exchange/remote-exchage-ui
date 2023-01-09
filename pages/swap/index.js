@@ -8,7 +8,7 @@ function Swap() {
     <NotConnect
       title="Swap"
       description={`Swap between ${DAPP_NAME} supported stable and volatile assets.`}
-      buttonText="LAUNCH APP"
+      buttonText="Launch App"
     >
       <SwapComponent />
     </NotConnect>
