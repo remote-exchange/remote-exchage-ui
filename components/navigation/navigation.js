@@ -177,14 +177,12 @@ function Navigation(props) {
       {isShowWarningWeb3Provider && (
           <SSWarning
               close={onDownloadClicked}
-              subTitle={"Warning!"}
-              description={
-                "This website is not supported by a regular browser. Kindly use a crypto wallet browser like MetaMask or TrustWallet to open this page."
-              }
+              subTitle={"Open in the Wallet Browser"}
+              description={"Please open the Remote.Exchange through your Metamask browser."}
               btnLabel1={"Download Metamask"}
               btnLabel2={"What is Metamask?"}
               action2={onRedirectToMetamaskGuide}
-              title={' '}
+              title={'Attention'}
               closePopup={closeWarning}
           />
       )}
