@@ -19,6 +19,7 @@ function Navigation(props) {
 
   function handleNavigate(route) {
     router.push(route);
+    setIsMenuVisible(false);
   }
 
   const [warningOpen, setWarningOpen] = useState(false);
