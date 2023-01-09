@@ -453,7 +453,7 @@ const EnhancedTableToolbar = (props) => {
           )}
 
           <div className={css.mergeButton} onClick={onMerge}>
-            MERGE MY LOCKED NFTs
+            Merge my Locked NFTs
           </div>
 
           <div className={css.addButton} onClick={onCreate}>
@@ -485,7 +485,7 @@ const EnhancedTableToolbar = (props) => {
           </div>
 
           <div className={css.mergeButtonMobile} onClick={onMerge}>
-            MERGE MY LOCKED NFTs
+            Merge my Locked NFTs
           </div>
         </div>
       </div>
@@ -693,8 +693,8 @@ export default function EnhancedTable({vestNFTs, govToken, veToken, loading}) {
                               >
                                 {(BigNumber(row.lockEnds).lt(moment().unix()) &&
                                   BigNumber(row.lockEnds).gt(0))
-                                    ? 'WITHDRAW'
-                                    : 'EDIT'
+                                    ? 'Withdraw'
+                                    : 'Edit'
                                 }
                                 {/* Manage */}
                               </Button>

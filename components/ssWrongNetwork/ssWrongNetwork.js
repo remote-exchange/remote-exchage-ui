@@ -35,7 +35,7 @@ export const WrongNetwork = (props) => {
             </Typography>
 
             <Typography className={classes.paragraph}>
-              Please check that your wallet is connected to {NETWORK_NAME} Network, only after you can proceed. If you do not have a {NETWORK_NAME} Network in your wallet, you can add it through the footer link on the {ETHERSCAN_URL}.
+              Please check that your wallet is connected to {NETWORK_NAME} Network, only after you can proceed. If you do not have a {NETWORK_NAME} Network in your wallet, you can add it through the footer link.
             </Typography>
 
             <div className={classes.buttonsContainer}>

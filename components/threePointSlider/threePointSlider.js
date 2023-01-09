@@ -135,32 +135,37 @@ export default function ThreePointSlider({
           bottom: 0,
 
           '& .MuiSlider-valueLabelLabel': {
+            marginTop: 2,
             height: 78,
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
             alignItems: 'center',
             textTransform: 'uppercase',
+            '@media (max-width: 860px)': {
+              height: 58,
+              marginTop: 0,
+            },
             '& .item': {
-              color: '#B1F1E3',
-              background: '#6575B1',
-              fontSize: '12px',
-              lineHeight: '12px',
+              fontFamily: 'PT Root UI',
+              fontSize: '14px',
+              lineHeight: '14px',
               fontWeight: 500,
-              border: '1px solid #B1F1E3',
-              borderRadius: '4px',
-              padding: '4px 8px',
+
+              color: '#B1F1E3',
+              // borderRadius: '4px',
+              // padding: '4px 8px',
               whiteSpace: 'nowrap',
               textAlign: 'center',
               width: 'fit-content',
               '&:first-of-type': {
                 // marginBottom: '20px'
               },
-              '@media (max-width: 860px)': {
-                fontSize: '12px',
-                lineHeight: '12px',
-                padding: '4px 8px',
-              },
+              // '@media (max-width: 860px)': {
+              //   fontSize: '12px',
+              //   lineHeight: '12px',
+              //   padding: '4px 8px',
+              // },
             },
           },
           '&:before': {
@@ -190,6 +195,9 @@ export default function ThreePointSlider({
           lineHeight: '20px',
           fontWeight: 500,
           top: '-26px',
+          '@media (max-width: 860px)': {
+            top: -18,
+          },
           '&:nth-of-type(4)': {
             transform: 'translateX(0%)'
           },
@@ -205,17 +213,27 @@ export default function ThreePointSlider({
             textAlign: 'center'
           },
           '& .item': {
-            background: '#060B17',
-            padding: '0 8px',
+            fontFamily: 'PT Root UI',
+            fontSize: 14,
+            fontWeight: 500,
+            lineHeight: '14px',
+            color: '#68727A',
+            // background: '#060B17',
+            // padding: '0 8px',
             '&:first-of-type': {
-              marginBottom: '36px'
+              marginBottom: '50px'
             },
+            '@media (max-width: 860px)': {
+              '&:first-of-type': {
+                marginBottom: '30px'
+              }
+            }
           },
-          '@media (max-width: 860px)': {
-            fontSize: '12px',
-            lineHeight: '12px',
-            top: '-9px',
-          },
+          // '@media (max-width: 860px)': {
+          //   fontSize: '12px',
+          //   lineHeight: '12px',
+          //   top: '-9px',
+          // },
         },
       });
     })

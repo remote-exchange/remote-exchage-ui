@@ -15,7 +15,7 @@
   gap: 14px;
 }
 
-@media (max-width: 805px) {
+@media (max-width: 860px) {
   .sliderWrapper {
     margin-bottom: 30px;
   }
@@ -33,7 +33,7 @@
   flex-direction: row;
 }
 
-@media (max-width: 805px) {
+@media (max-width: 860px) {
   .sliderWrapperPopuped {
     margin-top: 30px;
     margin-bottom: 30px;
@@ -50,7 +50,7 @@
   /*margin-right: 20px;*/
 }
 
-@media (max-width: 805px) {
+@media (max-width: 860px) {
   .sliderLabels {
     position: absolute;
     top: 0;
@@ -79,7 +79,7 @@
   /*padding: 12px 0;*/
 }
 
-@media (max-width: 805px) {
+@media (max-width: 860px) {
   .sliderLabelsItem {
     position: absolute;
   }
@@ -110,7 +110,7 @@
   height: 88px;
 }
 
-@media (max-width: 805px) {
+@media (max-width: 860px) {
   .profitItem {
     height: 76px;
   }
@@ -248,7 +248,7 @@
   line-height: 16px;
 }
 
-@media (max-width: 805px) {
+@media (max-width: 860px) {
   .createAction {
     margin-top: 12px;
   }
@@ -285,7 +285,7 @@
   position: relative;
 }
 
-@media (max-width: 805px) {
+@media (max-width: 860px) {
   .createActionButton {
     padding: 8px;
   }
@@ -305,7 +305,7 @@
   background: #B1F1E3;
 }
 
-@media (max-width: 805px) {
+@media (max-width: 860px) {
   .createActionButton:before {
     left: 50%;
     bottom: calc(100% + 2px);
@@ -318,7 +318,7 @@
   padding: 16px;
 }
 
-@media (max-width: 805px) {
+@media (max-width: 860px) {
   .boostCalculator--mobile {
     /* padding-left: 0;
     padding-right: 0; */
@@ -362,7 +362,7 @@
   /*flex-direction: column;*/
 }
 
-@media (max-width: 805px) {
+@media (max-width: 860px) {
   .boostCalculator--mobile .profitWrapper,
   .boostCalculator--mobile .createAction {
     flex-direction: column;
@@ -373,7 +373,7 @@
   padding: 12px 16px;
 }
 
-@media (max-width: 805px) {
+@media (max-width: 860px) {
   .boostCalculator--mobile .profitItem {
     padding: 8px;
   }
@@ -385,7 +385,7 @@
   /*justify-content: center;*/
 }
 
-@media (max-width: 805px) {
+@media (max-width: 860px) {
   .boostCalculator--mobile .profitItemDivider {
     min-width: 1px;
     width: 1px;
@@ -424,7 +424,7 @@
   justify-content: center;
 }
 
-@media (max-width: 805px) {
+@media (max-width: 860px) {
   .boostCalculator--mobile .createActionButton {
     margin-top: 8px;
     margin-left: 0;
@@ -441,7 +441,7 @@
   padding: 8px 0 0;
 }
 
-@media (max-width: 805px) {
+@media (max-width: 860px) {
   .calcToValue {
     margin-bottom: 15px;
     padding: 0;
@@ -454,7 +454,7 @@
   color: #9A9FAF;
 }
 
-@media (max-width: 805px) {
+@media (max-width: 860px) {
   .calcToValue .lp {
     font-family: 'PT Root UI';
     font-weight: 500;
@@ -511,7 +511,7 @@
   border-radius: 2px;
 }
 
-@media (max-width: 805px) {
+@media (max-width: 860px) {
   .sliderLabelSplitter {
     display: none;
   }
@@ -541,7 +541,7 @@
   border-radius: 12px;
   display: flex;
   justify-content: space-between;
-  background: #151718;
+  /* background: #151718; */
   margin-bottom: 20px;
 }
 
@@ -557,7 +557,7 @@
   margin-bottom: 12px;
 }
 
-@media (max-width: 805px) {
+@media (max-width: 860px) {
   .nftTitle {
     margin-bottom: 8px;
     font-family: 'PT Root UI';
@@ -598,9 +598,10 @@
 }
 
 .menuOptionSecText {
+  font-family: 'PT Root UI';
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
   text-align: right;
-  color: #8191B9;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
+  color: #9A9FAF;
 }
