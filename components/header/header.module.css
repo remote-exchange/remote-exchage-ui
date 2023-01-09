@@ -212,6 +212,18 @@
   height: 18px;
 }
 
+@media (max-width: 575px) {
+  .walletIcon {
+    display: none;
+  }
+}
+
+@media (max-width: 575px) {
+  .walletIconDot {
+    display: none;
+  }
+}
+
 .notificationsButton {
   width: 40px;
   height: 40px;
@@ -290,6 +302,28 @@
   border: 1px solid #7DB857 !important;
   border-radius: 100px !important;
   color: #7DB857 !important;
+}
+
+@media (max-width: 575px) {
+  .connectButton {
+    width: auto;
+    height: 28px;
+    font-size: 12px !important;
+    line-height: 12px !important;
+  }
+}
+
+@media (max-width: 575px) {
+  .connectButton svg {
+    width: 16px;
+  }
+}
+
+@media (max-width: 575px) {
+  .connectButtonText {
+    margin-left: 4px !important;
+    padding-top: 1px;
+  }
 }
 
 .connectButton:hover {
@@ -419,6 +453,14 @@
   cursor: pointer;
 }
 
+@media (max-width: 575px) {
+  .headSwitchBtn {
+    height: 42px;
+    padding-top: 8px;
+    padding-left: 8px;
+  }
+}
+
 .headSwitchBtn:hover {
   /* background: rgba(119, 155, 244, 0.8) !important; */
 }
@@ -433,6 +475,13 @@
   line-height: 120%;
 
   color: #E4E9F4;
+}
+
+@media (max-width: 575px) {
+  .headSwitchBtnText {
+    font-size: 12px;
+    line-height: 12px;
+  }
 }
 
 .switchNetworkBtn {
