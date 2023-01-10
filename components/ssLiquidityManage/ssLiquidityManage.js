@@ -2217,6 +2217,22 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
                   )}
                   <div style={{padding: '0 6px'}}>
                     {createLP && amount0 === "" && amount1 === "" && (
+                      <>
+                        {(!asset0 || !asset1) || (amount0 === "" || amount1 === "")  && (
+                          <div
+                            className={[
+                              classes.disclaimerContainer,
+                              classes.disclaimerContainerDefault,
+                            ].join(" ")}
+                          >
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path fillRule="evenodd" clipRule="evenodd" d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12ZM13 8C13 8.55228 12.5523 9 12 9C11.4477 9 11 8.55228 11 8C11 7.44772 11.4477 7 12 7C12.5523 7 13 7.44772 13 8ZM12.75 17V11H11.25V17H12.75Z" fill="#68727A"/>
+                            </svg>
+                            <div>
+                              Select coins/tokens for your liquidity pair and enter the amounts.
+                            </div>
+                          </div>
+                        )}
                         <Button
                             variant="contained"
                             size="large"
@@ -2238,6 +2254,7 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
                             <Loader color={appTheme === "dark" ? "#8F5AE8" : "#8F5AE8"} />
                         )}*/}
                         </Button>
+                        </>
                     )}
 
                     {!createLP && (
