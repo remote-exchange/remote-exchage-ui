@@ -24,7 +24,7 @@ const theme = createTheme({
       fontSize: 16,
     },
     fontFamily: [
-      '"PT Root UI"',
+      'BalooBhai2',
       'Arial',
       '-apple-system',
       'BlinkMacSystemFont',

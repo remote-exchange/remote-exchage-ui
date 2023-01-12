@@ -9,7 +9,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <link rel="stylesheet" href="/fonts/PT-Root-UI/PT-Root-UI.css"/>
+          <link rel="stylesheet" href="/fonts/Baloo-bhai-2/BalooBhai2.css"/>
         </Head>
         <body
           style={{

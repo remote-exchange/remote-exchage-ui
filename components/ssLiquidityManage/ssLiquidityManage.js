@@ -1703,7 +1703,7 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
                             tooltip: {
                               style: {
                                 padding: 12,
-                                fontFamily: 'PT Root UI',
+                                fontFamily: 'BalooBhai2',
                                 fontSize: 14,
                                 fontWeight: 500,
                                 lineHeight: '20px',

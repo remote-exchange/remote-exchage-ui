@@ -57,7 +57,7 @@ const SortSelect = (props) => {
                       style={{
                         display: 'flex',
                         alignItems: 'center',
-                        fontFamily: 'PT Root UI',
+                        fontFamily: 'BalooBhai2',
                         fontWeight: 500,
                         fontSize: 14,
                         lineHeight: '20px',

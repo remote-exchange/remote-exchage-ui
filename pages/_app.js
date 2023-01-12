@@ -84,7 +84,7 @@ export default function MyApp({ Component, pageProps }) {
   const theme = createTheme({
     typography: {
       allVariants: {
-        fontFamily: "'PT Root UI'",
+        fontFamily: "BalooBhai2",
       },
     },
   });

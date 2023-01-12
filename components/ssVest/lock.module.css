@@ -20,7 +20,7 @@
 .tnav {
   display: flex;
 
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
@@ -76,7 +76,7 @@
   margin: 0;
   margin-bottom: 20px;
 
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-weight: 700;
   font-size: 40px;
   line-height: 48px;
@@ -208,7 +208,7 @@
   margin: 0;
   margin-left: 12px;
 
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-style: normal;
   font-weight: 400;
   font-size: 48px;
@@ -222,7 +222,7 @@
   .textFieldSelectText {
     margin-left: 8px;
 
-    font-family: "PT Root UI";
+    font-family: "BalooBhai2";
     font-weight: 400;
     font-size: 20px;
     line-height: 32px;
@@ -259,7 +259,7 @@
 
   width: 100%;
 
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -281,7 +281,7 @@
 
   margin-left: 12px;
 
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-weight: 700;
   font-size: 14px;
   line-height: 20px;
@@ -307,7 +307,7 @@
 .largeInput {
   padding: 0 !important;
 
-  font-family: "PT Root UI" !important;
+  font-family: "BalooBhai2" !important;
   font-weight: 400 !important;
   font-size: 48px !important;
   line-height: 52px !important;
@@ -324,7 +324,7 @@
 }
 
 .largeInput::placeholder {
-  font-family: "PT Root UI" !important;
+  font-family: "BalooBhai2" !important;
   font-weight: 400 !important;
   font-size: 48px !important;
   line-height: 52px !important;
@@ -399,7 +399,7 @@
   width: 25%;
   height: 40px;
 
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
@@ -477,7 +477,7 @@
 
 .lockDateText {
   flex-wrap: nowrap;
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
@@ -512,7 +512,7 @@
 
   height: 100% !important;
 
-  font-family: "PT Root UI" !important;
+  font-family: "BalooBhai2" !important;
   font-weight: 500 !important;
   font-size: 16px !important;
   line-height: 150% !important;
@@ -541,7 +541,7 @@
   margin: 0;
   margin-top: 20px;
 
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
@@ -582,7 +582,7 @@
 .referalInput {
   padding: 0 !important;
 
-  font-family: "PT Root UI" !important;
+  font-family: "BalooBhai2" !important;
   font-weight: 500 !important;
   font-size: 16px !important;
   line-height: 24px !important;
@@ -599,7 +599,7 @@
 }
 
 .referalInput::placeholder {
-  font-family: "PT Root UI" !important;
+  font-family: "BalooBhai2" !important;
   font-weight: 500 !important;
   font-size: 16px !important;
   line-height: 24px !important;
@@ -656,7 +656,7 @@
 }
 
 .controlsInfo {
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
@@ -717,7 +717,7 @@
 .warningText {
   margin: 0;
 
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
@@ -742,7 +742,7 @@
 
   padding: 16px 52px !important;
 
-  font-family: "PT Root UI" !important;
+  font-family: "BalooBhai2" !important;
   font-weight: 700 !important;
   font-size: 24px !important;
   line-height: 32px !important;
@@ -845,7 +845,7 @@
 }
 
 .nftContainerTitleLarge {
-  font-family: 'PT Root UI';
+  font-family: 'BalooBhai2';
   font-weight: 400;
   font-size: 48px;
   line-height: 52px;
@@ -859,7 +859,7 @@
 
   margin-bottom: 4px;
 
-  font-family: 'PT Root UI';
+  font-family: 'BalooBhai2';
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
@@ -871,7 +871,7 @@
   display: flex;
   align-items: center;
 
-  font-family: 'PT Root UI';
+  font-family: 'BalooBhai2';
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
@@ -921,7 +921,7 @@
 .nftContainerTitleLargeMobile {
   margin-bottom: 4px;
 
-  font-family: 'PT Root UI';
+  font-family: 'BalooBhai2';
   font-weight: 700;
   font-size: 16px;
   line-height: 16px;
@@ -930,7 +930,7 @@
 }
 
 .nftContainerTitleMobile {
-  font-family: 'PT Root UI';
+  font-family: 'BalooBhai2';
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
@@ -939,7 +939,7 @@
 }
 
 .nftContainerValueMobile {
-  font-family: 'PT Root UI';
+  font-family: 'BalooBhai2';
   font-style: normal;
   font-weight: 500;
   font-size: 12px;

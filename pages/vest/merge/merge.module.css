@@ -75,7 +75,7 @@
 }
 
 .selectTitle {
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
@@ -91,7 +91,7 @@
 }
 
 .tokenSelectInfoAmount {
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
@@ -111,7 +111,7 @@
 }
 
 .tokenSelectLabel {
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-weight: 400;
   font-size: 48px;
   line-height: 52px;
@@ -154,7 +154,7 @@
   display: flex;
   align-items: center;
 
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-weight: 400;
   font-size: 48px;
   line-height: 52px;
@@ -172,7 +172,7 @@
 .tokenSelectInfoTextTitle {
   margin-bottom: 4px;
 
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
@@ -188,7 +188,7 @@
 }
 
 .tokenSelectInfoValue {
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;

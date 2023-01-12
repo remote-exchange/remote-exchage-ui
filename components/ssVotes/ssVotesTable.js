@@ -1675,7 +1675,7 @@ export default function EnhancedTable({gauges, filteredGauges, setParentSliderVa
                                 style={{
                                   marginLeft: 8,
                                   paddingTop: 3,
-                                  fontFamily: 'PT Root UI',
+                                  fontFamily: 'BalooBhai2',
                                   fontSize: 10,
                                   fontWeight: 500,
                                   lineHeight: "12px",
@@ -1794,7 +1794,7 @@ export default function EnhancedTable({gauges, filteredGauges, setParentSliderVa
                           }>
                             <div
                               style={{
-                                fontFamily: 'PT Root UI',
+                                fontFamily: 'BalooBhai2',
                                 fontWeight: 700,
                                 fontSize: 16,
                                 lineHeight: '100%',
@@ -1829,7 +1829,7 @@ export default function EnhancedTable({gauges, filteredGauges, setParentSliderVa
           {!gauges?.length ? (
             <div style={{
               margin: '15px 0',
-              fontFamily: 'PT Root UI',
+              fontFamily: 'BalooBhai2',
               fontSize: 20,
               lineHeight: '28px',
               fontWeight: 700,

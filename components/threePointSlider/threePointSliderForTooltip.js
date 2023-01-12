@@ -143,7 +143,7 @@ export default function ThreePointSlider({
               marginTop: 12,
             },
             '& .item': {
-              fontFamily: 'PT Root UI',
+              fontFamily: 'BalooBhai2',
               fontSize: '14px',
               lineHeight: '14px',
               fontWeight: 500,
@@ -199,7 +199,7 @@ export default function ThreePointSlider({
             textAlign: 'center'
           },
           '& .item': {
-            fontFamily: 'PT Root UI',
+            fontFamily: 'BalooBhai2',
             fontSize: 14,
             fontWeight: 500,
             lineHeight: '14px',

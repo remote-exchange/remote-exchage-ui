@@ -18,7 +18,7 @@ const coreTheme = {
       fontSize: 16,
     },
     fontFamily: [
-      "'PT Root UI'",
+      "BalooBhai2",
       "Arial",
     ].join(","),
     h1: {
@@ -100,7 +100,7 @@ const coreTheme = {
       }
     },
     body: {
-      fontFamily: "PT Root UI",
+      fontFamily: "BalooBhai2",
     }
   },
   palette: {
@@ -216,7 +216,7 @@ const coreTheme = {
       }
     },
     Mui: {
-      fontFamily: "PT Root UI",
+      fontFamily: "BalooBhai2",
       '&$disabled': {
         '&:before': {
           borderBottom: 'none'
