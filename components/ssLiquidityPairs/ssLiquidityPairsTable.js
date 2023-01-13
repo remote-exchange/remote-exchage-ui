@@ -531,6 +531,7 @@ const useStyles = makeStyles({
     padding: 20,
     marginTop: 20,
     ["@media (max-width:806px)"]: {
+      marginTop: 12,
       padding: 12,
       flexDirection: 'column',
       justifyContent: 'space-between',
@@ -840,9 +841,9 @@ const useStyles = makeStyles({
     padding: 20,
     minHeight: 'auto',
     ["@media (max-width:806px)"]: {
-      paddingBottom: 10,
+      padding: 12,
       boxShadow: '4px 4px 0px #6575B1',
-      borderradius: 16,
+      borderRadius: 16,
     },
   },
   filterButton: {
