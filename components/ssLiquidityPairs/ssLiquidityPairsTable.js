@@ -2767,7 +2767,7 @@ export default function EnhancedTable({pairs, isLoading}) {
                                 ? "/images/boost_fired.svg"
                                 : (BigNumber(row?.balance).gt(0))
                                   ? "/images/boost-empty.svg"
-                                  : "/images/icon-info.svg"
+                                  : "/images/boost-info.svg"
                               }
                               width="22px"
                               style={{ marginRight: 10 }}
