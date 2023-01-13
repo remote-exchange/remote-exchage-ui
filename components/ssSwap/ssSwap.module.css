@@ -19,6 +19,14 @@ input[type=number].massiveInputAmount {
   padding: 20px;
 }
 
+@media (max-width: 1024px) {
+  .swapInputs {
+    border-radius: 16px;
+    background: #EAE8E1;
+    box-shadow: 4px 4px 0px #6575B1;
+  }
+}
+
 .swapInputsHeader {
   display: flex;
   justify-content: space-between;
@@ -119,7 +127,7 @@ input[type=number].massiveInputAmount {
 .max {
   font-size: 14px;
   font-weight: 700;
-  line-height: 20px;
+  line-height: 100%;
   color: #B1F1E3;
   cursor: pointer;
 }
@@ -422,10 +430,11 @@ p.inputTitleText {
 }*/
 
 .largeInput {
+  height: 30px !important;
   padding: 0 !important;
   font-weight: 400 !important;
   font-size: 48px !important;
-  line-height: 52px !important;
+  line-height: 32px !important;
   border: none !important;
   outline: none !important;
   color: #F6F7F9 !important;
@@ -1422,7 +1431,7 @@ p.inputTitleText {
   }
 
   .inputColumn {
-    padding: 8px;
+    padding: 10px 8px 8px;
   }
 
   .inputColumn:first-child {
@@ -1494,6 +1503,7 @@ p.inputTitleText {
   p.inputBalanceText,
   p.inputTitleText {
     align-items: center;
+    line-height: 100%;
   }
 
   .spacer {
@@ -1551,6 +1561,7 @@ p.inputTitleText {
     /*font-weight: 500;
     font-size: 12px;
     line-height: 16px;*/
+    margin-bottom: 0;
     margin-left: 8px;
   }
 
