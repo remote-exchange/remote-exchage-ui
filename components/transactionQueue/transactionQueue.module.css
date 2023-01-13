@@ -50,12 +50,30 @@
 }
 
 .transactionInfo {
+  position: relative;
   display: flex;
   background: #131313;
   border: 1px solid rgba(104, 114, 122, 0.4);
   border-radius: 8px;
   align-items: center;
   padding: 12px;
+}
+
+.transactionInfoWithHash {
+  padding-right: 40px;
+}
+
+.transactionHashLink {
+  position: absolute;
+  right: -32px;
+  top: -2px;
+}
+
+@media (max-width: 540px) {
+  .transactionHashLink {
+    right: -28px;
+    top: -2px;
+  }
 }
 
 /*@media (max-width: 650px) {
@@ -83,7 +101,7 @@
 }
 
 .transactionDescription {
-  max-height: 200px;
+  /* max-height: 200px; */
   word-break: break-all;
   white-space: pre-wrap;
   font-weight: 500 !important;
@@ -328,5 +346,11 @@
     font-weight: 500;
     font-size: 12px;
     line-height: 12px;
+  }
+}
+
+@media (max-width: 540px) {
+  .transactionInfoWithHash {
+    padding-right: 32px;
   }
 }
