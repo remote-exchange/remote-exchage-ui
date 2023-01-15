@@ -1,4 +1,4 @@
-.logoIconImg {
+/* .logoIconImg {
     display: none;
 }
 @media (max-width: 850px) {
@@ -7,7 +7,6 @@
     }
     .logoIconImg {
         display: inline;
-        /*width: 32px;*/
         height: 40px;
     }
 }
@@ -25,5 +24,32 @@
 @media (max-width: 850px) {
     .logoText {
         display: none;
+    }
+}
+ */
+
+.logo,
+.logoMobile {
+  font-family: "BalooBhai2";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 40px;
+
+  color: #131313;
+}
+
+.logoMobile {
+    display: none;
+    line-height: 100%;
+}
+
+@media (max-width: 575px) {
+    .logo {
+      display: none;
+    }
+
+    .logoMobile {
+        display: inline;
     }
 }

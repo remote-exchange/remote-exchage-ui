@@ -226,12 +226,16 @@ function Header(props) {
       <div className={[classes.headerContainer, classes[`headerContainer--${appTheme}`]].join(' ')}>
         <div className={classes.logoContainer}>
           <a className={classes.logoLink} onClick={() => router.push("/home")}>
+            {/* <Logo /> */}
             <Logo />
           </a>
           {/*<Typography className={ classes.version}>version 0.0.30</Typography>*/}
         </div>
 
         <Navigation>
+          <div className={classes.networkMobile}>
+            <img src="/images/ui/network.png" />
+          </div>
           <div className={classes.statButtonMobileWrapper}>
             {StatButton()}
           </div>
@@ -356,7 +360,7 @@ function Header(props) {
                     style={{marginBottom: 2}}
                   />
 
-                  <div style={{
+                  <div className={classes.walletIconDot} style={{
                     marginLeft: 5,
                     marginRight: 5,
                     color: '#ffffff',
@@ -384,7 +388,7 @@ function Header(props) {
                       <path d="M3 8.5H2.5V9L2.5 19V19.0329C2.49998 19.4762 2.49995 19.8581 2.54107 20.1639C2.58514 20.4917 2.68451 20.8058 2.93934 21.0607L2.93934 21.0607C3.19417 21.3155 3.50835 21.4149 3.83611 21.4589C4.14193 21.5 4.52384 21.5 4.96708 21.5L5 21.5L19 21.5C19.011 21.5 19.022 21.5 19.0329 21.5C19.4762 21.5 19.8581 21.5 20.1639 21.4589C20.4917 21.4149 20.8058 21.3155 21.0607 21.0607C21.3155 20.8058 21.4149 20.4917 21.4589 20.1639C21.5 19.8581 21.5 19.4762 21.5 19.0329C21.5 19.022 21.5 19.011 21.5 19V18V17.5H21H18C16.6193 17.5 15.5 16.3807 15.5 15C15.5 13.6193 16.6193 12.5 18 12.5H21H21.5V12V11L21.5 10.9671C21.5 10.5238 21.5 10.1419 21.4589 9.8361C21.4149 9.50835 21.3155 9.19417 21.0607 8.93934C20.8058 8.68451 20.4917 8.58514 20.1639 8.54107C19.8581 8.49995 19.4762 8.49997 19.0329 8.5L19 8.5L3 8.5Z" fill="#7DB857" stroke="#7DB857"/>
                     </svg>
 
-                    <span style={{marginLeft: 15, whiteSpace: 'nowrap',}}>Connect Wallet</span>
+                    <span className={classes.connectButtonText} style={{marginLeft: 15, whiteSpace: 'nowrap',}}>Connect Wallet</span>
                   </Button>
                 )
               }}

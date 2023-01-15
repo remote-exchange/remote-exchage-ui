@@ -8,7 +8,7 @@ function Rewards() {
     <NotConnect
       title="Rewards"
       description="Claim your share of rewards!"
-      buttonText="LAUNCH APP"
+      buttonText="Launch App"
     >
       <SSRewards />
     </NotConnect>

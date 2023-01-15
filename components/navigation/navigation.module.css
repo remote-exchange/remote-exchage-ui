@@ -3,7 +3,8 @@
   flex-direction: row;
   align-items: center;
   margin-right: auto;
-  margin-left: 250px;
+  margin-left: auto;
+  /* margin-left: 250px; */
   border: none !important;
   background: transparent;
 }
@@ -48,6 +49,15 @@
   }
 }
 
+@media (max-width: 575px) {
+  .navigationToggle {
+    width: 28px;
+    height: 28px;
+    border: 1px solid #9A9FAF;
+    border-radius: 50%;
+  }
+}
+
 .navigationToggle span {
   position: relative;
 }
@@ -58,7 +68,17 @@
   width: 25px;
   height: 3px;
   border-radius: 3px;
-  background-color: #769cf5;
+  background-color: #9A9FAF;
+}
+
+@media (max-width: 575px) {
+  .navigationToggle span,
+  .navigationToggle span::before,
+  .navigationToggle span::after {
+    width: 12px;
+    height: 2px;
+    background: #9A9FAF;
+  }
 }
 
 .navigationToggle span::before,
@@ -72,8 +92,20 @@
   bottom: 8px;
 }
 
+@media (max-width: 575px) {
+  .navigationToggle span::before {
+    bottom: 4px;
+  }
+}
+
 .navigationToggle span::after {
   top: 8px;
+}
+
+@media (max-width: 575px) {
+  .navigationToggle span::after {
+    top: 4px;
+  }
 }
 
 .navigationToggleActive span {
@@ -118,7 +150,15 @@
 
 @media (max-width: 650px) {
   .navigationContent {
-    flex-direction: column;
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 575px) {
+  .navigationContent {
+    margin-top: 0;
+    margin-left: auto;
+    padding-top: 55px;
   }
 }
 
@@ -127,8 +167,6 @@
   background: #EAE8E1;
   border-bottom: 4px solid #6575B1;
 }
-
-
 
 a.linkz {
   cursor: pointer !important;
@@ -333,6 +371,13 @@ a.linkz {
   }
 }
 
+@media (max-width: 575px) {
+  .subtitleText {
+    font-size: 20px !important;
+    line-height: 28px !important;
+  }
+}
+
 .sectionDivider {
   height: 100%;
   width: 1px;
@@ -464,6 +509,12 @@ a.linkz {
     justify-content: flex-start !important;
     margin-bottom: 12px !important;
     padding: 0 !important;
+  }
+}
+
+@media (max-width: 575px) {
+  .nav-button {
+    margin-bottom: 8px !important;
   }
 }
 

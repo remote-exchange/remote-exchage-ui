@@ -7,7 +7,7 @@ function Vesting() {
     <NotConnect
       title="Whitelist"
       description="Whitelist tokens to be used in Remote Gauges."
-      buttonText="LAUNCH APP"
+      buttonText="Launch App"
     >
       <WhitelistTokens />
     </NotConnect>

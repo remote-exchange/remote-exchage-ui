@@ -165,7 +165,7 @@
 
   margin: 0 auto 40px;
 
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-weight: 700;
   font-size: 60px;
   line-height: 80px;
@@ -193,7 +193,7 @@
 .subtitle {
   margin-bottom: 80px;
 
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-weight: 700;
   font-size: 24px;
   line-height: 32px;
@@ -236,7 +236,7 @@
 
   margin: 0 auto 80px;
 
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-weight: 700;
   font-size: 24px;
   line-height: 32px;
@@ -246,6 +246,8 @@
 
   background: #7db857;
   color: #ffffff;
+
+  cursor: pointer;
 }
 
 @media (max-width: 860px) {
@@ -316,7 +318,7 @@
 .textTitle {
   margin-bottom: 40px;
 
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-weight: 700;
   font-size: 24px;
   line-height: 32px;
@@ -339,7 +341,7 @@
 
   margin: 0 auto 80px;
 
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
@@ -424,7 +426,7 @@
 .listItemTitle {
   margin-bottom: 12px;
 
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-weight: 700;
   font-size: 24px;
   line-height: 32px;
@@ -442,7 +444,7 @@
 }
 
 .listItemText {
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;

@@ -53,7 +53,7 @@ const HomePage = () => {
       </a>
 
       <div className={classes.title}>Control your assets and earn boosted rewards in Remote’s decentralized ecosystem</div>
-      <div className={classes.subtitle}>Remote provides a safe and decentralized ecosystem for yield farming on the Neon network.</div>
+      <div className={classes.subtitle}>Remote provides a safe and decentralized ecosystem for token swaps on the Neon network.</div>
 
       <button className={classes.button} onClick={() => router.push("/swap")}>Launch App</button>
 
@@ -134,8 +134,8 @@ const HomePage = () => {
       </div>
 
       <div className={classes.textTitle}>Meet Telly!</div>
-      <div className={classes.text}>Telly is Remote’s avatar, loved by everyone in our ecosystem. Telly will tell you about all the new stuff in our ecosystem and how you’ll benefit from using them. Finally, he’s fun to be with and a great Remote assistant. Click on the Telly if you want him to show you around.</div>
-      <div className={classes.text}>Remote is a DeFi ecosystem that utilizes the famous ve (3,3) system. On Remote, DeFi users get rewarded for participating in the ecosystem’s activities. Remote’s ecosystem is designed to induce decentralized activities and reward participants through multiple channels. With Remote, you literally have full control of your assets, and you earn while doing so!</div>
+      <div className={classes.text}>Remote’s Avatar, Telly, will tell you about all the new stuff in our ecosystem and how you’ll benefit from using them. Click the character if you want Telly to show you around.</div>
+      <div className={classes.text}>Remote is a DeFi ecosystem that utilizes the famous ve (3,3) system. On Remote, DeFi users get rewarded for participating in the ecosystem’s activities. Remote’s ecosystem is designed to induce decentralized activities and reward participants through multiple channels. With Remote, you have full control of your assets and earn while doing so!</div>
 
       <div className={classes.list}>
         {list.map(item => (
@@ -171,7 +171,7 @@ const HomePage = () => {
           >
             <BtnEnterApp
               labelClassName={classes.buttonEnterLabel}
-              label={"Launch app"}
+              label={"Launch App"}
             />
           </div>
         </div>

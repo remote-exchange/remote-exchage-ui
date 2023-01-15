@@ -33,6 +33,12 @@
   }
 }
 
+@media (max-width: 575px) {
+  .headerContainer {
+    height: 44px;
+  }
+}
+
 .hidden {
   display: none !important;
 }
@@ -69,11 +75,13 @@
 
 .logoContainer {
   margin-left: 30px;
+  margin-right: 300px;
 }
 
 @media (max-width: 1500px) {
   .logoContainer {
     margin-left: 12px;
+    margin-right: 0;
   }
 }
 
@@ -118,6 +126,31 @@
 @media (max-width: 650px) {
   .network {
     display: none;
+  }
+}
+
+.networkMobile {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  margin-left: auto;
+  margin-right: 8px;
+  border: 1px solid rgba(104, 114, 122, 0.12);
+  border-radius: 50%;
+}
+
+@media (max-width: 575px) {
+  .networkMobile {
+    display: flex;
+  }
+}
+
+@media (max-width: 575px) {
+  .networkMobile {
+    width: 32px;
+    height: 32px;
   }
 }
 
@@ -204,6 +237,18 @@
   height: 18px;
 }
 
+@media (max-width: 575px) {
+  .walletIcon {
+    display: none;
+  }
+}
+
+@media (max-width: 575px) {
+  .walletIconDot {
+    display: none;
+  }
+}
+
 .notificationsButton {
   width: 40px;
   height: 40px;
@@ -219,10 +264,23 @@
   }
 }
 
+@media (max-width: 575px) {
+  .notificationsButton {
+    width: 28px;
+    height: 28px;
+  }
+}
+
 .notificationsButton svg {
   font-size: 10px;
   color: #779BF4;
   fill: #779BF4;
+}
+
+@media (max-width: 575px) {
+  .notificationsButton svg {
+    width: 15px;
+  }
 }
 
 .notificationsButton:hover {
@@ -271,6 +329,28 @@
   color: #7DB857 !important;
 }
 
+@media (max-width: 575px) {
+  .connectButton {
+    width: auto;
+    height: 28px;
+    font-size: 12px !important;
+    line-height: 12px !important;
+  }
+}
+
+@media (max-width: 575px) {
+  .connectButton svg {
+    width: 16px;
+  }
+}
+
+@media (max-width: 575px) {
+  .connectButtonText {
+    margin-left: 4px !important;
+    padding-top: 1px;
+  }
+}
+
 .connectButton:hover {
   /*background: rgba(211, 248, 90, 0.15) !important;*/
 }
@@ -296,6 +376,12 @@
   }
 }
 
+@media (max-width: 575px) {
+  .accountButtonContainer {
+    order: -1;
+  }
+}
+
 .accountButton {
   transition: none !important;
   position: fixed;
@@ -311,6 +397,12 @@
 @media (max-width: 650px) {
   .accountButton {
     min-width: auto !important;
+  }
+}
+
+@media (max-width: 575px) {
+  .accountButton {
+    height: 28px;
   }
 }
 
@@ -344,6 +436,13 @@
   }
 }
 
+@media (max-width: 575px) {
+  .accountButtonAddress {
+    height: 100%;
+    padding: 6px 8px !important;
+  }
+}
+
 .headBalanceTxt {
   height: 38px;
   margin-left: -22px !important;
@@ -354,6 +453,15 @@
   line-height: 20px !important;
   font-weight: 500 !important;
   color: #9A9FAF !important;
+}
+
+
+@media (max-width: 575px) {
+  .headBalanceTxt {
+    height: 100%;
+    font-size: 12px !important;
+    line-height: 12px !important;
+  }
 }
 
 @media (max-width: 650px) {
@@ -376,6 +484,14 @@
   cursor: pointer;
 }
 
+@media (max-width: 575px) {
+  .headSwitchBtn {
+    height: 42px;
+    padding-top: 8px;
+    padding-left: 8px;
+  }
+}
+
 .headSwitchBtn:hover {
   /* background: rgba(119, 155, 244, 0.8) !important; */
 }
@@ -390,6 +506,13 @@
   line-height: 120%;
 
   color: #E4E9F4;
+}
+
+@media (max-width: 575px) {
+  .headSwitchBtnText {
+    font-size: 12px;
+    line-height: 12px;
+  }
 }
 
 .switchNetworkBtn {
@@ -458,6 +581,14 @@
   background-size: 100%;
 }
 
+@media (max-width: 575px) {
+  .accountIcon {
+    width: 16px;
+    height: 16px;
+    margin-right: 4px !important;
+  }
+}
+
 .headBtnTxt {
   font-style: normal !important;
   font-weight: 500 !important;
@@ -480,6 +611,17 @@
 @media (max-width: 650px) {
   .headBtnTxtMobile {
     display: inline;
+  }
+}
+
+@media (max-width: 575px) {
+  .headBtnTxtMobile {
+    display: inline-flex;
+    padding-bottom: 5px;
+    font-family: 'BalooBhai2';
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 12px;
   }
 }
 
@@ -662,6 +804,29 @@
   }
 }
 
+@media (max-width: 575px) {
+  .statButton {
+    justify-content: center;
+    align-items: center;
+
+    width: 60px;
+    height: 32px;
+
+    padding: 0;
+
+    border: 1px solid #9A9FAF;
+    border-radius: 100px;
+  }
+
+  .statButton svg {
+    width: 14px;
+  }
+
+  .statButton > span {
+    margin-left: 5px !important;
+  }
+}
+
 .statButtonMobileWrapper {
   display: none;
   margin: 12px 0;
@@ -670,6 +835,13 @@
 @media (max-width: 650px) {
   .statButtonMobileWrapper {
     display: inline-flex !important;
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 575px) {
+  .statButtonMobileWrapper {
+    /* margin-left: auto !important; */
   }
 }
 

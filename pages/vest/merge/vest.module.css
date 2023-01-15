@@ -642,7 +642,7 @@
 }
 
 .searchInput input {
-  font-family: 'PT Root UI' !important;
+  font-family: 'BalooBhai2' !important;
   padding-top: 0 !important;
   padding-bottom: 0 !important;
   padding-left: 12px !important;
@@ -692,7 +692,7 @@
 .descText {
   margin: 20px auto 20px;
 
-  font-family: 'PT Root UI';
+  font-family: 'BalooBhai2';
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
@@ -717,7 +717,7 @@
   min-width: 336px;
   height: 48px;
 
-  font-family: 'PT Root UI';
+  font-family: 'BalooBhai2';
   font-weight: 700;
   font-size: 16px;
   line-height: 16px;

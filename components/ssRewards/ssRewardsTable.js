@@ -774,7 +774,7 @@ export default function EnhancedTable({ rewards, vestNFTs, tokenID }) {
                           <td style={{ padding: "30px 12px 16px" }} colSpan={4}>
                             <span
                               style={{
-                                fontFamily: 'PT Root UI',
+                                fontFamily: 'BalooBhai2',
                                 fontWeight: 700,
                                 fontSize: 16,
                                 lineHeight: "16px",
@@ -1088,7 +1088,7 @@ export default function EnhancedTable({ rewards, vestNFTs, tokenID }) {
               <div
                 style={{
                   marginTop: 20,
-                  fontFamily: 'PT Root UI',
+                  fontFamily: 'BalooBhai2',
                   fontWeight: 700,
                   fontSize: 20,
                   lineHeight: '28px',

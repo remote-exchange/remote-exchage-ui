@@ -26,7 +26,7 @@
 }
 
 .headerText {
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
@@ -71,7 +71,7 @@
 
 .vaultSourceTitle {
   margin-bottom: 4px;
-  font-family: 'PT Root UI';
+  font-family: 'BalooBhai2';
   font-weight: 700;
   font-size: 16px;
   line-height: 16px;
@@ -81,7 +81,7 @@
 }
 
 .vaultSourceSubtitle {
-  font-family: 'PT Root UI';
+  font-family: 'BalooBhai2';
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
@@ -92,7 +92,7 @@
 
 .itemTitle {
   margin-bottom: 4px;
-  font-family: 'PT Root UI';
+  font-family: 'BalooBhai2';
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -109,7 +109,7 @@
 }
 
 .itemText {
-  font-family: 'PT Root UI';
+  font-family: 'BalooBhai2';
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -134,7 +134,7 @@
 
   padding: 8px 16px;
 
-  font-family: 'PT Root UI' !important;
+  font-family: 'BalooBhai2' !important;
   font-weight: 500 !important;
   font-size: 14px !important;
   line-height: 20px !important;
@@ -177,7 +177,7 @@
   display: flex;
   align-items: center;
 
-  font-family: 'PT Root UI';
+  font-family: 'BalooBhai2';
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
@@ -207,7 +207,7 @@
 }
 
 .selectLabel {
-  font-family: 'PT Root UI';
+  font-family: 'BalooBhai2';
   font-size: 16px !important;
   font-weight: 500 !important;
   line-height: 24px !important;
@@ -233,7 +233,7 @@
   padding-right: 33px !important;
   padding-left: 0px !important;
 
-  font-family: 'PT Root UI';
+  font-family: 'BalooBhai2';
   font-size: 16px !important;
   font-weight: 500 !important;
   line-height: 24px !important;
@@ -270,7 +270,7 @@
 .displayedRows {
   margin-left: auto;
 
-  font-family: 'PT Root UI';
+  font-family: 'BalooBhai2';
   font-size: 16px !important;
   font-weight: 500 !important;
   line-height: 24px !important;

@@ -20,7 +20,7 @@
 .tnav {
   display: flex;
 
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
@@ -76,7 +76,7 @@
   margin: 0;
   margin-bottom: 20px;
 
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-weight: 700;
   font-size: 40px;
   line-height: 48px;
@@ -136,7 +136,7 @@
 }
 
 .inputTitleText {
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -148,7 +148,7 @@
 
 @media (max-width: 767px) {
   .inputTitleText {
-    font-family: 'PT Root UI';
+    font-family: 'BalooBhai2';
     font-weight: 500;
     font-size: 12px;
     line-height: 16px;
@@ -176,7 +176,7 @@
 
   padding-right: 15px;
 
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-weight: 400;
   font-size: 48px;
   line-height: 52px;
@@ -270,7 +270,7 @@
 .smallerText {
   margin-left: 12px;
 
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-weight: 400;
   font-size: 48px;
   line-height: 52px;
@@ -318,7 +318,7 @@ input[type="number"].massiveInputAmount {
 }
 
 .largeInput {
-  font-family: "PT Root UI" !important;
+  font-family: "BalooBhai2" !important;
   font-weight: 400 !important;
   font-size: 48px !important;
   line-height: 52px !important;
@@ -339,7 +339,7 @@ input[type="number"].massiveInputAmount {
 }
 
 .inputBalanceText {
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
@@ -356,7 +356,7 @@ input[type="number"].massiveInputAmount {
 }
 
 .inputBalanceMax {
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-weight: 700;
   font-size: 14px;
   line-height: 20px;
@@ -429,7 +429,7 @@ input[type="number"].massiveInputAmount {
 .warningText {
   margin: 0;
 
-  font-family: "PT Root UI";
+  font-family: "BalooBhai2";
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
@@ -466,7 +466,7 @@ input[type="number"].massiveInputAmount {
 
   padding: 16px 52px !important;
 
-  font-family: "PT Root UI" !important;
+  font-family: "BalooBhai2" !important;
   font-weight: 700 !important;
   font-size: 24px !important;
   line-height: 32px !important;

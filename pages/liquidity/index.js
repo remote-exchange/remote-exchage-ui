@@ -7,7 +7,7 @@ function Liquidity() {
     <NotConnect
       title="Liquidity"
       description="Create a pair or add liquidity to existing stable or volatile Liquidity Pairs."
-      buttonText="LAUNCH APP"
+      buttonText="Launch App"
     >
       <LiquidityPairs />
     </NotConnect>

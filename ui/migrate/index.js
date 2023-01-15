@@ -7,7 +7,7 @@ export default function Migrate() {
     <NotConnect
       title="Migrate"
       description="Migrate your LP tokens."
-      buttonText="LAUNCH APP"
+      buttonText="Launch App"
     >
       <Setup/>
     </NotConnect>
