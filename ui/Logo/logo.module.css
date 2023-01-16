@@ -28,7 +28,7 @@
 }
  */
 
-.logo,
+/* .logo,
 .logoMobile {
   font-family: "BalooBhai2";
   font-style: normal;
@@ -37,14 +37,32 @@
   line-height: 40px;
 
   color: #131313;
-}
+} */
 
-.logoMobile {
+/* .logoMobile {
     display: none;
     line-height: 100%;
+} */
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 1500px) {
+  .logo img {
+    width: 120px;
+  }
 }
 
 @media (max-width: 575px) {
+    .logo img {
+        width: 100px;
+    }
+}
+
+/* @media (max-width: 575px) {
     .logo {
       display: none;
     }
@@ -52,4 +70,4 @@
     .logoMobile {
         display: inline;
     }
-}
+} */
