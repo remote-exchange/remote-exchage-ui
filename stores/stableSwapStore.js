@@ -274,6 +274,7 @@ class Store {
       );
       await enrichAdditionalApr(pairs)
       this.setStore({pairs: pairs});
+      await this._getBaseAssetInfo(await this.getWeb3(), this.getUserAddress());
     } catch (e) {
       console.error("Error refresh pairs", e);
       await emitError(this.emitter, "Error refresh pairs")

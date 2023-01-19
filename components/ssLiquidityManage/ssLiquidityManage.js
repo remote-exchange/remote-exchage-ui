@@ -232,7 +232,8 @@ export default function ssLiquidityManage({initActiveTab = 'deposit',}) {
       setWithdrawAmount1("");
       setWithdrawQuote(null);
 
-      onBack();
+      ssUpdated();
+      // onBack();
     };
 
     const createGaugeReturned = () => {
