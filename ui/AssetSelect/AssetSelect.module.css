@@ -346,6 +346,11 @@ p.labelSelectSecondary {
   border: 1px solid #9A9FAF !important;
 }
 
+.searchInput:hover {
+  border: 1px solid #B1F1E3 !important;
+  background: rgba(177, 241, 227, 0.12);
+}
+
 /*@media (max-width: 600px) {
   .searchInput {
     height: 48px;

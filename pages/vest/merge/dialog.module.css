@@ -156,6 +156,11 @@
   border-radius: 12px !important;
 }
 
+.searchInput:hover {
+  border: 1px solid #B1F1E3 !important;
+  background: rgba(177, 241, 227, 0.12);
+}
+
 .searchInput input {
   font-family: "BalooBhai2" !important;
   padding-top: 0 !important;

@@ -725,6 +725,8 @@ const useStyles = makeStyles({
     borderRadius: 12,
   
     '&:hover': {
+      border: '1px solid #B1F1E3',
+      background: 'rgba(177, 241, 227, 0.12) !important',
       // backgroundColor: '#1F2B49 !important',
     },
 
@@ -970,7 +972,7 @@ const useStyles = makeStyles({
     ["@media (max-width:806px)"]: {
       position: 'absolute',
       height: 48,
-      top: 109,
+      top: 101,
       left: 11,
       width: 'calc(100% - 22px)',
     },
