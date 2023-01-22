@@ -303,10 +303,12 @@ export default function ssBribeCreate() {
           {renderMassiveInput('amount', amount, amountError, amountChanged, asset, null, assetOptions, onAssetSelect)}
         </div>
 
-        <div className={classes.warningContainer}>
-          <img src="/images/ui/info-circle-gray.svg" width="18px" className={classes.warningIcon} />
-          <p className={classes.warningText}>Select a liquidity pool to bribe for and a bribe token with the amount.</p>
-        </div>
+        {(!asset || !amount) && (
+          <div className={classes.warningContainer}>
+            <img src="/images/ui/info-circle-gray.svg" width="18px" className={classes.warningIcon} />
+            <p className={classes.warningText}>Select a liquidity pool to bribe for and a bribe token with the amount.</p>
+          </div>
+        )}
 
         {amountError && (
           <div className={[classes.warningContainer, classes.warningContainerError].join(" ")}>
