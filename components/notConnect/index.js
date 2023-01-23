@@ -34,10 +34,9 @@ export const NotConnect = (props) => {
     };
   }, []);
 
-
   return (
     <>
-      {account? (
+      {(account && typeof account === 'string') ? (
         props.children
       ) : (
         <div className={classes.notConnectWrapper}>

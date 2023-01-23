@@ -430,7 +430,7 @@ p.inputTitleText {
 }*/
 
 .largeInput {
-  height: 30px !important;
+  height: 36px !important;
   padding: 0 !important;
   font-weight: 400 !important;
   font-size: 48px !important;
@@ -1463,6 +1463,7 @@ p.inputTitleText {
   }
 
   .largeInput {
+    height: 30px !important;
     font-size: 32px !important;
   }
 

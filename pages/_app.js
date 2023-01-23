@@ -115,7 +115,7 @@ export default function MyApp({ Component, pageProps }) {
                 backgroundSize: 'cover',
               }}>
                 <img
-                    src={"/images/ui/logo.png"}
+                    src={"/images/ui/logo.svg"}
                     style={{
                       position: "absolute",
                       width: "242px",

@@ -79,6 +79,19 @@ const SortSelect = (props) => {
             </div>
           </div>
         }
+         {open &&
+          <div
+            style={{
+              position: 'absolute',
+              top: 'calc(50% - 2px)',
+              left: 'calc(100% - 2px)',
+              width: 4,
+              height: 4,
+              borderRadius: 2,
+              background: '#131313',
+            }}
+          />
+        }
       </div>
     </ClickAwayListener>
   );
