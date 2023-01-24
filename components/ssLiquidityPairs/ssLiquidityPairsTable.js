@@ -2733,6 +2733,8 @@ export default function EnhancedTable({pairs, isLoading}) {
                             justifyContent: 'right',
                             padding: '8px 0',
                           }}>
+                            {BigNumber(row?.gauge?.apr).gt(0) && (
+                              <>
                             <Dialog
                               PaperProps={{
                                 style: {
@@ -2752,14 +2754,12 @@ export default function EnhancedTable({pairs, isLoading}) {
                               }}
                             >
                               <div className={css.boostCalculatorTooltip}>
-                                <BoostCalculator popuped={true} pair={row} ve={veTok} nft={nfts.reduce((acc, item) => item.totalPower > acc.totalPower ? item : acc, nfts[0])} isMobileView={true} amount={100} />
+                              <BoostCalculator popuped={true} pair={row} ve={veTok} nft={nfts.filter(n => n.id === row?.gauge?.veId)[0]} isMobileView={true} amount={100} />
+                                {/* <BoostCalculator popuped={true} pair={row} ve={veTok} nft={nfts.reduce((acc, item) => item.totalPower > acc.totalPower ? item : acc, nfts[0])} isMobileView={true} amount={100} /> */}
                               </div>
                             </Dialog>
                             <img
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleTooltipOpen()
-                              }}
+                              onClick={(e) => {handleTooltipOpen()}}
                               src={(row?.gauge?.boost && BigNumber(row?.gauge?.boost).gt(0) && BigNumber(row?.gauge?.balance).gt(0))
                                 ? "/images/boost_fired.svg"
                                 : (BigNumber(row?.balance).gt(0))
@@ -2770,6 +2770,8 @@ export default function EnhancedTable({pairs, isLoading}) {
                               style={{ marginRight: 10 }}
                               alt="boost"
                             />
+                            </>
+                            )}
 
                             {/* <Tooltip
                                 title={
